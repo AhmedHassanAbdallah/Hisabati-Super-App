@@ -1,0 +1,7 @@
+Ezaza 0daa269aa5465866f7646fece68b99f943571ec4 0
+Hesabaty-Flooring 856111656fc68386fb4af6dcdc905f55beea54b1 0
+Hesabaty-Gebsum 04fda90707403ba7b925593baf39c81f9005ec7e 0
+Hesabaty-HAVC c1938b32746548202044fa59d9a4c14e9ce7c93e 0
+Hesabaty-painting fbb595ef073514737f0fcf47a5b83c85f829db2f 0
+Hesabaty-plaster NO_COMMITS 0
+Hesabaty-plumbing 65a05b2e0e8fcfbd250eff228699d7f8aa58ee0c 0

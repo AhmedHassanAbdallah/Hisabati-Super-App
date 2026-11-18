@@ -1,0 +1,127 @@
+# بناء تطبيق أندرويد (APK) لحساباتي للأرضيات
+# © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+#
+# - كل رفع للكود: بيتبني APK ويتحط في «Artifacts» صفحة الـ Action للتجربة.
+# - علشان التحديثات تتثبت فوق بعض لازم توقيع ثابت: ضيف Secret اسمه HFLOORING_KEY_PASSWORD
+#   (كلمة سر من اختيارك). أول مرة بيتعمل مفتاح توقيع جديد ويتحفظ مشفر في android/keystore.enc.
+# - على main ومع وجود التوقيع: بيتنشر Release فيه hesabati-flooring.apk كرابط تحميل مباشر.
+name: Android APK
+
+on:
+  push:
+    branches: [main, "ccr-**", "claude/**"]
+    paths:
+      - "index.html"
+      - "version.json"
+      - "css/**"
+      - "js/**"
+      - "fonts/**"
+      - "icons/**"
+      - "android/**"
+      - "tools/android-*.sh"
+      - ".github/workflows/android.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      signed: ${{ steps.key.outputs.signed }}
+      version: ${{ steps.ver.outputs.version }}
+    env:
+      HFLOORING_KEY_PASSWORD: ${{ secrets.HFLOORING_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Version
+        id: ver
+        run: echo "version=$(python3 -c "import json;print(json.load(open('version.json'))['version'])")" >> "$GITHUB_OUTPUT"
+
+      - name: App files
+        run: bash tools/android-assets.sh
+
+      - name: Signing key
+        id: key
+        run: |
+          if [ -z "${HFLOORING_KEY_PASSWORD}" ]; then
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::مفيش Secret باسم HFLOORING_KEY_PASSWORD — هيتعمل APK للتجربة فقط (توقيع مؤقت) ومش هيتنشر"
+            exit 0
+          fi
+          KS="$RUNNER_TEMP/hflooring.jks"
+          if [ -f android/keystore.enc ]; then
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in android/keystore.enc -out "$KS" -pass env:HFLOORING_KEY_PASSWORD
+          else
+            keytool -genkeypair -keystore "$KS" -storetype PKCS12 -alias hflooring -keyalg RSA -keysize 4096 -validity 36500 \
+              -storepass "$HFLOORING_KEY_PASSWORD" -keypass "$HFLOORING_KEY_PASSWORD" \
+              -dname "CN=Ahmed Hassan Abdallah, O=Hesabati Flooring, C=EG"
+            openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -in "$KS" -out android/keystore.enc -pass env:HFLOORING_KEY_PASSWORD
+            echo "new_key=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "HFLOORING_KEYSTORE=$KS" >> "$GITHUB_ENV"
+          echo "signed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Build APK
+        working-directory: android
+        run: gradle --no-daemon assembleRelease
+
+      - name: Collect APK
+        run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/release/*.apk out/hesabati-flooring.apk
+          ls -la out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hesabati-flooring-apk
+          path: out/hesabati-flooring.apk
+
+      - name: Save encrypted signing key
+        if: steps.key.outputs.new_key == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add android/keystore.enc
+          git commit -m "Add encrypted APK signing key [skip ci]"
+          git push
+
+  release:
+    needs: build
+    if: needs.build.outputs.signed == 'true' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: hesabati-flooring-apk
+          path: out
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VER: ${{ needs.build.outputs.version }}
+        run: |
+          python3 -c "import json;d=json.load(open('version.json'));print('\n'.join('- '+n for n in d['notes']))" > notes.md
+          printf '\n\nحمّل الملف hesabati-flooring.apk وثبّته على موبايلك الأندرويد.\n' >> notes.md
+          if gh release view "v$VER" >/dev/null 2>&1; then
+            gh release upload "v$VER" out/hesabati-flooring.apk --clobber
+            gh release edit "v$VER" --notes-file notes.md --latest
+          else
+            gh release create "v$VER" out/hesabati-flooring.apk --title "حساباتي للأرضيات $VER" --notes-file notes.md --latest
+          fi

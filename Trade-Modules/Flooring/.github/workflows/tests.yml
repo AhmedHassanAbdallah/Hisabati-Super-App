@@ -1,0 +1,26 @@
+# اختبارات محرك الحسابات + اختبار الواجهة في متصفح حقيقي
+name: Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Calculation engine tests
+        run: node --test tests/calc.test.js
+      - name: UI end-to-end tests
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+          mkdir -p /tmp/www && ln -s "$PWD" /tmp/www/Hesabaty-Flooring && mkdir -p /tmp/www/Ezaza && echo '<!doctype html><title>stub</title>' > /tmp/www/Ezaza/index.html
+          (cd /tmp/www && python3 -m http.server 8765 >/dev/null 2>&1 &)
+          sleep 1
+          node tests/e2e.js http://localhost:8765/Hesabaty-Flooring/
+          node tests/e2e-modules.js http://localhost:8765/Hesabaty-Flooring/

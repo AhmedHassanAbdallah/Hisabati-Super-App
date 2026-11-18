@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1b33">
+  <meta name="description" content="حساباتي — تطبيق واحد يجمع كل تطبيقات حساباتي للمهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس. تصميم وتطوير: أحمد حسن عبدالله.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="حساباتي">
+  <title>حساباتي — كل المهن</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="../Shared-Assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../Shared-Assets/icons/icon-192.png">
+  <link rel="stylesheet" href="../Shared-Assets/fonts/cairo.css">
+  <link rel="stylesheet" href="./launcher.css">
+  <script>
+    // نطبق الثيم قبل الرسم علشان مفيش وميض
+    (function () {
+      try {
+        var t = localStorage.getItem('hisabati_super_theme_v1');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body data-view="home">
+
+  <!-- ======== الشاشة الرئيسية: اختيار المهنة ======== -->
+  <main id="home" class="home" aria-labelledby="homeTitle">
+    <header class="hero">
+      <div class="hero-row">
+        <img class="brand" src="../Shared-Assets/icons/icon-192.png" alt="" width="46" height="46">
+        <div class="hero-text">
+          <span class="hello">أهلاً بيك في</span>
+          <h1 id="homeTitle">حساباتي</h1>
+        </div>
+        <button id="themeBtn" class="icon-btn" type="button" aria-label="تبديل الوضع الليلي">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+      <p class="hero-sub">اختار مهنتك — كل تطبيق بيشتغل بحساباته وفواتيره وبياناته زي ما هو بالظبط.</p>
+    </header>
+
+    <section class="trades-wrap" aria-labelledby="tradesTitle">
+      <h2 id="tradesTitle" class="section-title">المهن</h2>
+      <div id="tradeGrid" class="trade-grid"></div>
+    </section>
+
+    <footer class="home-foot">
+      <span>تصميم وتطوير: أحمد حسن عبدالله</span>
+      <span id="launcherVer" class="ver"></span>
+    </footer>
+  </main>
+
+  <!-- ======== شاشة تشغيل المهنة ======== -->
+  <section id="runner" class="runner" aria-live="polite" hidden>
+    <div class="runner-bar">
+      <button id="homeBtn" class="bar-btn" type="button" aria-label="الرجوع لكل المهن">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>
+        <span>كل المهن</span>
+      </button>
+      <div class="bar-title">
+        <img id="barIcon" src="" alt="" width="26" height="26">
+        <strong id="barName"></strong>
+      </div>
+    </div>
+    <div id="frameHost" class="frame-host">
+      <div id="frameLoading" class="frame-state">
+        <div class="spinner" aria-hidden="true"></div>
+        <span>جاري فتح التطبيق…</span>
+      </div>
+      <div id="frameError" class="frame-state" hidden>
+        <strong>التطبيق ما فتحش</strong>
+        <span>لو دي أول مرة تفتح المهنة دي، لازم تكون متصل بالإنترنت علشان تتحفظ على جهازك.</span>
+        <button id="retryBtn" class="retry" type="button">حاول تاني</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="./trades.js"></script>
+  <script src="./launcher.js"></script>
+</body>
+</html>

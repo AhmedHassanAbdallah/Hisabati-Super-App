@@ -1,0 +1,23 @@
+# اختبارات الحسابات والواجهة عند كل تعديل
+name: Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Engine tests (الحسابات مقارنة بالحساب اليدوي)
+        run: node --test tests/engine.test.js
+      - name: UI smoke test (المتصفح)
+        run: |
+          npm init -y >/dev/null
+          npm i --no-save playwright@1.48.2
+          npx playwright install --with-deps chromium
+          node tests/ui.smoke.js

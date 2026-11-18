@@ -1,0 +1,25 @@
+{
+  "id": "/Hesabaty-plumbing/",
+  "name": "حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي",
+  "short_name": "حساباتي السباكة",
+  "description": "نظام متكامل لإدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف: التأسيس والتشطيب والصيانة والخامات والعمال والمقايسات والفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1b33",
+  "theme_color": "#0b1b33",
+  "categories": ["business", "productivity", "utilities"],
+  "developer": {
+    "name": "أحمد حسن عبدالله",
+    "url": "https://www.facebook.com/share/1CTcsmiTif/"
+  },
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

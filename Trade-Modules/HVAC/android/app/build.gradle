@@ -1,0 +1,56 @@
+// حساباتي HVAC - تطبيق أندرويد مستقل (applicationId مختلف عن حساباتي الكهرباء)
+// © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+plugins {
+    id "com.android.application"
+}
+
+// رقم الإصدار يُقرأ من version.json (نفس رقم إصدار تطبيق الويب)
+def versionJson = new groovy.json.JsonSlurper().parse(file("../../version.json"))
+def appVersionName = versionJson.version as String
+def parts = appVersionName.tokenize(".").collect { it as int }
+def appVersionCode = parts[0] * 10000 + parts[1] * 100 + parts[2]
+// نسخ الاختبار: رقم أقل بواحد من الإصدار الرسمي علشان الرسمي يتثبت فوقها عادي
+if (System.getenv("HVAC_VERSION_NAME")) appVersionName = System.getenv("HVAC_VERSION_NAME")
+if (System.getenv("HVAC_VERSION_CODE")) appVersionCode = System.getenv("HVAC_VERSION_CODE") as int
+
+android {
+    namespace "com.ahmedhassan.hesabatihvac"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ahmedhassan.hesabatihvac"
+        minSdk 21
+        targetSdk 34
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    signingConfigs {
+        release {
+            def ks = System.getenv("HVAC_KEYSTORE")
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv("HVAC_KEY_PASSWORD")
+                keyAlias "hesabatihvac"
+                keyPassword System.getenv("HVAC_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig System.getenv("HVAC_KEYSTORE") ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}

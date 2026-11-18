@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1b33">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="author" content="أحمد حسن عبدالله">
+  <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+  <meta name="description" content="حساباتي للجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
+  <title>حساباتي للجبس والديكورات - HESABATI GYPSUM</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script>
+    // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح خاص بتطبيق الجبس
+    try {
+      var _t = (JSON.parse(localStorage.getItem('hgyp_settings_v1') || '{}') || {}).theme;
+      if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/app.css">
+  <!--
+    حساباتي للجبس والديكورات — HESABATI GYPSUM
+    تصميم وتطوير: أحمد حسن عبدالله
+    © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+  -->
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <img class="brand-ic" src="./icons/icon-192.png" alt="">
+    <div class="titles">
+      <div class="sub" id="greetLine">أهلاً بيك</div>
+      <h1 id="tabTitle">حساباتي للجبس</h1>
+    </div>
+    <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
+  </header>
+
+  <main class="container">
+    <!-- الرئيسية -->
+    <section class="view active" id="view-home">
+      <section class="home-sum" id="homeSum"></section>
+      <div class="kpis" id="homeKpis"></div>
+      <div class="quick" style="margin-bottom:6px">
+        <button type="button" class="q-tile dark" onclick="openProjectEdit(null)"><span class="q-ic orange"><i data-icon="briefcase"></i></span><b>مشروع جديد</b><small>عميل + بنود + حسابات</small></button>
+        <button type="button" class="q-tile" onclick="quickInvoice()"><span class="q-ic"><i data-icon="file"></i></span><b>فاتورة / مقايسة</b><small>من مشروع موجود</small></button>
+        <button type="button" class="q-tile" onclick="openStockEdit(null)"><span class="q-ic orange-soft"><i data-icon="box"></i></span><b>إضافة خامة</b><small>للمخزون والأسعار</small></button>
+        <button type="button" class="q-tile" onclick="openPaymentSheet(null)"><span class="q-ic green"><i data-icon="cash"></i></span><b>تسجيل دفعة</b><small>من عميل</small></button>
+      </div>
+      <div id="homeNotes"></div>
+      <div class="home-row"><h2 class="home-h" style="margin:0">الحاسبات</h2><button type="button" class="link-btn" onclick="switchView('calc')">كل الحاسبات</button></div>
+      <div class="calc-grid" id="homeCalcs"></div>
+      <div class="home-row"><h2 class="home-h" style="margin:0">آخر الفواتير والمستندات</h2><button type="button" class="link-btn" onclick="openDocsPage()">عرض الكل</button></div>
+      <div id="homeDocs"></div>
+      <div class="home-row"><h2 class="home-h" style="margin:0">آخر العملاء</h2><button type="button" class="link-btn" onclick="openCustomersPage()">عرض الكل</button></div>
+      <div id="homeCust"></div>
+    </section>
+
+    <!-- المشروعات -->
+    <section class="view" id="view-projects">
+      <button type="button" class="btn btn-accent" style="margin-bottom:12px" onclick="openProjectEdit(null)"><i data-icon="plus"></i> مشروع جديد</button>
+      <div class="field" style="margin-bottom:10px"><input type="search" id="projSearch" placeholder="ابحث باسم العميل أو المشروع أو العنوان..." oninput="renderProjects()"></div>
+      <div class="filter-chips" id="projFilter"></div>
+      <div id="projList"></div>
+    </section>
+
+    <!-- الحاسبات -->
+    <section class="view" id="view-calc">
+      <div class="note orange" style="margin-bottom:4px"><strong>حاسبات بالأبعاد الحقيقية:</strong> الكميات بتتحسب من المقاسات ومقاس اللوح والمسافات وعدد الطبقات — مش بمعامل ثابت. عدّل الإعدادات حسب النظام وتعليمات الشركة.</div>
+      <div id="calcHub"></div>
+    </section>
+
+    <!-- المزيد -->
+    <section class="view" id="view-more">
+      <div class="more-grid" id="moreGrid"></div>
+
+      <h3 class="more-h">الإعدادات</h3>
+      <div class="card">
+        <div class="field">
+          <label for="currencySelect">العملة الأساسية</label>
+          <select id="currencySelect" onchange="setCurrency(this.value)"></select>
+          <div class="hint">بتغيّر رمز العملة في كل التطبيق بس، ومش بتحوّل المبالغ (مفيش أسعار صرف ثابتة).</div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label for="defWaste">نسبة الهالك الافتراضية %</label><input type="number" inputmode="decimal" id="defWaste" min="0" step="any" oninput="setDefault('defaultWaste', this.value)"></div>
+          <div class="field"><label for="defScope">نوع الاتفاق الافتراضي</label><select id="defScope" onchange="setDefault('defaultScope', this.value)"></select></div>
+        </div>
+        <div class="card-title" style="margin:6px 0 10px"><div class="t-ic"><i data-icon="moon"></i></div><h2>المظهر</h2></div>
+        <div class="segmented" style="grid-template-columns:repeat(3,1fr);margin-bottom:0" role="radiogroup" aria-label="المظهر">
+          <button type="button" id="theme-auto" onclick="setTheme('auto')">تلقائي</button>
+          <button type="button" id="theme-light" onclick="setTheme('light')">فاتح</button>
+          <button type="button" id="theme-dark" onclick="setTheme('dark')">ليلي</button>
+        </div>
+      </div>
+
+      <h3 class="more-h">بياناتك والنسخ الاحتياطي</h3>
+      <div class="card">
+        <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
+        <p class="hint" style="margin:-6px 0 12px">كل بياناتك محفوظة على الموبايل ده بس وبتشتغل من غير إنترنت. النسخة الاحتياطية بتحفظ كل المشروعات والعملاء والمخزون والمستندات في ملف واحد تنقله لأي موبايل.</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost" onclick="exportBackup()"><i data-icon="download"></i> نسخة احتياطية</button>
+          <button type="button" class="btn btn-ghost" onclick="$('importFile').click()"><i data-icon="upload"></i> استعادة</button>
+        </div>
+        <div class="backup-line" id="backupLine"></div>
+        <input type="file" id="importFile" accept=".json,application/json" class="hidden" onchange="importBackup(event)">
+        <input type="file" id="logoFile" accept="image/*" class="hidden" onchange="uploadLogo(event)">
+      </div>
+
+      <div class="card">
+        <div class="card-title"><div class="t-ic orange"><i data-icon="refresh"></i></div><h2>التحديثات</h2></div>
+        <div class="ver-box"><span class="dot"></span><div style="flex:1"><div class="s">الإصدار الحالي</div><div class="v" id="verCurrent">—</div></div></div>
+        <div class="note" id="updateStatus" style="margin-bottom:12px">التطبيق بيدور على التحديثات لوحده، وبياناتك مش بتتأثر بالتحديث.</div>
+        <div class="stack">
+          <button type="button" class="btn btn-accent hidden" id="btnApplyUpdate" onclick="applyUpdate()"><i data-icon="download"></i> تحديث الآن</button>
+          <button type="button" class="btn btn-soft" onclick="checkUpdates()"><i data-icon="refresh"></i> البحث عن تحديثات</button>
+          <a class="btn btn-ghost" href="https://github.com/AhmedHassanAbdallah/Hesabaty-Gebsum/releases/latest/download/hesabati-gypsum.apk" rel="noopener"><i data-icon="download"></i> تحميل تطبيق أندرويد (APK)</a>
+        </div>
+      </div>
+
+      <div class="dev-card">
+        <div class="dev-name">أحمد حسن عبدالله</div>
+        <div class="dev-role">مطوّر ومصمّم تطبيقات حساباتي</div>
+        <div class="dev-links">
+          <a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener"><i data-icon="chat"></i> واتساب</a>
+          <a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener"><i data-icon="facebook"></i> فيسبوك</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <b>حساباتي للجبس والديكورات</b> — HESABATI GYPSUM · الإصدار <span id="aboutVersion"></span><br>
+        © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
+        <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="أقسام التطبيق">
+    <button type="button" class="nav-item active" id="navBtn-home" onclick="switchView('home')"><span class="pill"><i data-icon="home"></i></span>الرئيسية</button>
+    <button type="button" class="nav-item" id="navBtn-projects" onclick="switchView('projects')"><span class="pill"><i data-icon="briefcase"></i></span>المشروعات</button>
+    <div class="nav-center"><button type="button" class="nav-plus" onclick="openCreate()" aria-label="إنشاء جديد"><i data-icon="plus"></i></button></div>
+    <button type="button" class="nav-item" id="navBtn-calc" onclick="switchView('calc')"><span class="pill"><i data-icon="calc"></i></span>الحاسبات</button>
+    <button type="button" class="nav-item" id="navBtn-more" onclick="switchView('more')"><span class="pill"><i data-icon="grid"></i></span>المزيد</button>
+  </nav>
+
+  <button type="button" class="upd-bubble hidden" id="updBubble" onclick="applyUpdate()"><span class="b-ic"><i data-icon="download"></i></span><span class="t">تحديث جديد<small>اضغط للتحديث</small></span></button>
+</div>
+
+<!-- نافذة منبثقة من الأسفل -->
+<div class="backdrop" id="backdrop" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <div class="grab"></div>
+  <div class="sheet-head"><h3 id="sheetTitle"></h3><button type="button" class="close-x" onclick="closeSheet()" aria-label="إغلاق"><i data-icon="x"></i></button></div>
+  <div id="sheetBody"></div>
+</div>
+
+<!-- التأكيد -->
+<div class="dialog-wrap" id="confirmDialog">
+  <div class="dialog">
+    <div class="d-ic"><i data-icon="alert"></i></div>
+    <p id="appConfirmText"><span id="confirmText"></span></p>
+    <div class="btn-row"><button type="button" class="btn btn-ghost" onclick="confirmAnswer(false)">إلغاء</button><button type="button" class="btn btn-danger" id="confirmYes" onclick="confirmAnswer(true)">تأكيد</button></div>
+  </div>
+</div>
+
+<!-- معاينة المستند A4 -->
+<div id="printPreviewModal">
+  <div class="preview-toolbar">
+    <div class="toolbar-row">
+      <button type="button" class="tb-btn close" onclick="closePrint()" aria-label="إغلاق"><i data-icon="x"></i></button>
+      <span class="grow"></span>
+      <button type="button" class="tb-btn" onclick="printCopy()" aria-label="نسخ"><i data-icon="copy"></i></button>
+      <button type="button" class="tb-btn" onclick="printWhatsApp()" aria-label="واتساب"><i data-icon="send"></i></button>
+      <button type="button" class="tb-print" onclick="doPrint()"><i data-icon="printer"></i> طباعة / PDF</button>
+    </div>
+    <div class="edit-hint">تقدر تعدّل أي نص على الورقة قبل الطباعة · اختار «حفظ PDF» من نافذة الطباعة عشان تبعته واتساب</div>
+  </div>
+  <div class="page-label">ورقة A4</div>
+  <div id="printViewport"><div id="printSheet"></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="./js/engine/core.js"></script>
+<script src="./js/engine/board.js"></script>
+<script src="./js/engine/plaster.js"></script>
+<script src="./js/engine/decor.js"></script>
+<script src="./js/engine/finance.js"></script>
+<script src="./js/data/catalog.js"></script>
+<script src="./js/store.js"></script>
+<script src="./js/ui/base.js"></script>
+<script src="./js/ui/calc.js"></script>
+<script src="./js/ui/projects.js"></script>
+<script src="./js/ui/manage.js"></script>
+<script src="./js/ui/docs.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

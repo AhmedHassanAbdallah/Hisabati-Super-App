@@ -1,0 +1,13 @@
+{
+  "baseline_taken": "2026-11-17",
+  "note": "Each Trade-Modules/<dir> is a byte-identical copy of the original repository at the listed commit, excluding only the .git folder. Checksums: <repo>.sha256. Verify with tools/verify-integrity.sh",
+  "modules": [
+    { "dir": "Trade-Modules/Electrical", "repo": "AhmedHassanAbdallah/Ezaza",             "commit": "0daa269aa5465866f7646fece68b99f943571ec4", "version": "2.4.1", "files": 46 },
+    { "dir": "Trade-Modules/Plumbing",   "repo": "AhmedHassanAbdallah/Hesabaty-plumbing", "commit": "65a05b2e0e8fcfbd250eff228699d7f8aa58ee0c", "version": "1.0.0", "files": 57 },
+    { "dir": "Trade-Modules/HVAC",       "repo": "AhmedHassanAbdallah/Hesabaty-HAVC",     "commit": "c1938b32746548202044fa59d9a4c14e9ce7c93e", "version": "1.0.2", "files": 57 },
+    { "dir": "Trade-Modules/Painting",   "repo": "AhmedHassanAbdallah/Hesabaty-painting", "commit": "fbb595ef073514737f0fcf47a5b83c85f829db2f", "version": "1.1.0", "files": 48 },
+    { "dir": "Trade-Modules/Flooring",   "repo": "AhmedHassanAbdallah/Hesabaty-Flooring", "commit": "856111656fc68386fb4af6dcdc905f55beea54b1", "version": "1.0.0", "files": 63 },
+    { "dir": "Trade-Modules/Gypsum",     "repo": "AhmedHassanAbdallah/Hesabaty-Gebsum",   "commit": "04fda90707403ba7b925593baf39c81f9005ec7e", "version": "1.0.0", "files": 59 },
+    { "dir": "Trade-Modules/Plastering", "repo": "AhmedHassanAbdallah/Hesabaty-plaster",  "commit": null, "version": null, "files": 0, "note": "repository is empty" }
+  ]
+}
