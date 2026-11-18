@@ -4,7 +4,7 @@
  * فكل تطبيق بيفضل متحكم فيه الـ Service Worker الأصلي بتاعه زي ما هو.
  * أسماء الكاش كلها بتبدأ بـ hisabati-super- (مختلفة عن كل التطبيقات).
  */
-const VERSION = '1.2.0';
+const VERSION = '1.2.1';
 const CACHE = 'hisabati-super-' + VERSION;
 const PREFIX = 'hisabati-super-';
 const TRADE_DIRS = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum'];

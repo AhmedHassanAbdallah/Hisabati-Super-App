@@ -6,7 +6,7 @@
  *   لو فاضي: زرار تسجيل الدخول بيظهر بس بيقول إن الخدمة لسه بتتجهز.
  */
 window.HISABATI_CONFIG = {
-  googleClientId: '',
+  googleClientId: '911657691701-1n6h1c3gjnbaqp8anjch3e3kvr3semis.apps.googleusercontent.com',
   driveFolderName: 'حساباتي — نسخ احتياطية',
   developer: {
     name: 'أحمد حسن عبدالله',

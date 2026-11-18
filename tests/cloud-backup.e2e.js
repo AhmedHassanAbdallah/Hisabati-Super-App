@@ -80,12 +80,13 @@ async function device(browser, opts = {}) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
   await ctx.route('https://accounts.google.com/gsi/client', r => r.fulfill({ status: 200, contentType: 'text/javascript', body: GSI_STUB }));
   await ctx.route('https://www.googleapis.com/**', googleApis);
-  if (opts.configured !== false) {
-    await ctx.route(LAUNCHER + 'config.js', async r => {
-      const res = await r.fetch(); const body = (await res.text()).replace("googleClientId: ''", "googleClientId: 'test-client.apps.googleusercontent.com'");
-      r.fulfill({ response: res, body });
-    });
-  }
+  // الاختبار بيستخدم معرّف وهمي (أو فاضي لاختبار "قبل الإعداد") بدل المعرّف الحقيقي
+  await ctx.route(LAUNCHER + 'config.js', async r => {
+    const res = await r.fetch();
+    const id = opts.configured === false ? '' : 'test-client.apps.googleusercontent.com';
+    const body = (await res.text()).replace(/googleClientId: '[^']*'/, `googleClientId: '${id}'`);
+    r.fulfill({ response: res, body });
+  });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', e => errors.push('pageerror: ' + e.message));
