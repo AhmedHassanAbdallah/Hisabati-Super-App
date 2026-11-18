@@ -76,4 +76,16 @@ including an invoice comparison.
 * 7 separate registrations, so cache names never overlap.
 * Offline: the launcher and all 6 apps open and run.
 
+`node tests/cloud-backup.e2e.js` — **35 / 35 passed** (launcher 1.2.0). Google itself can't be
+used in automated tests, so the test serves a stand-in for Google Identity Services and an
+in-memory Google Drive v3 (same requests/responses, CORS, bearer tokens). Everything else is real:
+* Without a Client ID the sign-in button explains the service is coming — no errors.
+* Device 1: settings made through each section's own UI + business data + HVAC photos →
+  sign in (consent asked) → backup creates the folder and a JSON file containing **every section
+  key with identical values** and the photos; no foreign keys, no launcher/account keys, no token stored.
+* Device 2 (empty): sign in → offered to restore the latest backup → all section data identical
+  byte-for-byte, photos restored, unrelated keys untouched, all 6 sections open with restored settings.
+* Undo of the last restore, restore from the list, delete from Drive, sign-out (local data kept).
+* Restore rejects files that are not Hisabati backups or contain foreign keys/databases.
+
 Screenshots: `Documentation/screenshots/`.

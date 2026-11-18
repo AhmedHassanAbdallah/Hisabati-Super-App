@@ -4,12 +4,13 @@
  * فكل تطبيق بيفضل متحكم فيه الـ Service Worker الأصلي بتاعه زي ما هو.
  * أسماء الكاش كلها بتبدأ بـ hisabati-super- (مختلفة عن كل التطبيقات).
  */
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 const CACHE = 'hisabati-super-' + VERSION;
 const PREFIX = 'hisabati-super-';
 const TRADE_DIRS = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum'];
 const FILES = [
   './', './index.html', './launcher.css', './launcher.js', './trades.js', './manifest.json',
+  './config.js', './backup.js', './cloud.js', './privacy.html', '../Shared-Assets/images/developer.jpg',
   '../Shared-Assets/fonts/cairo.css', '../Shared-Assets/fonts/cairo-arabic.woff2',
   '../Shared-Assets/fonts/cairo-latin.woff2', '../Shared-Assets/fonts/cairo-latin-ext.woff2',
   '../Shared-Assets/icons/icon-192.png', '../Shared-Assets/icons/icon-512.png',

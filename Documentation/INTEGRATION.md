@@ -63,8 +63,19 @@ Why this is the safest choice:
 ### What the launcher does — and never does
 
 * Never edits, injects into, or wraps any app code or browser API of an app.
-* Never reads or writes app data. Its own keys are `hisabati_super_last_v1` (last trade)
-  and `hisabati_super_theme_v1` (launcher theme). Its caches are `hisabati-super-*`.
+* Reads/writes section data **only when the user asks** for a cloud backup or a restore
+  (`Main-App/backup.js`), and only keys with the sections' own prefixes:
+  `ahmed_elec_*`, `hesabaty_*`, `hesabati_plumbing_*`, `hesabati_hvac_*`, `hpaint_*`, `hflooring_*`,
+  `hgyp_*`, plus the photo databases `hesabati_plumbing_media` / `hesabati_hvac_media`
+  (object store `media`, version 1 — exactly as the sections create them). Any other key on
+  the origin is never copied or touched. Before a restore the current data is saved
+  (IndexedDB `hisabati_super_v1`) so the user can undo.
+* Its own keys: `hisabati_super_last_v1` (last section), `hisabati_super_theme_v1` (theme),
+  `hisabati_super_account_v1` (signed-in name/email/photo — never a token),
+  `hisabati_super_last_backup_v1`. Its caches are `hisabati-super-*`.
+* Google sign-in (launcher 1.2.0): Google Identity Services token client, scopes
+  `openid email profile drive.file`, no server. Backups go to the Drive folder
+  "حساباتي — نسخ احتياطية" as JSON. Setup: `Documentation/GOOGLE-SETUP.md`.
 * Its service worker is scoped to `Main-App/`, so it can never intercept an app's requests;
   every app keeps being controlled by its own original service worker.
 * It shows no version numbers (owner's request, launcher 1.1.0). A side menu (☰) introduces

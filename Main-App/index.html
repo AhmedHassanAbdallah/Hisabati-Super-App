@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0b1b33">
-  <meta name="description" content="حساباتي — حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس. تصميم وتطوير: أحمد حسن عبدالله.">
+  <meta name="description" content="حساباتي — حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس، مع نسخ احتياطي على جوجل درايف. تصميم وتطوير: أحمد حسن عبدالله.">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="../Shared-Assets/fonts/cairo.css">
   <link rel="stylesheet" href="./launcher.css">
   <script>
-    // نطبق الثيم قبل الرسم علشان مفيش وميض
     (function () {
       try {
         var t = localStorage.getItem('hisabati_super_theme_v1');
@@ -27,38 +26,92 @@
 </head>
 <body data-view="home">
 
-  <!-- ======== الشاشة الرئيسية: اختيار المهنة ======== -->
+  <!-- أيقونات -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-cloud-up" viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9H16"/><path d="M12 12v9M8.5 15.5 12 12l3.5 3.5"/></symbol>
+    <symbol id="i-cloud-down" viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9H16"/><path d="M12 21v-9M8.5 17.5 12 21l3.5-3.5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 17l-5-5 5-5M5 12h11"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-offline" viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M4 9h11a5 5 0 0 1 0 10H8"/><path d="M8 5L4 9l4 4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8.6 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+    <symbol id="i-google" viewBox="0 0 48 48"><path fill="#EA4335" stroke="none" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" stroke="none" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" stroke="none" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" stroke="none" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol>
+  </svg>
+
+  <!-- ======== الرئيسية ======== -->
   <main id="home" class="home" aria-labelledby="homeTitle">
     <header class="hero">
-      <div class="hero-row">
-        <button id="menuBtn" class="icon-btn" type="button" aria-label="القائمة والتعريف بالأقسام" aria-controls="drawer" aria-expanded="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-        <img class="brand" src="../Shared-Assets/icons/icon-192.png" alt="" width="46" height="46">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hero-top">
+        <button id="menuBtn" class="glass-btn" type="button" aria-label="القائمة" aria-controls="drawer" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+        <div class="hero-top-end">
+          <button id="accountBtn" class="glass-btn avatar-btn" type="button" aria-label="حسابي والنسخ الاحتياطي"><svg><use href="#i-user"/></svg></button>
+          <button id="themeBtn" class="glass-btn" type="button" aria-label="تبديل الوضع الليلي"><svg><use href="#i-moon"/></svg></button>
+        </div>
+      </div>
+      <div class="hero-main">
+        <div class="brand-tile"><img src="../Shared-Assets/icons/icon-192.png" alt="" width="62" height="62"></div>
         <div class="hero-text">
-          <span class="hello">أهلاً بيك في</span>
+          <span id="greet" class="greet">أهلاً بيك</span>
           <h1 id="homeTitle">حساباتي</h1>
         </div>
-        <button id="themeBtn" class="icon-btn" type="button" aria-label="تبديل الوضع الليلي">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        </button>
       </div>
-      <p class="hero-sub">اختار مهنتك وابدأ شغلك — الحسابات والفواتير والمقايسات والخامات لكل مهنة في مكان واحد.</p>
+      <p class="hero-sub">احسب شغلك صح، وطلّع فواتير ومقايسات احترافية — لكل مهنة قسم كامل في مكان واحد.</p>
+      <div class="hero-chips">
+        <span class="chip"><svg><use href="#i-grid"/></svg> 6 أقسام</span>
+        <span class="chip"><svg><use href="#i-offline"/></svg> بيشتغل أوفلاين</span>
+        <span class="chip"><svg><use href="#i-cloud-up"/></svg> نسخ على درايف</span>
+      </div>
     </header>
 
-    <section class="trades-wrap" aria-labelledby="tradesTitle">
-      <h2 id="tradesTitle" class="section-title">المهن</h2>
-      <div id="tradeGrid" class="trade-grid"></div>
-    </section>
+    <div class="content">
+      <button id="resumeCard" class="resume" type="button" hidden></button>
 
-    <footer class="home-foot">
-      <span>تصميم وتطوير: أحمد حسن عبدالله</span>
-    </footer>
+      <section class="block" aria-labelledby="tradesTitle">
+        <div class="sec-head"><h2 id="tradesTitle">اختار قسمك</h2><span class="sec-hint">دوس على المهنة وابدأ</span></div>
+        <div id="tradeGrid" class="trade-grid"></div>
+      </section>
+
+      <section id="cloudCard" class="cloud-card block" aria-live="polite"></section>
+
+      <section class="dev-card block" aria-labelledby="devName">
+        <div class="dev-glow" aria-hidden="true"></div>
+        <div class="dev-row">
+          <img id="devPhoto" class="dev-photo" src="../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله" width="76" height="76">
+          <div class="dev-text">
+            <span class="dev-kicker">صمّمه وطوّره</span>
+            <strong id="devName">أحمد حسن عبدالله</strong>
+            <span id="devRole" class="dev-role">مطوّر ومصمّم حساباتي</span>
+          </div>
+        </div>
+        <div class="dev-actions">
+          <a id="devWa" class="dev-btn wa" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg> واتساب</a>
+          <a id="devFb" class="dev-btn fb" href="#" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg> فيسبوك</a>
+          <a id="devTel" class="dev-btn tel" href="#"><svg><use href="#i-phone"/></svg> اتصال</a>
+        </div>
+      </section>
+
+      <footer class="home-foot">
+        <a href="./privacy.html" class="foot-link"><svg><use href="#i-shield"/></svg> سياسة الخصوصية</a>
+        <span>© 2026 أحمد حسن عبدالله — جميع الحقوق محفوظة</span>
+      </footer>
+    </div>
   </main>
 
-  <!-- ======== القائمة: التعريف بحساباتي وأقسامه ======== -->
-  <div id="drawer" class="drawer" aria-hidden="true">
-    <div class="drawer-backdrop" data-close></div>
+  <!-- ======== القائمة الجانبية ======== -->
+  <div id="drawer" class="layer drawer" aria-hidden="true">
+    <div class="layer-backdrop" data-close></div>
     <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
       <div class="drawer-head">
         <img src="../Shared-Assets/icons/icon-192.png" alt="" width="42" height="42">
@@ -66,9 +119,7 @@
           <strong id="drawerTitle">حساباتي</strong>
           <span>حسابات وفواتير كل المهن</span>
         </div>
-        <button class="icon-btn" type="button" data-close aria-label="قفل القائمة">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
+        <button class="glass-btn" type="button" data-close aria-label="قفل القائمة"><svg><use href="#i-x"/></svg></button>
       </div>
       <div class="drawer-body">
         <section class="about">
@@ -77,9 +128,14 @@
           <ul class="about-points">
             <li>بيشتغل من غير إنترنت، وبياناتك محفوظة على جهازك</li>
             <li>فواتير ومقايسات PDF بالعربي جاهزة للطباعة والإرسال</li>
-            <li>نسخ احتياطي واستعادة لبياناتك في أي وقت</li>
+            <li>نسخ احتياطي على جوجل درايف واسترجاع في أي وقت</li>
           </ul>
         </section>
+        <div class="menu-links">
+          <button class="menu-link" type="button" data-goto="account"><svg><use href="#i-cloud-up"/></svg><span>حسابي والنسخ الاحتياطي</span></button>
+          <a class="menu-link" href="./privacy.html"><svg><use href="#i-shield"/></svg><span>سياسة الخصوصية</span></a>
+          <button class="menu-link" type="button" data-goto="dev"><svg><use href="#i-user"/></svg><span>عن المطوّر</span></button>
+        </div>
         <h2 class="drawer-sec">الأقسام</h2>
         <div id="drawerTrades" class="drawer-trades"></div>
       </div>
@@ -87,11 +143,38 @@
     </aside>
   </div>
 
-  <!-- ======== شاشة تشغيل المهنة ======== -->
+  <!-- ======== حسابي والنسخ الاحتياطي ======== -->
+  <div id="accountSheet" class="layer sheet" aria-hidden="true">
+    <div class="layer-backdrop" data-close></div>
+    <section class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <div class="sheet-grip" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2 id="accountTitle">حسابي والنسخ الاحتياطي</h2>
+        <button class="icon-plain" type="button" data-close aria-label="قفل"><svg><use href="#i-x"/></svg></button>
+      </div>
+      <div id="accountBody" class="sheet-body"></div>
+    </section>
+  </div>
+
+  <!-- ======== تأكيد ======== -->
+  <div id="confirm" class="confirm" hidden>
+    <div class="confirm-box" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmText">
+      <strong id="confirmTitle"></strong>
+      <p id="confirmText"></p>
+      <div class="confirm-actions">
+        <button id="confirmNo" type="button" class="btn ghost">إلغاء</button>
+        <button id="confirmYes" type="button" class="btn primary">تمام</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ======== شاشة تشغيل القسم ======== -->
   <section id="runner" class="runner" aria-live="polite" hidden>
     <div class="runner-bar">
-      <button id="homeBtn" class="bar-btn" type="button" aria-label="الرجوع لكل المهن">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>
+      <button id="homeBtn" class="bar-btn" type="button" aria-label="الرجوع لكل الأقسام">
+        <svg><use href="#i-grid"/></svg>
         <span>كل المهن</span>
       </button>
       <div class="bar-title">
@@ -102,17 +185,20 @@
     <div id="frameHost" class="frame-host">
       <div id="frameLoading" class="frame-state">
         <div class="spinner" aria-hidden="true"></div>
-        <span>جاري فتح التطبيق…</span>
+        <span>جاري الفتح…</span>
       </div>
       <div id="frameError" class="frame-state" hidden>
-        <strong>التطبيق ما فتحش</strong>
-        <span>لو دي أول مرة تفتح المهنة دي، لازم تكون متصل بالإنترنت علشان تتحفظ على جهازك.</span>
-        <button id="retryBtn" class="retry" type="button">حاول تاني</button>
+        <strong>القسم ما فتحش</strong>
+        <span>لو دي أول مرة تفتح القسم ده، لازم تكون متصل بالإنترنت علشان يتحفظ على جهازك.</span>
+        <button id="retryBtn" class="btn primary" type="button">حاول تاني</button>
       </div>
     </div>
   </section>
 
+  <script src="./config.js"></script>
   <script src="./trades.js"></script>
+  <script src="./backup.js"></script>
+  <script src="./cloud.js"></script>
   <script src="./launcher.js"></script>
 </body>
 </html>
