@@ -142,3 +142,86 @@ body[data-view="app"] .home { display: none; }
 .retry {
   border: 0; border-radius: 12px; padding: 10px 22px; background: var(--orange-500); color: #fff; font-weight: 800;
 }
+
+/* ---------- القائمة الجانبية: التعريف بحساباتي ---------- */
+.drawer { position: fixed; inset: 0; z-index: 50; visibility: hidden; }
+.drawer.open { visibility: visible; }
+.drawer-backdrop {
+  position: absolute; inset: 0; background: rgba(7,18,38,.55);
+  opacity: 0; transition: opacity .22s ease;
+}
+.drawer.open .drawer-backdrop { opacity: 1; }
+.drawer-panel {
+  position: absolute; top: 0; bottom: 0; inset-inline-start: 0;
+  width: min(88vw, 380px); background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,.35);
+  transform: translateX(100%); transition: transform .25s ease;
+}
+[dir="ltr"] .drawer-panel { transform: translateX(-100%); }
+.drawer.open .drawer-panel { transform: none; }
+.drawer-head {
+  display: flex; align-items: center; gap: 10px; color: #fff;
+  padding: calc(var(--safe-t) + 14px) 14px 14px;
+  background: linear-gradient(160deg, var(--navy-800), var(--navy-950));
+}
+.drawer-head img { border-radius: 11px; flex: none; }
+.drawer-head-text { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35; }
+.drawer-head-text strong { font-size: 19px; font-weight: 900; }
+.drawer-head-text span { font-size: 12.5px; color: #b9c8de; font-weight: 600; }
+.drawer-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 14px 14px 8px; }
+.about {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px; box-shadow: var(--shadow-sm);
+}
+.about h2, .drawer-sec { margin: 0 0 8px; font-size: 16px; font-weight: 800; }
+.drawer-sec { margin: 18px 4px 10px; }
+.about p { margin: 0; font-size: 13.5px; line-height: 1.85; font-weight: 600; color: var(--muted); }
+.about-points { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.about-points li {
+  font-size: 13px; font-weight: 700; line-height: 1.6; padding-inline-start: 22px; position: relative;
+}
+.about-points li::before {
+  content: ""; position: absolute; inset-inline-start: 4px; top: .55em; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--orange-500);
+}
+.drawer-trades { display: grid; gap: 10px; }
+.dt {
+  --c: #64748b; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.dt summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 11px 12px;
+}
+.dt summary::-webkit-details-marker { display: none; }
+.dt summary:focus-visible { outline: 3px solid var(--orange-500); outline-offset: -3px; }
+.dt-icon {
+  width: 40px; height: 40px; border-radius: 11px; overflow: hidden; flex: none; background: var(--navy-900);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 25%, transparent);
+  display: grid; place-items: center; color: #fff; font-weight: 900;
+}
+.dt-icon img { width: 100%; height: 100%; display: block; }
+.dt-text { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.45; }
+.dt-text strong { font-size: 14.5px; font-weight: 800; }
+.dt-text small { font-size: 12px; color: var(--muted); font-weight: 600; overflow-wrap: anywhere; }
+.dt-chev { width: 18px; height: 18px; color: var(--muted); flex: none; transition: transform .2s ease; }
+.dt[open] .dt-chev { transform: rotate(180deg); }
+.dt-body { padding: 0 12px 12px; border-top: 1px dashed var(--border); }
+.dt-body p { margin: 10px 0 8px; font-size: 13px; line-height: 1.8; font-weight: 600; }
+.dt-body ul { margin: 0 0 12px; padding-inline-start: 18px; display: grid; gap: 3px; }
+.dt-body li { font-size: 12.5px; line-height: 1.7; color: var(--muted); font-weight: 600; }
+.dt-body li::marker { color: var(--c); }
+.dt-open {
+  width: 100%; border: 0; border-radius: 12px; padding: 10px; background: var(--orange-500);
+  color: #fff; font-weight: 800; font-size: 14px;
+}
+.dt.soon { opacity: .65; }
+.dt.soon .dt-icon { background: var(--c); }
+.soon-tag {
+  font-size: 11px; font-weight: 800; padding: 2px 9px; border-radius: 999px;
+  background: var(--border); color: var(--muted); flex: none;
+}
+.drawer-foot {
+  padding: 12px 14px calc(var(--safe-b) + 12px); text-align: center; font-size: 12px;
+  font-weight: 600; color: var(--muted); border-top: 1px solid var(--border);
+}
+@media (prefers-reduced-motion: reduce) { .drawer-panel, .drawer-backdrop, .dt-chev { transition: none; } }

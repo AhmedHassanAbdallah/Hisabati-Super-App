@@ -88,13 +88,47 @@ const openPlus = async f => {
     check('6 مهن شغالة بالترتيب', JSON.stringify(enabled) === JSON.stringify(TRADES.map(t => t.id)), enabled);
     const disabled = await page.$$eval('.trade[disabled]', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim()));
     check('المحارة ظاهرة كغير متاحة', disabled.length === 1 && disabled[0].includes('المحارة'), disabled);
-    for (const t of TRADES) {
-      const v = JSON.parse(fs.readFileSync(path.join(ROOT, 'Trade-Modules', t.dir, 'version.json'), 'utf8')).version;
-      const shown = await page.textContent(`[data-ver="${t.id}"]`).catch(() => '');
-      check(`إصدار ${t.id} = ${v}`, shown.includes(v), shown);
-    }
+    const homeText = await page.evaluate(() => document.body.innerText);
+    check('أرقام الإصدارات مخفية', !/إصدار/.test(homeText) && !(await page.$('[data-ver]')));
+    check('مفيش أي ذكر لـ "تطبيق" في الرئيسية', !/تطبيق/.test(homeText), (homeText.match(/[^\n]*تطبيق[^\n]*/g) || []));
     check('مفيش أخطاء في الرئيسية', errors.length === 0, errors);
     await shot(page, '00-home');
+    await ctx.close();
+  }
+
+  /* ---------------- 1ب) القائمة: التعريف بالأقسام ---------------- */
+  console.log('\n[1ب] القائمة والتعريف بالأقسام');
+  {
+    const { ctx, page, errors } = await newCtx(browser);
+    const drawerOpen = () => page.evaluate(() => document.getElementById('drawer').classList.contains('open'));
+    await page.goto(LAUNCHER); await sleep(600);
+    check('القائمة مقفولة في الأول', !(await drawerOpen()));
+    await page.click('#menuBtn'); await sleep(450);
+    check('زرار القائمة بيفتحها', await drawerOpen());
+    const items = await page.$$eval('#drawerTrades [data-open]', els => els.map(e => e.dataset.open));
+    check('القائمة فيها تعريف الـ 6 أقسام بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
+    const dText = await page.evaluate(() => document.getElementById('drawer').innerText);
+    check('القائمة فيها "عن حساباتي" والمحارة "قريباً"', dText.includes('عن حساباتي') && /المحارة[\s\S]*قريباً/.test(dText));
+    check('القائمة ما فيهاش ذكر لـ "تطبيق" ولا إصدارات', !/تطبيق|إصدار/.test(dText), (dText.match(/[^\n]*(تطبيق|إصدار)[^\n]*/g) || []));
+    await page.click('#drawerTrades .dt:nth-child(3) summary'); await sleep(300);
+    check('الضغط على قسم بيعرض مميزاته', await page.evaluate(() => { const d = document.querySelector('#drawerTrades .dt:nth-child(3)'); return d.open && d.querySelectorAll('li').length >= 3; }));
+    await shot(page, '01-menu');
+    await page.evaluate(() => history.back()); await sleep(450);
+    check('زرار الرجوع بيقفل القائمة ويفضل في الرئيسية', !(await drawerOpen()) && (await view(page)) === 'home' && page.url().startsWith(LAUNCHER));
+    await page.click('#menuBtn'); await sleep(450);
+    await page.click('#drawer .drawer-head [data-close]'); await sleep(450);
+    check('زرار X بيقفل القائمة', !(await drawerOpen()) && (await page.evaluate(() => history.state && history.state.hs)) === 'home');
+    await page.click('#menuBtn'); await sleep(450);
+    await page.keyboard.press('Escape'); await sleep(450);
+    check('Esc بيقفل القائمة', !(await drawerOpen()));
+    await page.click('#menuBtn'); await sleep(450);
+    if (!(await page.$eval('#drawerTrades .dt:nth-child(3)', d => d.open))) { await page.click('#drawerTrades .dt:nth-child(3) summary'); await sleep(300); }
+    await page.click('#drawerTrades [data-open="hvac"]');
+    const f = await appFrame(page);
+    check('زرار "افتح" في القائمة بيفتح القسم', f.url() === BASE + 'Trade-Modules/HVAC/' && !(await drawerOpen()));
+    await page.evaluate(() => history.back()); await sleep(700);
+    check('الرجوع من القسم بيروح للرئيسية على طول (مش للقائمة)', (await view(page)) === 'home' && !(await drawerOpen()));
+    check('مفيش أخطاء', errors.length === 0, errors);
     await ctx.close();
   }
 

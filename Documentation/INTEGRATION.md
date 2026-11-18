@@ -67,7 +67,9 @@ Why this is the safest choice:
   and `hisabati_super_theme_v1` (launcher theme). Its caches are `hisabati-super-*`.
 * Its service worker is scoped to `Main-App/`, so it can never intercept an app's requests;
   every app keeps being controlled by its own original service worker.
-* It reads each app's `version.json` (read-only) to show the version on the trade card.
+* It shows no version numbers (owner's request, launcher 1.1.0). A side menu (☰) introduces
+  Hisabati and each trade section with its main features; the copied apps are presented as
+  sections of one app, never as separate apps.
 
 ## 3. Behaviour details
 

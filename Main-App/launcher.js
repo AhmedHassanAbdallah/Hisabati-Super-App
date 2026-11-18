@@ -14,7 +14,7 @@
 (function () {
   'use strict';
 
-  const LAUNCHER_VERSION = '1.0.0';
+  const LAUNCHER_VERSION = '1.1.0'; // داخلي بس — مش بيظهر للمستخدم
   const LAST_KEY = 'hisabati_super_last_v1';
   const THEME_KEY = 'hisabati_super_theme_v1';
   const TRADES = window.HISABATI_TRADES || [];
@@ -42,7 +42,7 @@
           <div class="trade-icon" aria-hidden="true">${esc(t.name.replace(/^ال/, '').slice(0, 1))}</div>
           <div class="trade-name">${esc(t.name)}</div>
           <div class="trade-desc">${esc(t.desc)}</div>
-          <div class="trade-meta"><span class="pill">غير متاح حالياً</span></div>
+          <div class="trade-meta"><span class="pill">قريباً</span></div>
         </button>`;
       }
       return `<button class="trade" type="button" data-trade="${esc(t.id)}" style="${style}">
@@ -50,26 +50,10 @@
         <div class="trade-name">${esc(t.name)}</div>
         <div class="trade-desc">${esc(t.desc)}</div>
         <div class="trade-meta">
-          <span class="pill" data-ver="${esc(t.id)}"></span>
           ${last === t.id ? '<span class="pill last">آخر استخدام</span>' : ''}
         </div>
       </button>`;
     }).join('');
-    loadVersions();
-  }
-
-  // بيقرا version.json بتاع كل تطبيق (قراءة بس) علشان يعرض رقم الإصدار
-  function loadVersions() {
-    TRADES.filter(t => t.available).forEach(t => {
-      fetch(tradeBase(t) + 'version.json', { cache: 'no-cache' })
-        .then(r => (r.ok ? r.json() : null))
-        .then(v => {
-          const el = document.querySelector(`[data-ver="${t.id}"]`);
-          if (el && v && v.version) el.textContent = 'الإصدار ' + v.version;
-          else if (el) el.remove();
-        })
-        .catch(() => { const el = document.querySelector(`[data-ver="${t.id}"]`); if (el) el.remove(); });
-    });
   }
 
   /* ---------------- فتح المهنة ---------------- */
@@ -192,6 +176,8 @@
 
   window.addEventListener('popstate', e => {
     const s = e.state;
+    if (s && s.hs === 'menu') { if (!current) showDrawer(); return; }
+    hideDrawer();
     if (s && s.hs === 'app') {
       if (homing) return;
       if (!current || current.id !== s.id) openTrade(s.id, { push: false });
@@ -217,6 +203,73 @@
     }
   });
 
+  /* ---------------- القائمة: التعريف بالأقسام ---------------- */
+  const chev = '<svg class="dt-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  function renderDrawer() {
+    $('drawerTrades').innerHTML = TRADES.map(t => {
+      const style = `--c:${esc(t.color)}`;
+      if (!t.available) {
+        return `<div class="dt soon" style="${style}"><div class="dt-sum" style="display:flex;align-items:center;gap:10px;padding:11px 12px">
+          <div class="dt-icon" aria-hidden="true">${esc(t.name.replace(/^ال/, '').slice(0, 1))}</div>
+          <div class="dt-text"><strong>${esc(t.name)}</strong><small>${esc(t.about)}</small></div>
+          <span class="soon-tag">قريباً</span></div></div>`;
+      }
+      return `<details class="dt" style="${style}">
+        <summary>
+          <div class="dt-icon"><img src="${esc(tradeIcon(t))}" alt="" width="40" height="40" loading="lazy"></div>
+          <div class="dt-text"><strong>${esc(t.name)}</strong><small>${esc(t.desc)}</small></div>
+          ${chev}
+        </summary>
+        <div class="dt-body">
+          <p>${esc(t.about)}</p>
+          <ul>${t.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+          <button class="dt-open" type="button" data-open="${esc(t.id)}">افتح قسم ${esc(t.name)}</button>
+        </div>
+      </details>`;
+    }).join('');
+  }
+  let drawerReturnFocus = null;
+  function showDrawer() {
+    const d = $('drawer');
+    if (d.classList.contains('open')) return;
+    drawerReturnFocus = document.activeElement;
+    d.classList.add('open'); d.setAttribute('aria-hidden', 'false');
+    $('menuBtn').setAttribute('aria-expanded', 'true');
+    setTimeout(() => { const b = d.querySelector('.drawer-head [data-close]'); if (b) b.focus(); }, 60);
+  }
+  function hideDrawer() {
+    const d = $('drawer');
+    if (!d.classList.contains('open')) return;
+    d.classList.remove('open'); d.setAttribute('aria-hidden', 'true');
+    $('menuBtn').setAttribute('aria-expanded', 'false');
+    if (drawerReturnFocus && drawerReturnFocus.focus) drawerReturnFocus.focus();
+  }
+  // فتح القائمة بيضيف خطوة في سجل الرجوع علشان زرار الرجوع في الموبايل يقفلها
+  function openDrawer() {
+    if (current) return;
+    history.pushState({ hs: 'menu' }, '', location.pathname + location.search);
+    showDrawer();
+  }
+  function closeDrawer() {
+    if (history.state && history.state.hs === 'menu') history.back(); // popstate بيقفلها
+    else hideDrawer();
+  }
+  $('menuBtn').addEventListener('click', openDrawer);
+  $('drawer').addEventListener('click', e => {
+    if (e.target.closest('[data-close]')) { closeDrawer(); return; }
+    const b = e.target.closest('[data-open]');
+    if (!b) return;
+    const id = b.dataset.open;
+    // خطوة القائمة بتتبدل بخطوة القسم: الرجوع من القسم يروح للرئيسية على طول
+    if (history.state && history.state.hs === 'menu') history.replaceState({ hs: 'app', id }, '', '#' + id);
+    else history.pushState({ hs: 'app', id }, '', '#' + id);
+    drawerReturnFocus = null;
+    hideDrawer();
+    openTrade(id, { push: false });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('drawer').classList.contains('open')) closeDrawer(); });
+  renderDrawer();
+
   /* ---------------- الثيم ---------------- */
   function toggleTheme() {
     const root = document.documentElement;
@@ -240,14 +293,15 @@
     destroyFrame(); current = null;
     openTrade(t.id, { push: false });
   });
-  $('launcherVer').textContent = 'التطبيق الموحد · الإصدار ' + LAUNCHER_VERSION;
 
   renderGrid();
 
   // رابط مباشر لمهنة: Main-App/#electrical (وكمان اختصارات أيقونة التطبيق)
   const startId = decodeURIComponent(location.hash.slice(1));
   const st = history.state;
-  if (st && st.hs === 'app' && byId(st.id)) {
+  if (st && st.hs === 'menu') {
+    history.replaceState({ hs: 'home' }, '', location.pathname + location.search);
+  } else if (st && st.hs === 'app' && byId(st.id)) {
     openTrade(st.id, { push: false }); // إعادة تحميل الصفحة وهي على مهنة
   } else {
     history.replaceState({ hs: 'home' }, '', location.pathname + location.search);
@@ -262,5 +316,5 @@
   }
 
   // للاختبارات الآلية
-  window.__hisabatiLauncher = { version: LAUNCHER_VERSION, openTrade, goHome, get current() { return current && current.id; }, get frame() { return frame; } };
+  window.__hisabatiLauncher = { version: LAUNCHER_VERSION, openTrade, goHome, openDrawer, closeDrawer, get current() { return current && current.id; }, get frame() { return frame; } };
 })();

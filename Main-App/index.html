@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0b1b33">
-  <meta name="description" content="حساباتي — تطبيق واحد يجمع كل تطبيقات حساباتي للمهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس. تصميم وتطوير: أحمد حسن عبدالله.">
+  <meta name="description" content="حساباتي — حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس. تصميم وتطوير: أحمد حسن عبدالله.">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,6 +31,9 @@
   <main id="home" class="home" aria-labelledby="homeTitle">
     <header class="hero">
       <div class="hero-row">
+        <button id="menuBtn" class="icon-btn" type="button" aria-label="القائمة والتعريف بالأقسام" aria-controls="drawer" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
         <img class="brand" src="../Shared-Assets/icons/icon-192.png" alt="" width="46" height="46">
         <div class="hero-text">
           <span class="hello">أهلاً بيك في</span>
@@ -40,7 +43,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
         </button>
       </div>
-      <p class="hero-sub">اختار مهنتك — كل تطبيق بيشتغل بحساباته وفواتيره وبياناته زي ما هو بالظبط.</p>
+      <p class="hero-sub">اختار مهنتك وابدأ شغلك — الحسابات والفواتير والمقايسات والخامات لكل مهنة في مكان واحد.</p>
     </header>
 
     <section class="trades-wrap" aria-labelledby="tradesTitle">
@@ -50,9 +53,39 @@
 
     <footer class="home-foot">
       <span>تصميم وتطوير: أحمد حسن عبدالله</span>
-      <span id="launcherVer" class="ver"></span>
     </footer>
   </main>
+
+  <!-- ======== القائمة: التعريف بحساباتي وأقسامه ======== -->
+  <div id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <div class="drawer-head">
+        <img src="../Shared-Assets/icons/icon-192.png" alt="" width="42" height="42">
+        <div class="drawer-head-text">
+          <strong id="drawerTitle">حساباتي</strong>
+          <span>حسابات وفواتير كل المهن</span>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="قفل القائمة">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <section class="about">
+          <h2>عن حساباتي</h2>
+          <p>حساباتي بيساعد الصنايعي والمقاول يحسب شغله صح ويطلّع فواتير ومقايسات احترافية، ويتابع العملاء والدفعات والخامات والعمال والمصروفات والأرباح — لكل مهنة قسم كامل بحاسباته وطرق محاسبتها.</p>
+          <ul class="about-points">
+            <li>بيشتغل من غير إنترنت، وبياناتك محفوظة على جهازك</li>
+            <li>فواتير ومقايسات PDF بالعربي جاهزة للطباعة والإرسال</li>
+            <li>نسخ احتياطي واستعادة لبياناتك في أي وقت</li>
+          </ul>
+        </section>
+        <h2 class="drawer-sec">الأقسام</h2>
+        <div id="drawerTrades" class="drawer-trades"></div>
+      </div>
+      <div class="drawer-foot">تصميم وتطوير: أحمد حسن عبدالله</div>
+    </aside>
+  </div>
 
   <!-- ======== شاشة تشغيل المهنة ======== -->
   <section id="runner" class="runner" aria-live="polite" hidden>

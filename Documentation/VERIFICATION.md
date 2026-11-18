@@ -54,8 +54,10 @@ Electrical (Ezaza) ships no automated test suite. It is covered by the launcher 
 including an invoice comparison.
 
 ## 5. Launcher tests
-`node tests/launcher.e2e.js` — **125 / 125 passed**:
-* 6 trades + Plastering shown as unavailable; versions read from each copy's `version.json`.
+`node tests/launcher.e2e.js` — **133 / 133 passed** (launcher 1.1.0):
+* 6 trades + Plastering shown as "قريباً"; no version numbers and no mention of separate apps on screen.
+* Menu (☰): opens, introduces all 6 sections with features and an open button; closes with
+  Back / ✕ / Esc; opening a section from it, then Back, returns straight to the home screen.
 * For every trade: opens from its copy folder; same document title and page structure as
   standalone; **writes exactly the same storage keys as when run standalone**; no JS errors.
 * Back button: first closes the app's own window, then returns to the trade list;
