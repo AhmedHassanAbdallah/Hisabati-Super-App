@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ahmedhassan.hisabati",
+      "sha256_cert_fingerprints": [
+        "A5:C5:13:B7:AC:5E:48:83:A8:4D:4E:DE:DF:D1:B0:80:A9:A8:06:F0:1E:28:BA:36:67:C0:83:C1:00:97:04:8D"
+      ]
+    }
+  }
+]
