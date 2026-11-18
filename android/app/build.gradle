@@ -1,0 +1,58 @@
+// حساباتي — تطبيق أندرويد (Trusted Web Activity)
+// بيفتح https://ahmedhassanabdallah.github.io/Hisabati-Super-App/Main-App/ جوه Chrome بملء الشاشة:
+// تسجيل الدخول بجوجل والطباعة/PDF والعمل أوفلاين بيشتغلوا زي الموقع بالظبط.
+// © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+plugins {
+    id "com.android.application"
+}
+
+def versionJson = new groovy.json.JsonSlurper().parse(file("../../version.json"))
+def appVersionName = versionJson.version as String
+def parts = appVersionName.tokenize(".").collect { it as int }
+def appVersionCode = parts[0] * 10000 + parts[1] * 100 + parts[2]
+
+android {
+    namespace "com.ahmedhassan.hisabati"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ahmedhassan.hisabati"
+        minSdk 21
+        targetSdk 34
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    signingConfigs {
+        release {
+            def ks = System.getenv("HISABATI_KEYSTORE")
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv("HISABATI_KEY_PASSWORD")
+                keyAlias "hisabati"
+                keyPassword System.getenv("HISABATI_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig System.getenv("HISABATI_KEYSTORE") ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation "com.google.androidbrowserhelper:androidbrowserhelper:2.5.0"
+}
