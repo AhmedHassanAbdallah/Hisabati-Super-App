@@ -40,8 +40,6 @@ jobs:
           java-version: "17"
 
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.9"
 
       - name: Version
         id: ver
@@ -81,20 +79,23 @@ jobs:
           PY
           cat android/assetlinks.json
 
-      - name: Build APK
+      - name: Build APK + AAB (Google Play)
         working-directory: android
-        run: gradle --no-daemon assembleRelease
+        run: ./gradlew --no-daemon assembleRelease bundleRelease
 
       - name: Collect APK
         run: |
           mkdir -p out
           cp android/app/build/outputs/apk/release/*.apk out/hisabati.apk
+          cp android/app/build/outputs/bundle/release/*.aab out/hisabati.aab
           ls -la out
 
       - uses: actions/upload-artifact@v4
         with:
           name: hisabati-apk
-          path: out/hisabati.apk
+          path: |
+            out/hisabati.apk
+            out/hisabati.aab
 
       - name: Save signing key fingerprint (and encrypted key on first run)
         if: steps.key.outputs.signed == 'true'
@@ -137,10 +138,10 @@ jobs:
           VER: ${{ needs.build.outputs.version }}
         run: |
           python3 -c "import json;d=json.load(open('version.json'));print('\n'.join('- '+n for n in d['notes']))" > notes.md
-          printf '\n\nحمّل الملف **hisabati.apk** وثبّته على موبايلك الأندرويد.\nالتطبيق محتاج متصفح Chrome على الموبايل (موجود على أغلب الموبايلات).\n' >> notes.md
+          printf '\n\n- **hisabati.apk**: للتثبيت المباشر على الموبايل.\n- **hisabati.aab**: للرفع على جوجل بلاي (Play Console).\n\nالتطبيق محتاج متصفح Chrome على الموبايل (موجود على أغلب الموبايلات).\n' >> notes.md
           if gh release view "v$VER" >/dev/null 2>&1; then
-            gh release upload "v$VER" out/hisabati.apk --clobber
+            gh release upload "v$VER" out/hisabati.apk out/hisabati.aab --clobber
             gh release edit "v$VER" --notes-file notes.md --latest
           else
-            gh release create "v$VER" out/hisabati.apk --title "حساباتي $VER" --notes-file notes.md --latest
+            gh release create "v$VER" out/hisabati.apk out/hisabati.aab --title "حساباتي $VER" --notes-file notes.md --latest
           fi
