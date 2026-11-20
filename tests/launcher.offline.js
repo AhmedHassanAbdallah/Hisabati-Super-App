@@ -50,7 +50,7 @@ async function frameOf(page) {
     check(`${id}: متحكم فيه الـ Service Worker الأصلي بتاعه`, ctl === BASE + 'Trade-Modules/' + dir + '/service-worker.js', ctl);
   }
   const regs = await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).map(r => r.scope).sort());
-  check('7 تسجيلات منفصلة (اللانشر + 6 تطبيقات)', regs.length === 7, regs);
+  check(`${TRADES.length + 1} تسجيلات منفصلة (اللانشر + ${TRADES.length} أقسام)`, regs.length === TRADES.length + 1, regs);
   const cacheNames = await page.evaluate(() => caches.keys());
   check('كاش اللانشر بس بيبدأ بـ hisabati-super-', cacheNames.filter(k => k.startsWith('hisabati-super-')).length === 1, cacheNames);
 
