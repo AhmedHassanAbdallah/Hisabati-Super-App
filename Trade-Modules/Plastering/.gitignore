@@ -1,0 +1,5 @@
+node_modules/
+android/app/src/main/assets/
+*.jks
+*.keystore
+.DS_Store

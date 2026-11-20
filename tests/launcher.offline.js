@@ -10,7 +10,7 @@
 const { chromium } = require('playwright');
 const BASE = (process.argv[2] || 'http://127.0.0.1:8790/').replace(/\/?$/, '/');
 const LAUNCHER = BASE + 'Main-App/';
-const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum']];
+const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum'], ['plastering', 'Plastering']];
 let passed = 0, failed = 0;
 const check = (n, c, x) => { if (c) { passed++; console.log('  ✔ ' + n); } else { failed++; console.log('  ✘ ' + n + (x !== undefined ? '  → ' + JSON.stringify(x) : '')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -57,7 +57,7 @@ async function frameOf(page) {
   console.log('\n[2] أوفلاين');
   await ctx.setOffline(true);
   await page.goto(LAUNCHER); await sleep(800);
-  check('اللانشر بيفتح أوفلاين', (await page.$$('.trade[data-trade]')).length === 6);
+  check('اللانشر بيفتح أوفلاين', (await page.$$('.trade[data-trade]')).length === 7);
   for (const [id] of TRADES) {
     await page.click(`[data-trade="${id}"]`);
     const f = await frameOf(page); await sleep(800);

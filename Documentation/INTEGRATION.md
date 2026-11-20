@@ -10,9 +10,9 @@
 | Painting | Hesabaty-painting | `fbb595e` | 1.1.0 | single `index.html` PWA | `hpaint_*` |
 | Flooring | Hesabaty-Flooring | `8561116` | 1.0.0 | HTML + `js/*.js` PWA | `hflooring_*` |
 | Gypsum | Hesabaty-Gebsum | `04fda90` | 1.0.0 | HTML + `js/**` PWA | `hgyp_*` |
-| Plastering | Hesabaty-plaster | — | — | **repository is empty** | — |
+| Plastering | Hesabaty-plaster | `ac46676` | 1.0.0 | HTML + `js/*.js` PWA (added 2026-11-20) | `hplaster_*` |
 
-All six apps are static, framework-free Progressive Web Apps with an Android WebView
+All seven apps are static, framework-free Progressive Web Apps with an Android WebView
 wrapper (`android/`). There is no backend, build step or database server: data lives
 in each app's own `localStorage` / IndexedDB keys, and each app's service worker uses its
 own cache-name prefix and resolves every path relative to its own folder.
@@ -38,7 +38,7 @@ Hisabati-Super-App/
 │   └── service-worker.js   (caches the launcher only)
 ├── Trade-Modules/          ← exact copies, unchanged
 │   ├── Electrical/ Plumbing/ HVAC/ Painting/ Flooring/ Gypsum/
-│   └── Plastering/         (README only — source repo empty)
+│   └── Plastering/         (added 2026-11-20 from Hesabaty-plaster main)
 ├── Shared-Assets/          ← launcher icon + Cairo font (copied from Flooring's bundled font)
 ├── Documentation/
 ├── tests/launcher.e2e.js   ← end-to-end test of the launcher with every app
@@ -66,7 +66,7 @@ Why this is the safest choice:
 * Reads/writes section data **only when the user asks** for a cloud backup or a restore
   (`Main-App/backup.js`), and only keys with the sections' own prefixes:
   `ahmed_elec_*`, `hesabaty_*`, `hesabati_plumbing_*`, `hesabati_hvac_*`, `hpaint_*`, `hflooring_*`,
-  `hgyp_*`, plus the photo databases `hesabati_plumbing_media` / `hesabati_hvac_media`
+  `hgyp_*`, `hplaster_*`, plus the photo databases `hesabati_plumbing_media` / `hesabati_hvac_media`
   (object store `media`, version 1 — exactly as the sections create them). Any other key on
   the origin is never copied or touched. Before a restore the current data is saved
   (IndexedDB `hisabati_super_v1`) so the user can undo.
@@ -123,4 +123,5 @@ their version-pinning logic runs exactly as designed.
 3. **In-app update bubbles.** Each copied app still checks its *own* GitHub repository for
    new releases (unchanged behaviour). Inside the super app that notice refers to the
    standalone app.
-4. **Plastering** has no application (empty repository).
+4. **Plastering** was added on 2026-11-20. It was copied from GitHub `main` @ `ac46676`;
+   the local clone of `Hesabaty-plaster` in the first session was still empty and was not modified.

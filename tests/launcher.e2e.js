@@ -4,7 +4,7 @@
  *   node tests/launcher.e2e.js [http://127.0.0.1:8790/] [مجلد_لقطات]
  *
  * بيتأكد من:
- *  1) قائمة المهن: 6 مهن شغالة + المحارة غير متاحة، وأرقام الإصدارات من version.json بتاع كل نسخة.
+ *  1) قائمة المهن: 7 مهن شغالة، ومن غير أرقام إصدارات.
  *  2) كل مهنة بتفتح جوه اللانشر من فولدر نسختها، وبتحمّل نفس المستند ونفس العنوان زي التشغيل المستقل،
  *     ومن غير أي أخطاء JavaScript.
  *  3) التطبيق جوه اللانشر بيكتب نفس مفاتيح التخزين بالظبط اللي بيكتبها لما يشتغل لوحده.
@@ -25,7 +25,8 @@ const ROOT = path.join(__dirname, '..');
 const LAUNCHER = BASE + 'Main-App/';
 const TRADES = [
   { id: 'electrical', dir: 'Electrical' }, { id: 'plumbing', dir: 'Plumbing' }, { id: 'hvac', dir: 'HVAC' },
-  { id: 'painting', dir: 'Painting' }, { id: 'flooring', dir: 'Flooring' }, { id: 'gypsum', dir: 'Gypsum' }
+  { id: 'painting', dir: 'Painting' }, { id: 'flooring', dir: 'Flooring' }, { id: 'gypsum', dir: 'Gypsum' },
+  { id: 'plastering', dir: 'Plastering' }
 ];
 
 let passed = 0, failed = 0;
@@ -68,6 +69,7 @@ const dataSnapshot = page => page.evaluate(() => {
 });
 const openPlus = async f => {
   if (await f.$('#navPlus')) await f.click('#navPlus');
+  else if (await f.$('.bottom-nav [data-view="projects"]')) await f.click('.bottom-nav [data-view="projects"]'); // المحارة: التنقل بالصفحات (#/projects)
   else await f.click('.bottom-nav .nav-plus');
   await sleep(500);
 };
@@ -87,7 +89,7 @@ const openPlus = async f => {
     const enabled = await page.$$eval('.trade[data-trade]', els => els.map(e => e.dataset.trade));
     check('6 مهن شغالة بالترتيب', JSON.stringify(enabled) === JSON.stringify(TRADES.map(t => t.id)), enabled);
     const disabled = await page.$$eval('.trade[disabled]', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim()));
-    check('المحارة ظاهرة كغير متاحة', disabled.length === 1 && disabled[0].includes('المحارة'), disabled);
+    check('كل الأقسام متاحة (مفيش أقسام "قريباً")', disabled.length === 0, disabled);
     const homeText = await page.evaluate(() => document.body.innerText);
     check('أرقام الإصدارات مخفية', !/إصدار/.test(homeText) && !(await page.$('[data-ver]')));
     check('مفيش أي ذكر لـ "تطبيق" في الرئيسية', !/تطبيق/.test(homeText), (homeText.match(/[^\n]*تطبيق[^\n]*/g) || []));
@@ -106,9 +108,9 @@ const openPlus = async f => {
     await page.click('#menuBtn'); await sleep(450);
     check('زرار القائمة بيفتحها', await drawerOpen());
     const items = await page.$$eval('#drawerTrades [data-open]', els => els.map(e => e.dataset.open));
-    check('القائمة فيها تعريف الـ 6 أقسام بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
+    check('القائمة فيها تعريف الـ 7 أقسام بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
     const dText = await page.evaluate(() => document.getElementById('drawer').innerText);
-    check('القائمة فيها "عن حساباتي" والمحارة "قريباً"', dText.includes('عن حساباتي') && /المحارة[\s\S]*قريباً/.test(dText));
+    check('القائمة فيها "عن حساباتي" وقسم المحارة', dText.includes('عن حساباتي') && dText.includes('المحارة والواجهات') && !dText.includes('قريباً'));
     check('القائمة ما فيهاش ذكر لـ "تطبيق" ولا إصدارات', !/تطبيق|إصدار/.test(dText), (dText.match(/[^\n]*(تطبيق|إصدار)[^\n]*/g) || []));
     await page.click('#drawerTrades .dt:nth-child(3) summary'); await sleep(300);
     check('الضغط على قسم بيعرض مميزاته', await page.evaluate(() => { const d = document.querySelector('#drawerTrades .dt:nth-child(3)'); return d.open && d.querySelectorAll('li').length >= 3; }));
@@ -196,7 +198,7 @@ const openPlus = async f => {
       await page.goto(LAUNCHER + '#' + t.id);
       let f = await appFrame(page);
       const th0 = await f.evaluate(() => document.documentElement.getAttribute('data-theme'));
-      await f.click('#themeBtn'); await sleep(400);
+      await f.click('#themeBtn, [data-act="toggleTheme"]'); await sleep(400);
       const th1 = await f.evaluate(() => document.documentElement.getAttribute('data-theme'));
       check(`${t.id}: زرار الثيم جوه التطبيق اشتغل`, th1 && th1 !== th0, { th0, th1 });
       const snap = await dataSnapshot(page);

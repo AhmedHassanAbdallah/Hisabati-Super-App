@@ -14,7 +14,7 @@ original app for that trade runs inside the unified app — unchanged.
 | النقاشة — Painting | `Trade-Modules/Painting` | Hesabaty-painting @ `fbb595e` | 1.1.0 |
 | الأرضيات — Flooring | `Trade-Modules/Flooring` | Hesabaty-Flooring @ `8561116` | 1.0.0 |
 | الجبس — Gypsum | `Trade-Modules/Gypsum` | Hesabaty-Gebsum @ `04fda90` | 1.0.0 |
-| المحارة — Plastering | `Trade-Modules/Plastering` | Hesabaty-plaster — *empty repository* | — |
+| المحارة — Plastering | `Trade-Modules/Plastering` | Hesabaty-plaster @ `ac46676` | 1.0.0 |
 
 ## Golden rule
 `Trade-Modules/*` are byte-identical copies of the original repositories (only `.git`

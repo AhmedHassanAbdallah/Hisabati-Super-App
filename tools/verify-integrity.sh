@@ -15,6 +15,7 @@ fail=0
 declare -A MAP=(
   [Ezaza]=Electrical [Hesabaty-plumbing]=Plumbing [Hesabaty-HAVC]=HVAC
   [Hesabaty-painting]=Painting [Hesabaty-Flooring]=Flooring [Hesabaty-Gebsum]=Gypsum
+  [Hesabaty-plaster@main]=Plastering   # copied 2026-11-20 from GitHub main @ ac46676 (the local clone is still empty)
 )
 
 check_tree() { # $1 = dir, $2 = baseline checksum file, $3 = label

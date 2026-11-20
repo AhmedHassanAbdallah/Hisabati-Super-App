@@ -1,0 +1,53 @@
+// HESABATI PLASTER - تطبيق أندرويد (مستقل تماماً عن تطبيق حساباتي للكهرباء)
+plugins {
+    id "com.android.application"
+}
+
+// رقم الإصدار يُقرأ من version.json
+def versionJson = new groovy.json.JsonSlurper().parse(file("../../version.json"))
+def appVersionName = versionJson.version as String
+def parts = appVersionName.tokenize(".").collect { it as int }
+def appVersionCode = parts[0] * 10000 + parts[1] * 100 + parts[2]
+
+android {
+    namespace "com.ahmedhassan.hesabaty.plaster"
+    compileSdk 34
+
+    defaultConfig {
+        // معرّف مختلف عن تطبيق الكهرباء (com.ahmedhassan.hesabaty) — يتثبت جنبه ولا يلمس بياناته
+        applicationId "com.ahmedhassan.hesabaty.plaster"
+        minSdk 21
+        targetSdk 34
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    signingConfigs {
+        release {
+            def ks = System.getenv("PLASTER_KEYSTORE")
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv("PLASTER_KEY_PASSWORD")
+                keyAlias "plaster"
+                keyPassword System.getenv("PLASTER_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig System.getenv("PLASTER_KEYSTORE") ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}

@@ -26,4 +26,4 @@ which print the whole WebView. Options, all requiring owner approval:
      possibly app-side changes in the copies.
 
 ## 4. Plastering
-Add the plastering app when it exists (see `Trade-Modules/Plastering/README.md`).
+Done on 2026-11-20 — copied unchanged into `Trade-Modules/Plastering`.

@@ -1,7 +1,7 @@
 /*
  * حساباتي — محرك النسخ الاحتياطي (محلي، من غير أي شبكة).
  *
- * بيجمع بيانات الأقسام الستة بس، عن طريق بادئات مفاتيح التخزين بتاعة كل قسم
+ * بيجمع بيانات الأقسام السبعة بس، عن طريق بادئات مفاتيح التخزين بتاعة كل قسم
  * (اتحصرت من كود كل قسم)، ومن غير ما يلمس كود الأقسام نفسها:
  *   الكهرباء  ahmed_elec_* , hesabaty_*
  *   السباكة   hesabati_plumbing_*   + IndexedDB hesabati_plumbing_media (الصور)
@@ -9,6 +9,7 @@
  *   النقاشة   hpaint_*
  *   الأرضيات  hflooring_*
  *   الجبس     hgyp_*
+ *   المحارة   hplaster_*
  * أي مفاتيح تانية على نفس الموقع ما بتتنسخش ولا بتتمسح.
  */
 (function () {
@@ -22,7 +23,8 @@
     { id: 'hvac', prefixes: ['hesabati_hvac_'], idb: ['hesabati_hvac_media'] },
     { id: 'painting', prefixes: ['hpaint_'], idb: [] },
     { id: 'flooring', prefixes: ['hflooring_'], idb: [] },
-    { id: 'gypsum', prefixes: ['hgyp_'], idb: [] }
+    { id: 'gypsum', prefixes: ['hgyp_'], idb: [] },
+    { id: 'plastering', prefixes: ['hplaster_'], idb: [] }
   ];
   // مفاتيح مؤقتة/تقنية ما لهاش لازمة في النسخة
   const SKIP = k => /__probe$/.test(k);

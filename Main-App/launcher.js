@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  const LAUNCHER_VERSION = '1.2.0'; // داخلي بس — مش بيظهر للمستخدم
+  const LAUNCHER_VERSION = '1.3.0'; // داخلي بس — مش بيظهر للمستخدم
   const LAST_KEY = 'hisabati_super_last_v1';
   const THEME_KEY = 'hisabati_super_theme_v1';
   const TRADES = window.HISABATI_TRADES || [];
