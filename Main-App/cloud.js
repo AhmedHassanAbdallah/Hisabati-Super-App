@@ -31,7 +31,29 @@
   const lsDel = k => { try { localStorage.removeItem(k); } catch (e) {} };
 
   function account() { try { return JSON.parse(lsGet(ACCOUNT_KEY) || 'null'); } catch (e) { return null; } }
-  const isConfigured = () => !!CFG.googleClientId;
+
+  /* تطبيق الأندرويد المستقل: جوجل بتمنع تسجيل الدخول جوه WebView، فالتطبيق بيعمله بشكل أصلي
+     (Google Identity AuthorizationClient) ويرجّع التوكن للصفحة. في المتصفح NATIVE = null. */
+  const NATIVE = (window.HisabatiNative && typeof window.HisabatiNative.googleAuthorize === 'function') ? window.HisabatiNative : null;
+  const nativePending = {};
+  window.__hisabatiAuthResult = function (id, accessToken, grantedScopes, error) {
+    const p = nativePending[id]; delete nativePending[id];
+    if (!p) return;
+    if (error || !accessToken) { p.reject(new Error(error || 'access_denied')); return; }
+    if (String(grantedScopes || '').split(' ').indexOf(DRIVE_SCOPE) < 0) { p.reject(new Error('drive-not-granted')); return; }
+    token = { access_token: accessToken, expires_at: Date.now() + 50 * 60 * 1000 };
+    p.resolve(token);
+  };
+  function nativeToken(interactive) {
+    return new Promise((resolve, reject) => {
+      const id = 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+      nativePending[id] = { resolve, reject };
+      try { NATIVE.googleAuthorize(id, SCOPES, !!interactive); }
+      catch (e) { delete nativePending[id]; reject(new Error('native-failed')); }
+    });
+  }
+
+  const isConfigured = () => !!NATIVE || !!CFG.googleClientId;
 
   function loadGsi() {
     if (window.google && window.google.accounts && window.google.accounts.oauth2) return Promise.resolve();
@@ -46,7 +68,7 @@
     return gsiPromise;
   }
   // نحمّل مكتبة جوجل بدري (من غير أي طلب صلاحيات) علشان طلب التوكن يحصل جوه ضغطة المستخدم
-  function preload() { if (isConfigured()) loadGsi().then(initClient).catch(() => {}); }
+  function preload() { if (!NATIVE && isConfigured()) loadGsi().then(initClient).catch(() => {}); }
 
   function initClient() {
     if (tokenClient) return tokenClient;
@@ -73,6 +95,7 @@
   function requestToken(forceConsent) {
     if (!isConfigured()) return Promise.reject(new Error('not-configured'));
     if (token && token.expires_at - Date.now() > 60000) return Promise.resolve(token);
+    if (NATIVE) return nativeToken(true);
     const go = () => new Promise((resolve, reject) => {
       pending = { resolve, reject };
       const acc = account();
@@ -104,7 +127,10 @@
     const t = token;
     token = null; folderId = null;
     lsDel(ACCOUNT_KEY);
-    try { if (t && window.google) google.accounts.oauth2.revoke(t.access_token, () => {}); } catch (e) {}
+    try {
+      if (t && NATIVE) fetch('https://oauth2.googleapis.com/revoke?token=' + encodeURIComponent(t.access_token), { method: 'POST' }).catch(() => {});
+      else if (t && window.google) google.accounts.oauth2.revoke(t.access_token, () => {});
+    } catch (e) {}
   }
 
   /* ---------------- Drive ---------------- */
@@ -170,7 +196,7 @@
   }
 
   window.HisabatiCloud = {
-    isConfigured, account, preload, requestToken, signIn, signOut,
+    isConfigured, account, preload, requestToken, signIn, signOut, isNative: () => !!NATIVE,
     listBackups, uploadBackup, downloadBackup, deleteBackup,
     lastBackupAt: () => lsGet('hisabati_super_last_backup_v1'),
     hasToken: () => !!(token && token.expires_at - Date.now() > 60000)

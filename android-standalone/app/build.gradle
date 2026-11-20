@@ -1,0 +1,75 @@
+// حساباتي أوفلاين — تطبيق أندرويد مستقل بالكامل: كل الأقسام جوه التطبيق وبتشتغل من غير إنترنت ومن غير Chrome.
+// ملفات الويب بتتنسخ وقت البناء من Main-App/ و Shared-Assets/ و Trade-Modules/ (من غير أي تعديل عليها).
+// © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+plugins {
+    id "com.android.application"
+}
+
+def versionJson = new groovy.json.JsonSlurper().parse(file("../../version.json"))
+def appVersionName = versionJson.version as String
+def parts = appVersionName.tokenize(".").collect { it as int }
+def appVersionCode = parts[0] * 10000 + parts[1] * 100 + parts[2]
+
+// نسخ ملفات الويب لأصول التطبيق (assets/www) — مصدر واحد للحقيقة، ومن غير ملفات أندرويد/اختبارات الأقسام
+def webRoot = file("../..")
+def webAssets = layout.buildDirectory.dir("generated/hisabati-web").get().asFile
+def syncWebAssets = tasks.register("syncWebAssets", Sync) {
+    from(webRoot) {
+        include "Main-App/**", "Shared-Assets/**", "Trade-Modules/**"
+        exclude "**/android/**", "**/tests/**", "**/tools/**", "**/.github/**", "**/docs/**", "**/*.md", "**/.gitignore"
+    }
+    into new File(webAssets, "www")
+}
+
+android {
+    namespace "com.ahmedhassan.hisabati.offline"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.ahmedhassan.hisabati.offline"
+        minSdk 23
+        targetSdk 36
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    sourceSets {
+        main { assets.srcDirs += [webAssets] }
+    }
+
+    signingConfigs {
+        release {
+            def ks = System.getenv("HISABATI_KEYSTORE")
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv("HISABATI_KEY_PASSWORD")
+                keyAlias "hisabati"
+                keyPassword System.getenv("HISABATI_KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig System.getenv("HISABATI_KEYSTORE") ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+tasks.named("preBuild") { dependsOn syncWebAssets }
+
+dependencies {
+    // تسجيل الدخول بجوجل + صلاحية درايف بشكل أصلي (جوجل بتمنع تسجيل الدخول جوه WebView)
+    implementation "com.google.android.gms:play-services-auth:21.3.0"
+}

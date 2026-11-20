@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  const LAUNCHER_VERSION = '1.3.0'; // داخلي بس — مش بيظهر للمستخدم
+  const LAUNCHER_VERSION = '1.4.0'; // داخلي بس — مش بيظهر للمستخدم
   const LAST_KEY = 'hisabati_super_last_v1';
   const THEME_KEY = 'hisabati_super_theme_v1';
   const TRADES = window.HISABATI_TRADES || [];
@@ -29,6 +29,10 @@
   const tradeBase = t => new URL('../Trade-Modules/' + t.dir + '/', location.href).href;
   const tradeIcon = t => '../Trade-Modules/' + t.dir + '/icons/icon-192.png';
   const initial = t => esc(t.name.replace(/^ال/, '').slice(0, 1));
+
+  // جوه تطبيق الأندرويد المستقل: كل قسم بيتفتح كصفحة كاملة (مش iframe) علشان طباعة أندرويد
+  // تطبع فاتورة القسم نفسها، والتطبيق بيعرض شريط "كل المهن" بشكل أصلي فوقها.
+  const NATIVE_APP = !!(window.HisabatiNative && typeof window.HisabatiNative.isNative === 'function' && window.HisabatiNative.isNative());
 
   let current = null;   // القسم المفتوح
   let frame = null;     // الـ iframe الحالي
@@ -162,6 +166,7 @@
     const push = !opts || opts.push !== false;
     const t = byId(id);
     if (!t || !t.available) return;
+    if (NATIVE_APP) { lsSet(LAST_KEY, t.id); location.href = tradeBase(t); return; }
     if (current && current.id === id && frame) { showRunner(); return; }
 
     destroyFrame();
@@ -373,6 +378,8 @@
   function cloudError(e) {
     const m = String(e && e.message || e);
     if (m === 'not-configured') return 'تسجيل الدخول بجوجل هيتفعّل قريباً.';
+    if (m === 'android-not-configured') return 'تسجيل الدخول بجوجل لسه بيتجهز على تطبيق الأندرويد.';
+    if (m === 'auth-failed' || m === 'native-failed' || m === 'consent-required') return 'ما قدرناش نسجّل الدخول بجوجل — جرّب تاني.';
     if (m === 'offline' || /Failed to fetch|NetworkError/.test(m)) return 'مفيش إنترنت — اتأكد من الاتصال وجرّب تاني.';
     if (m === 'drive-not-granted') return 'لازم توافق على صلاحية جوجل درايف علشان نقدر نحفظ النسخة.';
     if (m === 'popup_closed' || m === 'access_denied' || m === 'popup_failed_to_open') return 'اتلغى تسجيل الدخول.';
@@ -593,13 +600,13 @@
     if (startId && byId(startId) && byId(startId).available) openTrade(startId);
   }
 
-  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  if ('serviceWorker' in navigator && location.protocol !== 'file:' && !NATIVE_APP) {
     window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(() => {}); });
   }
 
   // للاختبارات الآلية
   window.__hisabatiLauncher = {
-    version: LAUNCHER_VERSION, openTrade, goHome, openLayer, closeLayer,
+    version: LAUNCHER_VERSION, nativeApp: NATIVE_APP, openTrade, goHome, openLayer, closeLayer,
     get current() { return current && current.id; }, get frame() { return frame; }
   };
 })();
