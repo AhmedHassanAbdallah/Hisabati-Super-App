@@ -55,6 +55,8 @@ const appFrame = async page => {
   await sleep(600);
   return f;
 };
+// بعض الأقسام بتضيف #/home لعنوانها عند التشغيل (زي التشغيل المستقل بالظبط)
+const noHash = u => String(u).split('#')[0];
 const view = page => page.evaluate(() => document.body.dataset.view);
 const frameIndex = f => f.evaluate(() => (window.navigation && navigation.currentEntry ? navigation.currentEntry.index : -1));
 const lsKeys = page => page.evaluate(() => Object.keys(localStorage).sort());
@@ -153,7 +155,7 @@ const openPlus = async f => {
     await page.click(`[data-trade="${t.id}"]`);
     let f = await appFrame(page);
     await sleep(900);
-    check('اتفتح من فولدر النسخة', f.url() === url, f.url());
+    check('اتفتح من فولدر النسخة', noHash(f.url()) === url, f.url());
     check('نفس عنوان المستند زي التشغيل المستقل', (await f.title()) === soloTitle, await f.title());
     check('نفس هيكل الصفحة', (await f.evaluate(() => document.body.childElementCount)) === soloBody);
     check('اللانشر في وضع التطبيق ورابطه #' + t.id, (await view(page)) === 'app' && page.url().endsWith('#' + t.id), page.url());
@@ -181,7 +183,7 @@ const openPlus = async f => {
 
     // فتح مباشر من الرابط
     await page.goto(LAUNCHER + '#' + t.id); f = await appFrame(page);
-    check('الرابط المباشر #' + t.id + ' بيفتح المهنة', f.url() === url);
+    check('الرابط المباشر #' + t.id + ' بيفتح المهنة', noHash(f.url()) === url);
     await page.evaluate(() => history.back()); await sleep(700);
     check('الرجوع من الرابط المباشر بيروح للقائمة', (await view(page)) === 'home');
 
