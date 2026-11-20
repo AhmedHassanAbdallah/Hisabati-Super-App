@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1b33">
+  <meta name="theme-color" content="#011a51">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="author" content="أحمد حسن عبدالله">
   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
-  <meta name="description" content="حساباتي السباكة: تطبيق متكامل لإدارة ومحاسبة أعمال السباكة والصحي والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
-  <title>حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي</title>
+  <meta name="description" content="أرزقي السباكة: تطبيق متكامل لإدارة ومحاسبة أعمال السباكة والصحي والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
+  <title>أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <script>
-    // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح مستقل لحساباتي السباكة
+    // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح مستقل لأرزقي السباكة
     try {
       var _k = (/\/beta\//.test(location.pathname) ? 'beta_' : '') + 'hesabati_plumbing_settings_v1';
       var _t = (JSON.parse(localStorage.getItem(_k) || '{}') || {}).theme;
@@ -26,8 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <!--
-    حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي
-    تطبيق مستقل من عائلة حساباتي (بنفس نظام التصميم)
+    أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي
+    تطبيق مستقل من عائلة أرزقي (بنفس نظام التصميم)
     تصميم وتطوير: أحمد حسن عبدالله
     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
     يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
@@ -669,7 +669,7 @@
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
 
-    /* ============ إضافات حساباتي السباكة (بنفس متغيرات التصميم الأصلي) ============ */
+    /* ============ إضافات أرزقي السباكة (بنفس متغيرات التصميم الأصلي) ============ */
     .calc-row { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; margin-bottom: 10px; }
     .calc-row .mini-f input, .calc-row .mini-f select { height: 44px; padding: 0 10px; font-size: .88rem; min-width: 0; width: 100%; }
     .calc-row .row-2 { gap: 6px; align-items: end; }
@@ -736,6 +736,7 @@
     .inv-notes ol { padding-right: 18px; }
     .inv-notes ol li { margin-bottom: 3px; }
   </style>
+  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 </head>
 <body>
 
@@ -748,7 +749,7 @@
     <img class="brand-ic" src="./icons/icon-192.png" alt="">
     <div class="titles">
       <div class="sub" id="greetLine">أهلاً بيك</div>
-      <h1><span id="tabTitle">حساباتي السباكة</span><span class="brand-tag">PLUMBING</span></h1>
+      <h1><span id="tabTitle">أرزقي السباكة</span><span class="brand-tag">PLUMBING</span></h1>
     </div>
     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
   </header>
@@ -919,7 +920,7 @@
       <h3 class="more-h">التطبيق وبياناتك</h3>
       <div class="card">
         <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
-        <p class="hint" style="margin:-6px 0 12px">النسخة الكاملة تحفظ المقايسات والفواتير والعملاء والمشروعات وسجل الصيانة والصور والمخزن والعمال والحسابات وقوائم الأسعار والإعدادات في ملف واحد (JSON)، وتسترجعها في أي وقت أو على موبايل تاني. بيانات حساباتي السباكة مستقلة تماماً عن حساباتي الكهرباء والنقاشة والتكييف.</p>
+        <p class="hint" style="margin:-6px 0 12px">النسخة الكاملة تحفظ المقايسات والفواتير والعملاء والمشروعات وسجل الصيانة والصور والمخزن والعمال والحسابات وقوائم الأسعار والإعدادات في ملف واحد (JSON)، وتسترجعها في أي وقت أو على موبايل تاني. بيانات أرزقي السباكة مستقلة تماماً عن أرزقي الكهرباء والنقاشة والتكييف.</p>
         <div class="btn-row">
           <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
           <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
@@ -945,7 +946,7 @@
 
       <div class="card hidden" id="apkCard">
         <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
-        <p class="hint" style="margin:-6px 0 12px">نزّل حساباتي السباكة كتطبيق أندرويد مستقل (مش هيأثر على تطبيقات حساباتي التانية لو متثبتة). بياناتك هنا مش بتتنقل لوحدها: خد «نسخة كاملة» واعمل لها «استعادة» جوه التطبيق.</p>
+        <p class="hint" style="margin:-6px 0 12px">نزّل أرزقي السباكة كتطبيق أندرويد مستقل (مش هيأثر على تطبيقات أرزقي التانية لو متثبتة). بياناتك هنا مش بتتنقل لوحدها: خد «نسخة كاملة» واعمل لها «استعادة» جوه التطبيق.</p>
         <a class="btn btn-accent" id="apkLink" href="#" rel="noopener"><i data-icon="download"></i> تحميل تطبيق أندرويد</a>
       </div>
 
@@ -962,7 +963,7 @@
       </div>
 
       <div class="copyright">
-        <b>حساباتي السباكة</b> — إدارة ومحاسبة أعمال السباكة والصحي · الإصدار <span id="aboutVersion"></span><br>
+        <b>أرزقي السباكة</b> — إدارة ومحاسبة أعمال السباكة والصحي · الإصدار <span id="aboutVersion"></span><br>
         PLUMBING &amp; SANITARY WORK ACCOUNTING<br>
         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>

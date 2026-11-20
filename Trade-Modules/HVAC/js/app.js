@@ -1,5 +1,5 @@
 /* =========================================================
-   حساباتي HVAC - app.js
+   أرزقي HVAC - app.js
    الصور (IndexedDB محلي)، النسخ الاحتياطي والاستعادة، نظام التحديثات،
    وتشغيل التطبيق.
    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
@@ -115,7 +115,7 @@ async function buildBackup(withMedia = true) {
 }
 async function exportBackupJSON() {
   const b = await buildBackup(true);
-  const ok = downloadText(JSON.stringify(b), `حساباتي_HVAC_نسخة_كاملة_${todayISO()}.json`, 'application/json');
+  const ok = downloadText(JSON.stringify(b), `أرزقي_HVAC_نسخة_كاملة_${todayISO()}.json`, 'application/json');
   if (!ok) return;
   lsSet(KEYS.backup, String(Date.now()));
   renderBackupLine();
@@ -136,7 +136,7 @@ function renderBackupLine() {
 function backupKind(obj) {
   if (!obj || typeof obj !== 'object') return 'invalid';
   if (obj.app === BACKUP_APP_ID && obj.data && typeof obj.data === 'object') return 'ok';
-  // نسخ تطبيقات حساباتي الأخرى (الكهرباء / النقاشة) لا تُستورد هنا
+  // نسخ تطبيقات أرزقي الأخرى (الكهرباء / النقاشة) لا تُستورد هنا
   if (obj.app === 'hesabaty' || Array.isArray(obj.invoices) || obj.type === 'hesabaty-ledger') return 'other-app';
   return 'invalid';
 }
@@ -165,7 +165,7 @@ function importBackupJSON(event) {
     let obj;
     try { obj = JSON.parse(e.target.result); } catch (err) { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
     const kind = backupKind(obj);
-    if (kind === 'other-app') { showAppToast('⚠️ الملف ده نسخة من تطبيق حساباتي تاني (الكهرباء أو النقاشة) — مش هيتستورد هنا علشان البيانات ما تتخلطش.'); return; }
+    if (kind === 'other-app') { showAppToast('⚠️ الملف ده نسخة من تطبيق أرزقي تاني (الكهرباء أو النقاشة) — مش هيتستورد هنا علشان البيانات ما تتخلطش.'); return; }
     if (kind !== 'ok') { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
     const d = obj.data;
     const n = k => (Array.isArray(d[k]) ? d[k].length : 0);
@@ -180,7 +180,7 @@ function exportCSVReport() {
   const rows = [['رقم المستند', 'النوع', 'التاريخ', 'العميل', 'الهاتف', 'الإجمالي', 'المدفوع', 'المتبقي', 'العملة']];
   DB.docs.forEach(d => { const t = computeDoc(d); rows.push([d.number, docTypeInfo(d.docType).label, d.date, docTitle(d), d.clientPhone, t.total, t.paid, t.remaining, currentCurrency().code]); });
   const csv = '﻿' + rows.map(r => r.map(x => `"${String(x).replace(/"/g, '""')}"`).join(',')).join('\r\n');
-  downloadText(csv, `فواتير_حساباتي_HVAC_${todayISO()}.csv`, 'text/csv');
+  downloadText(csv, `فواتير_أرزقي_HVAC_${todayISO()}.csv`, 'text/csv');
   showAppToast('✔️ تم تنزيل تقرير الفواتير (Excel / CSV)');
 }
 
@@ -333,7 +333,7 @@ window.onAppUpdateProgress = function (pct, state) {
   if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
   else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
   else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
-  else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق حساباتي HVAC، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
+  else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق أرزقي HVAC، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
   else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
   else if (state === 'applying') txt.textContent = 'جاري التحديث... التطبيق هيفتح تاني بالإصدار الجديد';
 };

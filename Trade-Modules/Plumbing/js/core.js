@@ -1,6 +1,6 @@
 /* =========================================================
-   حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف
-   تطبيق مستقل من عائلة حساباتي (HESABATI PLUMBING)
+   أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف
+   تطبيق مستقل من عائلة أرزقي (HESABATI PLUMBING)
    تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
    ---------------------------------------------------------
@@ -8,9 +8,9 @@
    النوافذ والصفحات وزر الرجوع، والتنقل بين الأقسام.
    ========================================================= */
 const APP_VERSION = '1.0.0';
-const APP_NAME = 'حساباتي السباكة';
+const APP_NAME = 'أرزقي السباكة';
 const IS_BETA = /\/beta\//.test(location.pathname);
-// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة أو التكييف
+// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات أرزقي الكهرباء أو النقاشة أو التكييف
 const NS = (IS_BETA ? 'beta_' : '') + 'hesabati_plumbing_';
 const IN_APP = !!(window.HesabatiPlumbingApp && typeof window.HesabatiPlumbingApp.versionName === 'function');
 const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Hesabaty-plumbing/releases/latest';
@@ -133,7 +133,7 @@ function copyText(text, doneMsg) {
 }
 function sendWhatsApp(phone, text) { window.open(`https://wa.me/${waPhone(phone)}?text=` + encodeURIComponent(text), '_blank'); }
 
-/* ---------------- العملات (نفس نظام حساباتي) ---------------- */
+/* ---------------- العملات (نفس نظام أرزقي) ---------------- */
 const CURRENCIES = [
   { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
   { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },

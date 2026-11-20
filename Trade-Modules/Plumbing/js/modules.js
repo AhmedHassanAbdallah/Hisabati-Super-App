@@ -1,5 +1,5 @@
 /* =========================================================
-   حساباتي السباكة - modules.js
+   أرزقي السباكة - modules.js
    الرئيسية، الخامات والأدوات الصحية (المخزن)، العمال والفريق، الحسابات
    والمصروفات، قوائم الأسعار، عقود الصيانة، الضمان والمواعيد، النوتة،
    كشوفات الخامات، وتعريف النقاط ومراحل العمل.
@@ -198,7 +198,7 @@ function exportICS(list) {
     ics += `BEGIN:VEVENT\r\nUID:${(r.ref || 'r') + '-' + i + '-' + d}@hesabati-plumbing\r\nDTSTAMP:${stamp}\r\nDTSTART;VALUE=DATE:${d}\r\nDTEND;VALUE=DATE:${next}\r\nSUMMARY:${escI(r.title)}\r\nDESCRIPTION:${escI(r.sub)}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15H\r\nACTION:DISPLAY\r\nDESCRIPTION:${escI(r.title)}\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
   });
   ics += 'END:VCALENDAR\r\n';
-  downloadText(ics, `مواعيد_حساباتي_السباكة_${todayISO()}.ics`, 'text/calendar');
+  downloadText(ics, `مواعيد_أرزقي_السباكة_${todayISO()}.ics`, 'text/calendar');
   showAppToast(`✔️ تم تجهيز ${list.length} موعد — افتح الملف علشان يتضاف للتقويم`);
 }
 function enableNotifications() {
@@ -217,7 +217,7 @@ function notifyDueReminders() {
     if (!due.length) return;
     settings.lastNotify = todayISO(); saveSettings();
     const body = due.slice(0, 4).map(r => '• ' + r.title).join('\n');
-    const title = `حساباتي السباكة: ${due.length} موعد النهارده`;
+    const title = `أرزقي السباكة: ${due.length} موعد النهارده`;
     if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(reg => reg.showNotification(title, { body, icon: './icons/icon-192.png', lang: 'ar', dir: 'rtl', tag: 'plumbing-due' })).catch(() => {});
     else new Notification(title, { body });
   } catch (e) {}
@@ -1027,7 +1027,7 @@ function openNoteForm(id, preset = {}) {
 }
 
 /* =========================================================
-   كشوفات الخامات (نفس نظام حساباتي الأصلي)
+   كشوفات الخامات (نفس نظام أرزقي الأصلي)
    ========================================================= */
 const MAT_PRESETS = ['ماسورة PPR', 'ماسورة PVC', 'كوع', 'تيه', 'جلبة', 'مخفض', 'محبس', 'محبس زاوية', 'خلاط حوض', 'خلاط دش', 'شطاف', 'قاعدة حمام', 'حوض', 'سيفون', 'صفاية', 'خرطوم توصيل', 'تيفلون', 'كلبس', 'لاصق PVC'];
 const MAT_UNITS = ['قطعة', 'متر', 'عود', 'لفة', 'كجم', 'علبة', 'طقم'];

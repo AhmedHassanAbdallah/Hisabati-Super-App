@@ -1,5 +1,5 @@
 /*
- * حساباتي — تسجيل الدخول بجوجل والنسخ الاحتياطي على Google Drive.
+ * أرزقي — تسجيل الدخول بجوجل والنسخ الاحتياطي على Google Drive.
  *
  * - Google Identity Services (token client) — من غير أي سيرفر: البيانات بتروح من الجهاز
  *   لدرايف المستخدم على طول.
@@ -18,7 +18,7 @@
   const API = 'https://www.googleapis.com/drive/v3';
   const UPLOAD = 'https://www.googleapis.com/upload/drive/v3/files';
   const FOLDER_MIME = 'application/vnd.google-apps.folder';
-  const FOLDER_NAME = CFG.driveFolderName || 'حساباتي — نسخ احتياطية';
+  const FOLDER_NAME = CFG.driveFolderName || 'أرزقي — نسخ احتياطية';
 
   let token = null;          // { access_token, expires_at }
   let tokenClient = null;
@@ -148,8 +148,8 @@
   }
 
   async function listBackups() {
-    const fid = await ensureFolder();
-    const query = `'${fid}' in parents and trashed=false and appProperties has { key='hisabati' and value='backup' }`;
+    // كل النسخ اللي التطبيق عملها (حتى اللي في فولدر "حساباتي" القديم قبل تغيير الاسم)
+    const query = `trashed=false and appProperties has { key='hisabati' and value='backup' }`;
     const r = await (await api(`${API}/files?q=${q(query)}&orderBy=createdTime desc&pageSize=50&fields=files(id,name,createdTime,size,appProperties)&spaces=drive`)).json();
     return (r.files || []).map(f => ({
       id: f.id, name: f.name, createdTime: f.createdTime, size: Number(f.size) || 0,

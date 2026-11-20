@@ -1,12 +1,12 @@
 /*
- * حساباتي للجبس والديكورات — أدوات الواجهة المشتركة
+ * أرزقي للجبس والديكورات — أدوات الواجهة المشتركة
  * أيقونات، تنسيق الأرقام والعملة، النوافذ المنبثقة، الرسائل، بناء النماذج وقراءتها
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 'use strict';
 const HGc = HG.core, HGf = HG.finance;
 const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
-let printJobName = 'حساباتي للجبس';
+let printJobName = 'أرزقي للجبس';
 if (IN_APP) {
   window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
   window.print = function () { try { window.HesabatyApp.print(printJobName); } catch (e) {} };

@@ -1,5 +1,5 @@
 /*
- * حساباتي — الواجهة الرئيسية
+ * أرزقي — الواجهة الرئيسية
  *
  * كل قسم بيتفتح كمستند كامل جوه <iframe> من فولدره في Trade-Modules/ (نفس الأصل).
  * الواجهة دي ما بتعدلش أي ملف من ملفات الأقسام ولا بتحقن كود جواها.
@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  const LAUNCHER_VERSION = '1.4.0'; // داخلي بس — مش بيظهر للمستخدم
+  const LAUNCHER_VERSION = '2.0.0'; // داخلي بس — مش بيظهر للمستخدم
   const LAST_KEY = 'hisabati_super_last_v1';
   const THEME_KEY = 'hisabati_super_theme_v1';
   const TRADES = window.HISABATI_TRADES || [];
@@ -86,6 +86,7 @@
     $('greet').textContent = greeting();
     renderAccountBtn();
     renderResume();
+    renderProfileCard();
     renderGrid();
     renderCloudCard();
   }
@@ -222,7 +223,7 @@
     current = null;
     $('runner').hidden = true;
     document.body.dataset.view = 'home';
-    document.title = 'حساباتي — كل المهن';
+    document.title = 'أرزقي — لحسابات المصنعية';
     renderHome();
     if (was) { const b = document.querySelector(`[data-trade="${was.id}"]`); if (b) b.focus({ preventScroll: true }); }
   }
@@ -264,7 +265,7 @@
   function finishHoming() { if (homing) { clearTimeout(homing.timer); homing = null; } }
 
   /* ================= الطبقات: القائمة والحساب ================= */
-  const LAYERS = { menu: 'drawer', account: 'accountSheet' };
+  const LAYERS = { menu: 'drawer', account: 'accountSheet', profile: 'profileSheet' };
   let layerReturnFocus = null;
   function openLayerName() { for (const [n, id] of Object.entries(LAYERS)) if ($(id).classList.contains('open')) return n; return null; }
   function showLayer(name) {
@@ -276,6 +277,7 @@
     document.body.classList.add('locked');
     if (name === 'menu') $('menuBtn').setAttribute('aria-expanded', 'true');
     if (name === 'account') renderAccountSheet();
+    if (name === 'profile') fillProfileForm();
     setTimeout(() => { const b = el.querySelector('[data-close]:not(.layer-backdrop)'); if (b) b.focus(); }, 60);
   }
   function hideLayers(keepFocus) {
@@ -296,7 +298,7 @@
     if (history.state && history.state.hs === 'layer') history.back();
     else hideLayers();
   }
-  ['drawer', 'accountSheet'].forEach(id => $(id).addEventListener('click', e => { if (e.target.closest('[data-close]')) closeLayer(); }));
+  ['drawer', 'accountSheet', 'profileSheet'].forEach(id => $(id).addEventListener('click', e => { if (e.target.closest('[data-close]')) closeLayer(); }));
 
   window.addEventListener('popstate', e => {
     const s = e.state;
@@ -353,6 +355,7 @@
     const go = e.target.closest('[data-goto]');
     if (go) {
       if (go.dataset.goto === 'account') { openLayer('account'); return; }
+      if (go.dataset.goto === 'profile') { openLayer('profile'); return; }
       if (go.dataset.goto === 'dev') {
         closeLayer();
         setTimeout(() => { const d = document.querySelector('.dev-card'); d.scrollIntoView({ behavior: 'smooth', block: 'center' }); d.classList.remove('flash'); void d.offsetWidth; d.classList.add('flash'); }, 300);
@@ -384,7 +387,7 @@
     if (m === 'drive-not-granted') return 'لازم توافق على صلاحية جوجل درايف علشان نقدر نحفظ النسخة.';
     if (m === 'popup_closed' || m === 'access_denied' || m === 'popup_failed_to_open') return 'اتلغى تسجيل الدخول.';
     if (m === 'auth-expired') return 'الجلسة خلصت — دوس تاني علشان تكمّل.';
-    if (m === 'not-a-hisabati-backup' || /^foreign-|^bad-value|newer-format/.test(m)) return 'الملف ده مش نسخة احتياطية سليمة من حساباتي.';
+    if (m === 'not-a-hisabati-backup' || /^foreign-|^bad-value|newer-format/.test(m)) return 'الملف ده مش نسخة احتياطية سليمة من أرزقي.';
     if (/QuotaExceeded/i.test(m)) return 'مساحة التخزين على الجهاز مش كفاية.';
     return 'حصلت مشكلة — جرّب تاني.';
   }
@@ -497,7 +500,7 @@
   async function renderAccountSheet() {
     const body = $('accountBody');
     const acc = Cloud.account();
-    const privacy = `<p class="fine">${icon('shield')} حساباتي بيوصل بس للملفات اللي هو بيعملها على درايف بتاعك، ومفيش أي سيرفر بيشوف بياناتك. <a href="./privacy.html">سياسة الخصوصية</a></p>`;
+    const privacy = `<p class="fine">${icon('shield')} أرزقي بيوصل بس للملفات اللي هو بيعملها على درايف بتاعك، ومفيش أي سيرفر بيشوف بياناتك. <a href="./privacy.html">سياسة الخصوصية</a></p>`;
     if (!acc) {
       body.innerHTML = `<div class="about">
           <h2>احفظ شغلك على جوجل درايف</h2>
@@ -543,10 +546,71 @@
       case 'signin': doSignIn(); break;
       case 'backup': doBackup(); break;
       case 'open-account': openLayer('account'); if (Cloud.hasToken()) loadBackups(); break;
+      case 'open-profile': openLayer('profile'); break;
       case 'load': loadBackups(true); break;
       case 'undo': doUndo(); break;
       case 'signout': doSignOut(); break;
     }
+  });
+
+  /* ================= بياناتي في الفاتورة (مشتركة بين كل الأقسام) ================= */
+  const PROFILE_KEY = 'arzaqi_profile_v1';
+  function getProfile() { try { return JSON.parse(lsGet(PROFILE_KEY) || '{}') || {}; } catch (e) { return {}; } }
+  function renderProfileCard() {
+    const p = getProfile();
+    const c = $('profileCard');
+    const filled = !!(p.name || p.phone);
+    c.classList.toggle('filled', filled);
+    c.innerHTML = `<span class="pc-logo">${p.logo ? `<img src="${esc(p.logo)}" alt="">` : icon('doc')}</span>
+      <span class="pc-text">${filled
+        ? `<strong>${esc(p.name || 'بياناتي')}</strong><small>${esc([p.trade, p.phone].filter(Boolean).join(' · ') || 'دوس لتعديل بياناتك')}</small>`
+        : `<strong>ضيف بياناتك للفاتورة</strong><small>اسمك ولوجو ورقم تليفونك يظهروا فوق في كل فاتورة</small>`}</span>
+      <span class="go">${icon('arrow')}</span>`;
+  }
+  let pfLogo = '';
+  function setLogoPreview() {
+    const pv = $('pfLogoPreview');
+    pv.style.backgroundImage = pfLogo ? `url("${pfLogo}")` : '';
+    pv.textContent = pfLogo ? '' : 'مفيش لوجو';
+    $('pfLogoRemove').hidden = !pfLogo;
+  }
+  function fillProfileForm() {
+    const p = getProfile();
+    $('pfName').value = p.name || ''; $('pfTrade').value = p.trade || '';
+    $('pfPhone').value = p.phone || ''; $('pfWarranty').value = p.warranty || '';
+    pfLogo = p.logo || ''; setLogoPreview();
+  }
+  // اللوجو بيتصغّر لحد 512 بكسل علشان يفضل خفيف في التخزين والنسخ الاحتياطي
+  $('pfLogo').addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const k = Math.min(1, 512 / Math.max(img.width, img.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        pfLogo = cv.toDataURL('image/png'); setLogoPreview();
+      };
+      img.onerror = () => toast('الصورة دي مش مدعومة');
+      img.src = r.result;
+    };
+    r.readAsDataURL(f);
+  });
+  $('pfLogoRemove').addEventListener('click', () => { pfLogo = ''; setLogoPreview(); });
+  $('profileForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const p = {
+      name: $('pfName').value.trim(), trade: $('pfTrade').value.trim(), phone: $('pfPhone').value.trim(),
+      warranty: $('pfWarranty').value.trim(), logo: pfLogo, updatedAt: new Date().toISOString()
+    };
+    try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch (err) { toast('مساحة التخزين مش كفاية للوجو — جرّب صورة أصغر'); return; }
+    toast('اتحفظت بياناتك ✓ — هتظهر في كل الفواتير');
+    renderProfileCard();
+    closeLayer();
   });
 
   /* ================= الثيم ================= */

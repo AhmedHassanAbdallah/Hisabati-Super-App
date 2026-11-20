@@ -375,7 +375,7 @@
         <input type="file" id="restoreFile" accept=".json,application/json" class="hidden">
         <div class="hint mt" style="text-align:center">${lb ? 'آخر نسخة: ' + new Date(lb).toLocaleString('ar-EG') : 'لم يتم عمل نسخة احتياطية بعد'}</div></div>
         <div class="card"><div class="card-title"><div class="t-ic orange">${icon('shield')}</div><h2>خصوصية وعزل البيانات</h2></div>
-          <div class="note">بيانات «حساباتي للمحارة» منفصلة تماماً عن باقي تطبيقات حساباتي (الكهرباء وغيرها): مخزنة بمفاتيح خاصة بيها، ومسحها أو استعادتها لا يؤثر على أي تطبيق تاني. لا يتم رفع أي بيانات على الإنترنت.</div>
+          <div class="note">بيانات «أرزقي للمحارة» منفصلة تماماً عن باقي تطبيقات أرزقي (الكهرباء وغيرها): مخزنة بمفاتيح خاصة بيها، ومسحها أو استعادتها لا يؤثر على أي تطبيق تاني. لا يتم رفع أي بيانات على الإنترنت.</div>
           <button type="button" class="btn btn-danger mt" data-act="resetAll">${icon('trash')} مسح كل بيانات هذا التطبيق</button></div>`;
       return {
         title: 'النسخ الاحتياطي', html,
@@ -402,7 +402,7 @@
   U.VIEWS.about = {
     parent: () => ['more'],
     render() {
-      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>حساباتي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
+      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>أرزقي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
         <div class="card"><div class="kv">
           <div class="kv-row"><span>العمل بدون إنترنت</span><strong>${'serviceWorker' in navigator ? 'مفعّل' : 'غير مدعوم في المتصفح ده'}</strong></div>
           <div class="kv-row"><span>حالة الاتصال الآن</span><strong>${navigator.onLine ? 'متصل' : 'بدون إنترنت'}</strong></div>
@@ -410,7 +410,7 @@
         </div></div>
         <div class="card"><div class="card-title"><div class="t-ic orange">${icon('info')}</div><h2>عن الحسابات</h2></div>
           <div class="note">كل المعادلات <b>تقديرية</b> ومبنية على المدخلات اللي بتكتبها: السمك، نسب الخلط، معدل الاستهلاك من نشرة المنتج، الهالك، وقواعد خصم الفتحات حسب اتفاقك مع العميل. التطبيق بيوضح الافتراضات تحت كل نتيجة. راجع دائماً بيانات الشركة المصنعة.</div></div>
-        <div class="copyright">مبني على فلسفة تصميم تطبيق «حساباتي» — نسخة مستقلة لأعمال المحارة والجرافيت والواجهات.</div>`;
+        <div class="copyright">مبني على فلسفة تصميم تطبيق «أرزقي» — نسخة مستقلة لأعمال المحارة والجرافيت والواجهات.</div>`;
       return { title: 'عن التطبيق', html };
     }
   };
@@ -448,7 +448,7 @@
     },
     restoreBackup() { document.getElementById('restoreFile').click(); },
     resetAll() {
-      U.confirmBox('مسح كل بيانات «حساباتي للمحارة» نهائياً؟\n(باقي تطبيقات حساباتي مش هتتأثر)', () => {
+      U.confirmBox('مسح كل بيانات «أرزقي للمحارة» نهائياً؟\n(باقي تطبيقات أرزقي مش هتتأثر)', () => {
         U.confirmBox('تأكيد أخير: كل المشروعات والعملاء والمخزن هيتمسحوا.', () => { S.resetAll(); U.applyTheme(); U.toast('تم المسح'); U.go('home'); }, { yes: 'امسح' });
       }, { yes: 'متابعة' });
     }

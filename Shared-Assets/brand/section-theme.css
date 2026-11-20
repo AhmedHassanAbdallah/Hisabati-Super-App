@@ -1,0 +1,30 @@
+/*
+ * أرزقي — ألوان الأقسام.
+ * بيتحمّل آخر حاجة في كل قسم، وبيبدّل متغيرات الألوان بتاعته (الكحلي/البرتقالي) بهوية أرزقي
+ * (أزرق ملكي + أصفر الخوذة + برتقالي المسطرين) — من غير ما نعدّل ملفات التصميم الأصلية للقسم.
+ */
+:root {
+  --navy-950: #010f33;
+  --navy-900: #011a51;
+  --navy-800: #012a6f;
+  --navy-700: #01429c;
+  --navy-600: #1f6fd6;
+  --orange-400: #ff9a3c;
+  --orange-500: #f17700;
+  --orange-600: #ee6300;
+  --amber-400: #fbbf00;
+  --primary-soft: #e6efff;
+  --accent-soft: #fff4d1;
+  --bg: #f1f5fb;
+  --border: #dfe7f3;
+}
+:root[data-theme="dark"] {
+  --bg: #020c26; --surface: #0a1c45; --surface-2: #0f2556; --border: #1c3a73;
+  --text: #eaf1fb; --muted: #a3b6d3; --primary: #8cb8f5; --primary-soft: #102a5e; --accent-soft: #3a2a05;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #020c26; --surface: #0a1c45; --surface-2: #0f2556; --border: #1c3a73;
+    --text: #eaf1fb; --muted: #a3b6d3; --primary: #8cb8f5; --primary-soft: #102a5e; --accent-soft: #3a2a05;
+  }
+}

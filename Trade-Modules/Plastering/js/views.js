@@ -70,7 +70,7 @@
       </div>
       <div class="home-row"><h2 class="home-h" style="margin:0">آخر المشروعات</h2><button type="button" class="link-btn" data-act="go" data-view="projects">عرض الكل</button></div>
       ${ps.length ? ps.slice(-5).reverse().map(projectRow).join('') : `<div class="empty"><div class="big">${icon('trowel')}</div><p>ابدأ أول مشروع: سجّل العميل، احسب المساحات، واختار البنود (محارة، جرافيت، معجون، واجهات).</p><button type="button" class="btn btn-accent" data-act="newProject">${icon('plus')} مشروع جديد</button></div>`}`;
-      return { title: 'حساباتي للمحارة', sub: greet, html };
+      return { title: 'أرزقي للمحارة', sub: greet, html };
     }
   };
 

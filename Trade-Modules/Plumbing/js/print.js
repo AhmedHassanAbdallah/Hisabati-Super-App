@@ -1,6 +1,6 @@
 /* =========================================================
-   حساباتي السباكة - print.js
-   نفس نظام الطباعة وPDF في حساباتي: ورقة A4 حقيقية قابلة للتعديل
+   أرزقي السباكة - print.js
+   نفس نظام الطباعة وPDF في أرزقي: ورقة A4 حقيقية قابلة للتعديل
    قبل الطباعة، بهوامش مطابقة للمعاينة، ومتعددة الصفحات (عربي RTL).
    المستندات: مقايسات التأسيس/التشطيب/التغذية/الصرف/الحمام/المطبخ،
    عرض السعر، فاتورة الأعمال، فاتورة التوريد والتركيب، فاتورة الصيانة،
@@ -102,7 +102,7 @@ function printHeaderHTML(title, tag, date, line2) {
     <div class="inv-stripe"></div>`;
 }
 function printFooterHTML() {
-  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي السباكة</b></span></footer>`;
+  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي السباكة</b></span></footer>`;
 }
 const signHTML = (a = 'توقيع السباك / المقاول', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
 function notesHTML(title, items) {

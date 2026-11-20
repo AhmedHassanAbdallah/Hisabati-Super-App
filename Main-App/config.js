@@ -1,5 +1,5 @@
 /*
- * حساباتي — الإعدادات
+ * أرزقي — الإعدادات
  * googleClientId: معرّف OAuth (Web application) من Google Cloud Console.
  *   ده معرّف عام مش سر — مكانه الطبيعي في كود الصفحة.
  *   طريقة إنشائه: Documentation/GOOGLE-SETUP.md
@@ -7,10 +7,10 @@
  */
 window.HISABATI_CONFIG = {
   googleClientId: '911657691701-1n6h1c3gjnbaqp8anjch3e3kvr3semis.apps.googleusercontent.com',
-  driveFolderName: 'حساباتي — نسخ احتياطية',
+  driveFolderName: 'أرزقي — نسخ احتياطية',
   developer: {
     name: 'أحمد حسن عبدالله',
-    role: 'مطوّر ومصمّم حساباتي',
+    role: 'مطوّر ومصمّم أرزقي',
     photo: '../Shared-Assets/images/developer.jpg',
     whatsapp: '201015421255',
     phoneDisplay: '+20 101 542 1255',

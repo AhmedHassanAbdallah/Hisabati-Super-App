@@ -1,8 +1,8 @@
 /*
- * حساباتي للأرضيات — التخزين المحلي (Offline First)
+ * أرزقي للأرضيات — التخزين المحلي (Offline First)
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  *
- * مهم: التطبيق ده ممكن يتنشر على نفس الدومين بتاع تطبيق «حساباتي» للكهرباء
+ * مهم: التطبيق ده ممكن يتنشر على نفس الدومين بتاع تطبيق «أرزقي» للكهرباء
  * (ahmedhassanabdallah.github.io). علشان كده كل مفاتيح التخزين هنا تبدأ بـ hflooring_
  * ومستحيل تقرا أو تكتب أو تمسح أي بيانات خاصة بتطبيق الكهرباء.
  */
@@ -134,10 +134,10 @@
     exportObject() { return Object.assign({}, this.db, { exportedAt: nowISO(), backupOf: APP_ID }); },
     markBackup() { try { localStorage.setItem(BACKUP_KEY, String(Date.now())); } catch (e) {} },
     lastBackup() { try { return parseInt(localStorage.getItem(BACKUP_KEY), 10) || 0; } catch (e) { return 0; } },
-    // يقبل نسخ «حساباتي للأرضيات» فقط (مش نسخ تطبيق الكهرباء) — علشان ما يحصلش خلط بين التطبيقات
+    // يقبل نسخ «أرزقي للأرضيات» فقط (مش نسخ تطبيق الكهرباء) — علشان ما يحصلش خلط بين التطبيقات
     validateBackup(obj) {
       if (!obj || typeof obj !== 'object') return 'الملف غير صالح';
-      if (obj.app !== APP_ID) return obj.app === 'hesabaty' || Array.isArray(obj.invoices) ? 'ده ملف نسخة من تطبيق «حساباتي» للكهرباء، مش من تطبيق الأرضيات' : 'الملف ده مش نسخة احتياطية من «حساباتي للأرضيات»';
+      if (obj.app !== APP_ID) return obj.app === 'hesabaty' || Array.isArray(obj.invoices) ? 'ده ملف نسخة من تطبيق «أرزقي» للكهرباء، مش من تطبيق الأرضيات' : 'الملف ده مش نسخة احتياطية من «أرزقي للأرضيات»';
       return null;
     },
     restore(obj) {

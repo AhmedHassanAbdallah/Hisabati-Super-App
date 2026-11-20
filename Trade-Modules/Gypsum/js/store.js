@@ -1,6 +1,6 @@
 /*
- * حساباتي للجبس والديكورات — التخزين المحلي (Offline First)
- * كل البيانات محفوظة على الجهاز فقط، بمفاتيح مستقلة تماماً عن تطبيق حساباتي للكهرباء.
+ * أرزقي للجبس والديكورات — التخزين المحلي (Offline First)
+ * كل البيانات محفوظة على الجهاز فقط، بمفاتيح مستقلة تماماً عن تطبيق أرزقي للكهرباء.
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 (function (root) {
@@ -81,7 +81,7 @@
   function exportData() { return JSON.stringify(Object.assign({ app: 'hesabati-gypsum', exported: new Date().toISOString() }, db), null, 1); }
   function importData(text, mode) {
     const raw = JSON.parse(text);
-    if (!raw || (raw.app && raw.app !== 'hesabati-gypsum')) throw new Error('الملف مش نسخة من حساباتي للجبس');
+    if (!raw || (raw.app && raw.app !== 'hesabati-gypsum')) throw new Error('الملف مش نسخة من أرزقي للجبس');
     const inc = normalize(raw);
     if (mode === 'merge') {
       LISTS.forEach(k => {

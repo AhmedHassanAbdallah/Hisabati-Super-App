@@ -12,7 +12,7 @@
   function header(docName, no, date) {
     const st = S.db().settings;
     const logo = st.logo && st.showLogo !== false ? `<div class="d-logo"><img src="${esc(st.logo)}" alt=""></div>` : '';
-    return `<div class="d-head"><div class="d-brand">${logo}<div><h1 contenteditable="true">${esc(st.bizName || 'حساباتي للمحارة والواجهات')}</h1>
+    return `<div class="d-head"><div class="d-brand">${logo}<div><h1 contenteditable="true">${esc(st.bizName || 'أرزقي للمحارة والواجهات')}</h1>
       <p contenteditable="true">${esc(st.bizTitle || '')}${st.bizPhone ? ' · <b>' + esc(st.bizPhone) + '</b>' : ''}${st.bizAddress ? '<br>' + esc(st.bizAddress) : ''}</p></div></div>
       <div class="d-doc"><span class="tag" contenteditable="true">${esc(docName)}</span>${no ? `<span class="d">رقم: <b>${esc(no)}</b></span>` : ''}<span class="d">التاريخ: <b>${esc(fmtDate(date || S.today()))}</b></span></div></div><div class="d-stripe"></div>`;
   }
@@ -244,7 +244,7 @@
   }
   function closeDoc() {
     document.getElementById('printModal').classList.remove('open');
-    document.title = 'HESABATI PLASTER — حساباتي للمحارة والواجهات';
+    document.title = 'HESABATI PLASTER — أرزقي للمحارة والواجهات';
     CUR_DOC = null;
   }
   window.addEventListener('resize', fitPreview);

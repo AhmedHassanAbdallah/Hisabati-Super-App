@@ -1,5 +1,5 @@
 /*
- * حساباتي للأرضيات — الخامات والمخزون، العمال، المصروفات، النوتة، أنواع الأعمال، الإعدادات، النسخ الاحتياطي
+ * أرزقي للأرضيات — الخامات والمخزون، العمال، المصروفات، النوتة، أنواع الأعمال، الإعدادات، النسخ الاحتياطي
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 (function (root) {
@@ -569,7 +569,7 @@
           <div class="btn-row"><button type="button" class="btn btn-accent" data-act="export">${icon('download')} تنزيل نسخة</button><button type="button" class="btn btn-ghost" data-act="import">${icon('upload')} استعادة نسخة</button></div>
           <input type="file" accept=".json,application/json" class="hidden" data-file></div>
           <div class="card"><div class="card-title"><div class="t-ic" style="background:var(--danger-soft);color:var(--danger)">${icon('trash')}</div><h2>مسح كل البيانات</h2></div>
-          <p class="hint" style="margin:-6px 0 12px">بيمسح كل بيانات «حساباتي للأرضيات» من الموبايل ده بس (مش بيلمس تطبيق حساباتي للكهرباء). خد نسخة احتياطية الأول.</p>
+          <p class="hint" style="margin:-6px 0 12px">بيمسح كل بيانات «أرزقي للأرضيات» من الموبايل ده بس (مش بيلمس تطبيق أرزقي للكهرباء). خد نسخة احتياطية الأول.</p>
           <button type="button" class="btn btn-danger" data-act="wipe">${icon('trash')} مسح كل البيانات</button></div>`;
         const file = body.querySelector('[data-file]');
         file.onchange = () => {
@@ -588,12 +588,12 @@
         };
         act(body, {
           export: () => {
-            const name = `حساباتي_للأرضيات_نسخة_${today()}.json`;
+            const name = `أرزقي_للأرضيات_نسخة_${today()}.json`;
             if (UI.downloadText(name, 'application/json', JSON.stringify(Store.exportObject(), null, 1))) { Store.markBackup(); UI.toast('✔️ تم تنزيل النسخة: ' + name); page.refresh(); }
             else UI.toast('⚠️ تعذر تنزيل الملف', 'err');
           },
           import: () => file.click(),
-          wipe: () => UI.confirm('متأكد إنك عايز تمسح كل المشروعات والفواتير والعملاء والخامات والعمال؟ مفيش رجوع.', () => UI.confirm('تأكيد أخير: مسح كل بيانات حساباتي للأرضيات؟', () => { Store.wipe(); UI.setCurrency(db().settings.currency); App.applyTheme(); UI.toast('تم مسح البيانات'); page.refresh(); }, { yes: 'امسح كله' }), { yes: 'أيوه، كمّل' })
+          wipe: () => UI.confirm('متأكد إنك عايز تمسح كل المشروعات والفواتير والعملاء والخامات والعمال؟ مفيش رجوع.', () => UI.confirm('تأكيد أخير: مسح كل بيانات أرزقي للأرضيات؟', () => { Store.wipe(); UI.setCurrency(db().settings.currency); App.applyTheme(); UI.toast('تم مسح البيانات'); page.refresh(); }, { yes: 'امسح كله' }), { yes: 'أيوه، كمّل' })
         });
       }
     });
@@ -608,7 +608,7 @@
           <div class="stack">${root.SWUpdate && root.SWUpdate.waiting ? `<button type="button" class="btn btn-accent" data-act="apply">${icon('download')} تحديث الآن</button>` : ''}<button type="button" class="btn btn-soft" data-act="check">${icon('refresh')} البحث عن تحديث</button></div></div>
           <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
           <div class="dev-links"><a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener">${icon('chat')} واتساب</a><a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">${icon('facebook')} فيسبوك</a></div><div class="dev-phone">+20 101 542 1255</div></div>
-          <div class="copyright"><b>حساباتي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
+          <div class="copyright"><b>أرزقي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
         act(body, {
           apply: () => root.SWUpdate.apply(),
           check: () => { if (!root.SWUpdate) { UI.toast('التحديث التلقائي غير متاح هنا'); return; } root.SWUpdate.check().then(r => UI.toast(r ? '✔️ في تحديث جديد — اضغط تحديث الآن' : '✔️ أنت على آخر إصدار')).catch(() => UI.toast('⚠️ مفيش إنترنت دلوقتي', 'err')); }

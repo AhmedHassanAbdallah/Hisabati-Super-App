@@ -1,27 +1,87 @@
 {
   "id": "./",
-  "name": "حساباتي — كل المهن",
-  "short_name": "حساباتي",
-  "description": "حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس. تصميم وتطوير: أحمد حسن عبدالله.",
+  "name": "أرزقي — لحسابات المصنعية",
+  "short_name": "أرزقي",
+  "description": "أرزقي — لحسابات المصنعية: حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، الجبس، والمحارة. تصميم وتطوير: أحمد حسن عبدالله.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0b1b33",
-  "theme_color": "#0b1b33",
-  "categories": ["business", "productivity", "utilities"],
+  "background_color": "#011a51",
+  "theme_color": "#011a51",
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
   "icons": [
-    { "src": "../Shared-Assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "../Shared-Assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "../Shared-Assets/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "../Shared-Assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "../Shared-Assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../Shared-Assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../Shared-Assets/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "../Shared-Assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "الكهرباء", "url": "./#electrical", "icons": [{ "src": "../Trade-Modules/Electrical/icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "السباكة والصحي", "url": "./#plumbing", "icons": [{ "src": "../Trade-Modules/Plumbing/icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "التكييف والتبريد", "url": "./#hvac", "icons": [{ "src": "../Trade-Modules/HVAC/icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "النقاشة والدهانات", "url": "./#painting", "icons": [{ "src": "../Trade-Modules/Painting/icons/icon-192.png", "sizes": "192x192" }] }
+    {
+      "name": "الكهرباء",
+      "url": "./#electrical",
+      "icons": [
+        {
+          "src": "../Trade-Modules/Electrical/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "السباكة والصحي",
+      "url": "./#plumbing",
+      "icons": [
+        {
+          "src": "../Trade-Modules/Plumbing/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "التكييف والتبريد",
+      "url": "./#hvac",
+      "icons": [
+        {
+          "src": "../Trade-Modules/HVAC/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "النقاشة والدهانات",
+      "url": "./#painting",
+      "icons": [
+        {
+          "src": "../Trade-Modules/Painting/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

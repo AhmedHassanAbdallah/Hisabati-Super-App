@@ -2,7 +2,7 @@
  * HESABATI PLASTER — طبقة التخزين المحلي (Offline First)
  *
  * عزل البيانات: كل مفاتيح التخزين تبدأ بـ "hplaster_" فقط.
- * التطبيق لا يقرأ ولا يكتب ولا يمسح أي مفتاح يخص تطبيقات حساباتي الأخرى
+ * التطبيق لا يقرأ ولا يكتب ولا يمسح أي مفتاح يخص تطبيقات أرزقي الأخرى
  * (الكهرباء وغيرها) حتى لو كانوا على نفس النطاق ahmedhassanabdallah.github.io.
  */
 (function (root, factory) {
@@ -124,7 +124,7 @@
   function importJSON(text) {
     const parsed = JSON.parse(text);
     const data = parsed && parsed.app === 'HESABATI_PLASTER' ? parsed.data : null;
-    if (!data || !Array.isArray(data.projects)) throw new Error('الملف ليس نسخة احتياطية من حساباتي للمحارة');
+    if (!data || !Array.isArray(data.projects)) throw new Error('الملف ليس نسخة احتياطية من أرزقي للمحارة');
     DB = normalize(data);
     saveNow();
     return DB;

@@ -1,10 +1,10 @@
 /*
- * حساباتي للجبس والديكورات — تشغيل التطبيق: التنقل، الرئيسية، الإعدادات، النسخ الاحتياطي، التحديثات
+ * أرزقي للجبس والديكورات — تشغيل التطبيق: التنقل، الرئيسية، الإعدادات، النسخ الاحتياطي، التحديثات
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 'use strict';
 const APP_VERSION = '1.0.0';
-const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
+const VIEW_TITLES = { home: 'أرزقي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
 let currentView = 'home';
 
 /* ---------------- التنقل ---------------- */
@@ -13,7 +13,7 @@ function switchView(v) {
   currentView = v;
   document.querySelectorAll('.view').forEach(el => el.classList.toggle('active', el.id === 'view-' + v));
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.id === 'navBtn-' + v));
-  $('tabTitle').textContent = VIEW_TITLES[v] || 'حساباتي للجبس';
+  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي للجبس';
   renderView(v);
   window.scrollTo(0, 0);
 }

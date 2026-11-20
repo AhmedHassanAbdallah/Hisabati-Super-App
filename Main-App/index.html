@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1b33">
-  <meta name="description" content="حساباتي — حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس، مع نسخ احتياطي على جوجل درايف. تصميم وتطوير: أحمد حسن عبدالله.">
+  <meta name="theme-color" content="#011a51">
+  <meta name="description" content="أرزقي — لحسابات المصنعية: حسابات وفواتير ومقايسات لكل المهن: الكهرباء، السباكة، التكييف، النقاشة، الأرضيات، والجبس، مع نسخ احتياطي على جوجل درايف. تصميم وتطوير: أحمد حسن عبدالله.">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="حساباتي">
-  <title>حساباتي — كل المهن</title>
+  <meta name="apple-mobile-web-app-title" content="أرزقي">
+  <title>أرزقي — لحسابات المصنعية</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../Shared-Assets/icons/icon-192.png">
   <link rel="apple-touch-icon" href="../Shared-Assets/icons/icon-192.png">
   <link rel="stylesheet" href="../Shared-Assets/fonts/cairo.css">
+  <link rel="stylesheet" href="../Shared-Assets/brand/arzaqi.css">
   <link rel="stylesheet" href="./launcher.css">
   <script>
     (function () {
@@ -23,6 +24,7 @@
       } catch (e) {}
     })();
   </script>
+  <script src="../Shared-Assets/brand/splash.js" data-base="../Shared-Assets/brand/"></script>
 </head>
 <body data-view="home">
 
@@ -61,11 +63,11 @@
         </div>
       </div>
       <div class="hero-main">
-        <div class="brand-tile"><img src="../Shared-Assets/icons/icon-192.png" alt="" width="62" height="62"></div>
-        <div class="hero-text">
-          <span id="greet" class="greet">أهلاً بيك</span>
-          <h1 id="homeTitle">حساباتي</h1>
-        </div>
+        <span id="greet" class="greet">أهلاً بيك</span>
+        <h1 id="homeTitle">
+          <img class="az-only-light" src="../Shared-Assets/brand/arzaqi-logo-on-light.png" alt="أرزقي — لحسابات المصنعية" width="1200" height="449">
+          <img class="az-only-dark" src="../Shared-Assets/brand/arzaqi-logo-on-dark.png" alt="أرزقي — لحسابات المصنعية" width="1200" height="431">
+        </h1>
       </div>
       <p class="hero-sub">احسب شغلك صح، وطلّع فواتير ومقايسات احترافية — لكل مهنة قسم كامل في مكان واحد.</p>
       <div class="hero-chips">
@@ -77,6 +79,7 @@
 
     <div class="content">
       <button id="resumeCard" class="resume" type="button" hidden></button>
+      <button id="profileCard" class="profile-card" type="button" data-act="open-profile"></button>
 
       <section class="block" aria-labelledby="tradesTitle">
         <div class="sec-head"><h2 id="tradesTitle">اختار قسمك</h2><span class="sec-hint">دوس على المهنة وابدأ</span></div>
@@ -92,7 +95,7 @@
           <div class="dev-text">
             <span class="dev-kicker">صمّمه وطوّره</span>
             <strong id="devName">أحمد حسن عبدالله</strong>
-            <span id="devRole" class="dev-role">مطوّر ومصمّم حساباتي</span>
+            <span id="devRole" class="dev-role">مطوّر ومصمّم أرزقي</span>
           </div>
         </div>
         <div class="dev-actions">
@@ -114,17 +117,16 @@
     <div class="layer-backdrop" data-close></div>
     <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
       <div class="drawer-head">
-        <img src="../Shared-Assets/icons/icon-192.png" alt="" width="42" height="42">
         <div class="drawer-head-text">
-          <strong id="drawerTitle">حساباتي</strong>
-          <span>حسابات وفواتير كل المهن</span>
+          <strong id="drawerTitle" class="sr-only">أرزقي</strong>
+          <img class="drawer-logo" src="../Shared-Assets/brand/arzaqi-logo-on-dark.png" alt="" width="1200" height="431">
         </div>
         <button class="glass-btn" type="button" data-close aria-label="قفل القائمة"><svg><use href="#i-x"/></svg></button>
       </div>
       <div class="drawer-body">
         <section class="about">
-          <h2>عن حساباتي</h2>
-          <p>حساباتي بيساعد الصنايعي والمقاول يحسب شغله صح ويطلّع فواتير ومقايسات احترافية، ويتابع العملاء والدفعات والخامات والعمال والمصروفات والأرباح — لكل مهنة قسم كامل بحاسباته وطرق محاسبتها.</p>
+          <h2>عن أرزقي</h2>
+          <p>أرزقي بيساعد الصنايعي والمقاول يحسب شغله صح ويطلّع فواتير ومقايسات احترافية، ويتابع العملاء والدفعات والخامات والعمال والمصروفات والأرباح — لكل مهنة قسم كامل بحاسباته وطرق محاسبتها.</p>
           <ul class="about-points">
             <li>بيشتغل من غير إنترنت، وبياناتك محفوظة على جهازك</li>
             <li>فواتير ومقايسات PDF بالعربي جاهزة للطباعة والإرسال</li>
@@ -132,6 +134,7 @@
           </ul>
         </section>
         <div class="menu-links">
+          <button class="menu-link" type="button" data-goto="profile"><svg><use href="#i-doc"/></svg><span>بياناتي في الفاتورة</span></button>
           <button class="menu-link" type="button" data-goto="account"><svg><use href="#i-cloud-up"/></svg><span>حسابي والنسخ الاحتياطي</span></button>
           <a class="menu-link" href="./privacy.html"><svg><use href="#i-shield"/></svg><span>سياسة الخصوصية</span></a>
           <button class="menu-link" type="button" data-goto="dev"><svg><use href="#i-user"/></svg><span>عن المطوّر</span></button>
@@ -153,6 +156,33 @@
         <button class="icon-plain" type="button" data-close aria-label="قفل"><svg><use href="#i-x"/></svg></button>
       </div>
       <div id="accountBody" class="sheet-body"></div>
+    </section>
+  </div>
+
+  <!-- ======== بياناتي في الفاتورة ======== -->
+  <div id="profileSheet" class="layer sheet" aria-hidden="true">
+    <div class="layer-backdrop" data-close></div>
+    <section class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+      <div class="sheet-grip" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2 id="profileTitle">بياناتي في الفاتورة</h2>
+        <button class="icon-plain" type="button" data-close aria-label="قفل"><svg><use href="#i-x"/></svg></button>
+      </div>
+      <form id="profileForm" class="sheet-body pf" autocomplete="on">
+        <p class="fine" style="margin-top:0">البيانات دي بتظهر فوق في كل فاتورة في كل الأقسام.</p>
+        <div class="pf-logo">
+          <div id="pfLogoPreview" class="pf-logo-prev" aria-hidden="true"></div>
+          <div class="pf-logo-actions">
+            <label class="btn ghost pf-file"><input id="pfLogo" type="file" accept="image/*" hidden> اختار اللوجو بتاعك</label>
+            <button id="pfLogoRemove" class="btn ghost" type="button">شيل اللوجو</button>
+          </div>
+        </div>
+        <label class="pf-field"><span>اسمك أو اسم ورشتك</span><input id="pfName" name="name" maxlength="60" placeholder="مثلاً: م. أحمد حسن"></label>
+        <label class="pf-field"><span>التخصص</span><input id="pfTrade" name="trade" maxlength="70" placeholder="مثلاً: أعمال الكهرباء والتشطيبات"></label>
+        <label class="pf-field"><span>رقم التليفون</span><input id="pfPhone" name="phone" maxlength="40" inputmode="tel" dir="ltr" placeholder="01xxxxxxxxx"></label>
+        <label class="pf-field"><span>الضمان الافتراضي (اختياري — تقدر تعدّله في كل فاتورة)</span><textarea id="pfWarranty" name="warranty" maxlength="240" rows="2" placeholder="مثلاً: ضمان سنة على المصنعية من تاريخ التسليم"></textarea></label>
+        <div class="sheet-actions"><button class="btn primary" type="submit">حفظ البيانات</button></div>
+      </form>
     </section>
   </div>
 

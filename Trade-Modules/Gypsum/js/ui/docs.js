@@ -1,5 +1,5 @@
 /*
- * حساباتي للجبس والديكورات — الفواتير والمقايسات وعروض الأسعار والمستخلصات والتقارير
+ * أرزقي للجبس والديكورات — الفواتير والمقايسات وعروض الأسعار والمستخلصات والتقارير
  * المعاينة ورقة A4 حقيقية، والحفظ PDF عن طريق الطباعة (من المتصفح أو من تطبيق أندرويد)
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
@@ -112,7 +112,7 @@ function docHTML(s) {
   const C = cur().sym;
   const head = `<header class="inv-head"><div class="inv-brand">
       ${st.showLogo && st.logo ? `<div class="inv-logo"><img src="${st.logo}" alt=""></div>` : ''}
-      <div><h1 contenteditable="true">${esc(st.bizName || 'حساباتي للجبس والديكورات')}</h1>
+      <div><h1 contenteditable="true">${esc(st.bizName || 'أرزقي للجبس والديكورات')}</h1>
       <p contenteditable="true">${esc([st.ownerName, st.address].filter(Boolean).join(' — ') || 'أعمال الجبسون بورد والجبس البلدي والديكورات')}</p>
       ${st.phone || st.phone2 ? `<p>هاتف: <b>${esc([st.phone, st.phone2].filter(Boolean).join(' / '))}</b></p>` : ''}</div></div>
     <div class="inv-doc"><span class="tag">${esc(T.name)}</span><span class="d">رقم: <b>${esc(docNo(s))}</b></span><span class="d">التاريخ: <b>${esc(fmtDate(s.date))}</b></span>
@@ -171,7 +171,7 @@ function docHTML(s) {
   return `${head}${client}${body}
     <div class="inv-bottom"><div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notes.length ? notes.map(n => esc(n)).join('<br>') : '—'}</div></div><div class="inv-side">${totals}</div></div>
     ${sign}
-    <footer class="inv-foot"><span>${esc(st.bizName || 'حساباتي للجبس والديكورات')}</span><span>صدر من تطبيق <b>حساباتي للجبس</b></span></footer>`;
+    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي للجبس</b></span></footer>`;
 }
 
 /* ---------------- المعاينة والطباعة ---------------- */

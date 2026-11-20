@@ -1,5 +1,5 @@
 /* =========================================================
-   حساباتي HVAC - modules.js
+   أرزقي HVAC - modules.js
    الرئيسية، المخزن (الخامات وقطع الغيار)، الفنيين والعمال، الحسابات
    والمصروفات، قوائم الأسعار، عقود الصيانة، الضمان والمواعيد،
    النوتة الفنية، وكشوفات الخامات.
@@ -192,7 +192,7 @@ function exportICS(list) {
     ics += `BEGIN:VEVENT\r\nUID:${(r.ref || 'r') + '-' + i + '-' + d}@hesabati-hvac\r\nDTSTAMP:${stamp}\r\nDTSTART;VALUE=DATE:${d}\r\nDTEND;VALUE=DATE:${next}\r\nSUMMARY:${escI(r.title)}\r\nDESCRIPTION:${escI(r.sub)}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15H\r\nACTION:DISPLAY\r\nDESCRIPTION:${escI(r.title)}\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
   });
   ics += 'END:VCALENDAR\r\n';
-  downloadText(ics, `مواعيد_حساباتي_HVAC_${todayISO()}.ics`, 'text/calendar');
+  downloadText(ics, `مواعيد_أرزقي_HVAC_${todayISO()}.ics`, 'text/calendar');
   showAppToast(`✔️ تم تجهيز ${list.length} موعد — افتح الملف علشان يتضاف للتقويم`);
 }
 function enableNotifications() {
@@ -211,7 +211,7 @@ function notifyDueReminders() {
     if (!due.length) return;
     settings.lastNotify = todayISO(); saveSettings();
     const body = due.slice(0, 4).map(r => '• ' + r.title).join('\n');
-    const title = `حساباتي HVAC: ${due.length} موعد النهارده`;
+    const title = `أرزقي HVAC: ${due.length} موعد النهارده`;
     if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(reg => reg.showNotification(title, { body, icon: './icons/icon-192.png', lang: 'ar', dir: 'rtl', tag: 'hvac-due' })).catch(() => {});
     else new Notification(title, { body });
   } catch (e) {}
@@ -967,7 +967,7 @@ function openNoteForm(id) {
 }
 
 /* =========================================================
-   كشوفات الخامات (نفس نظام حساباتي الأصلي)
+   كشوفات الخامات (نفس نظام أرزقي الأصلي)
    ========================================================= */
 const MAT_PRESETS = ['ماسورة نحاس', 'عزل حراري', 'كابل كهرباء', 'خرطوم صرف', 'حوامل', 'شريط عزل', 'وصلات', 'أكواع', 'فريون', 'كابستور', 'مسامير وخوابير', 'سيليكون', 'جلبة حائط'];
 const MAT_UNITS = ['قطعة', 'متر', 'لفة', 'كجم', 'علبة', 'طقم'];

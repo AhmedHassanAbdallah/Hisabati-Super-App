@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1b33">
+  <meta name="theme-color" content="#011a51">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="author" content="أحمد حسن عبدالله">
   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
-  <meta name="description" content="حساباتي نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
-  <title>حساباتي نقاشة - حسابات وفواتير النقاشة والدهانات</title>
+  <meta name="description" content="أرزقي نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
+  <title>أرزقي نقاشة - حسابات وفواتير النقاشة والدهانات</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <!--
-    حساباتي نقاشة (HESABATI PAINTING) - حسابات وفواتير النقاشة والدهانات
+    أرزقي نقاشة (HESABATI PAINTING) - حسابات وفواتير النقاشة والدهانات
     تصميم وتطوير: أحمد حسن عبدالله
     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
     يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
@@ -653,7 +653,7 @@
 
     /* الهوامش البيضاء جزء من الورقة نفسها (9 مم) عشان تطلع زي المعاينة بالظبط
        حتى لو الطابعة أو أندرويد فرضوا هوامش صفر وتجاهلوا هوامش الصفحة */
-    /* ============ حساباتي نقاشة: محرك حسابات النقاشة ============ */
+    /* ============ أرزقي نقاشة: محرك حسابات النقاشة ============ */
     input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex-shrink: 0; }
     input[type="color"] { direction: ltr; width: 100%; height: 48px; border: 1.5px solid var(--border); border-radius: 13px; background: var(--surface-2); padding: 4px; }
     .type-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
@@ -738,6 +738,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 </head>
 <body>
 
@@ -748,7 +749,7 @@
     <img class="brand-ic" src="./icons/icon-192.png" alt="">
     <div class="titles">
       <div class="sub" id="greetLine">أهلاً بيك</div>
-      <h1 id="tabTitle">حساباتي نقاشة</h1>
+      <h1 id="tabTitle">أرزقي نقاشة</h1>
     </div>
     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
   </header>
@@ -1090,7 +1091,7 @@
       </div>
 
       <div class="copyright">
-        <b>حساباتي نقاشة</b> — حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
+        <b>أرزقي نقاشة</b> — حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
         <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
@@ -1501,10 +1502,10 @@
 
 <script>
   /* =========================================================
-     حساباتي نقاشة (HESABATI PAINTING) - حسابات وفواتير النقاشة والدهانات
+     أرزقي نقاشة (HESABATI PAINTING) - حسابات وفواتير النقاشة والدهانات
      تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
      © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
-     تطبيق مستقل تماماً عن «حساباتي» للكهرباء: مفاتيح تخزين وذاكرة وتحديثات منفصلة.
+     تطبيق مستقل تماماً عن «أرزقي» للكهرباء: مفاتيح تخزين وذاكرة وتحديثات منفصلة.
      ========================================================= */
   const APP_VERSION = '1.1.0';
   // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
@@ -1514,7 +1515,7 @@
   const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
   const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Hesabaty-painting/releases/latest';
   const APK_ASSET = 'hesabaty-painting.apk';
-  let printJobName = 'حساباتي نقاشة';
+  let printJobName = 'أرزقي نقاشة';
   if (IN_APP) {
     // روابط واتساب وفيسبوك تفتح في تطبيقاتها، والطباعة عن طريق أندرويد (حفظ PDF أو طابعة)
     window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
@@ -1531,7 +1532,7 @@
   const BACKUP_APP_ID = 'hesabaty-painting';
   const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال نقاشة ودهانات';
   const DEFAULT_TECH = 'للنقاشة والدهانات والديكورات';
-  const VIEW_TITLES = { home: 'حساباتي نقاشة', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
+  const VIEW_TITLES = { home: 'أرزقي نقاشة', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
   const EDITOR_VIEWS = ['pricing', 'rooms', 'costs', 'summary'];
 
   /* ---------------- محرك النقاشة: الأنواع والقوائم الجاهزة ---------------- */
@@ -1596,7 +1597,7 @@
   // بنود القائمة الافتراضية بدون أي أسعار إجبارية — المستخدم يكتب أسعاره
   const DEFAULT_PRICE_ITEMS = [['المعجون', 'م²'], ['الصنفرة', 'م²'], ['البطانة', 'م²'], ['الدهان', 'م²'], ['المتر الطولي (كرانيش ووزرات)', 'م.ط'], ['اليومية', 'يومية'], ['الساعة الإضافية', 'ساعة']];
 
-  // العملة: تُختار مرة واحدة من «المزيد» وتُطبّق على كل الأسعار في التطبيق (نفس نظام حساباتي الأصلي)
+  // العملة: تُختار مرة واحدة من «المزيد» وتُطبّق على كل الأسعار في التطبيق (نفس نظام أرزقي الأصلي)
   const CURRENCIES = [
     { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
     { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
@@ -1950,7 +1951,7 @@
     const order = EDITOR_VIEWS.indexOf(key);
     EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
     document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
-    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'حساباتي نقاشة';
+    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي نقاشة';
     document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
     if (isEd) renderEditorBar();
     if (key === 'home') renderHome();
@@ -2405,7 +2406,7 @@
     document.getElementById('verCurrent').textContent = IN_APP ? appVersion() : APP_VERSION;
     document.getElementById('copyYear').textContent = Math.max(2026, new Date().getFullYear());
     document.getElementById('storageNote').textContent = canStore
-      ? 'بياناتك محفوظة على الموبايل ده بس (بدون إنترنت وبدون أي خادم)، ومنفصلة تماماً عن تطبيق حساباتي للكهرباء.'
+      ? 'بياناتك محفوظة على الموبايل ده بس (بدون إنترنت وبدون أي خادم)، ومنفصلة تماماً عن تطبيق أرزقي للكهرباء.'
       : '⚠️ التخزين على الجهاز غير متاح في الوضع ده (مثلاً تصفح خفي) — البيانات مش هتتحفظ بعد قفل الصفحة.';
 
     document.getElementById('invFilter').addEventListener('click', e => {
@@ -5036,7 +5037,7 @@
     return `
       <footer class="inv-foot">
         <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
-        <span>صدرت بواسطة تطبيق <b>حساباتي نقاشة</b></span>
+        <span>صدرت بواسطة تطبيق <b>أرزقي نقاشة</b></span>
       </footer>`;
   }
   const signHTML = (a, b) => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
@@ -5457,7 +5458,7 @@
   function exportBackupJSON() {
     syncLinkedInvoices();
     downloadJSON(Object.assign({}, appData, { app: BACKUP_APP_ID, backupVersion: 1, appVersion: APP_VERSION, exportedAt: new Date().toISOString(), customers, settings, matLists, notes }),
-      `حساباتي_نقاشة_نسخة_كاملة_${todayISO()}.json`);
+      `أرزقي_نقاشة_نسخة_كاملة_${todayISO()}.json`);
     showAppToast('✔️ تم تنزيل النسخة الكاملة (المشاريع + النوتة + الخامات + الملاحظات)');
   }
   function exportLedgerJSON() {
@@ -5480,7 +5481,7 @@
     });
     return { added, updated };
   }
-  // ملف من تطبيق حساباتي للكهرباء؟ لا يتم استيراده هنا أبداً حتى لا تختلط البيانات
+  // ملف من تطبيق أرزقي للكهرباء؟ لا يتم استيراده هنا أبداً حتى لا تختلط البيانات
   function isElectricalBackup(o) {
     if (!o || typeof o !== 'object') return false;
     if (o.app === BACKUP_APP_ID) return false;
@@ -5493,7 +5494,7 @@
     reader.onload = function (e) {
       let imported;
       try { imported = JSON.parse(e.target.result); } catch (err) { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
-      if (isElectricalBackup(imported)) { showAppToast('⚠️ الملف ده نسخة من «حساباتي» للكهرباء — مش هيتم استيراده هنا علشان البيانات ما تختلطش.'); return; }
+      if (isElectricalBackup(imported)) { showAppToast('⚠️ الملف ده نسخة من «أرزقي» للكهرباء — مش هيتم استيراده هنا علشان البيانات ما تختلطش.'); return; }
       if (imported && imported.type === 'hesabaty-painting-ledger' && Array.isArray(imported.customers)) {
         showAppConfirm(`استعادة نوتة بها ${imported.customers.length} عميل؟ سيتم دمجها مع النوتة الحالية دون حذف أي سجل.`, () => {
           const r = mergeCustomers(imported.customers);
@@ -5752,7 +5753,7 @@
     if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
     else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
     else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
-    else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق حساباتي نقاشة، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
+    else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق أرزقي نقاشة، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
     else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
   };
   // يستدعيها التطبيق كل ما ترجع له

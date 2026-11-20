@@ -1,5 +1,5 @@
 /*
- * حساباتي للأرضيات — الفواتير والمستندات والطباعة (PDF بالعربي من نظام الطباعة)
+ * أرزقي للأرضيات — الفواتير والمستندات والطباعة (PDF بالعربي من نظام الطباعة)
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 (function (root) {
@@ -283,7 +283,7 @@
   }
   function footerHTML() {
     const s = db().settings;
-    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي للأرضيات</b></span></footer>`;
+    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي للأرضيات</b></span></footer>`;
   }
   function signHTML(a, b) { return `<div class="inv-sign"><div ${CE}>${a || 'توقيع القائم بالأعمال'}</div><div ${CE}>${b || 'اعتماد العميل'}</div></div>`; }
   function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }
@@ -323,7 +323,7 @@
   }
   function doPrint(jobName) {
     const old = document.title;
-    document.title = jobName || 'حساباتي للأرضيات';
+    document.title = jobName || 'أرزقي للأرضيات';
     if (root.HFloorApp && typeof root.HFloorApp.print === 'function') { try { root.HFloorApp.print(document.title); } catch (e) { UI.toast('⚠️ تعذرت الطباعة', 'err'); } }
     else { try { window.print(); } catch (e) { UI.toast('⚠️ الطباعة مش متاحة في المتصفح ده', 'err'); } }
     setTimeout(() => { document.title = old; }, 1500);

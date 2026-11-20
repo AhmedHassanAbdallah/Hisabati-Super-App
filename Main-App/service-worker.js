@@ -1,16 +1,17 @@
 /*
- * حساباتي — التطبيق الموحد: Service Worker خاص باللانشر بس.
+ * أرزقي — التطبيق الموحد: Service Worker خاص باللانشر بس.
  * نطاقه Main-App/ — صفحات التطبيقات (Trade-Modules/*) خارج النطاق ده،
  * فكل تطبيق بيفضل متحكم فيه الـ Service Worker الأصلي بتاعه زي ما هو.
  * أسماء الكاش كلها بتبدأ بـ hisabati-super- (مختلفة عن كل التطبيقات).
  */
-const VERSION = '1.4.0';
+const VERSION = '2.0.0';
 const CACHE = 'hisabati-super-' + VERSION;
 const PREFIX = 'hisabati-super-';
 const TRADE_DIRS = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum', 'Plastering'];
 const FILES = [
   './', './index.html', './launcher.css', './launcher.js', './trades.js', './manifest.json',
   './config.js', './backup.js', './cloud.js', './privacy.html', '../Shared-Assets/images/developer.jpg',
+  '../Shared-Assets/brand/arzaqi.css', '../Shared-Assets/brand/splash.js', '../Shared-Assets/brand/arzaqi-logo-on-light.png', '../Shared-Assets/brand/arzaqi-logo-on-dark.png',
   '../Shared-Assets/fonts/cairo.css', '../Shared-Assets/fonts/cairo-arabic.woff2',
   '../Shared-Assets/fonts/cairo-latin.woff2', '../Shared-Assets/fonts/cairo-latin-ext.woff2',
   '../Shared-Assets/icons/icon-192.png', '../Shared-Assets/icons/icon-512.png',
