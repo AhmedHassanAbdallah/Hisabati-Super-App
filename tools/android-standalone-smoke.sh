@@ -3,7 +3,8 @@
 # من جوه التطبيق، ويتأكد إن كل صفحة اتحملت وجسرها موجود ومفيش أخطاء JavaScript ولا انهيار.
 set -uo pipefail
 PKG=com.ahmedhassan.arzaqi
-ACT=$PKG/.MainActivity
+# اسم الكلاس في الكود (namespace) مختلف عن اسم الباكدج، فلازم الاسم الكامل
+ACT=$PKG/com.ahmedhassan.hisabati.offline.MainActivity
 APK="$(ls apk/*.apk | head -1)"
 mkdir -p shots
 adb install -r "$APK" || exit 1
