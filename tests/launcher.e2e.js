@@ -112,7 +112,7 @@ const openPlus = async f => {
     const items = await page.$$eval('#drawerTrades [data-open]', els => els.map(e => e.dataset.open));
     check('القائمة فيها تعريف الـ 7 أقسام بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
     const dText = await page.evaluate(() => document.getElementById('drawer').innerText);
-    check('القائمة فيها "عن حساباتي" وقسم المحارة', dText.includes('عن حساباتي') && dText.includes('المحارة والواجهات') && !dText.includes('قريباً'));
+    check('القائمة فيها "عن أرزقي" وقسم المحارة', dText.includes('عن أرزقي') && dText.includes('المحارة والواجهات') && !dText.includes('قريباً'));
     check('القائمة ما فيهاش ذكر لـ "تطبيق" ولا إصدارات', !/تطبيق|إصدار/.test(dText), (dText.match(/[^\n]*(تطبيق|إصدار)[^\n]*/g) || []));
     await page.click('#drawerTrades .dt:nth-child(3) summary'); await sleep(300);
     check('الضغط على قسم بيعرض مميزاته', await page.evaluate(() => { const d = document.querySelector('#drawerTrades .dt:nth-child(3)'); return d.open && d.querySelectorAll('li').length >= 3; }));
