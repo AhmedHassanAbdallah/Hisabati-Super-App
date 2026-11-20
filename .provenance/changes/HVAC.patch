@@ -1,0 +1,361 @@
+Binary files HVAC/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-192.png differ
+Binary files HVAC/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-512.png differ
+Binary files HVAC/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-maskable-192.png differ
+Binary files HVAC/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-maskable-512.png differ
+diff -ruN --no-dereference HVAC/index.html /home/user/Hisabati-Super-App/Trade-Modules/HVAC/index.html
+--- HVAC/index.html	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/index.html	2026-11-20 23:11:30.851337955 +0000
+@@ -3,19 +3,19 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+-  <meta name="theme-color" content="#0b1b33">
++  <meta name="theme-color" content="#011a51">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+   <meta name="author" content="أحمد حسن عبدالله">
+   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+-  <meta name="description" content="حساباتي HVAC: تطبيق متكامل لإدارة ومحاسبة أعمال التكييف والتبريد والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
+-  <title>حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد</title>
++  <meta name="description" content="أرزقي HVAC: تطبيق متكامل لإدارة ومحاسبة أعمال التكييف والتبريد والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
++  <title>أرزقي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد</title>
+   <link rel="manifest" href="./manifest.json">
+   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+   <script>
+-    // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح مستقل لحساباتي HVAC
++    // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح مستقل لأرزقي HVAC
+     try {
+       var _k = (/\/beta\//.test(location.pathname) ? 'beta_' : '') + 'hesabati_hvac_settings_v1';
+       var _t = (JSON.parse(localStorage.getItem(_k) || '{}') || {}).theme;
+@@ -26,8 +26,8 @@
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+   <!--
+-    حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
+-    تطبيق مستقل من عائلة حساباتي (بنفس نظام التصميم)
++    أرزقي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
++    تطبيق مستقل من عائلة أرزقي (بنفس نظام التصميم)
+     تصميم وتطوير: أحمد حسن عبدالله
+     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+     يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
+@@ -669,7 +669,7 @@
+       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+     }
+ 
+-    /* ============ إضافات حساباتي HVAC (بنفس متغيرات التصميم الأصلي) ============ */
++    /* ============ إضافات أرزقي HVAC (بنفس متغيرات التصميم الأصلي) ============ */
+     .brand-tag { display: inline-block; font-size: .6rem; font-weight: 900; letter-spacing: .6px; background: rgba(255,255,255,.14); color: #bae6fd; padding: 0 7px; border-radius: 99px; margin-inline-start: 6px; vertical-align: middle; }
+     .pg-actions { display: flex; gap: 8px; flex-shrink: 0; }
+     .page-overlay .app-header .titles .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@@ -726,6 +726,8 @@
+     .inv-notes ol { padding-right: 18px; }
+     .inv-notes ol li { margin-bottom: 3px; }
+   </style>
++  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
++  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+ </head>
+ <body>
+ 
+@@ -738,7 +740,7 @@
+     <img class="brand-ic" src="./icons/icon-192.png" alt="">
+     <div class="titles">
+       <div class="sub" id="greetLine">أهلاً بيك</div>
+-      <h1><span id="tabTitle">حساباتي HVAC</span><span class="brand-tag">HVAC ❄</span></h1>
++      <h1><span id="tabTitle">أرزقي HVAC</span><span class="brand-tag">HVAC ❄</span></h1>
+     </div>
+     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
+   </header>
+@@ -907,7 +909,7 @@
+       <h3 class="more-h">التطبيق وبياناتك</h3>
+       <div class="card">
+         <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
+-        <p class="hint" style="margin:-6px 0 12px">النسخة الكاملة تحفظ الفواتير والعملاء والأجهزة وسجل الصيانة والصور والمخزن والفنيين والحسابات في ملف واحد (JSON)، وتسترجعها في أي وقت أو على موبايل تاني. بيانات حساباتي HVAC مستقلة تماماً عن حساباتي الكهرباء والنقاشة.</p>
++        <p class="hint" style="margin:-6px 0 12px">النسخة الكاملة تحفظ الفواتير والعملاء والأجهزة وسجل الصيانة والصور والمخزن والفنيين والحسابات في ملف واحد (JSON)، وتسترجعها في أي وقت أو على موبايل تاني. بيانات أرزقي HVAC مستقلة تماماً عن أرزقي الكهرباء والنقاشة.</p>
+         <div class="btn-row">
+           <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
+           <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
+@@ -933,7 +935,7 @@
+ 
+       <div class="card hidden" id="apkCard">
+         <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
+-        <p class="hint" style="margin:-6px 0 12px">نزّل حساباتي HVAC كتطبيق أندرويد مستقل (مش هيأثر على حساباتي الكهرباء لو متثبت). بياناتك هنا مش بتتنقل لوحدها: خد «نسخة كاملة» واعمل لها «استعادة» جوه التطبيق.</p>
++        <p class="hint" style="margin:-6px 0 12px">نزّل أرزقي HVAC كتطبيق أندرويد مستقل (مش هيأثر على أرزقي الكهرباء لو متثبت). بياناتك هنا مش بتتنقل لوحدها: خد «نسخة كاملة» واعمل لها «استعادة» جوه التطبيق.</p>
+         <a class="btn btn-accent" id="apkLink" href="#" rel="noopener"><i data-icon="download"></i> تحميل تطبيق أندرويد</a>
+       </div>
+ 
+@@ -950,7 +952,7 @@
+       </div>
+ 
+       <div class="copyright">
+-        <b>حساباتي HVAC</b> — إدارة ومحاسبة أعمال التكييف والتبريد · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي HVAC</b> — إدارة ومحاسبة أعمال التكييف والتبريد · الإصدار <span id="aboutVersion"></span><br>
+         AIR CONDITIONING &amp; REFRIGERATION MANAGEMENT<br>
+         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
+         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
+diff -ruN --no-dereference HVAC/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/app.js
+--- HVAC/js/app.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/app.js	2026-11-20 23:08:29.178686311 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - app.js
++   أرزقي HVAC - app.js
+    الصور (IndexedDB محلي)، النسخ الاحتياطي والاستعادة، نظام التحديثات،
+    وتشغيل التطبيق.
+    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+@@ -115,7 +115,7 @@
+ }
+ async function exportBackupJSON() {
+   const b = await buildBackup(true);
+-  const ok = downloadText(JSON.stringify(b), `حساباتي_HVAC_نسخة_كاملة_${todayISO()}.json`, 'application/json');
++  const ok = downloadText(JSON.stringify(b), `أرزقي_HVAC_نسخة_كاملة_${todayISO()}.json`, 'application/json');
+   if (!ok) return;
+   lsSet(KEYS.backup, String(Date.now()));
+   renderBackupLine();
+@@ -136,7 +136,7 @@
+ function backupKind(obj) {
+   if (!obj || typeof obj !== 'object') return 'invalid';
+   if (obj.app === BACKUP_APP_ID && obj.data && typeof obj.data === 'object') return 'ok';
+-  // نسخ تطبيقات حساباتي الأخرى (الكهرباء / النقاشة) لا تُستورد هنا
++  // نسخ تطبيقات أرزقي الأخرى (الكهرباء / النقاشة) لا تُستورد هنا
+   if (obj.app === 'hesabaty' || Array.isArray(obj.invoices) || obj.type === 'hesabaty-ledger') return 'other-app';
+   return 'invalid';
+ }
+@@ -165,7 +165,7 @@
+     let obj;
+     try { obj = JSON.parse(e.target.result); } catch (err) { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
+     const kind = backupKind(obj);
+-    if (kind === 'other-app') { showAppToast('⚠️ الملف ده نسخة من تطبيق حساباتي تاني (الكهرباء أو النقاشة) — مش هيتستورد هنا علشان البيانات ما تتخلطش.'); return; }
++    if (kind === 'other-app') { showAppToast('⚠️ الملف ده نسخة من تطبيق أرزقي تاني (الكهرباء أو النقاشة) — مش هيتستورد هنا علشان البيانات ما تتخلطش.'); return; }
+     if (kind !== 'ok') { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
+     const d = obj.data;
+     const n = k => (Array.isArray(d[k]) ? d[k].length : 0);
+@@ -180,7 +180,7 @@
+   const rows = [['رقم المستند', 'النوع', 'التاريخ', 'العميل', 'الهاتف', 'الإجمالي', 'المدفوع', 'المتبقي', 'العملة']];
+   DB.docs.forEach(d => { const t = computeDoc(d); rows.push([d.number, docTypeInfo(d.docType).label, d.date, docTitle(d), d.clientPhone, t.total, t.paid, t.remaining, currentCurrency().code]); });
+   const csv = '﻿' + rows.map(r => r.map(x => `"${String(x).replace(/"/g, '""')}"`).join(',')).join('\r\n');
+-  downloadText(csv, `فواتير_حساباتي_HVAC_${todayISO()}.csv`, 'text/csv');
++  downloadText(csv, `فواتير_أرزقي_HVAC_${todayISO()}.csv`, 'text/csv');
+   showAppToast('✔️ تم تنزيل تقرير الفواتير (Excel / CSV)');
+ }
+ 
+@@ -333,7 +333,7 @@
+   if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
+   else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
+   else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
+-  else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق حساباتي HVAC، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
++  else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق أرزقي HVAC، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
+   else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
+   else if (state === 'applying') txt.textContent = 'جاري التحديث... التطبيق هيفتح تاني بالإصدار الجديد';
+ };
+diff -ruN --no-dereference HVAC/js/calc.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/calc.js
+--- HVAC/js/calc.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/calc.js	2026-11-20 23:08:29.179715606 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - calc.js
++   أرزقي HVAC - calc.js
+    الحاسبات المتخصصة: التركيب، الصيانة، الفريون، النحاس، قطع الغيار،
+    اليومية، مرجع قدرات الأجهزة، وتحويل العملات (مرجعي فقط).
+    كل حاسبة تقدر تضيف نتيجتها كبنود في فاتورة.
+diff -ruN --no-dereference HVAC/js/catalog.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/catalog.js
+--- HVAC/js/catalog.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/catalog.js	2026-11-20 23:08:29.180379024 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - catalog.js
++   أرزقي HVAC - catalog.js
+    تصنيفات أعمال التكييف والتبريد، طرق المحاسبة، أنواع الأجهزة
+    والفريون والمستندات، وتنظيف البيانات المحفوظة والمستوردة.
+    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+diff -ruN --no-dereference HVAC/js/core.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/core.js
+--- HVAC/js/core.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/core.js	2026-11-20 23:08:29.178328170 +0000
+@@ -1,6 +1,6 @@
+ /* =========================================================
+-   حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
+-   تطبيق مستقل من عائلة حساباتي
++   أرزقي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
++   تطبيق مستقل من عائلة أرزقي
+    تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
+    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+    ---------------------------------------------------------
+@@ -8,9 +8,9 @@
+    النوافذ والصفحات وزر الرجوع، والتنقل بين الأقسام.
+    ========================================================= */
+ const APP_VERSION = '1.0.2';
+-const APP_NAME = 'حساباتي HVAC';
++const APP_NAME = 'أرزقي HVAC';
+ const IS_BETA = /\/beta\//.test(location.pathname);
+-// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة
++// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات أرزقي الكهرباء أو النقاشة
+ const NS = (IS_BETA ? 'beta_' : '') + 'hesabati_hvac_';
+ const IN_APP = !!(window.HesabatiHvacApp && typeof window.HesabatiHvacApp.versionName === 'function');
+ const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Hesabaty-HAVC/releases/latest';
+@@ -132,7 +132,7 @@
+ }
+ function sendWhatsApp(phone, text) { window.open(`https://wa.me/${waPhone(phone)}?text=` + encodeURIComponent(text), '_blank'); }
+ 
+-/* ---------------- العملات (نفس نظام حساباتي) ---------------- */
++/* ---------------- العملات (نفس نظام أرزقي) ---------------- */
+ const CURRENCIES = [
+   { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
+   { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
+diff -ruN --no-dereference HVAC/js/customers.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/customers.js
+--- HVAC/js/customers.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/customers.js	2026-11-20 23:08:29.180092035 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - customers.js
++   أرزقي HVAC - customers.js
+    العملاء وحساباتهم، أجهزة كل عميل، وسجل الزيارات والتقارير الفنية.
+    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+    ========================================================= */
+diff -ruN --no-dereference HVAC/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/docs.js
+--- HVAC/js/docs.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/docs.js	2026-11-20 23:08:29.179476219 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - docs.js
++   أرزقي HVAC - docs.js
+    محرك المحاسبة: الفواتير والمقايسات وعروض الأسعار، البنود بطرق
+    الحساب المختلفة، المدفوعات (عربون ودفعات)، وربط المخزون.
+    © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+diff -ruN --no-dereference HVAC/js/modules.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/modules.js
+--- HVAC/js/modules.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/modules.js	2026-11-20 23:08:29.177914225 +0000
+@@ -1,5 +1,5 @@
+ /* =========================================================
+-   حساباتي HVAC - modules.js
++   أرزقي HVAC - modules.js
+    الرئيسية، المخزن (الخامات وقطع الغيار)، الفنيين والعمال، الحسابات
+    والمصروفات، قوائم الأسعار، عقود الصيانة، الضمان والمواعيد،
+    النوتة الفنية، وكشوفات الخامات.
+@@ -192,7 +192,7 @@
+     ics += `BEGIN:VEVENT\r\nUID:${(r.ref || 'r') + '-' + i + '-' + d}@hesabati-hvac\r\nDTSTAMP:${stamp}\r\nDTSTART;VALUE=DATE:${d}\r\nDTEND;VALUE=DATE:${next}\r\nSUMMARY:${escI(r.title)}\r\nDESCRIPTION:${escI(r.sub)}\r\nBEGIN:VALARM\r\nTRIGGER:-PT15H\r\nACTION:DISPLAY\r\nDESCRIPTION:${escI(r.title)}\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
+   });
+   ics += 'END:VCALENDAR\r\n';
+-  downloadText(ics, `مواعيد_حساباتي_HVAC_${todayISO()}.ics`, 'text/calendar');
++  downloadText(ics, `مواعيد_أرزقي_HVAC_${todayISO()}.ics`, 'text/calendar');
+   showAppToast(`✔️ تم تجهيز ${list.length} موعد — افتح الملف علشان يتضاف للتقويم`);
+ }
+ function enableNotifications() {
+@@ -211,7 +211,7 @@
+     if (!due.length) return;
+     settings.lastNotify = todayISO(); saveSettings();
+     const body = due.slice(0, 4).map(r => '• ' + r.title).join('\n');
+-    const title = `حساباتي HVAC: ${due.length} موعد النهارده`;
++    const title = `أرزقي HVAC: ${due.length} موعد النهارده`;
+     if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(reg => reg.showNotification(title, { body, icon: './icons/icon-192.png', lang: 'ar', dir: 'rtl', tag: 'hvac-due' })).catch(() => {});
+     else new Notification(title, { body });
+   } catch (e) {}
+@@ -967,7 +967,7 @@
+ }
+ 
+ /* =========================================================
+-   كشوفات الخامات (نفس نظام حساباتي الأصلي)
++   كشوفات الخامات (نفس نظام أرزقي الأصلي)
+    ========================================================= */
+ const MAT_PRESETS = ['ماسورة نحاس', 'عزل حراري', 'كابل كهرباء', 'خرطوم صرف', 'حوامل', 'شريط عزل', 'وصلات', 'أكواع', 'فريون', 'كابستور', 'مسامير وخوابير', 'سيليكون', 'جلبة حائط'];
+ const MAT_UNITS = ['قطعة', 'متر', 'لفة', 'كجم', 'علبة', 'طقم'];
+diff -ruN --no-dereference HVAC/js/print.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/print.js
+--- HVAC/js/print.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/print.js	2026-11-20 23:13:29.331628880 +0000
+@@ -1,6 +1,6 @@
+ /* =========================================================
+-   حساباتي HVAC - print.js
+-   نفس نظام الطباعة وPDF في حساباتي: ورقة A4 حقيقية قابلة للتعديل
++   أرزقي HVAC - print.js
++   نفس نظام الطباعة وPDF في أرزقي: ورقة A4 حقيقية قابلة للتعديل
+    قبل الطباعة، بهوامش مطابقة للمعاينة، ومتعددة الصفحات.
+    المستندات: فواتير التركيب/الصيانة/الإصلاح/قطع الغيار/الختامية،
+    المقايسة، عرض السعر، إيصال الدفعة، كشف حساب العميل، عقد الصيانة،
+@@ -100,7 +100,7 @@
+     <div class="inv-stripe"></div>`;
+ }
+ function printFooterHTML() {
+-  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي HVAC</b></span></footer>`;
++  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي HVAC</b></span></footer>`;
+ }
+ const signHTML = (a = 'توقيع الفني / القائم بالأعمال', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
+ function notesHTML(title, items) {
+@@ -163,6 +163,24 @@
+     d.lines.some(l => l.kind === 'refrigerant') ? 'كمية الفريون حسب بيانات الشركة المصنعة ولوحة بيانات الجهاز.' : '',
+     business.terms ? esc(business.terms) : ''
+   ]);
++  // أرزقي: الفاتورة الموحدة (نفس الأرقام اللي القسم حسبها)
++  if (window.ArzaqiInvoice) {
++    const cust = d.customerId ? getCustomer(d.customerId) : null;
++    const lines = ArzaqiInvoice.kindLines(t.byKind, LINE_KINDS, KIND_ORDER, { materials: ['part', 'material', 'refrigerant', 'equipment'], workers: ['labor'] },
++      { materialsLabel: 'الخامات والأجهزة (على العميل)', workersLabel: 'أجور الفنيين (على العميل)' });
++    if (t.add) lines.push(['إضافات' + (d.addNote ? ' (' + esc(d.addNote) + ')' : ''), t.add, '+']);
++    if (t.discount) lines.push(['الخصم', t.discount, '-']);
++    const warranty = (d.warrantyMonths ? 'ضمان ' + fmtN(d.warrantyMonths) + ' شهر حتى ' + fmtDate(addMonthsISO(d.date, d.warrantyMonths)) : '')
++      + (d.warrantyTerms ? (d.warrantyMonths ? ' — ' : '') + d.warrantyTerms : '');
++    return ArzaqiInvoice.render({
++      section: 'hvac', docKey: d.id, docLabel: info.label, number: d.number, date: fmtDate(d.date), billable: t.billable,
++      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, logo: business.showLogo ? business.logoData : '' },
++      client: { name: d.clientName, phone: d.clientPhone, address: d.clientAddress, note: cust ? cust.note : '' },
++      chips: chips.filter(c => c.indexOf('الضمان:') < 0), bodyHTML: tables, notesHTML: notes, money,
++      totals: { lines, total: t.total, paid: t.paid, paidLabel: 'الواصل من العميل' + (t.payments.length ? ' (' + t.payments.length + ' دفعة)' : '') },
++      warranty, signLabel: 'توقيع الفني', netLabel: 'إجمالي ' + info.label
++    });
++  }
+   const kindRows = KIND_ORDER.filter(k => t.byKind[k]).map(k => `<tr><td ${CE}>${esc(LINE_KINDS[k])}</td><td ${CE}>${money(t.byKind[k])}</td></tr>`).join('');
+   return `
+     ${printHeaderHTML(info.label, d.number, fmtDate(d.date), `عدد البنود: <b>${d.lines.length}</b>`)}
+diff -ruN --no-dereference HVAC/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/HVAC/manifest.json
+--- HVAC/manifest.json	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/manifest.json	2026-11-20 23:08:29.176578887 +0000
+@@ -1,7 +1,7 @@
+ {
+   "id": "/Hesabaty-HAVC/",
+-  "name": "حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد",
+-  "short_name": "حساباتي HVAC",
++  "name": "أرزقي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد",
++  "short_name": "أرزقي HVAC",
+   "description": "تطبيق متكامل لإدارة ومحاسبة أعمال التكييف والتبريد والصيانة والتركيب والإصلاح. تصميم وتطوير: أحمد حسن عبدالله.",
+   "lang": "ar",
+   "dir": "rtl",
+diff -ruN --no-dereference HVAC/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/HVAC/privacy.html
+--- HVAC/privacy.html	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/privacy.html	2026-11-20 23:08:29.177004145 +0000
+@@ -4,7 +4,7 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="theme-color" content="#0b1b33">
+-  <title>سياسة الخصوصية - حساباتي HVAC</title>
++  <title>سياسة الخصوصية - أرزقي HVAC</title>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+   <style>
+     :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+@@ -28,7 +28,7 @@
+ <body>
+   <header>
+     <h1>سياسة الخصوصية</h1>
+-    <p>تطبيق حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد · آخر تحديث: 14 نوفمبر 2026</p>
++    <p>تطبيق أرزقي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد · آخر تحديث: 14 نوفمبر 2026</p>
+   </header>
+   <main>
+     <section>
+@@ -58,6 +58,6 @@
+         فيسبوك: <a href="https://www.facebook.com/share/1CTcsmiTif/">صفحة المطور</a></p>
+     </section>
+   </main>
+-  <footer>© 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة. · بيانات حساباتي HVAC منفصلة تماماً عن تطبيقات حساباتي الأخرى. · <a href="./">العودة للتطبيق</a></footer>
++  <footer>© 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة. · بيانات أرزقي HVAC منفصلة تماماً عن تطبيقات أرزقي الأخرى. · <a href="./">العودة للتطبيق</a></footer>
+ </body>
+ </html>
+diff -ruN --no-dereference HVAC/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/service-worker.js
+--- HVAC/service-worker.js	2026-11-15 00:15:45.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/service-worker.js	2026-11-20 23:08:29.176762651 +0000
+@@ -1,6 +1,6 @@
+ /*
+- * حساباتي HVAC - Service Worker
+- * ذاكرة مستقلة تماماً بأسماء hesabati-hvac-* حتى لا تتداخل مع حساباتي الكهرباء أو النقاشة
++ * أرزقي HVAC - Service Worker
++ * ذاكرة مستقلة تماماً بأسماء hesabati-hvac-* حتى لا تتداخل مع أرزقي الكهرباء أو النقاشة
+  * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *

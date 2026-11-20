@@ -739,6 +739,7 @@
 
   </style>
   <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
+  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
 </head>
 <body>
 
@@ -5156,6 +5157,28 @@
     } else {
       noteItems = termsList(inv);
       if (!noteItems.length) noteItems = contract ? ['الحساب بنظام المقاولة الإجمالية حسب الاتفاق.'] : ['الحساب حسب المقاسات الفعلية بعد خصم الفتحات.', 'إجمالي كل بند = الكمية × سعر الوحدة.'];
+    }
+    // أرزقي: الفاتورة الموحدة (نفس أرقام القسم)
+    if (window.ArzaqiInvoice) {
+      const tmp = document.createElement('div'); tmp.innerHTML = html;
+      const h = ArzaqiInvoice.harvest(tmp);
+      const billing = !!D.billing;
+      const lines = [[contract ? 'قيمة المقاولة' : (t.totalArea ? `أعمال النقاشة والدهانات (${fmtQ(t.totalArea)} م²)` : 'أعمال النقاشة والدهانات'), t.baseTotal]];
+      if (t.additionsTotal) lines.push(['أعمال إضافية', t.additionsTotal, '+']);
+      if (billing && t.materialsDue) lines.push(['الخامات (على العميل)', t.materialsDue, '+']);
+      if (t.discount) lines.push(['الخصم', t.discount, '-']);
+      const cust = customers.find(c => c.name === inv.clientName && (!inv.clientPhone || !c.phone || c.phone === inv.clientPhone));
+      const chips = h.chips.slice();
+      if (inv.projectName) chips.unshift(`<span class="inv-chip navy" ${CE}>المشروع: <b>${esc(inv.projectName)}</b></span>`);
+      return ArzaqiInvoice.render({
+        section: 'painting', docKey: inv.id + ':' + type, docLabel: D.tag, number: docNo(D.prefix, inv.serial), date: inv.date, billable: billing,
+        business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
+        client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
+        chips, bodyHTML: h.bodyHTML, money,
+        notesHTML: notesBoxHTML(type === 'quote' ? 'شروط العرض' : type === 'estimate' ? 'طريقة الحساب' : 'ملاحظات وشروط', noteItems),
+        totals: { lines, total: billing ? r4(t.netContract + t.materialsDue) : t.netContract, paid: t.paid },
+        signLabel: 'توقيع النقاش / المقاول', netLabel: 'إجمالي ' + D.tag
+      });
     }
     const settled = DOC_TYPES[type].billing && round2(t.netRemaining) <= 0 && t.grandTotal > 0;
     html += `<div class="inv-bottom"><div class="inv-side">${settled ? `<div style="text-align:center"><span class="paid-stamp" ${CE}>تم السداد بالكامل ✓</span></div>` : ''}${notesBoxHTML(type === 'quote' ? 'شروط العرض' : type === 'estimate' ? 'طريقة الحساب' : 'ملاحظات وشروط', noteItems)}${signHTML('توقيع القائم بالأعمال', type === 'quote' ? 'موافقة العميل' : 'اعتماد العميل')}</div>${totalsBoxHTML(inv, t, type)}</div>`;

@@ -152,6 +152,28 @@ function docHTML(s) {
     if (d.materials && d.materials.length) body += `<div class="inv-sec"><span class="n">${multi ? secs.length + 1 : 2}</span>حصر الخامات المطلوبة</div><table class="p-table"><thead><tr><th>#</th><th>الخامة</th><th>الكمية</th><th>الوحدة</th></tr></thead><tbody>
       ${d.materials.map((m, i) => tr([`<td class="idx">${i + 1}</td>`, `<td class="room-col">${esc(m.name)}${m.detail ? `<span class="sub-note">${esc(m.detail)}</span>` : ''}</td>`, `<td>${fq(m.qty)}</td>`, `<td>${esc(m.unit)}</td>`])).join('')}</tbody></table>`;
   }
+  // أرزقي: الفاتورة الموحدة لمستندات العميل (الإيصالات والكشوف والتقارير بتفضل بشكلها)
+  if (window.ArzaqiInvoice && ['labor_inv', 'supply_inv', 'si_inv', 'quote', 'boq_board', 'boq_plaster', 'boq_decor', 'progress'].includes(s.type)) {
+    const t0 = d.totals || {};
+    const billable = ['labor_inv', 'supply_inv', 'si_inv'].includes(s.type) && !d.noPaid;
+    const lbl = { labor_inv: 'المصنعية', supply_inv: 'الخامات (على العميل)', si_inv: 'التوريد والتركيب', progress: 'قيمة الأعمال المنفذة' }[s.type] || 'إجمالي البنود';
+    const lines = [[lbl, t0.subtotal]];
+    if (t0.additions) lines.push(['إضافات', t0.additions, '+']);
+    if (t0.discount) lines.push(['الخصم', t0.discount, '-']);
+    const cust = (DB().customers || []).find(x => x.name === c.name && (!c.phone || !x.phone || x.phone === c.phone));
+    const notesArr = [s.notes, st.docFooter].filter(Boolean);
+    return ArzaqiInvoice.render({
+      section: 'gypsum', docKey: s.id || docNo(s), docLabel: T.name, number: docNo(s), date: fmtDate(s.date), billable,
+      business: { name: st.bizName || st.ownerName, trade: st.bizName ? st.ownerName : '', phone: [st.phone, st.phone2].filter(Boolean).join(' / '), logo: st.showLogo ? st.logo : '' },
+      client: { name: c.name, phone: c.phone, address: c.address, note: cust ? cust.note : '' },
+      chips: [c.project ? `<span class="inv-chip navy">المشروع: <b>${esc(c.project)}</b></span>` : '', d.validity ? `<span class="inv-chip">صالح لمدة: <b>${d.validity} يوم</b></span>` : ''].filter(Boolean),
+      bodyHTML: body,
+      notesHTML: notesArr.length ? `<div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notesArr.map(n => esc(n)).join('<br>')}</div></div>` : '',
+      money: v => `${fmt(v)} ${C}`,
+      totals: { lines, total: t0.final, paid: t0.paid },
+      signLabel: 'توقيع المنفذ', netLabel: 'إجمالي ' + T.name
+    });
+  }
   const t = d.totals || {};
   let totals = '';
   if (d.columns === 'report') totals = `<div class="inv-totals"><div class="inv-net"><span>صافي الربح</span><strong>${fmt(t.profit)} ${esc(C)}</strong></div></div>`;

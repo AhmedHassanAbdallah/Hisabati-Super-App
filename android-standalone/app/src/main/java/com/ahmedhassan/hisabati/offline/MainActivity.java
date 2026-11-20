@@ -1,9 +1,9 @@
 /*
- * حساباتي أوفلاين — تطبيق أندرويد مستقل بالكامل
+ * أرزقي — لحسابات المصنعية: تطبيق أندرويد مستقل بالكامل
  * تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  *
- * كل ملفات حساباتي (الواجهة الرئيسية + الأقسام السبعة) جوه التطبيق وبتشتغل من غير إنترنت.
+ * كل ملفات أرزقي (الواجهة الرئيسية + الأقسام السبعة) جوه التطبيق وبتشتغل من غير إنترنت.
  * الأقسام نفسها ما اتعدلتش: التطبيق بيقدّم لكل قسم نفس "الجسر" اللي تطبيقه الأصلي كان بيقدّمه
  * (HesabatyApp / HesabatiPlumbingApp / HesabatiHvacApp / HFloorApp / PlasterApp) بنفس الوظائف:
  *   الطباعة وحفظ PDF، حفظ النسخ الاحتياطية في التنزيلات، فتح واتساب وفيسبوك، رقم الإصدار.
@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
     private static final String BASE = "https://" + APP_HOST + "/";
     private static final String HOME_URL = BASE + "Main-App/index.html";
     private static final String RELEASES_URL = "https://github.com/AhmedHassanAbdallah/Hisabati-Super-App/releases";
-    private static final int NAVY = Color.parseColor("#0b1b33");
+    private static final int NAVY = Color.parseColor("#011a51");
     private static final int REQ_FILE_CHOOSER = 1001;
     private static final int REQ_STORAGE = 1002;
     private static final int REQ_AUTH = 1003;
@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
         sectionBar.setGravity(Gravity.CENTER_VERTICAL);
         sectionBar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         sectionBar.setPadding(dp(10), 0, dp(10), 0);
-        sectionBar.setBackgroundColor(Color.parseColor("#071226"));
+        sectionBar.setBackgroundColor(Color.parseColor("#010f33"));
         sectionBar.setVisibility(View.GONE);
 
         TextView home = new TextView(this);
@@ -530,11 +530,11 @@ public class MainActivity extends Activity {
             handler.post(() -> doSaveFile(name, mime, text));
         }
 
-        /** تحديثات الأقسام بتوصل مع تحديث تطبيق حساباتي نفسه */
+        /** تحديثات الأقسام بتوصل مع تحديث تطبيق أرزقي نفسه */
         @JavascriptInterface
         public void downloadUpdate(final String url, final String version) {
             handler.post(() -> {
-                toast("التحديثات بتوصل مع تحديث تطبيق حساباتي");
+                toast("التحديثات بتوصل مع تحديث تطبيق أرزقي");
                 js("window.onAppUpdateProgress && window.onAppUpdateProgress(0,'failed')");
                 openExternalUri(Uri.parse(RELEASES_URL));
             });
@@ -570,7 +570,7 @@ public class MainActivity extends Activity {
     private void doPrint(String title) {
         try {
             PrintManager pm = (PrintManager) getSystemService(Context.PRINT_SERVICE);
-            String job = (title == null || title.trim().isEmpty()) ? "حساباتي" : title.trim();
+            String job = (title == null || title.trim().isEmpty()) ? "أرزقي" : title.trim();
             PrintDocumentAdapter adapter = webView.createPrintDocumentAdapter(job);
             PrintAttributes attrs = new PrintAttributes.Builder()
                     .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
@@ -584,7 +584,7 @@ public class MainActivity extends Activity {
 
     /* ---------- حفظ النسخة الاحتياطية في التنزيلات ---------- */
     private void doSaveFile(String name, String mime, String text) {
-        String safeName = name == null ? "hisabati.json" : name.replaceAll("[\\\\/:*?\"<>|]", "_");
+        String safeName = name == null ? "arzaqi.json" : name.replaceAll("[\\\\/:*?\"<>|]", "_");
         byte[] bytes = (text == null ? "" : text).getBytes(StandardCharsets.UTF_8);
         try {
             if (Build.VERSION.SDK_INT >= 29) {
@@ -592,14 +592,14 @@ public class MainActivity extends Activity {
                 ContentValues v = new ContentValues();
                 v.put(MediaStore.MediaColumns.DISPLAY_NAME, safeName);
                 v.put(MediaStore.MediaColumns.MIME_TYPE, mime == null ? "application/json" : mime);
-                v.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Hisabati");
+                v.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Arzaqi");
                 Uri uri = cr.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, v);
                 if (uri == null) throw new IOException("insert failed");
                 try (OutputStream out = cr.openOutputStream(uri)) {
                     if (out == null) throw new IOException("stream failed");
                     out.write(bytes);
                 }
-                toast("✔ تم الحفظ في التنزيلات ← Hisabati\n" + safeName);
+                toast("✔ تم الحفظ في التنزيلات ← Arzaqi\n" + safeName);
                 return;
             }
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -607,10 +607,10 @@ public class MainActivity extends Activity {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE);
                 return;
             }
-            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Hisabati");
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Arzaqi");
             if (!dir.exists() && !dir.mkdirs()) throw new IOException("mkdir failed");
             try (FileOutputStream out = new FileOutputStream(new File(dir, safeName))) { out.write(bytes); }
-            toast("✔ تم الحفظ في التنزيلات ← Hisabati\n" + safeName);
+            toast("✔ تم الحفظ في التنزيلات ← Arzaqi\n" + safeName);
         } catch (Exception e) {
             try {
                 File f = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), safeName);

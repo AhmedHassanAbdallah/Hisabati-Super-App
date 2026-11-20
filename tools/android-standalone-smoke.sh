@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# اختبار تشغيل "حساباتي أوفلاين" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام السبعة
+# اختبار تشغيل "أرزقي" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام السبعة
 # من جوه التطبيق، ويتأكد إن كل صفحة اتحملت وجسرها موجود ومفيش أخطاء JavaScript ولا انهيار.
 set -uo pipefail
-PKG=com.ahmedhassan.hisabati.offline
+PKG=com.ahmedhassan.arzaqi
 ACT=$PKG/.MainActivity
 APK="$(ls apk/*.apk | head -1)"
 mkdir -p shots

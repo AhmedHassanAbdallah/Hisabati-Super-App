@@ -163,6 +163,24 @@ function buildDocHTML(d) {
     d.lines.some(l => l.kind === 'refrigerant') ? 'كمية الفريون حسب بيانات الشركة المصنعة ولوحة بيانات الجهاز.' : '',
     business.terms ? esc(business.terms) : ''
   ]);
+  // أرزقي: الفاتورة الموحدة (نفس الأرقام اللي القسم حسبها)
+  if (window.ArzaqiInvoice) {
+    const cust = d.customerId ? getCustomer(d.customerId) : null;
+    const lines = ArzaqiInvoice.kindLines(t.byKind, LINE_KINDS, KIND_ORDER, { materials: ['part', 'material', 'refrigerant', 'equipment'], workers: ['labor'] },
+      { materialsLabel: 'الخامات والأجهزة (على العميل)', workersLabel: 'أجور الفنيين (على العميل)' });
+    if (t.add) lines.push(['إضافات' + (d.addNote ? ' (' + esc(d.addNote) + ')' : ''), t.add, '+']);
+    if (t.discount) lines.push(['الخصم', t.discount, '-']);
+    const warranty = (d.warrantyMonths ? 'ضمان ' + fmtN(d.warrantyMonths) + ' شهر حتى ' + fmtDate(addMonthsISO(d.date, d.warrantyMonths)) : '')
+      + (d.warrantyTerms ? (d.warrantyMonths ? ' — ' : '') + d.warrantyTerms : '');
+    return ArzaqiInvoice.render({
+      section: 'hvac', docKey: d.id, docLabel: info.label, number: d.number, date: fmtDate(d.date), billable: t.billable,
+      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, logo: business.showLogo ? business.logoData : '' },
+      client: { name: d.clientName, phone: d.clientPhone, address: d.clientAddress, note: cust ? cust.note : '' },
+      chips: chips.filter(c => c.indexOf('الضمان:') < 0), bodyHTML: tables, notesHTML: notes, money,
+      totals: { lines, total: t.total, paid: t.paid, paidLabel: 'الواصل من العميل' + (t.payments.length ? ' (' + t.payments.length + ' دفعة)' : '') },
+      warranty, signLabel: 'توقيع الفني', netLabel: 'إجمالي ' + info.label
+    });
+  }
   const kindRows = KIND_ORDER.filter(k => t.byKind[k]).map(k => `<tr><td ${CE}>${esc(LINE_KINDS[k])}</td><td ${CE}>${money(t.byKind[k])}</td></tr>`).join('');
   return `
     ${printHeaderHTML(info.label, d.number, fmtDate(d.date), `عدد البنود: <b>${d.lines.length}</b>`)}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">حساباتي</string>
+    <string name="app_name">أرزقي</string>
     <string name="launch_url" translatable="false">https://ahmedhassanabdallah.github.io/Hisabati-Super-App/Main-App/</string>
     <string name="asset_statements" translatable="false">[{ \"relation\": [\"delegate_permission/common.handle_all_urls\"], \"target\": { \"namespace\": \"web\", \"site\": \"https://ahmedhassanabdallah.github.io\" } }]</string>
 </resources>

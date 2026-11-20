@@ -1,4 +1,4 @@
-# بناء "حساباتي أوفلاين" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
+# بناء "أرزقي — لحسابات المصنعية" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
 # بيتبني من نفس ملفات الموقع (Main-App / Shared-Assets / Trade-Modules) من غير أي تعديل عليها،
 # وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام السبعة) قبل النشر.
 # التوقيع: نفس مفتاح التطبيق (android/keystore.enc + HISABATI_KEY_PASSWORD).
@@ -88,21 +88,21 @@ jobs:
       - name: Collect
         run: |
           mkdir -p out
-          cp android-standalone/app/build/outputs/apk/release/*.apk out/hisabati-offline.apk
-          cp android-standalone/app/build/outputs/bundle/release/*.aab out/hisabati-offline.aab
+          cp android-standalone/app/build/outputs/apk/release/*.apk out/arzaqi.apk
+          cp android-standalone/app/build/outputs/bundle/release/*.aab out/arzaqi.aab
           ls -la out
 
       - uses: actions/upload-artifact@v4
         with:
-          name: hisabati-offline
+          name: arzaqi
           path: out/
 
       - name: Summary
         run: |
           {
-            echo "## حساباتي أوفلاين ${{ steps.ver.outputs.version }}"
+            echo "## أرزقي ${{ steps.ver.outputs.version }}"
             echo ""
-            echo "- Package: \`com.ahmedhassan.hisabati.offline\`"
+            echo "- Package: \`com.ahmedhassan.arzaqi\`"
             echo "- SHA-1 (لعميل Android في Google Cloud): \`${{ steps.key.outputs.sha1 }}\`"
             echo "- SHA-256: \`${{ steps.key.outputs.sha256 }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
@@ -115,7 +115,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: hisabati-offline
+          name: arzaqi
           path: apk
       - name: Keep the APK only
         run: rm -f apk/*.aab && ls -la apk
@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: hisabati-offline
+          name: arzaqi
           path: out
       - name: Publish release
         env:
@@ -157,20 +157,20 @@ jobs:
           VER: ${{ needs.build.outputs.version }}
           SHA1: ${{ needs.build.outputs.sha1 }}
         run: |
-          TAG="offline-v$VER"
+          TAG="arzaqi-v$VER"
           {
-            echo "**حساباتي أوفلاين** — كل الأقسام جوه التطبيق، بيشتغل من غير إنترنت ومن غير Chrome."
+            echo "**أرزقي — لحسابات المصنعية** — كل الأقسام جوه التطبيق، بيشتغل من غير إنترنت ومن غير Chrome."
             echo ""
             python3 -c "import json;d=json.load(open('version.json'));print('\n'.join('- '+n for n in d['notes']))"
             echo ""
-            echo "- **hisabati-offline.apk**: للتثبيت المباشر على الموبايل."
-            echo "- **hisabati-offline.aab**: للرفع على جوجل بلاي."
+            echo "- **arzaqi.apk**: للتثبيت المباشر على الموبايل."
+            echo "- **arzaqi.aab**: للرفع على جوجل بلاي."
             echo ""
-            echo "Package: \`com.ahmedhassan.hisabati.offline\` · SHA-1: \`$SHA1\`"
+            echo "Package: \`com.ahmedhassan.arzaqi\` · SHA-1: \`$SHA1\`"
           } > notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" out/hisabati-offline.apk out/hisabati-offline.aab --clobber
+            gh release upload "$TAG" out/arzaqi.apk out/arzaqi.aab --clobber
             gh release edit "$TAG" --notes-file notes.md --latest=false
           else
-            gh release create "$TAG" out/hisabati-offline.apk out/hisabati-offline.aab --title "حساباتي أوفلاين $VER" --notes-file notes.md --latest=false
+            gh release create "$TAG" out/arzaqi.apk out/arzaqi.aab --title "أرزقي $VER" --notes-file notes.md --latest=false
           fi

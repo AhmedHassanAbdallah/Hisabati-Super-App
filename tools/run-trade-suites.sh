@@ -13,8 +13,13 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TMP="$(mktemp -d)"; LOGS="${LOGS:-$TMP/logs}"; mkdir -p "$LOGS"
 PORT="${PORT:-8802}"
 declare -A MAP=([Ezaza]=Electrical [Hesabaty-plumbing]=Plumbing [Hesabaty-HAVC]=HVAC
-                [Hesabaty-painting]=Painting [Hesabaty-Flooring]=Flooring [Hesabaty-Gebsum]=Gypsum)
+                [Hesabaty-painting]=Painting [Hesabaty-Flooring]=Flooring [Hesabaty-Gebsum]=Gypsum
+                [Hesabaty-plaster]=Plastering)
 for repo in "${!MAP[@]}"; do mkdir -p "$TMP/$repo"; cp -a "$ROOT/Trade-Modules/${MAP[$repo]}/." "$TMP/$repo/"; done
+# ملفات أرزقي المشتركة (الألوان والفاتورة الموحدة) بتتحمّل من ../../Shared-Assets —
+# بنوصّلها لكل خادم اختبار علشان الاختبارات تجرب الفاتورة الموحدة نفسها
+cp -a "$ROOT/Shared-Assets" "$TMP/Shared-Assets"
+for repo in "${!MAP[@]}"; do ln -s "$TMP/Shared-Assets" "$TMP/$repo/Shared-Assets"; done
 
 ( cd "$TMP" && exec python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 ) & SRV=$!
 trap 'kill $SRV 2>/dev/null; rm -rf "$TMP"' EXIT
@@ -37,5 +42,7 @@ run hvac-layout      Hesabaty-HAVC     node tests/layout-audit.js
 run plumbing-all     Hesabaty-plumbing node tests/run-tests.js
 run plumbing-layout  Hesabaty-plumbing node tests/layout-audit.js
 run painting-calcs   Hesabaty-painting node tools/test-calcs.js
+run plaster-unit     Hesabaty-plaster  node --test tests/engine.test.js
+run plaster-e2e      Hesabaty-plaster  node tests/e2e.js
 [ -n "${KEEP_LOGS:-}" ] && { cp -r "$LOGS" "$KEEP_LOGS"; echo "logs copied to $KEEP_LOGS"; }
 exit $fail

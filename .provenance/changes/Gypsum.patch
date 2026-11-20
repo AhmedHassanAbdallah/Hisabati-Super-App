@@ -1,0 +1,337 @@
+Binary files Gypsum/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-192.png differ
+Binary files Gypsum/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-512.png differ
+Binary files Gypsum/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-maskable-192.png differ
+Binary files Gypsum/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-maskable-512.png differ
+diff -ruN --no-dereference Gypsum/index.html /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/index.html
+--- Gypsum/index.html	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/index.html	2026-11-20 23:11:30.898840066 +0000
+@@ -3,14 +3,14 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+-  <meta name="theme-color" content="#0b1b33">
++  <meta name="theme-color" content="#011a51">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+   <meta name="author" content="أحمد حسن عبدالله">
+   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+-  <meta name="description" content="حساباتي للجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
+-  <title>حساباتي للجبس والديكورات - HESABATI GYPSUM</title>
++  <meta name="description" content="أرزقي للجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
++  <title>أرزقي للجبس والديكورات - HESABATI GYPSUM</title>
+   <link rel="manifest" href="./manifest.json">
+   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+@@ -26,10 +26,12 @@
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="./css/app.css">
+   <!--
+-    حساباتي للجبس والديكورات — HESABATI GYPSUM
++    أرزقي للجبس والديكورات — HESABATI GYPSUM
+     تصميم وتطوير: أحمد حسن عبدالله
+     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+   -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
++  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+ </head>
+ <body>
+ <div id="app">
+@@ -37,7 +39,7 @@
+     <img class="brand-ic" src="./icons/icon-192.png" alt="">
+     <div class="titles">
+       <div class="sub" id="greetLine">أهلاً بيك</div>
+-      <h1 id="tabTitle">حساباتي للجبس</h1>
++      <h1 id="tabTitle">أرزقي للجبس</h1>
+     </div>
+     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
+   </header>
+@@ -125,14 +127,14 @@
+ 
+       <div class="dev-card">
+         <div class="dev-name">أحمد حسن عبدالله</div>
+-        <div class="dev-role">مطوّر ومصمّم تطبيقات حساباتي</div>
++        <div class="dev-role">مطوّر ومصمّم تطبيقات أرزقي</div>
+         <div class="dev-links">
+           <a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener"><i data-icon="chat"></i> واتساب</a>
+           <a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener"><i data-icon="facebook"></i> فيسبوك</a>
+         </div>
+       </div>
+       <div class="copyright">
+-        <b>حساباتي للجبس والديكورات</b> — HESABATI GYPSUM · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي للجبس والديكورات</b> — HESABATI GYPSUM · الإصدار <span id="aboutVersion"></span><br>
+         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
+         <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
+       </div>
+diff -ruN --no-dereference Gypsum/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/app.js
+--- Gypsum/js/app.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/app.js	2026-11-20 23:08:29.193504389 +0000
+@@ -1,10 +1,10 @@
+ /*
+- * حساباتي للجبس والديكورات — تشغيل التطبيق: التنقل، الرئيسية، الإعدادات، النسخ الاحتياطي، التحديثات
++ * أرزقي للجبس والديكورات — تشغيل التطبيق: التنقل، الرئيسية، الإعدادات، النسخ الاحتياطي، التحديثات
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ 'use strict';
+ const APP_VERSION = '1.0.0';
+-const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
++const VIEW_TITLES = { home: 'أرزقي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
+ let currentView = 'home';
+ 
+ /* ---------------- التنقل ---------------- */
+@@ -13,7 +13,7 @@
+   currentView = v;
+   document.querySelectorAll('.view').forEach(el => el.classList.toggle('active', el.id === 'view-' + v));
+   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.id === 'navBtn-' + v));
+-  $('tabTitle').textContent = VIEW_TITLES[v] || 'حساباتي للجبس';
++  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي للجبس';
+   renderView(v);
+   window.scrollTo(0, 0);
+ }
+diff -ruN --no-dereference Gypsum/js/data/catalog.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/data/catalog.js
+--- Gypsum/js/data/catalog.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/data/catalog.js	2026-11-20 23:08:29.195980752 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — البيانات الثابتة: العملات، الوحدات، التصنيفات، الخامات المبدئية
++ * أرزقي للجبس والديكورات — البيانات الثابتة: العملات، الوحدات، التصنيفات، الخامات المبدئية
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  * ملاحظة: لا توجد أسعار ثابتة — كل الأسعار يدخلها المستخدم.
+  */
+diff -ruN --no-dereference Gypsum/js/engine/board.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/board.js
+--- Gypsum/js/engine/board.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/board.js	2026-11-20 23:08:29.195751743 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — محرك حسابات الجبسون بورد
++ * أرزقي للجبس والديكورات — محرك حسابات الجبسون بورد
+  * أسقف معلقة / قواطيع / بيت نور / تكسية حوائط / تكسية أعمدة وكمرات
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+diff -ruN --no-dereference Gypsum/js/engine/core.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/core.js
+--- Gypsum/js/engine/core.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/core.js	2026-11-20 23:08:29.195000719 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — HESABATI GYPSUM
++ * أرزقي للجبس والديكورات — HESABATI GYPSUM
+  * محرك الحسابات: أدوات مشتركة (بدون أي اعتماد على الواجهة)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+diff -ruN --no-dereference Gypsum/js/engine/decor.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/decor.js
+--- Gypsum/js/engine/decor.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/decor.js	2026-11-20 23:08:29.195526229 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — محرك الكرانيش والبانوهات والروزتات والزخارف
++ * أرزقي للجبس والديكورات — محرك الكرانيش والبانوهات والروزتات والزخارف
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * الكرانيش والبراويز تُحسب بخطة قص حقيقية (أقل عدد أعواد)، ثم تُطبَّق نسبة
+diff -ruN --no-dereference Gypsum/js/engine/finance.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/finance.js
+--- Gypsum/js/engine/finance.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/finance.js	2026-11-20 23:08:29.195191988 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — المحرك المالي
++ * أرزقي للجبس والديكورات — المحرك المالي
+  * طرق المحاسبة / نوع الاتفاق / إجماليات المشروع / الأرباح / بيانات المستندات
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+diff -ruN --no-dereference Gypsum/js/engine/plaster.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/plaster.js
+--- Gypsum/js/engine/plaster.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/plaster.js	2026-11-20 23:08:29.195359505 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — محرك حسابات الجبس البلدي واللياسة الجبسية
++ * أرزقي للجبس والديكورات — محرك حسابات الجبس البلدي واللياسة الجبسية
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * الكمية (كجم) = المساحة × السمك (مم) × عدد الطبقات × معدل الاستهلاك (كجم/م²/مم) × (1 + الهالك)
+diff -ruN --no-dereference Gypsum/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/store.js
+--- Gypsum/js/store.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/store.js	2026-11-20 23:08:29.193294385 +0000
+@@ -1,6 +1,6 @@
+ /*
+- * حساباتي للجبس والديكورات — التخزين المحلي (Offline First)
+- * كل البيانات محفوظة على الجهاز فقط، بمفاتيح مستقلة تماماً عن تطبيق حساباتي للكهرباء.
++ * أرزقي للجبس والديكورات — التخزين المحلي (Offline First)
++ * كل البيانات محفوظة على الجهاز فقط، بمفاتيح مستقلة تماماً عن تطبيق أرزقي للكهرباء.
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ (function (root) {
+@@ -81,7 +81,7 @@
+   function exportData() { return JSON.stringify(Object.assign({ app: 'hesabati-gypsum', exported: new Date().toISOString() }, db), null, 1); }
+   function importData(text, mode) {
+     const raw = JSON.parse(text);
+-    if (!raw || (raw.app && raw.app !== 'hesabati-gypsum')) throw new Error('الملف مش نسخة من حساباتي للجبس');
++    if (!raw || (raw.app && raw.app !== 'hesabati-gypsum')) throw new Error('الملف مش نسخة من أرزقي للجبس');
+     const inc = normalize(raw);
+     if (mode === 'merge') {
+       LISTS.forEach(k => {
+diff -ruN --no-dereference Gypsum/js/ui/base.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/base.js
+--- Gypsum/js/ui/base.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/base.js	2026-11-20 23:08:29.193728372 +0000
+@@ -1,12 +1,12 @@
+ /*
+- * حساباتي للجبس والديكورات — أدوات الواجهة المشتركة
++ * أرزقي للجبس والديكورات — أدوات الواجهة المشتركة
+  * أيقونات، تنسيق الأرقام والعملة، النوافذ المنبثقة، الرسائل، بناء النماذج وقراءتها
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ 'use strict';
+ const HGc = HG.core, HGf = HG.finance;
+ const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
+-let printJobName = 'حساباتي للجبس';
++let printJobName = 'أرزقي للجبس';
+ if (IN_APP) {
+   window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
+   window.print = function () { try { window.HesabatyApp.print(printJobName); } catch (e) {} };
+diff -ruN --no-dereference Gypsum/js/ui/calc.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/calc.js
+--- Gypsum/js/ui/calc.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/calc.js	2026-11-20 23:08:29.194284830 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — واجهة الحاسبات
++ * أرزقي للجبس والديكورات — واجهة الحاسبات
+  * كل حاسبة: إدخال → نتيجة فورية (كميات + خامات) → تسعير حسب نوع الاتفاق → إضافة لمشروع
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+diff -ruN --no-dereference Gypsum/js/ui/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/docs.js
+--- Gypsum/js/ui/docs.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/docs.js	2026-11-20 23:16:52.835816873 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — الفواتير والمقايسات وعروض الأسعار والمستخلصات والتقارير
++ * أرزقي للجبس والديكورات — الفواتير والمقايسات وعروض الأسعار والمستخلصات والتقارير
+  * المعاينة ورقة A4 حقيقية، والحفظ PDF عن طريق الطباعة (من المتصفح أو من تطبيق أندرويد)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+@@ -112,7 +112,7 @@
+   const C = cur().sym;
+   const head = `<header class="inv-head"><div class="inv-brand">
+       ${st.showLogo && st.logo ? `<div class="inv-logo"><img src="${st.logo}" alt=""></div>` : ''}
+-      <div><h1 contenteditable="true">${esc(st.bizName || 'حساباتي للجبس والديكورات')}</h1>
++      <div><h1 contenteditable="true">${esc(st.bizName || 'أرزقي للجبس والديكورات')}</h1>
+       <p contenteditable="true">${esc([st.ownerName, st.address].filter(Boolean).join(' — ') || 'أعمال الجبسون بورد والجبس البلدي والديكورات')}</p>
+       ${st.phone || st.phone2 ? `<p>هاتف: <b>${esc([st.phone, st.phone2].filter(Boolean).join(' / '))}</b></p>` : ''}</div></div>
+     <div class="inv-doc"><span class="tag">${esc(T.name)}</span><span class="d">رقم: <b>${esc(docNo(s))}</b></span><span class="d">التاريخ: <b>${esc(fmtDate(s.date))}</b></span>
+@@ -152,6 +152,28 @@
+     if (d.materials && d.materials.length) body += `<div class="inv-sec"><span class="n">${multi ? secs.length + 1 : 2}</span>حصر الخامات المطلوبة</div><table class="p-table"><thead><tr><th>#</th><th>الخامة</th><th>الكمية</th><th>الوحدة</th></tr></thead><tbody>
+       ${d.materials.map((m, i) => tr([`<td class="idx">${i + 1}</td>`, `<td class="room-col">${esc(m.name)}${m.detail ? `<span class="sub-note">${esc(m.detail)}</span>` : ''}</td>`, `<td>${fq(m.qty)}</td>`, `<td>${esc(m.unit)}</td>`])).join('')}</tbody></table>`;
+   }
++  // أرزقي: الفاتورة الموحدة لمستندات العميل (الإيصالات والكشوف والتقارير بتفضل بشكلها)
++  if (window.ArzaqiInvoice && ['labor_inv', 'supply_inv', 'si_inv', 'quote', 'boq_board', 'boq_plaster', 'boq_decor', 'progress'].includes(s.type)) {
++    const t0 = d.totals || {};
++    const billable = ['labor_inv', 'supply_inv', 'si_inv'].includes(s.type) && !d.noPaid;
++    const lbl = { labor_inv: 'المصنعية', supply_inv: 'الخامات (على العميل)', si_inv: 'التوريد والتركيب', progress: 'قيمة الأعمال المنفذة' }[s.type] || 'إجمالي البنود';
++    const lines = [[lbl, t0.subtotal]];
++    if (t0.additions) lines.push(['إضافات', t0.additions, '+']);
++    if (t0.discount) lines.push(['الخصم', t0.discount, '-']);
++    const cust = (DB().customers || []).find(x => x.name === c.name && (!c.phone || !x.phone || x.phone === c.phone));
++    const notesArr = [s.notes, st.docFooter].filter(Boolean);
++    return ArzaqiInvoice.render({
++      section: 'gypsum', docKey: s.id || docNo(s), docLabel: T.name, number: docNo(s), date: fmtDate(s.date), billable,
++      business: { name: st.bizName || st.ownerName, trade: st.bizName ? st.ownerName : '', phone: [st.phone, st.phone2].filter(Boolean).join(' / '), logo: st.showLogo ? st.logo : '' },
++      client: { name: c.name, phone: c.phone, address: c.address, note: cust ? cust.note : '' },
++      chips: [c.project ? `<span class="inv-chip navy">المشروع: <b>${esc(c.project)}</b></span>` : '', d.validity ? `<span class="inv-chip">صالح لمدة: <b>${d.validity} يوم</b></span>` : ''].filter(Boolean),
++      bodyHTML: body,
++      notesHTML: notesArr.length ? `<div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notesArr.map(n => esc(n)).join('<br>')}</div></div>` : '',
++      money: v => `${fmt(v)} ${C}`,
++      totals: { lines, total: t0.final, paid: t0.paid },
++      signLabel: 'توقيع المنفذ', netLabel: 'إجمالي ' + T.name
++    });
++  }
+   const t = d.totals || {};
+   let totals = '';
+   if (d.columns === 'report') totals = `<div class="inv-totals"><div class="inv-net"><span>صافي الربح</span><strong>${fmt(t.profit)} ${esc(C)}</strong></div></div>`;
+@@ -171,7 +193,7 @@
+   return `${head}${client}${body}
+     <div class="inv-bottom"><div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notes.length ? notes.map(n => esc(n)).join('<br>') : '—'}</div></div><div class="inv-side">${totals}</div></div>
+     ${sign}
+-    <footer class="inv-foot"><span>${esc(st.bizName || 'حساباتي للجبس والديكورات')}</span><span>صدر من تطبيق <b>حساباتي للجبس</b></span></footer>`;
++    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي للجبس</b></span></footer>`;
+ }
+ 
+ /* ---------------- المعاينة والطباعة ---------------- */
+diff -ruN --no-dereference Gypsum/js/ui/manage.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/manage.js
+--- Gypsum/js/ui/manage.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/manage.js	2026-11-20 23:08:29.194513300 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — الخامات والمخزون / العمال / المصروفات / النوتة
++ * أرزقي للجبس والديكورات — الخامات والمخزون / العمال / المصروفات / النوتة
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ 'use strict';
+diff -ruN --no-dereference Gypsum/js/ui/projects.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/projects.js
+--- Gypsum/js/ui/projects.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/projects.js	2026-11-20 23:08:29.194800218 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للجبس والديكورات — العملاء والمشروعات والبنود والمدفوعات
++ * أرزقي للجبس والديكورات — العملاء والمشروعات والبنود والمدفوعات
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ 'use strict';
+diff -ruN --no-dereference Gypsum/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/manifest.json
+--- Gypsum/manifest.json	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/manifest.json	2026-11-20 23:08:29.192610266 +0000
+@@ -1,7 +1,7 @@
+ {
+   "id": "/Hesabaty-Gebsum/",
+-  "name": "حساباتي للجبس والديكورات",
+-  "short_name": "حساباتي للجبس",
++  "name": "أرزقي للجبس والديكورات",
++  "short_name": "أرزقي للجبس",
+   "description": "حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات. تصميم وتطوير: أحمد حسن عبدالله.",
+   "lang": "ar",
+   "dir": "rtl",
+diff -ruN --no-dereference Gypsum/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/privacy.html
+--- Gypsum/privacy.html	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/privacy.html	2026-11-20 23:08:29.193097398 +0000
+@@ -4,7 +4,7 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="theme-color" content="#0b1b33">
+-  <title>سياسة الخصوصية - حساباتي للجبس والديكورات</title>
++  <title>سياسة الخصوصية - أرزقي للجبس والديكورات</title>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+   <style>
+     :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+@@ -28,7 +28,7 @@
+ <body>
+   <header>
+     <h1>سياسة الخصوصية</h1>
+-    <p>تطبيق حساباتي للجبس والديكورات · آخر تحديث: 17 نوفمبر 2026</p>
++    <p>تطبيق أرزقي للجبس والديكورات · آخر تحديث: 17 نوفمبر 2026</p>
+   </header>
+   <main>
+     <section>
+diff -ruN --no-dereference Gypsum/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/service-worker.js
+--- Gypsum/service-worker.js	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/service-worker.js	2026-11-20 23:08:29.192904753 +0000
+@@ -1,9 +1,9 @@
+ /*
+- * حساباتي للجبس والديكورات - Service Worker (العمل بدون إنترنت)
++ * أرزقي للجبس والديكورات - Service Worker (العمل بدون إنترنت)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * - كل ملفات التطبيق بتتحفظ في ذاكرة مستقلة باسم hgyp-app-<الإصدار>
+- *   (مستقلة تماماً عن ذاكرة تطبيق حساباتي للكهرباء).
++ *   (مستقلة تماماً عن ذاكرة تطبيق أرزقي للكهرباء).
+  * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
+  * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
+  */
+diff -ruN --no-dereference Gypsum/version.json /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/version.json
+--- Gypsum/version.json	2026-11-17 17:29:51.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/version.json	2026-11-20 23:08:29.192749732 +0000
+@@ -2,7 +2,7 @@
+   "version": "1.0.0",
+   "date": "2026-11-17",
+   "notes": [
+-    "الإصدار الأول من حساباتي للجبس والديكورات",
++    "الإصدار الأول من أرزقي للجبس والديكورات",
+     "حاسبات الجبسون بورد: أسقف، قواطيع، بيت نور، تكسية حوائط وأعمدة",
+     "حاسبات الجبس البلدي والكرانيش والبانوهات والروزتات",
+     "مشروعات وعملاء ومخزون وعمال ومصروفات ونوتة",

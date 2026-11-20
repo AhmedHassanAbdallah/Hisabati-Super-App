@@ -1,0 +1,218 @@
+Binary files Electrical/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-192.png differ
+Binary files Electrical/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-512.png differ
+Binary files Electrical/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-maskable-192.png differ
+Binary files Electrical/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-maskable-512.png differ
+diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/Trade-Modules/Electrical/index.html
+--- Electrical/index.html	2026-11-15 12:27:42.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/index.html	2026-11-20 23:14:30.818911014 +0000
+@@ -3,14 +3,14 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+-  <meta name="theme-color" content="#0b1b33">
++  <meta name="theme-color" content="#011a51">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+   <meta name="author" content="أحمد حسن عبدالله">
+   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+-  <meta name="description" content="حساباتي: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
+-  <title>حساباتي - حاسبة وفواتير الكهرباء</title>
++  <meta name="description" content="أرزقي: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
++  <title>أرزقي - حاسبة وفواتير الكهرباء</title>
+   <link rel="manifest" href="./manifest.json">
+   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+@@ -26,7 +26,7 @@
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+   <!--
+-    حساباتي - حاسبة وفواتير الكهرباء
++    أرزقي - حاسبة وفواتير الكهرباء
+     تصميم وتطوير: أحمد حسن عبدالله
+     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+     يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
+@@ -672,6 +672,8 @@
+       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+     }
+   </style>
++  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
++  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+ </head>
+ <body>
+ 
+@@ -682,7 +684,7 @@
+     <img class="brand-ic" src="./icons/icon-192.png" alt="">
+     <div class="titles">
+       <div class="sub" id="greetLine">أهلاً بيك</div>
+-      <h1 id="tabTitle">حساباتي</h1>
++      <h1 id="tabTitle">أرزقي</h1>
+     </div>
+     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
+   </header>
+@@ -999,7 +1001,7 @@
+       </div>
+ 
+       <div class="copyright">
+-        <b>حساباتي</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
+         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
+         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
+         <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
+@@ -1331,7 +1333,7 @@
+ 
+ <script>
+   /* =========================================================
+-     حساباتي - حاسبة وفواتير الكهرباء
++     أرزقي - حاسبة وفواتير الكهرباء
+      تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
+      © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+      ========================================================= */
+@@ -1342,7 +1344,7 @@
+   // داخل تطبيق أندرويد (APK): الجسر الأصلي متاح باسم HesabatyApp
+   const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
+   const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Ezaza/releases/latest';
+-  let printJobName = 'حساباتي';
++  let printJobName = 'أرزقي';
+   if (IN_APP) {
+     // روابط واتساب وفيسبوك تفتح في تطبيقاتها، والطباعة عن طريق أندرويد (حفظ PDF أو طابعة)
+     window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
+@@ -1357,7 +1359,7 @@
+   const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال كهرباء';
+   const DEFAULT_TECH = 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية';
+   const ROOM_PRESETS = ['الريسبشن', 'الصالة', 'غرفة النوم الرئيسية', 'غرفة الأطفال', 'غرفة المعيشة', 'المطبخ', 'الحمام', 'الطرقة والمدخل', 'البلكونة'];
+-  const VIEW_TITLES = { home: 'حساباتي', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
++  const VIEW_TITLES = { home: 'أرزقي', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
+   const EDITOR_VIEWS = ['pricing', 'rooms', 'summary'];
+   // نظام البنود المنفصلة
+   const WORK_PRESETS = ['تقفيل لوحة', 'تركيب لوحة', 'سحب خط', 'تأسيس نقطة', 'تركيب نجفة', 'تركيب إسبوتات', 'تركيب سخان', 'تركيب شفاط', 'تغيير بريزة / مفتاح', 'صيانة وكشف أعطال'];
+@@ -1659,7 +1661,7 @@
+     const order = EDITOR_VIEWS.indexOf(key);
+     EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
+     document.getElementById('headerTitle').textContent = (key === 'rooms' && isItemsMode(getCurrentInvoice())) ? 'بنود الفاتورة' : VIEW_TITLES[key];
+-    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'حساباتي';
++    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي';
+     document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
+     if (isEd) renderEditorBar();
+     if (key === 'home') renderHome();
+@@ -2616,11 +2618,38 @@
+     return `
+       <footer class="inv-foot">
+         <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
+-        <span>صدرت بواسطة تطبيق <b>حساباتي</b></span>
++        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
+       </footer>`;
+   }
+ 
+   // فاتورة نظام البنود المنفصلة: نفس شكل الفاتورة بمسميات البنود
++  // أرزقي: الفاتورة الموحدة — نفس أرقام القسم، بالشكل الموحد لكل الأقسام
++  function azElectricalInvoice(inv, t) {
++    if (!window.ArzaqiInvoice) return;
++    const money = v => `${fmt(v)} ${CUR}`;
++    const cust = customers.find(c => c.name === inv.clientName && (!inv.clientPhone || !c.phone || c.phone === inv.clientPhone));
++    const lines = [];
++    if (t.mode === 'items') lines.push([`إجمالي البنود والأعمال (${inv.items.length} بند)`, t.itemsTotal]);
++    else {
++      if (inv.systemType === 'old') {
++        lines.push([`نقاط التأسيس واللوحة والصواعد (${fmt(t.totalBasePtsAll)} ن)`, t.totalBaseCostAll]);
++        lines.push([`نقاط الإسبوتات وشريط الليد (${fmt(t.sumFinishPts)} ن)`, t.sumFinishCost]);
++      } else lines.push([`مصنعية النقاط (${fmt(t.allPointsCount)} نقطة)`, t.pointsCostTotal]);
++      if (t.sumProfileCost > 0) lines.push([`الليد بروفايل (${fmt(t.sumProfileMeters)} م)`, t.sumProfileCost]);
++      if (t.sumPlasterCost > 0) lines.push([`بروفايل المحارة (${fmt(t.sumPlasterMeters)} م)`, t.sumPlasterCost]);
++      if (t.sumExtrasCost > 0) lines.push(['البنود الإضافية', t.sumExtrasCost]);
++    }
++    if (t.materialsDue > 0) lines.push(['الخامات (على العميل)', t.materialsDue, '+']);
++    if (inv.discountAmount > 0) lines.push(['الخصم', inv.discountAmount, '-']);
++    ArzaqiInvoice.wrapSheet(document.getElementById('printSheet'), {
++      section: 'electrical', docKey: inv.id, docLabel: 'فاتورة', date: inv.date, billable: true,
++      business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
++      client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
++      money, totals: { lines, total: t.grandTotal - (inv.discountAmount || 0) + (t.materialsDue || 0), paid: inv.paidAmount || 0 },
++      signLabel: 'توقيع الكهربائي'
++    });
++  }
++
+   function buildItemsInvoiceHTML(inv) {
+     autoFitTypographyForRoomCount(Math.round(inv.items.length * 0.8));
+     const t = computeInvoice(inv);
+@@ -2679,6 +2708,7 @@
+         </div>
+       </div>
+       ${printFooterHTML()}`;
++    azElectricalInvoice(inv, t);
+   }
+ 
+   function buildSinglePageHTML() {
+@@ -2850,8 +2880,9 @@
+ 
+       <footer class="inv-foot">
+         <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
+-        <span>صدرت بواسطة تطبيق <b>حساباتي</b></span>
++        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
+       </footer>`;
++    azElectricalInvoice(inv, t);
+   }
+ 
+   function openSinglePagePreview(autoPrint = false) {
+@@ -4087,7 +4118,7 @@
+   function exportBackupJSON() {
+     syncLinkedInvoices();
+     downloadJSON(Object.assign({}, appData, { app: 'hesabaty', backupVersion: 3, exportedAt: new Date().toISOString(), customers, settings, matLists }),
+-      `حساباتي_نسخة_كاملة_${todayISO()}.json`);
++      `أرزقي_نسخة_كاملة_${todayISO()}.json`);
+     showAppToast('✔️ تم تنزيل النسخة الكاملة (الفواتير + النوتة + كشوفات الخامات)');
+   }
+   // نسخة النوتة فقط
+@@ -4390,7 +4421,7 @@
+     if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
+     else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
+     else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
+-    else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق حساباتي، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
++    else if (state === 'permission') { txt.textContent = 'فعّل «السماح من هذا المصدر» لتطبيق أرزقي، وارجع للتطبيق والتحميل هيكمل لوحده'; btn.disabled = false; }
+     else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
+   };
+   // يستدعيها التطبيق كل ما ترجع له
+diff -ruN --no-dereference Electrical/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Electrical/manifest.json
+--- Electrical/manifest.json	2026-11-15 12:27:42.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/manifest.json	2026-11-20 23:08:29.169270169 +0000
+@@ -1,7 +1,7 @@
+ {
+   "id": "/Ezaza/",
+-  "name": "حساباتي - حاسبة وفواتير الكهرباء",
+-  "short_name": "حساباتي",
++  "name": "أرزقي - حاسبة وفواتير الكهرباء",
++  "short_name": "أرزقي",
+   "description": "حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء بسهولة واحترافية. تصميم وتطوير: أحمد حسن عبدالله.",
+   "lang": "ar",
+   "dir": "rtl",
+diff -ruN --no-dereference Electrical/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Electrical/privacy.html
+--- Electrical/privacy.html	2026-11-15 12:27:42.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/privacy.html	2026-11-20 23:08:29.169643491 +0000
+@@ -4,7 +4,7 @@
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="theme-color" content="#0b1b33">
+-  <title>سياسة الخصوصية - حساباتي</title>
++  <title>سياسة الخصوصية - أرزقي</title>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+   <style>
+     :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+@@ -28,7 +28,7 @@
+ <body>
+   <header>
+     <h1>سياسة الخصوصية</h1>
+-    <p>تطبيق حساباتي - حاسبة وفواتير الكهرباء · آخر تحديث: 9 نوفمبر 2026</p>
++    <p>تطبيق أرزقي - حاسبة وفواتير الكهرباء · آخر تحديث: 9 نوفمبر 2026</p>
+   </header>
+   <main>
+     <section>
+diff -ruN --no-dereference Electrical/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Electrical/service-worker.js
+--- Electrical/service-worker.js	2026-11-15 12:27:42.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/service-worker.js	2026-11-20 23:08:29.169477471 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي - Service Worker
++ * أرزقي - Service Worker
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * نظام الإصدارات:

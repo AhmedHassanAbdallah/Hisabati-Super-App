@@ -673,6 +673,7 @@
     }
   </style>
   <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
+  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
 </head>
 <body>
 
@@ -2622,6 +2623,33 @@
   }
 
   // فاتورة نظام البنود المنفصلة: نفس شكل الفاتورة بمسميات البنود
+  // أرزقي: الفاتورة الموحدة — نفس أرقام القسم، بالشكل الموحد لكل الأقسام
+  function azElectricalInvoice(inv, t) {
+    if (!window.ArzaqiInvoice) return;
+    const money = v => `${fmt(v)} ${CUR}`;
+    const cust = customers.find(c => c.name === inv.clientName && (!inv.clientPhone || !c.phone || c.phone === inv.clientPhone));
+    const lines = [];
+    if (t.mode === 'items') lines.push([`إجمالي البنود والأعمال (${inv.items.length} بند)`, t.itemsTotal]);
+    else {
+      if (inv.systemType === 'old') {
+        lines.push([`نقاط التأسيس واللوحة والصواعد (${fmt(t.totalBasePtsAll)} ن)`, t.totalBaseCostAll]);
+        lines.push([`نقاط الإسبوتات وشريط الليد (${fmt(t.sumFinishPts)} ن)`, t.sumFinishCost]);
+      } else lines.push([`مصنعية النقاط (${fmt(t.allPointsCount)} نقطة)`, t.pointsCostTotal]);
+      if (t.sumProfileCost > 0) lines.push([`الليد بروفايل (${fmt(t.sumProfileMeters)} م)`, t.sumProfileCost]);
+      if (t.sumPlasterCost > 0) lines.push([`بروفايل المحارة (${fmt(t.sumPlasterMeters)} م)`, t.sumPlasterCost]);
+      if (t.sumExtrasCost > 0) lines.push(['البنود الإضافية', t.sumExtrasCost]);
+    }
+    if (t.materialsDue > 0) lines.push(['الخامات (على العميل)', t.materialsDue, '+']);
+    if (inv.discountAmount > 0) lines.push(['الخصم', inv.discountAmount, '-']);
+    ArzaqiInvoice.wrapSheet(document.getElementById('printSheet'), {
+      section: 'electrical', docKey: inv.id, docLabel: 'فاتورة', date: inv.date, billable: true,
+      business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
+      client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
+      money, totals: { lines, total: t.grandTotal - (inv.discountAmount || 0) + (t.materialsDue || 0), paid: inv.paidAmount || 0 },
+      signLabel: 'توقيع الكهربائي'
+    });
+  }
+
   function buildItemsInvoiceHTML(inv) {
     autoFitTypographyForRoomCount(Math.round(inv.items.length * 0.8));
     const t = computeInvoice(inv);
@@ -2680,6 +2708,7 @@
         </div>
       </div>
       ${printFooterHTML()}`;
+    azElectricalInvoice(inv, t);
   }
 
   function buildSinglePageHTML() {
@@ -2853,6 +2882,7 @@
         <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
         <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
       </footer>`;
+    azElectricalInvoice(inv, t);
   }
 
   function openSinglePagePreview(autoPrint = false) {

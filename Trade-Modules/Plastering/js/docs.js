@@ -107,7 +107,34 @@
     if (disc) wa.push(`الخصم: ${M(disc)}`);
     if (isInv && isAll) wa.push(`المدفوع: ${M(r.received)}`, `*المتبقي: ${M(netVal)} ${sym()}*`);
     else wa.push(`*الصافي: ${M(net)} ${sym()}*`);
-    return { title: dt.name + ' - ' + p.name, html, text: wa.join('\n'), phone: (S.client(p.clientId) || {}).phone };
+    // أرزقي: الفاتورة الموحدة (نفس أرقام القسم)
+    let azHtml = null;
+    if (window.ArzaqiInvoice) {
+      const c = S.client(p.clientId);
+      const billable = isInv && isAll;
+      const lines = [];
+      if (useContract) lines.push([p.pricing === 'lump' ? 'قيمة المقاولة الكاملة' : 'إجمالي المراحل', gross]);
+      else if (mode === 'full') {
+        const lab = items.reduce((s2, x) => s2 + (Number(x.res.labor) || 0), 0);
+        lines.push(['المصنعية', lab]);
+        if (sub - lab > 0.005) lines.push(['الخامات (على العميل)', sub - lab, '+']);
+      } else lines.push([mode === 'supply' ? 'الخامات (على العميل)' : 'المصنعية', sub]);
+      if (disc) lines.push(['الخصم', disc, '-']);
+      const tmp = document.createElement('div'); tmp.innerHTML = html;
+      const assume = tmp.querySelector('.d-assume');
+      azHtml = ArzaqiInvoice.render({
+        section: 'plastering', docKey: p.id + ':' + type, docLabel: dt.name, number: docNo(type, p), date: fmtDate(S.today()), billable,
+        business: { name: st.bizName, trade: st.bizTitle, phone: st.bizPhone, logo: st.logo && st.showLogo !== false ? st.logo : '' },
+        client: { name: c ? c.name : '', phone: c ? c.phone : '', address: p.address || (c && c.address) || '', note: c ? c.notes : '' },
+        chips: [`<span class="inv-chip navy">المشروع: <b>${esc(p.name)}</b></span>`],
+        bodyHTML: body,
+        notesHTML: (terms ? notesBox(type === 'quote' || type.indexOf('boq') === 0 ? 'الشروط والملاحظات' : 'ملاحظات', terms) : '') + (assume ? assume.outerHTML : ''),
+        money: v => `${M(v)} ${sym()}`,
+        totals: { lines, total: net, paid: billable ? r.received : 0 },
+        signLabel: 'توقيع المقاول', netLabel: 'إجمالي ' + dt.name
+      });
+    }
+    return { title: dt.name + ' - ' + p.name, html: azHtml || html, text: wa.join('\n'), phone: (S.client(p.clientId) || {}).phone };
   }
 
   function certificateDoc(p) {

@@ -1,0 +1,242 @@
+Binary files Plastering/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-192.png differ
+Binary files Plastering/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-512.png differ
+Binary files Plastering/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-maskable-192.png differ
+Binary files Plastering/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-maskable-512.png differ
+diff -ruN --no-dereference Plastering/index.html /home/user/Hisabati-Super-App/Trade-Modules/Plastering/index.html
+--- Plastering/index.html	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/index.html	2026-11-20 23:11:30.912117841 +0000
+@@ -3,12 +3,12 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+-  <meta name="theme-color" content="#0b1b33">
++  <meta name="theme-color" content="#011a51">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+-  <meta name="description" content="HESABATI PLASTER — حساباتي للمحارة وتشطيبات الواجهات: حصر المساحات وحساب خامات ومصنعية المحارة والجرافيت والدهارة والمعجون والواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير.">
+-  <title>HESABATI PLASTER — حساباتي للمحارة والواجهات</title>
++  <meta name="description" content="HESABATI PLASTER — أرزقي للمحارة وتشطيبات الواجهات: حصر المساحات وحساب خامات ومصنعية المحارة والجرافيت والدهارة والمعجون والواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير.">
++  <title>HESABATI PLASTER — أرزقي للمحارة والواجهات</title>
+   <link rel="manifest" href="./manifest.json">
+   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+@@ -20,6 +20,8 @@
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="./css/app.css">
++  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
++  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+ </head>
+ <body>
+   <div id="app">
+diff -ruN --no-dereference Plastering/js/admin.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/admin.js
+--- Plastering/js/admin.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/admin.js	2026-11-20 23:08:29.198378217 +0000
+@@ -375,7 +375,7 @@
+         <input type="file" id="restoreFile" accept=".json,application/json" class="hidden">
+         <div class="hint mt" style="text-align:center">${lb ? 'آخر نسخة: ' + new Date(lb).toLocaleString('ar-EG') : 'لم يتم عمل نسخة احتياطية بعد'}</div></div>
+         <div class="card"><div class="card-title"><div class="t-ic orange">${icon('shield')}</div><h2>خصوصية وعزل البيانات</h2></div>
+-          <div class="note">بيانات «حساباتي للمحارة» منفصلة تماماً عن باقي تطبيقات حساباتي (الكهرباء وغيرها): مخزنة بمفاتيح خاصة بيها، ومسحها أو استعادتها لا يؤثر على أي تطبيق تاني. لا يتم رفع أي بيانات على الإنترنت.</div>
++          <div class="note">بيانات «أرزقي للمحارة» منفصلة تماماً عن باقي تطبيقات أرزقي (الكهرباء وغيرها): مخزنة بمفاتيح خاصة بيها، ومسحها أو استعادتها لا يؤثر على أي تطبيق تاني. لا يتم رفع أي بيانات على الإنترنت.</div>
+           <button type="button" class="btn btn-danger mt" data-act="resetAll">${icon('trash')} مسح كل بيانات هذا التطبيق</button></div>`;
+       return {
+         title: 'النسخ الاحتياطي', html,
+@@ -402,7 +402,7 @@
+   U.VIEWS.about = {
+     parent: () => ['more'],
+     render() {
+-      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>حساباتي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
++      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>أرزقي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
+         <div class="card"><div class="kv">
+           <div class="kv-row"><span>العمل بدون إنترنت</span><strong>${'serviceWorker' in navigator ? 'مفعّل' : 'غير مدعوم في المتصفح ده'}</strong></div>
+           <div class="kv-row"><span>حالة الاتصال الآن</span><strong>${navigator.onLine ? 'متصل' : 'بدون إنترنت'}</strong></div>
+@@ -410,7 +410,7 @@
+         </div></div>
+         <div class="card"><div class="card-title"><div class="t-ic orange">${icon('info')}</div><h2>عن الحسابات</h2></div>
+           <div class="note">كل المعادلات <b>تقديرية</b> ومبنية على المدخلات اللي بتكتبها: السمك، نسب الخلط، معدل الاستهلاك من نشرة المنتج، الهالك، وقواعد خصم الفتحات حسب اتفاقك مع العميل. التطبيق بيوضح الافتراضات تحت كل نتيجة. راجع دائماً بيانات الشركة المصنعة.</div></div>
+-        <div class="copyright">مبني على فلسفة تصميم تطبيق «حساباتي» — نسخة مستقلة لأعمال المحارة والجرافيت والواجهات.</div>`;
++        <div class="copyright">مبني على فلسفة تصميم تطبيق «أرزقي» — نسخة مستقلة لأعمال المحارة والجرافيت والواجهات.</div>`;
+       return { title: 'عن التطبيق', html };
+     }
+   };
+@@ -448,7 +448,7 @@
+     },
+     restoreBackup() { document.getElementById('restoreFile').click(); },
+     resetAll() {
+-      U.confirmBox('مسح كل بيانات «حساباتي للمحارة» نهائياً؟\n(باقي تطبيقات حساباتي مش هتتأثر)', () => {
++      U.confirmBox('مسح كل بيانات «أرزقي للمحارة» نهائياً؟\n(باقي تطبيقات أرزقي مش هتتأثر)', () => {
+         U.confirmBox('تأكيد أخير: كل المشروعات والعملاء والمخزن هيتمسحوا.', () => { S.resetAll(); U.applyTheme(); U.toast('تم المسح'); U.go('home'); }, { yes: 'امسح' });
+       }, { yes: 'متابعة' });
+     }
+diff -ruN --no-dereference Plastering/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/docs.js
+--- Plastering/js/docs.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/docs.js	2026-11-20 23:17:29.885708908 +0000
+@@ -12,7 +12,7 @@
+   function header(docName, no, date) {
+     const st = S.db().settings;
+     const logo = st.logo && st.showLogo !== false ? `<div class="d-logo"><img src="${esc(st.logo)}" alt=""></div>` : '';
+-    return `<div class="d-head"><div class="d-brand">${logo}<div><h1 contenteditable="true">${esc(st.bizName || 'حساباتي للمحارة والواجهات')}</h1>
++    return `<div class="d-head"><div class="d-brand">${logo}<div><h1 contenteditable="true">${esc(st.bizName || 'أرزقي للمحارة والواجهات')}</h1>
+       <p contenteditable="true">${esc(st.bizTitle || '')}${st.bizPhone ? ' · <b>' + esc(st.bizPhone) + '</b>' : ''}${st.bizAddress ? '<br>' + esc(st.bizAddress) : ''}</p></div></div>
+       <div class="d-doc"><span class="tag" contenteditable="true">${esc(docName)}</span>${no ? `<span class="d">رقم: <b>${esc(no)}</b></span>` : ''}<span class="d">التاريخ: <b>${esc(fmtDate(date || S.today()))}</b></span></div></div><div class="d-stripe"></div>`;
+   }
+@@ -107,7 +107,34 @@
+     if (disc) wa.push(`الخصم: ${M(disc)}`);
+     if (isInv && isAll) wa.push(`المدفوع: ${M(r.received)}`, `*المتبقي: ${M(netVal)} ${sym()}*`);
+     else wa.push(`*الصافي: ${M(net)} ${sym()}*`);
+-    return { title: dt.name + ' - ' + p.name, html, text: wa.join('\n'), phone: (S.client(p.clientId) || {}).phone };
++    // أرزقي: الفاتورة الموحدة (نفس أرقام القسم)
++    let azHtml = null;
++    if (window.ArzaqiInvoice) {
++      const c = S.client(p.clientId);
++      const billable = isInv && isAll;
++      const lines = [];
++      if (useContract) lines.push([p.pricing === 'lump' ? 'قيمة المقاولة الكاملة' : 'إجمالي المراحل', gross]);
++      else if (mode === 'full') {
++        const lab = items.reduce((s2, x) => s2 + (Number(x.res.labor) || 0), 0);
++        lines.push(['المصنعية', lab]);
++        if (sub - lab > 0.005) lines.push(['الخامات (على العميل)', sub - lab, '+']);
++      } else lines.push([mode === 'supply' ? 'الخامات (على العميل)' : 'المصنعية', sub]);
++      if (disc) lines.push(['الخصم', disc, '-']);
++      const tmp = document.createElement('div'); tmp.innerHTML = html;
++      const assume = tmp.querySelector('.d-assume');
++      azHtml = ArzaqiInvoice.render({
++        section: 'plastering', docKey: p.id + ':' + type, docLabel: dt.name, number: docNo(type, p), date: fmtDate(S.today()), billable,
++        business: { name: st.bizName, trade: st.bizTitle, phone: st.bizPhone, logo: st.logo && st.showLogo !== false ? st.logo : '' },
++        client: { name: c ? c.name : '', phone: c ? c.phone : '', address: p.address || (c && c.address) || '', note: c ? c.notes : '' },
++        chips: [`<span class="inv-chip navy">المشروع: <b>${esc(p.name)}</b></span>`],
++        bodyHTML: body,
++        notesHTML: (terms ? notesBox(type === 'quote' || type.indexOf('boq') === 0 ? 'الشروط والملاحظات' : 'ملاحظات', terms) : '') + (assume ? assume.outerHTML : ''),
++        money: v => `${M(v)} ${sym()}`,
++        totals: { lines, total: net, paid: billable ? r.received : 0 },
++        signLabel: 'توقيع المقاول', netLabel: 'إجمالي ' + dt.name
++      });
++    }
++    return { title: dt.name + ' - ' + p.name, html: azHtml || html, text: wa.join('\n'), phone: (S.client(p.clientId) || {}).phone };
+   }
+ 
+   function certificateDoc(p) {
+@@ -244,7 +271,7 @@
+   }
+   function closeDoc() {
+     document.getElementById('printModal').classList.remove('open');
+-    document.title = 'HESABATI PLASTER — حساباتي للمحارة والواجهات';
++    document.title = 'HESABATI PLASTER — أرزقي للمحارة والواجهات';
+     CUR_DOC = null;
+   }
+   window.addEventListener('resize', fitPreview);
+diff -ruN --no-dereference Plastering/js/engine.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/engine.js
+--- Plastering/js/engine.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/engine.js	2026-11-20 23:08:29.197981759 +0000
+@@ -1,6 +1,6 @@
+ /*
+  * HESABATI PLASTER — محرك الحسابات
+- * حساباتي للمحارة وتشطيبات الواجهات
++ * أرزقي للمحارة وتشطيبات الواجهات
+  *
+  * هذا الملف مستقل تماماً عن الواجهة: لا يلمس DOM ولا التخزين.
+  * يعمل في المتصفح (window.PlasterEngine) وفي Node للاختبارات (require).
+diff -ruN --no-dereference Plastering/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/store.js
+--- Plastering/js/store.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/store.js	2026-11-20 23:08:29.197114212 +0000
+@@ -2,7 +2,7 @@
+  * HESABATI PLASTER — طبقة التخزين المحلي (Offline First)
+  *
+  * عزل البيانات: كل مفاتيح التخزين تبدأ بـ "hplaster_" فقط.
+- * التطبيق لا يقرأ ولا يكتب ولا يمسح أي مفتاح يخص تطبيقات حساباتي الأخرى
++ * التطبيق لا يقرأ ولا يكتب ولا يمسح أي مفتاح يخص تطبيقات أرزقي الأخرى
+  * (الكهرباء وغيرها) حتى لو كانوا على نفس النطاق ahmedhassanabdallah.github.io.
+  */
+ (function (root, factory) {
+@@ -124,7 +124,7 @@
+   function importJSON(text) {
+     const parsed = JSON.parse(text);
+     const data = parsed && parsed.app === 'HESABATI_PLASTER' ? parsed.data : null;
+-    if (!data || !Array.isArray(data.projects)) throw new Error('الملف ليس نسخة احتياطية من حساباتي للمحارة');
++    if (!data || !Array.isArray(data.projects)) throw new Error('الملف ليس نسخة احتياطية من أرزقي للمحارة');
+     DB = normalize(data);
+     saveNow();
+     return DB;
+diff -ruN --no-dereference Plastering/js/ui.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/ui.js
+--- Plastering/js/ui.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/ui.js	2026-11-20 23:08:29.197347110 +0000
+@@ -300,7 +300,7 @@
+     const head = document.getElementById('appHeader');
+     const isTab = !!v.tab;
+     head.innerHTML = isTab
+-      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'حساباتي للمحارة والواجهات')}</div><h1>${esc(out.title || 'HESABATI PLASTER')}</h1></div>
++      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'أرزقي للمحارة والواجهات')}</div><h1>${esc(out.title || 'HESABATI PLASTER')}</h1></div>
+          <button type="button" class="icon-btn" data-act="toggleTheme" aria-label="الوضع الليلي">${icon(isDark() ? 'sun' : 'moon')}</button>`
+       : `<button type="button" class="icon-btn" data-act="back" aria-label="رجوع">${icon('back')}</button><div class="titles"><h1>${esc(out.title || '')}</h1>${out.sub ? `<div class="sub">${esc(out.sub)}</div>` : ''}</div>
+          ${(out.actions || []).map(a => `<button type="button" class="icon-btn${a.accent ? ' accent' : ''}" data-act="${esc(a.act)}"${a.data ? Object.keys(a.data).map(k => ` data-${k}="${esc(a.data[k])}"`).join('') : ''} aria-label="${esc(a.label || '')}">${icon(a.icon)}</button>`).join('')}`;
+diff -ruN --no-dereference Plastering/js/views.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/views.js
+--- Plastering/js/views.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/views.js	2026-11-20 23:08:29.198722167 +0000
+@@ -70,7 +70,7 @@
+       </div>
+       <div class="home-row"><h2 class="home-h" style="margin:0">آخر المشروعات</h2><button type="button" class="link-btn" data-act="go" data-view="projects">عرض الكل</button></div>
+       ${ps.length ? ps.slice(-5).reverse().map(projectRow).join('') : `<div class="empty"><div class="big">${icon('trowel')}</div><p>ابدأ أول مشروع: سجّل العميل، احسب المساحات، واختار البنود (محارة، جرافيت، معجون، واجهات).</p><button type="button" class="btn btn-accent" data-act="newProject">${icon('plus')} مشروع جديد</button></div>`}`;
+-      return { title: 'حساباتي للمحارة', sub: greet, html };
++      return { title: 'أرزقي للمحارة', sub: greet, html };
+     }
+   };
+ 
+diff -ruN --no-dereference Plastering/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Plastering/manifest.json
+--- Plastering/manifest.json	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/manifest.json	2026-11-20 23:08:29.196335438 +0000
+@@ -1,7 +1,7 @@
+ {
+   "id": "/Hesabaty-plaster/",
+-  "name": "HESABATI PLASTER - حساباتي للمحارة والواجهات",
+-  "short_name": "حساباتي للمحارة",
++  "name": "HESABATI PLASTER - أرزقي للمحارة والواجهات",
++  "short_name": "أرزقي للمحارة",
+   "description": "حساب مساحات وخامات ومصنعية المحارة والجرافيت والدهارة والمعجون وتشطيبات الواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير — يعمل بدون إنترنت.",
+   "lang": "ar",
+   "dir": "rtl",
+diff -ruN --no-dereference Plastering/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Plastering/privacy.html
+--- Plastering/privacy.html	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/privacy.html	2026-11-20 23:08:29.196828292 +0000
+@@ -14,7 +14,7 @@
+ </head>
+ <body>
+ <main>
+-  <h1>سياسة الخصوصية — حساباتي للمحارة وتشطيبات الواجهات</h1>
++  <h1>سياسة الخصوصية — أرزقي للمحارة وتشطيبات الواجهات</h1>
+   <p>تطبيق HESABATI PLASTER يعمل بالكامل على جهازك.</p>
+   <ul>
+     <li>كل البيانات (المشروعات، العملاء، العمال، المخزن، الفواتير) محفوظة على الجهاز فقط.</li>
+@@ -22,7 +22,7 @@
+     <li>لا توجد إعلانات ولا أدوات تتبع ولا حسابات تسجيل دخول.</li>
+     <li>عند المشاركة على واتساب أو الطباعة، أنت من يختار ما يتم إرساله.</li>
+     <li>النسخة الاحتياطية ملف تحفظه بنفسك في المكان الذي تختاره.</li>
+-    <li>بيانات هذا التطبيق منفصلة تماماً عن باقي تطبيقات «حساباتي».</li>
++    <li>بيانات هذا التطبيق منفصلة تماماً عن باقي تطبيقات «أرزقي».</li>
+   </ul>
+ </main>
+ </body>
+diff -ruN --no-dereference Plastering/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/service-worker.js
+--- Plastering/service-worker.js	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/service-worker.js	2026-11-20 23:08:29.196677099 +0000
+@@ -1,7 +1,7 @@
+ /*
+  * HESABATI PLASTER — Service Worker (العمل بدون إنترنت)
+  *
+- * عزل تام عن تطبيقات حساباتي الأخرى على نفس النطاق:
++ * عزل تام عن تطبيقات أرزقي الأخرى على نفس النطاق:
+  *  - أسماء الكاش تبدأ بـ "hplaster-" فقط.
+  *  - التنظيف يمسح كاش "hplaster-" القديم فقط ولا يلمس أي كاش آخر
+  *    (مثل hesabaty-app-* الخاص بتطبيق الكهرباء).
+diff -ruN --no-dereference Plastering/version.json /home/user/Hisabati-Super-App/Trade-Modules/Plastering/version.json
+--- Plastering/version.json	2026-11-19 20:47:38.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/version.json	2026-11-20 23:08:29.196471468 +0000
+@@ -2,7 +2,7 @@
+   "version": "1.0.0",
+   "date": "2026-11-18",
+   "notes": [
+-    "أول إصدار من حساباتي للمحارة وتشطيبات الواجهات",
++    "أول إصدار من أرزقي للمحارة وتشطيبات الواجهات",
+     "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات",
+     "المشروعات والعملاء والعمال والمخزن والمستندات والتقارير",
+     "يعمل بالكامل بدون إنترنت"

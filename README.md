@@ -1,4 +1,4 @@
-# حساباتي — التطبيق الموحد (Hisabati Super App)
+# أرزقي — لحسابات المصنعية (Arzaqi · Hisabati Super App)
 
 تطبيق واحد بيجمع كل تطبيقات حساباتي للمهن. افتح التطبيق ← اختار المهنة ← التطبيق الأصلي
 بتاعها بيشتغل جوه التطبيق الموحد بنفس حساباته وفواتيره وبياناته بالظبط.
@@ -17,9 +17,9 @@ original app for that trade runs inside the unified app — unchanged.
 | المحارة — Plastering | `Trade-Modules/Plastering` | Hesabaty-plaster @ `ac46676` | 1.0.0 |
 
 ## Golden rule
-`Trade-Modules/*` are byte-identical copies of the original repositories (only `.git`
-excluded). **Do not edit them here** — the original repositories remain the source of truth.
-The only new application code is `Main-App/`.
+`Trade-Modules/*` are copies of the original repositories plus the **intended Arzaqi changes only**
+(name, theme, icons, unified invoice) — each changed file is pinned in `.provenance/changes/`.
+The original repositories are never modified. See `Documentation/ARZAQI.md`.
 
 ## Run
 ```bash
@@ -36,8 +36,8 @@ tools/run-trade-suites.sh                           # every app's own test suite
 
 ## Android apps
 * `android/` — **حساباتي** (TWA, runs the site in Chrome): `hisabati.apk` / `hisabati.aab` in Releases `v*`.
-* `android-standalone/` — **حساباتي أوفلاين** (all sections inside the app, no Chrome needed):
-  `hisabati-offline.apk` / `.aab` in Releases `offline-v*`.
+* `android-standalone/` — **أرزقي** (all sections inside the app, no Chrome needed):
+  `arzaqi.apk` / `.aab` in Releases `arzaqi-v*`.
 * Both build automatically on GitHub Actions; both open in Android Studio (Gradle wrapper included).
 * Google Play: `Documentation/PLAY-STORE.md` (listing text, images, data safety, steps).
 

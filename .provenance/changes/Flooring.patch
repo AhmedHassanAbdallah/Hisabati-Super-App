@@ -1,0 +1,300 @@
+Binary files Flooring/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-192.png differ
+Binary files Flooring/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-512.png differ
+Binary files Flooring/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-maskable-192.png differ
+Binary files Flooring/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-maskable-512.png differ
+diff -ruN --no-dereference Flooring/index.html /home/user/Hisabati-Super-App/Trade-Modules/Flooring/index.html
+--- Flooring/index.html	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/index.html	2026-11-20 23:11:30.883852064 +0000
+@@ -3,15 +3,15 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+-  <meta name="theme-color" content="#0b1b33">
++  <meta name="theme-color" content="#011a51">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+-  <meta name="apple-mobile-web-app-title" content="حساباتي للأرضيات">
++  <meta name="apple-mobile-web-app-title" content="أرزقي للأرضيات">
+   <meta name="author" content="أحمد حسن عبدالله">
+   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+-  <meta name="description" content="حساباتي للأرضيات والتشطيبات: حساب المساحات والكميات والخامات والمصنعية والأرباح، وإدارة المشروعات والعملاء والعمال، وإصدار الفواتير والمقايسات — يعمل بدون إنترنت.">
+-  <title>حساباتي للأرضيات — HESABATI FLOORING</title>
++  <meta name="description" content="أرزقي للأرضيات والتشطيبات: حساب المساحات والكميات والخامات والمصنعية والأرباح، وإدارة المشروعات والعملاء والعمال، وإصدار الفواتير والمقايسات — يعمل بدون إنترنت.">
++  <title>أرزقي للأرضيات — HESABATI FLOORING</title>
+   <link rel="manifest" href="./manifest.json">
+   <link rel="icon" type="image/png" href="./icons/icon-192.png">
+   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+@@ -23,10 +23,12 @@
+   <link rel="stylesheet" href="./css/app.css">
+   <link rel="stylesheet" href="./css/flooring.css">
+   <!--
+-    حساباتي للأرضيات والتشطيبات — HESABATI FLOORING
++    أرزقي للأرضيات والتشطيبات — HESABATI FLOORING
+     تصميم وتطوير: أحمد حسن عبدالله
+     © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+   -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
++  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+ </head>
+ <body>
+ 
+@@ -35,7 +37,7 @@
+     <img class="brand-ic" src="./icons/icon-192.png" alt="">
+     <div class="titles">
+       <div class="sub" id="greetLine">أهلاً بيك</div>
+-      <h1 id="tabTitle">حساباتي للأرضيات</h1>
++      <h1 id="tabTitle">أرزقي للأرضيات</h1>
+     </div>
+     <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
+   </header>
+diff -ruN --no-dereference Flooring/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/app.js
+--- Flooring/js/app.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/app.js	2026-11-20 23:08:29.190686642 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — التطبيق الرئيسي: الرئيسية، المشروعات، صفحة المشروع، العملاء
++ * أرزقي للأرضيات — التطبيق الرئيسي: الرئيسية، المشروعات، صفحة المشروع، العملاء
+  * تصميم وتطوير: أحمد حسن عبدالله
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+@@ -37,7 +37,7 @@
+   }
+ 
+   /* ================= الأقسام الرئيسية ================= */
+-  const VIEW_TITLES = { home: 'حساباتي للأرضيات', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
++  const VIEW_TITLES = { home: 'أرزقي للأرضيات', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
+   let currentView = 'home';
+   function switchView(key) {
+     if (UI.depth()) { UI.closeAllThen(() => switchView(key)); return; }
+diff -ruN --no-dereference Flooring/js/calc.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calc.js
+--- Flooring/js/calc.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calc.js	2026-11-20 23:08:29.192199404 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — محرك الحسابات
++ * أرزقي للأرضيات — محرك الحسابات
+  * HESABATI FLOORING — Calculation engine
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+diff -ruN --no-dereference Flooring/js/calculators.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calculators.js
+--- Flooring/js/calculators.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calculators.js	2026-11-20 23:08:29.191385658 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — شاشات الحاسبات (المنطق نفسه في calc.js)
++ * أرزقي للأرضيات — شاشات الحاسبات (المنطق نفسه في calc.js)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ (function (root) {
+diff -ruN --no-dereference Flooring/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/docs.js
+--- Flooring/js/docs.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/docs.js	2026-11-20 23:16:06.792069627 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — الفواتير والمستندات والطباعة (PDF بالعربي من نظام الطباعة)
++ * أرزقي للأرضيات — الفواتير والمستندات والطباعة (PDF بالعربي من نظام الطباعة)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ (function (root) {
+@@ -283,7 +283,7 @@
+   }
+   function footerHTML() {
+     const s = db().settings;
+-    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي للأرضيات</b></span></footer>`;
++    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي للأرضيات</b></span></footer>`;
+   }
+   function signHTML(a, b) { return `<div class="inv-sign"><div ${CE}>${a || 'توقيع القائم بالأعمال'}</div><div ${CE}>${b || 'اعتماد العميل'}</div></div>`; }
+   function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }
+@@ -323,7 +323,7 @@
+   }
+   function doPrint(jobName) {
+     const old = document.title;
+-    document.title = jobName || 'حساباتي للأرضيات';
++    document.title = jobName || 'أرزقي للأرضيات';
+     if (root.HFloorApp && typeof root.HFloorApp.print === 'function') { try { root.HFloorApp.print(document.title); } catch (e) { UI.toast('⚠️ تعذرت الطباعة', 'err'); } }
+     else { try { window.print(); } catch (e) { UI.toast('⚠️ الطباعة مش متاحة في المتصفح ده', 'err'); } }
+     setTimeout(() => { document.title = old; }, 1500);
+@@ -363,6 +363,30 @@
+         <div class="inv-totals"><table class="p-totals-table">${totals.map(([l, v, c]) => `<tr${c ? ` class="${c}"` : ''}><td ${CE}>${l}</td><td ${CE}>${v} ${esc(UI.curSym())}</td></tr>`).join('')}</table>
+         <div class="inv-net"><span ${CE}>${netLabel}</span><strong ${CE}>${money(netVal)}</strong></div></div></div>
+       ${footerHTML()}`;
++    // أرزقي: الفاتورة الموحدة لكل مستندات العميل (فاتورة المشتريات من المورد بتفضل زي ما هي)
++    if (root.ArzaqiInvoice && !isP) {
++      const tmp = document.createElement('div'); tmp.innerHTML = html;
++      const h = root.ArzaqiInvoice.harvest(tmp);
++      const s = db().settings;
++      const c = d.customerId && by('customers', d.customerId);
++      const billable = !!T[d.type].revenue;
++      const lines = [[d.type === 'supply' ? 'الخامات (على العميل)' : (isX ? 'إجمالي الأعمال المنفذة' : 'إجمالي البنود'), t.subtotal]];
++      if (t.additions) lines.push(['إضافات', t.additions, '+']);
++      if (t.discount) lines.push(['الخصم', t.discount, '-']);
++      if (isX && t.previous) lines.push(['ما تم صرفه سابقاً', t.previous, '-']);
++      if (isX && t.deductions) lines.push(['استقطاعات', t.deductions, '-']);
++      const azHtml = root.ArzaqiInvoice.render({
++        section: 'flooring', docKey: d.id || d.number, docLabel: docTitle(d), number: d.number, date: fmtDate(d.date), billable,
++        business: { name: s.bizName || s.ownerName, trade: s.bizName ? s.ownerName : '', phone: [s.phone, s.phone2].filter(Boolean).join(' - '), logo: s.showLogo ? s.logo : '' },
++        client: { name: cl.name, phone: cl.phone, address: cl.address, note: c ? c.note : '' },
++        chips: p ? [`<span class="inv-chip navy" ${CE}>المشروع: <b>${esc(p.name)}</b></span>`] : [],
++        bodyHTML: h.bodyHTML, notesHTML: notesHTML(notes), money,
++        totals: { lines, total: isX ? t.due : t.total, paid: t.paid, paidLabel: t.linkedPaid ? 'الواصل من العميل (على المشروع)' : 'الواصل من العميل' },
++        netLabel: isX ? 'صافي المستحق بالمستخلص' : 'إجمالي ' + docTitle(d)
++      });
++      openPrint(azHtml, `${docTitle(d)} ${d.number || ''} ${cl.name || ''}`.trim());
++      return;
++    }
+     openPrint(html, `${docTitle(d)} ${d.number || ''} ${cl.name || ''}`.trim());
+   }
+ 
+diff -ruN --no-dereference Flooring/js/finance.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/finance.js
+--- Flooring/js/finance.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/finance.js	2026-11-20 23:08:29.191981239 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — الحسابات المالية (المشروعات، الأرباح، المخزون، العمال، المستندات)
++ * أرزقي للأرضيات — الحسابات المالية (المشروعات، الأرباح، المخزون، العمال، المستندات)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * قواعد ثابتة تمنع احتساب أي مبلغ مرتين:
+diff -ruN --no-dereference Flooring/js/modules.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/modules.js
+--- Flooring/js/modules.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/modules.js	2026-11-20 23:08:29.190095274 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — الخامات والمخزون، العمال، المصروفات، النوتة، أنواع الأعمال، الإعدادات، النسخ الاحتياطي
++ * أرزقي للأرضيات — الخامات والمخزون، العمال، المصروفات، النوتة، أنواع الأعمال، الإعدادات، النسخ الاحتياطي
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ (function (root) {
+@@ -569,7 +569,7 @@
+           <div class="btn-row"><button type="button" class="btn btn-accent" data-act="export">${icon('download')} تنزيل نسخة</button><button type="button" class="btn btn-ghost" data-act="import">${icon('upload')} استعادة نسخة</button></div>
+           <input type="file" accept=".json,application/json" class="hidden" data-file></div>
+           <div class="card"><div class="card-title"><div class="t-ic" style="background:var(--danger-soft);color:var(--danger)">${icon('trash')}</div><h2>مسح كل البيانات</h2></div>
+-          <p class="hint" style="margin:-6px 0 12px">بيمسح كل بيانات «حساباتي للأرضيات» من الموبايل ده بس (مش بيلمس تطبيق حساباتي للكهرباء). خد نسخة احتياطية الأول.</p>
++          <p class="hint" style="margin:-6px 0 12px">بيمسح كل بيانات «أرزقي للأرضيات» من الموبايل ده بس (مش بيلمس تطبيق أرزقي للكهرباء). خد نسخة احتياطية الأول.</p>
+           <button type="button" class="btn btn-danger" data-act="wipe">${icon('trash')} مسح كل البيانات</button></div>`;
+         const file = body.querySelector('[data-file]');
+         file.onchange = () => {
+@@ -588,12 +588,12 @@
+         };
+         act(body, {
+           export: () => {
+-            const name = `حساباتي_للأرضيات_نسخة_${today()}.json`;
++            const name = `أرزقي_للأرضيات_نسخة_${today()}.json`;
+             if (UI.downloadText(name, 'application/json', JSON.stringify(Store.exportObject(), null, 1))) { Store.markBackup(); UI.toast('✔️ تم تنزيل النسخة: ' + name); page.refresh(); }
+             else UI.toast('⚠️ تعذر تنزيل الملف', 'err');
+           },
+           import: () => file.click(),
+-          wipe: () => UI.confirm('متأكد إنك عايز تمسح كل المشروعات والفواتير والعملاء والخامات والعمال؟ مفيش رجوع.', () => UI.confirm('تأكيد أخير: مسح كل بيانات حساباتي للأرضيات؟', () => { Store.wipe(); UI.setCurrency(db().settings.currency); App.applyTheme(); UI.toast('تم مسح البيانات'); page.refresh(); }, { yes: 'امسح كله' }), { yes: 'أيوه، كمّل' })
++          wipe: () => UI.confirm('متأكد إنك عايز تمسح كل المشروعات والفواتير والعملاء والخامات والعمال؟ مفيش رجوع.', () => UI.confirm('تأكيد أخير: مسح كل بيانات أرزقي للأرضيات؟', () => { Store.wipe(); UI.setCurrency(db().settings.currency); App.applyTheme(); UI.toast('تم مسح البيانات'); page.refresh(); }, { yes: 'امسح كله' }), { yes: 'أيوه، كمّل' })
+         });
+       }
+     });
+@@ -608,7 +608,7 @@
+           <div class="stack">${root.SWUpdate && root.SWUpdate.waiting ? `<button type="button" class="btn btn-accent" data-act="apply">${icon('download')} تحديث الآن</button>` : ''}<button type="button" class="btn btn-soft" data-act="check">${icon('refresh')} البحث عن تحديث</button></div></div>
+           <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
+           <div class="dev-links"><a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener">${icon('chat')} واتساب</a><a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">${icon('facebook')} فيسبوك</a></div><div class="dev-phone">+20 101 542 1255</div></div>
+-          <div class="copyright"><b>حساباتي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
++          <div class="copyright"><b>أرزقي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
+         act(body, {
+           apply: () => root.SWUpdate.apply(),
+           check: () => { if (!root.SWUpdate) { UI.toast('التحديث التلقائي غير متاح هنا'); return; } root.SWUpdate.check().then(r => UI.toast(r ? '✔️ في تحديث جديد — اضغط تحديث الآن' : '✔️ أنت على آخر إصدار')).catch(() => UI.toast('⚠️ مفيش إنترنت دلوقتي', 'err')); }
+diff -ruN --no-dereference Flooring/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/store.js
+--- Flooring/js/store.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/store.js	2026-11-20 23:08:29.189446661 +0000
+@@ -1,8 +1,8 @@
+ /*
+- * حساباتي للأرضيات — التخزين المحلي (Offline First)
++ * أرزقي للأرضيات — التخزين المحلي (Offline First)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+- * مهم: التطبيق ده ممكن يتنشر على نفس الدومين بتاع تطبيق «حساباتي» للكهرباء
++ * مهم: التطبيق ده ممكن يتنشر على نفس الدومين بتاع تطبيق «أرزقي» للكهرباء
+  * (ahmedhassanabdallah.github.io). علشان كده كل مفاتيح التخزين هنا تبدأ بـ hflooring_
+  * ومستحيل تقرا أو تكتب أو تمسح أي بيانات خاصة بتطبيق الكهرباء.
+  */
+@@ -134,10 +134,10 @@
+     exportObject() { return Object.assign({}, this.db, { exportedAt: nowISO(), backupOf: APP_ID }); },
+     markBackup() { try { localStorage.setItem(BACKUP_KEY, String(Date.now())); } catch (e) {} },
+     lastBackup() { try { return parseInt(localStorage.getItem(BACKUP_KEY), 10) || 0; } catch (e) { return 0; } },
+-    // يقبل نسخ «حساباتي للأرضيات» فقط (مش نسخ تطبيق الكهرباء) — علشان ما يحصلش خلط بين التطبيقات
++    // يقبل نسخ «أرزقي للأرضيات» فقط (مش نسخ تطبيق الكهرباء) — علشان ما يحصلش خلط بين التطبيقات
+     validateBackup(obj) {
+       if (!obj || typeof obj !== 'object') return 'الملف غير صالح';
+-      if (obj.app !== APP_ID) return obj.app === 'hesabaty' || Array.isArray(obj.invoices) ? 'ده ملف نسخة من تطبيق «حساباتي» للكهرباء، مش من تطبيق الأرضيات' : 'الملف ده مش نسخة احتياطية من «حساباتي للأرضيات»';
++      if (obj.app !== APP_ID) return obj.app === 'hesabaty' || Array.isArray(obj.invoices) ? 'ده ملف نسخة من تطبيق «أرزقي» للكهرباء، مش من تطبيق الأرضيات' : 'الملف ده مش نسخة احتياطية من «أرزقي للأرضيات»';
+       return null;
+     },
+     restore(obj) {
+diff -ruN --no-dereference Flooring/js/ui.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/ui.js
+--- Flooring/js/ui.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/ui.js	2026-11-20 23:08:29.191011390 +0000
+@@ -1,5 +1,5 @@
+ /*
+- * حساباتي للأرضيات — أدوات الواجهة: الأيقونات، الرسائل، النوافذ المنبثقة، الصفحات، النماذج
++ * أرزقي للأرضيات — أدوات الواجهة: الأيقونات، الرسائل، النوافذ المنبثقة، الصفحات، النماذج
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  */
+ (function (root) {
+diff -ruN --no-dereference Flooring/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Flooring/manifest.json
+--- Flooring/manifest.json	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/manifest.json	2026-11-20 23:08:29.188720739 +0000
+@@ -1,7 +1,7 @@
+ {
+   "id": "./",
+-  "name": "حساباتي للأرضيات والتشطيبات",
+-  "short_name": "حساباتي للأرضيات",
++  "name": "أرزقي للأرضيات والتشطيبات",
++  "short_name": "أرزقي للأرضيات",
+   "description": "حساب المساحات والكميات والخامات والمصنعية والأرباح لأعمال الأرضيات والتشطيبات، وإدارة المشروعات والعملاء والعمال وإصدار الفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
+   "lang": "ar",
+   "dir": "rtl",
+diff -ruN --no-dereference Flooring/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Flooring/privacy.html
+--- Flooring/privacy.html	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/privacy.html	2026-11-20 23:08:29.189234189 +0000
+@@ -3,7 +3,7 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-  <title>سياسة الخصوصية — حساباتي للأرضيات</title>
++  <title>سياسة الخصوصية — أرزقي للأرضيات</title>
+   <link rel="stylesheet" href="./fonts/cairo.css">
+   <style>
+     :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --primary: #10284a; --border: #e2e8f1; }
+@@ -18,7 +18,7 @@
+ </head>
+ <body>
+ <main>
+-  <h1>سياسة الخصوصية — حساباتي للأرضيات والتشطيبات</h1>
++  <h1>سياسة الخصوصية — أرزقي للأرضيات والتشطيبات</h1>
+   <div class="card"><h2>بياناتك على جهازك أنت بس</h2>
+     <p>كل البيانات اللي بتسجلها في التطبيق (المشروعات، العملاء، الفواتير، الخامات، العمال، المصروفات، الملاحظات) بتتحفظ على جهازك فقط داخل التخزين المحلي للمتصفح أو التطبيق. التطبيق ما بيرفعش أي بيانات لأي سيرفر، ومفيش تسجيل دخول ولا حساب.</p></div>
+   <div class="card"><h2>بدون تتبع وبدون إعلانات</h2>
+diff -ruN --no-dereference Flooring/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/service-worker.js
+--- Flooring/service-worker.js	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/service-worker.js	2026-11-20 23:08:29.189087179 +0000
+@@ -1,10 +1,10 @@
+ /*
+- * حساباتي للأرضيات — Service Worker (العمل بدون إنترنت)
++ * أرزقي للأرضيات — Service Worker (العمل بدون إنترنت)
+  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+  *
+  * حماية التطبيقات التانية على نفس الدومين:
+  *  - كل الكاش هنا اسمه بيبدأ بـ "hflooring-" ومش بيلمس أي كاش تاني
+- *    (تطبيق حساباتي للكهرباء بيستخدم "hesabaty-..." — مستحيل يتمسح من هنا).
++ *    (تطبيق أرزقي للكهرباء بيستخدم "hesabaty-..." — مستحيل يتمسح من هنا).
+  *  - الـ Service Worker ده نطاقه مجلد التطبيق بس، وبيتعامل مع الطلبات اللي جوه المجلد ده بس.
+  *
+  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
+diff -ruN --no-dereference Flooring/version.json /home/user/Hisabati-Super-App/Trade-Modules/Flooring/version.json
+--- Flooring/version.json	2026-11-17 16:31:26.000000000 +0000
++++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/version.json	2026-11-20 23:08:29.188876124 +0000
+@@ -2,7 +2,7 @@
+   "version": "1.0.0",
+   "date": "2026-11-17",
+   "notes": [
+-    "أول إصدار من حساباتي للأرضيات والتشطيبات",
++    "أول إصدار من أرزقي للأرضيات والتشطيبات",
+     "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة",
+     "14 طريقة محاسبة داخل نفس المشروع",
+     "المشروعات والعملاء والخامات والمخزون والعمال والمصروفات والأرباح والنوتة",

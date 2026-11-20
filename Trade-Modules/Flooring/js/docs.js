@@ -363,6 +363,30 @@
         <div class="inv-totals"><table class="p-totals-table">${totals.map(([l, v, c]) => `<tr${c ? ` class="${c}"` : ''}><td ${CE}>${l}</td><td ${CE}>${v} ${esc(UI.curSym())}</td></tr>`).join('')}</table>
         <div class="inv-net"><span ${CE}>${netLabel}</span><strong ${CE}>${money(netVal)}</strong></div></div></div>
       ${footerHTML()}`;
+    // أرزقي: الفاتورة الموحدة لكل مستندات العميل (فاتورة المشتريات من المورد بتفضل زي ما هي)
+    if (root.ArzaqiInvoice && !isP) {
+      const tmp = document.createElement('div'); tmp.innerHTML = html;
+      const h = root.ArzaqiInvoice.harvest(tmp);
+      const s = db().settings;
+      const c = d.customerId && by('customers', d.customerId);
+      const billable = !!T[d.type].revenue;
+      const lines = [[d.type === 'supply' ? 'الخامات (على العميل)' : (isX ? 'إجمالي الأعمال المنفذة' : 'إجمالي البنود'), t.subtotal]];
+      if (t.additions) lines.push(['إضافات', t.additions, '+']);
+      if (t.discount) lines.push(['الخصم', t.discount, '-']);
+      if (isX && t.previous) lines.push(['ما تم صرفه سابقاً', t.previous, '-']);
+      if (isX && t.deductions) lines.push(['استقطاعات', t.deductions, '-']);
+      const azHtml = root.ArzaqiInvoice.render({
+        section: 'flooring', docKey: d.id || d.number, docLabel: docTitle(d), number: d.number, date: fmtDate(d.date), billable,
+        business: { name: s.bizName || s.ownerName, trade: s.bizName ? s.ownerName : '', phone: [s.phone, s.phone2].filter(Boolean).join(' - '), logo: s.showLogo ? s.logo : '' },
+        client: { name: cl.name, phone: cl.phone, address: cl.address, note: c ? c.note : '' },
+        chips: p ? [`<span class="inv-chip navy" ${CE}>المشروع: <b>${esc(p.name)}</b></span>`] : [],
+        bodyHTML: h.bodyHTML, notesHTML: notesHTML(notes), money,
+        totals: { lines, total: isX ? t.due : t.total, paid: t.paid, paidLabel: t.linkedPaid ? 'الواصل من العميل (على المشروع)' : 'الواصل من العميل' },
+        netLabel: isX ? 'صافي المستحق بالمستخلص' : 'إجمالي ' + docTitle(d)
+      });
+      openPrint(azHtml, `${docTitle(d)} ${d.number || ''} ${cl.name || ''}`.trim());
+      return;
+    }
     openPrint(html, `${docTitle(d)} ${d.number || ''} ${cl.name || ''}`.trim());
   }
 
