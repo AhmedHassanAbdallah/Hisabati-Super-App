@@ -89,3 +89,14 @@ in-memory Google Drive v3 (same requests/responses, CORS, bearer tokens). Everyt
 * Restore rejects files that are not Hisabati backups or contain foreign keys/databases.
 
 Screenshots: `Documentation/screenshots/`.
+
+## 6. Plastering section added (2026-11-20)
+* Source: `Hesabaty-plaster` GitHub `main` @ `ac46676` (v1.0.0). The local clone from the first
+  session was still empty and was not touched. Copied with `git archive` → 44 files, byte-identical
+  (`.provenance/Hesabaty-plaster@main.sha256`, `tools/verify-integrity.sh`).
+* Integration checks: unique storage prefix `hplaster_`, cache prefix `hplaster-`, no IndexedDB,
+  no frame-busting, hash-based navigation (`#/home`) — works inside the launcher unchanged.
+* The app's own suites, original vs. copy: engine **16/16 = 16/16**, browser e2e **PASSED = PASSED**
+  (including "clear all data clears only plastering data").
+* Launcher suites with 7 sections: `launcher.e2e.js` **151/151**, `cloud-backup.e2e.js` **36/36**
+  (backup/restore include `hplaster_*`), `launcher.offline.js` **20/20** (8 separate service workers).
