@@ -34,6 +34,13 @@ node tests/launcher.e2e.js http://127.0.0.1:8790/   # launcher + every app (Play
 tools/run-trade-suites.sh                           # every app's own test suite on the copies
 ```
 
+## Android apps
+* `android/` — **حساباتي** (TWA, runs the site in Chrome): `hisabati.apk` / `hisabati.aab` in Releases `v*`.
+* `android-standalone/` — **حساباتي أوفلاين** (all sections inside the app, no Chrome needed):
+  `hisabati-offline.apk` / `.aab` in Releases `offline-v*`.
+* Both build automatically on GitHub Actions; both open in Android Studio (Gradle wrapper included).
+* Google Play: `Documentation/PLAY-STORE.md` (listing text, images, data safety, steps).
+
 ## Documentation
 * `Documentation/INTEGRATION.md` — what was inspected, why iframe hosting, how back/print/data work, limitations
 * `Documentation/VERIFICATION.md` — baseline and test results

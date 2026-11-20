@@ -100,3 +100,19 @@ Screenshots: `Documentation/screenshots/`.
   (including "clear all data clears only plastering data").
 * Launcher suites with 7 sections: `launcher.e2e.js` **151/151**, `cloud-backup.e2e.js` **36/36**
   (backup/restore include `hplaster_*`), `launcher.offline.js` **20/20** (8 separate service workers).
+
+## 7. Android apps for Google Play (2026-11-20)
+**حساباتي (TWA, `android/`) 1.1.0** — GitHub Actions build: APK + AAB, targetSdk 36, signed → release `v1.1.0`.
+
+**حساباتي أوفلاين (standalone, `android-standalone/`) 1.1.0** — GitHub Actions run 44815570414:
+* Build: APK + AAB compiled; check step confirmed the web files inside the app are byte-identical to
+  `Main-App/`, `Shared-Assets/`, `Trade-Modules/*` index files and that no section android/tests files were bundled.
+* Android emulator (API 34, google_apis): installed and cold-started; home + all 7 sections loaded from inside
+  the APK with their own titles, all 5 native bridges present, no JavaScript errors, no crash, back key OK.
+* Release `offline-v1.1.0` (SHA-1 `F3:67:70:A9:02:F5:A1:CF:2D:A7:86:49:0A:AA:76:38:A6:34:81:1D`).
+* Browser simulation of the native bridge (`tests/native-mode.e2e.js`) **14/14**: sections open full page,
+  back returns home, Google sign-in and Drive backup go through the native path, no web Google library loaded.
+* Web suites after the change: launcher **151/151**, cloud backup **36/36**.
+* Not testable automatically: native Google sign-in on a device (needs the Android OAuth client —
+  `ANDROID-STANDALONE.md`), and the Android print dialog (needs a person).
+
