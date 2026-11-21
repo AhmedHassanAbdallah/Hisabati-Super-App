@@ -139,3 +139,14 @@ Intended differences that the original suites see (handled, not hidden):
   outside each section's folder, so each section's service worker caches them too — under the section's own
   cache prefix (the sections' cache-isolation checks still pass).
 * Invoices: the document type is the page's `<h1>` as before; the craftsman's name is above it with logo and phone.
+
+## 9. أرزقي | Arzoqi 2.1.0 — bilingual brand, teal identity, new fonts (2026-11-21)
+| Check | Result |
+|---|---|
+| `tools/verify-integrity.sh /home/user` | **ALL CHECKS PASSED** — originals untouched; copies = original + pinned changes only |
+| `tools/run-trade-suites.sh` (each app's own tests, incl. the two layout audits with the new fonts) | **12/12 PASS** |
+| `tests/launcher.e2e.js` / `launcher.offline.js` / `native-mode.e2e.js` / `cloud-backup.e2e.js` | 151 / 20 / 14 / 36 passed · 0 failed |
+| Offline: each section reloaded with the network cut | 7/7: theme, fonts (IBM Plex Sans Arabic + Inter), unified invoice, wordmark |
+
+Intended differences seen by the original suites: the Plumbing title check now expects `أرزقي | Arzoqi — السباكة`
+(pinned in `Plumbing/tests/run-tests.js`); the Drive folder is `أرزقي | Arzoqi — نسخ احتياطية` (launcher cloud test).

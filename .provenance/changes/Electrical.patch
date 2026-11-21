@@ -17,8 +17,8 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
 -  <meta name="description" content="حساباتي: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
 -  <title>حساباتي - حاسبة وفواتير الكهرباء</title>
-+  <meta name="description" content="أرزقي: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
-+  <title>أرزقي - حاسبة وفواتير الكهرباء</title>
++  <meta name="description" content="أرزقي | Arzoqi: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
++  <title>أرزقي | Arzoqi — حاسبة وفواتير الكهرباء</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -45,7 +45,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
 -      <h1 id="tabTitle">حساباتي</h1>
-+      <h1 id="tabTitle">أرزقي</h1>
++      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
@@ -54,7 +54,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
  
        <div class="copyright">
 -        <b>حساباتي</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
-+        <b>أرزقي</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي | Arzoqi</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
@@ -81,7 +81,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    const DEFAULT_TECH = 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية';
    const ROOM_PRESETS = ['الريسبشن', 'الصالة', 'غرفة النوم الرئيسية', 'غرفة الأطفال', 'غرفة المعيشة', 'المطبخ', 'الحمام', 'الطرقة والمدخل', 'البلكونة'];
 -  const VIEW_TITLES = { home: 'حساباتي', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
-+  const VIEW_TITLES = { home: 'أرزقي', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
++  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
    const EDITOR_VIEWS = ['pricing', 'rooms', 'summary'];
    // نظام البنود المنفصلة
    const WORK_PRESETS = ['تقفيل لوحة', 'تركيب لوحة', 'سحب خط', 'تأسيس نقطة', 'تركيب نجفة', 'تركيب إسبوتات', 'تركيب سخان', 'تركيب شفاط', 'تغيير بريزة / مفتاح', 'صيانة وكشف أعطال'];
@@ -90,7 +90,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
      document.getElementById('headerTitle').textContent = (key === 'rooms' && isItemsMode(getCurrentInvoice())) ? 'بنود الفاتورة' : VIEW_TITLES[key];
 -    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'حساباتي';
-+    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي';
++    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
@@ -99,7 +99,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
 -        <span>صدرت بواسطة تطبيق <b>حساباتي</b></span>
-+        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
++        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b></span>
        </footer>`;
    }
  
@@ -148,7 +148,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
        <footer class="inv-foot">
          <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
 -        <span>صدرت بواسطة تطبيق <b>حساباتي</b></span>
-+        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
++        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b></span>
        </footer>`;
 +    azElectricalInvoice(inv, t);
    }
@@ -179,7 +179,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    "id": "/Ezaza/",
 -  "name": "حساباتي - حاسبة وفواتير الكهرباء",
 -  "short_name": "حساباتي",
-+  "name": "أرزقي - حاسبة وفواتير الكهرباء",
++  "name": "أرزقي | Arzoqi — حاسبة وفواتير الكهرباء",
 +  "short_name": "أرزقي",
    "description": "حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء بسهولة واحترافية. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
@@ -191,7 +191,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي</title>
-+  <title>سياسة الخصوصية - أرزقي</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · حاسبة وفواتير الكهرباء</title>
    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
@@ -200,7 +200,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    <header>
      <h1>سياسة الخصوصية</h1>
 -    <p>تطبيق حساباتي - حاسبة وفواتير الكهرباء · آخر تحديث: 9 نوفمبر 2026</p>
-+    <p>تطبيق أرزقي - حاسبة وفواتير الكهرباء · آخر تحديث: 9 نوفمبر 2026</p>
++    <p>تطبيق أرزقي | Arzoqi — حاسبة وفواتير الكهرباء · آخر تحديث: 9 نوفمبر 2026</p>
    </header>
    <main>
      <section>
@@ -213,7 +213,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * نظام الإصدارات:
-@@ -111,6 +111,31 @@
+@@ -111,6 +111,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -222,7 +222,10 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabaty-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)

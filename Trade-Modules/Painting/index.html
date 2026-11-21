@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="author" content="أحمد حسن عبدالله">
   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
-  <meta name="description" content="أرزقي نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
-  <title>أرزقي نقاشة - حسابات وفواتير النقاشة والدهانات</title>
+  <meta name="description" content="أرزقي | Arzoqi — نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
+  <title>أرزقي | Arzoqi — نقاشة: حسابات وفواتير النقاشة والدهانات</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -750,7 +750,7 @@
     <img class="brand-ic" src="./icons/icon-192.png" alt="">
     <div class="titles">
       <div class="sub" id="greetLine">أهلاً بيك</div>
-      <h1 id="tabTitle">أرزقي نقاشة</h1>
+      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
     </div>
     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
   </header>
@@ -1092,7 +1092,7 @@
       </div>
 
       <div class="copyright">
-        <b>أرزقي نقاشة</b> — حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
+        <b>أرزقي | Arzoqi</b> — نقاشة: حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
         <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
@@ -1533,7 +1533,7 @@
   const BACKUP_APP_ID = 'hesabaty-painting';
   const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال نقاشة ودهانات';
   const DEFAULT_TECH = 'للنقاشة والدهانات والديكورات';
-  const VIEW_TITLES = { home: 'أرزقي نقاشة', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
+  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
   const EDITOR_VIEWS = ['pricing', 'rooms', 'costs', 'summary'];
 
   /* ---------------- محرك النقاشة: الأنواع والقوائم الجاهزة ---------------- */
@@ -1952,7 +1952,7 @@
     const order = EDITOR_VIEWS.indexOf(key);
     EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
     document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
-    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي نقاشة';
+    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
     document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
     if (isEd) renderEditorBar();
     if (key === 'home') renderHome();
@@ -5038,7 +5038,7 @@
     return `
       <footer class="inv-foot">
         <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
-        <span>صدرت بواسطة تطبيق <b>أرزقي نقاشة</b></span>
+        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — نقاشة</span>
       </footer>`;
   }
   const signHTML = (a, b) => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;

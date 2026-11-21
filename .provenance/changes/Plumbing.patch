@@ -17,8 +17,8 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
 -  <meta name="description" content="حساباتي السباكة: تطبيق متكامل لإدارة ومحاسبة أعمال السباكة والصحي والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
 -  <title>حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي</title>
-+  <meta name="description" content="أرزقي السباكة: تطبيق متكامل لإدارة ومحاسبة أعمال السباكة والصحي والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
-+  <title>أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي</title>
++  <meta name="description" content="أرزقي | Arzoqi — السباكة: تطبيق متكامل لإدارة ومحاسبة أعمال السباكة والصحي والصيانة والتركيب والإصلاح - تصميم وتطوير أحمد حسن عبدالله">
++  <title>أرزقي | Arzoqi — السباكة: إدارة ومحاسبة أعمال السباكة والصحي</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -62,7 +62,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
 -      <h1><span id="tabTitle">حساباتي السباكة</span><span class="brand-tag">PLUMBING</span></h1>
-+      <h1><span id="tabTitle">أرزقي السباكة</span><span class="brand-tag">PLUMBING</span></h1>
++      <h1><span id="tabTitle">أرزقي | Arzoqi</span><span class="brand-tag">PLUMBING</span></h1>
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
@@ -89,7 +89,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  
        <div class="copyright">
 -        <b>حساباتي السباكة</b> — إدارة ومحاسبة أعمال السباكة والصحي · الإصدار <span id="aboutVersion"></span><br>
-+        <b>أرزقي السباكة</b> — إدارة ومحاسبة أعمال السباكة والصحي · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي | Arzoqi</b> — السباكة: إدارة ومحاسبة أعمال السباكة والصحي · الإصدار <span id="aboutVersion"></span><br>
          PLUMBING &amp; SANITARY WORK ACCOUNTING<br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
@@ -197,6 +197,24 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  const CURRENCIES = [
    { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
    { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
+@@ -485,7 +485,7 @@
+ }
+ 
+ /* ---------------- التنقل بين الأقسام ---------------- */
+-const VIEW_TITLES = { home: APP_NAME, info: 'بيانات المستند', lines: 'بنود الأعمال', summary: 'الحساب والمدفوعات', docs: 'المقايسات والفواتير', ledger: 'العملاء', more: 'المزيد' };
++const VIEW_TITLES = { home: 'أرزقي | Arzoqi', info: 'بيانات المستند', lines: 'بنود الأعمال', summary: 'الحساب والمدفوعات', docs: 'المقايسات والفواتير', ledger: 'العملاء', more: 'المزيد' };
+ const EDITOR_VIEWS = ['info', 'lines', 'summary'];
+ let currentView = 'home';
+ let lastTab = 'home';
+@@ -506,7 +506,7 @@
+   const order = EDITOR_VIEWS.indexOf(key);
+   EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
+   document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
+-  document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || APP_NAME;
++  document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
+   document.getElementById('addLineFab').classList.toggle('hidden', key !== 'lines');
+   renderCurrentView();
+   window.scrollTo({ top: 0, behavior: 'smooth' });
 --- Plumbing/js/customers.js
 +++ Trade-Modules/Plumbing/js/customers.js
 @@ -1,5 +1,5 @@
@@ -238,7 +256,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      settings.lastNotify = todayISO(); saveSettings();
      const body = due.slice(0, 4).map(r => '• ' + r.title).join('\n');
 -    const title = `حساباتي السباكة: ${due.length} موعد النهارده`;
-+    const title = `أرزقي السباكة: ${due.length} موعد النهارده`;
++    const title = `أرزقي | Arzoqi — السباكة: ${due.length} موعد النهارده`;
      if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(reg => reg.showNotification(title, { body, icon: './icons/icon-192.png', lang: 'ar', dir: 'rtl', tag: 'plumbing-due' })).catch(() => {});
      else new Notification(title, { body });
    } catch (e) {}
@@ -267,7 +285,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  }
  function printFooterHTML() {
 -  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي السباكة</b></span></footer>`;
-+  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي السباكة</b></span></footer>`;
++  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — السباكة</span></footer>`;
  }
  const signHTML = (a = 'توقيع السباك / المقاول', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
  function notesHTML(title, items) {
@@ -304,7 +322,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    "id": "/Hesabaty-plumbing/",
 -  "name": "حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي",
 -  "short_name": "حساباتي السباكة",
-+  "name": "أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي",
++  "name": "أرزقي | Arzoqi — السباكة",
 +  "short_name": "أرزقي السباكة",
    "description": "نظام متكامل لإدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف: التأسيس والتشطيب والصيانة والخامات والعمال والمقايسات والفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
@@ -316,7 +334,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي السباكة</title>
-+  <title>سياسة الخصوصية - أرزقي السباكة</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · السباكة</title>
    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
@@ -325,7 +343,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    <header>
      <h1>سياسة الخصوصية</h1>
 -    <p>تطبيق حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي · آخر تحديث: 15 نوفمبر 2026</p>
-+    <p>تطبيق أرزقي السباكة - إدارة ومحاسبة أعمال السباكة والصحي · آخر تحديث: 15 نوفمبر 2026</p>
++    <p>تطبيق أرزقي | Arzoqi — السباكة: إدارة ومحاسبة أعمال السباكة والصحي · آخر تحديث: 15 نوفمبر 2026</p>
    </header>
    <main>
      <section>
@@ -348,7 +366,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
   * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-@@ -122,6 +122,31 @@
+@@ -122,6 +122,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -357,7 +375,10 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)
@@ -387,7 +408,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    check('عملاء التطبيقات الأخرى لم يتم استيرادهم تلقائياً', (await ev(() => DB.customers.length + DB.docs.length + DB.projects.length)) === 0);
    check('العملة والمظهر مستقلين (لم تُقرأ إعدادات التطبيقات الأخرى)', (await ev(() => settings.currency + '/' + settings.theme)) === 'EGP/auto');
 -  check('اسم التطبيق وهويته: حساباتي السباكة', (await page.title()).includes('حساباتي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
-+  check('اسم التطبيق وهويته: أرزقي السباكة', (await page.title()).includes('أرزقي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
++  check('اسم التطبيق وهويته: أرزقي | Arzoqi — السباكة', (await page.title()).includes('أرزقي | Arzoqi — السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
    await shot('01-home');
  
    /* ---------- العملاء والمشروعات ---------- */

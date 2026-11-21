@@ -217,7 +217,7 @@ function notifyDueReminders() {
     if (!due.length) return;
     settings.lastNotify = todayISO(); saveSettings();
     const body = due.slice(0, 4).map(r => '• ' + r.title).join('\n');
-    const title = `أرزقي السباكة: ${due.length} موعد النهارده`;
+    const title = `أرزقي | Arzoqi — السباكة: ${due.length} موعد النهارده`;
     if (navigator.serviceWorker && navigator.serviceWorker.ready) navigator.serviceWorker.ready.then(reg => reg.showNotification(title, { body, icon: './icons/icon-192.png', lang: 'ar', dir: 'rtl', tag: 'plumbing-due' })).catch(() => {});
     else new Notification(title, { body });
   } catch (e) {}

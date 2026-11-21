@@ -17,8 +17,8 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
 -  <meta name="description" content="حساباتي للجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
 -  <title>حساباتي للجبس والديكورات - HESABATI GYPSUM</title>
-+  <meta name="description" content="أرزقي للجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
-+  <title>أرزقي للجبس والديكورات - HESABATI GYPSUM</title>
++  <meta name="description" content="أرزقي | Arzoqi — الجبس والديكورات: حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات">
++  <title>أرزقي | Arzoqi — الجبس والديكورات</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -41,7 +41,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
 -      <h1 id="tabTitle">حساباتي للجبس</h1>
-+      <h1 id="tabTitle">أرزقي للجبس</h1>
++      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
@@ -50,7 +50,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
        <div class="dev-card">
          <div class="dev-name">أحمد حسن عبدالله</div>
 -        <div class="dev-role">مطوّر ومصمّم تطبيقات حساباتي</div>
-+        <div class="dev-role">مطوّر ومصمّم تطبيقات أرزقي</div>
++        <div class="dev-role">مطوّر ومصمّم أرزقي | Arzoqi</div>
          <div class="dev-links">
            <a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener"><i data-icon="chat"></i> واتساب</a>
            <a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener"><i data-icon="facebook"></i> فيسبوك</a>
@@ -58,7 +58,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
        </div>
        <div class="copyright">
 -        <b>حساباتي للجبس والديكورات</b> — HESABATI GYPSUM · الإصدار <span id="aboutVersion"></span><br>
-+        <b>أرزقي للجبس والديكورات</b> — HESABATI GYPSUM · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي | Arzoqi</b> — الجبس والديكورات · الإصدار <span id="aboutVersion"></span><br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
        </div>
@@ -73,7 +73,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  'use strict';
  const APP_VERSION = '1.0.0';
 -const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
-+const VIEW_TITLES = { home: 'أرزقي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
++const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
  let currentView = 'home';
  
  /* ---------------- التنقل ---------------- */
@@ -82,7 +82,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    document.querySelectorAll('.view').forEach(el => el.classList.toggle('active', el.id === 'view-' + v));
    document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.id === 'navBtn-' + v));
 -  $('tabTitle').textContent = VIEW_TITLES[v] || 'حساباتي للجبس';
-+  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي للجبس';
++  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي | Arzoqi';
    renderView(v);
    window.scrollTo(0, 0);
  }
@@ -238,7 +238,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
      <div class="inv-bottom"><div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notes.length ? notes.map(n => esc(n)).join('<br>') : '—'}</div></div><div class="inv-side">${totals}</div></div>
      ${sign}
 -    <footer class="inv-foot"><span>${esc(st.bizName || 'حساباتي للجبس والديكورات')}</span><span>صدر من تطبيق <b>حساباتي للجبس</b></span></footer>`;
-+    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي للجبس</b></span></footer>`;
++    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي | Arzoqi</b> — الجبس</span></footer>`;
  }
  
  /* ---------------- المعاينة والطباعة ---------------- */
@@ -267,7 +267,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    "id": "/Hesabaty-Gebsum/",
 -  "name": "حساباتي للجبس والديكورات",
 -  "short_name": "حساباتي للجبس",
-+  "name": "أرزقي للجبس والديكورات",
++  "name": "أرزقي | Arzoqi — الجبس والديكورات",
 +  "short_name": "أرزقي للجبس",
    "description": "حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
@@ -279,7 +279,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي للجبس والديكورات</title>
-+  <title>سياسة الخصوصية - أرزقي للجبس والديكورات</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · الجبس والديكورات</title>
    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
@@ -288,7 +288,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    <header>
      <h1>سياسة الخصوصية</h1>
 -    <p>تطبيق حساباتي للجبس والديكورات · آخر تحديث: 17 نوفمبر 2026</p>
-+    <p>تطبيق أرزقي للجبس والديكورات · آخر تحديث: 17 نوفمبر 2026</p>
++    <p>تطبيق أرزقي | Arzoqi — الجبس والديكورات · آخر تحديث: 17 نوفمبر 2026</p>
    </header>
    <main>
      <section>
@@ -306,7 +306,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
   * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
   */
-@@ -18,6 +18,31 @@
+@@ -18,6 +18,34 @@
    "./js/ui/base.js", "./js/ui/calc.js", "./js/ui/projects.js", "./js/ui/manage.js", "./js/ui/docs.js", "./js/app.js",
    "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-192.png", "./icons/icon-maskable-512.png"
  ];
@@ -316,7 +316,10 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)

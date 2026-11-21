@@ -4,7 +4,7 @@
  */
 'use strict';
 const APP_VERSION = '1.0.0';
-const VIEW_TITLES = { home: 'أرزقي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
+const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
 let currentView = 'home';
 
 /* ---------------- التنقل ---------------- */
@@ -13,7 +13,7 @@ function switchView(v) {
   currentView = v;
   document.querySelectorAll('.view').forEach(el => el.classList.toggle('active', el.id === 'view-' + v));
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.id === 'navBtn-' + v));
-  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي للجبس';
+  $('tabTitle').textContent = VIEW_TITLES[v] || 'أرزقي | Arzoqi';
   renderView(v);
   window.scrollTo(0, 0);
 }

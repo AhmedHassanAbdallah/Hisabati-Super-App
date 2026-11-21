@@ -15,8 +15,8 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 -  <meta name="description" content="HESABATI PLASTER — حساباتي للمحارة وتشطيبات الواجهات: حصر المساحات وحساب خامات ومصنعية المحارة والجرافيت والدهارة والمعجون والواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير.">
 -  <title>HESABATI PLASTER — حساباتي للمحارة والواجهات</title>
-+  <meta name="description" content="HESABATI PLASTER — أرزقي للمحارة وتشطيبات الواجهات: حصر المساحات وحساب خامات ومصنعية المحارة والجرافيت والدهارة والمعجون والواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير.">
-+  <title>HESABATI PLASTER — أرزقي للمحارة والواجهات</title>
++  <meta name="description" content="أرزقي | Arzoqi — المحارة وتشطيبات الواجهات: حصر المساحات وحساب خامات ومصنعية المحارة والجرافيت والدهارة والمعجون والواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير.">
++  <title>أرزقي | Arzoqi — المحارة والواجهات</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -45,7 +45,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
      parent: () => ['more'],
      render() {
 -      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>حساباتي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
-+      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>أرزقي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
++      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>أرزقي | Arzoqi</h2><p>المحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
          <div class="card"><div class="kv">
            <div class="kv-row"><span>العمل بدون إنترنت</span><strong>${'serviceWorker' in navigator ? 'مفعّل' : 'غير مدعوم في المتصفح ده'}</strong></div>
            <div class="kv-row"><span>حالة الاتصال الآن</span><strong>${navigator.onLine ? 'متصل' : 'بدون إنترنت'}</strong></div>
@@ -78,6 +78,15 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
        <p contenteditable="true">${esc(st.bizTitle || '')}${st.bizPhone ? ' · <b>' + esc(st.bizPhone) + '</b>' : ''}${st.bizAddress ? '<br>' + esc(st.bizAddress) : ''}</p></div></div>
        <div class="d-doc"><span class="tag" contenteditable="true">${esc(docName)}</span>${no ? `<span class="d">رقم: <b>${esc(no)}</b></span>` : ''}<span class="d">التاريخ: <b>${esc(fmtDate(date || S.today()))}</b></span></div></div><div class="d-stripe"></div>`;
    }
+@@ -23,7 +23,7 @@
+   }
+   function footer() {
+     const st = S.db().settings;
+-    return `<div class="d-foot"><span>${esc(st.bizName || '')} ${st.bizPhone ? '· ' + esc(st.bizPhone) : ''}</span><span>تم الإعداد بـ <b>HESABATI PLASTER</b></span></div>`;
++    return `<div class="d-foot"><span>${esc(st.bizName || '')} ${st.bizPhone ? '· ' + esc(st.bizPhone) : ''}</span><span>تم الإعداد بـ <b>أرزقي | Arzoqi</b> — المحارة</span></div>`;
+   }
+   function signs(a, b) { return `<div class="d-sign"><div>${esc(a || 'توقيع المقاول')}</div><div>${esc(b || 'توقيع العميل')}</div></div>`; }
+   function totalsBox(rows, netLabel, net) {
 @@ -107,7 +107,34 @@
      if (disc) wa.push(`الخصم: ${M(disc)}`);
      if (isInv && isAll) wa.push(`المدفوع: ${M(r.received)}`, `*المتبقي: ${M(netVal)} ${sym()}*`);
@@ -119,7 +128,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    function closeDoc() {
      document.getElementById('printModal').classList.remove('open');
 -    document.title = 'HESABATI PLASTER — حساباتي للمحارة والواجهات';
-+    document.title = 'HESABATI PLASTER — أرزقي للمحارة والواجهات';
++    document.title = 'أرزقي | Arzoqi — المحارة والواجهات';
      CUR_DOC = null;
    }
    window.addEventListener('resize', fitPreview);
@@ -160,7 +169,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
      const isTab = !!v.tab;
      head.innerHTML = isTab
 -      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'حساباتي للمحارة والواجهات')}</div><h1>${esc(out.title || 'HESABATI PLASTER')}</h1></div>
-+      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'أرزقي للمحارة والواجهات')}</div><h1>${esc(out.title || 'HESABATI PLASTER')}</h1></div>
++      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'المحارة والواجهات')}</div><h1>${esc(out.title || 'أرزقي | Arzoqi')}</h1></div>
           <button type="button" class="icon-btn" data-act="toggleTheme" aria-label="الوضع الليلي">${icon(isDark() ? 'sun' : 'moon')}</button>`
        : `<button type="button" class="icon-btn" data-act="back" aria-label="رجوع">${icon('back')}</button><div class="titles"><h1>${esc(out.title || '')}</h1>${out.sub ? `<div class="sub">${esc(out.sub)}</div>` : ''}</div>
           ${(out.actions || []).map(a => `<button type="button" class="icon-btn${a.accent ? ' accent' : ''}" data-act="${esc(a.act)}"${a.data ? Object.keys(a.data).map(k => ` data-${k}="${esc(a.data[k])}"`).join('') : ''} aria-label="${esc(a.label || '')}">${icon(a.icon)}</button>`).join('')}`;
@@ -171,7 +180,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
        <div class="home-row"><h2 class="home-h" style="margin:0">آخر المشروعات</h2><button type="button" class="link-btn" data-act="go" data-view="projects">عرض الكل</button></div>
        ${ps.length ? ps.slice(-5).reverse().map(projectRow).join('') : `<div class="empty"><div class="big">${icon('trowel')}</div><p>ابدأ أول مشروع: سجّل العميل، احسب المساحات، واختار البنود (محارة، جرافيت، معجون، واجهات).</p><button type="button" class="btn btn-accent" data-act="newProject">${icon('plus')} مشروع جديد</button></div>`}`;
 -      return { title: 'حساباتي للمحارة', sub: greet, html };
-+      return { title: 'أرزقي للمحارة', sub: greet, html };
++      return { title: 'أرزقي | Arzoqi', sub: greet, html };
      }
    };
  
@@ -182,23 +191,33 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    "id": "/Hesabaty-plaster/",
 -  "name": "HESABATI PLASTER - حساباتي للمحارة والواجهات",
 -  "short_name": "حساباتي للمحارة",
-+  "name": "HESABATI PLASTER - أرزقي للمحارة والواجهات",
++  "name": "أرزقي | Arzoqi — المحارة والواجهات",
 +  "short_name": "أرزقي للمحارة",
    "description": "حساب مساحات وخامات ومصنعية المحارة والجرافيت والدهارة والمعجون وتشطيبات الواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير — يعمل بدون إنترنت.",
    "lang": "ar",
    "dir": "rtl",
 --- Plastering/privacy.html
 +++ Trade-Modules/Plastering/privacy.html
-@@ -14,7 +14,7 @@
+@@ -3,7 +3,7 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-  <title>سياسة الخصوصية — HESABATI PLASTER</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · المحارة والواجهات</title>
+   <style>
+     :root { --bg: #f2f5fa; --text: #0f1b2d; --card: #fff; }
+     @media (prefers-color-scheme: dark) { :root { --bg: #071226; --text: #e9eff8; --card: #0f1f38; } }
+@@ -14,15 +14,15 @@
  </head>
  <body>
  <main>
 -  <h1>سياسة الخصوصية — حساباتي للمحارة وتشطيبات الواجهات</h1>
-+  <h1>سياسة الخصوصية — أرزقي للمحارة وتشطيبات الواجهات</h1>
-   <p>تطبيق HESABATI PLASTER يعمل بالكامل على جهازك.</p>
+-  <p>تطبيق HESABATI PLASTER يعمل بالكامل على جهازك.</p>
++  <h1>سياسة الخصوصية — أرزقي | Arzoqi · المحارة وتشطيبات الواجهات</h1>
++  <p>تطبيق أرزقي | Arzoqi (قسم المحارة) يعمل بالكامل على جهازك.</p>
    <ul>
      <li>كل البيانات (المشروعات، العملاء، العمال، المخزن، الفواتير) محفوظة على الجهاز فقط.</li>
-@@ -22,7 +22,7 @@
+     <li>التطبيق لا يجمع ولا يرسل ولا يشارك أي بيانات شخصية مع أي جهة.</li>
      <li>لا توجد إعلانات ولا أدوات تتبع ولا حسابات تسجيل دخول.</li>
      <li>عند المشاركة على واتساب أو الطباعة، أنت من يختار ما يتم إرساله.</li>
      <li>النسخة الاحتياطية ملف تحفظه بنفسك في المكان الذي تختاره.</li>
@@ -218,7 +237,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
   *  - أسماء الكاش تبدأ بـ "hplaster-" فقط.
   *  - التنظيف يمسح كاش "hplaster-" القديم فقط ولا يلمس أي كاش آخر
   *    (مثل hesabaty-app-* الخاص بتطبيق الكهرباء).
-@@ -34,6 +34,31 @@
+@@ -34,6 +34,34 @@
    './icons/icon-maskable-192.png',
    './icons/icon-maskable-512.png'
  ];
@@ -228,7 +247,10 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)

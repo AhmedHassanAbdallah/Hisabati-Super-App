@@ -13,7 +13,7 @@
 window.HISABATI_TRADES = [
   {
     id: 'electrical', dir: 'Electrical', source: 'Ezaza',
-    name: 'الكهرباء', full: 'أرزقي — الكهرباء',
+    name: 'الكهرباء', full: 'أرزقي | Arzoqi — الكهرباء',
     desc: 'نقاط تأسيسات الكهرباء وفواتير العملاء',
     about: 'احسب نقاط تأسيسات الكهرباء أوضة أوضة، وطلّع فاتورة احترافية لعميلك في دقايق.',
     features: [
@@ -27,7 +27,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'plumbing', dir: 'Plumbing', source: 'Hesabaty-plumbing',
-    name: 'السباكة والصحي', full: 'أرزقي — السباكة',
+    name: 'السباكة والصحي', full: 'أرزقي | Arzoqi — السباكة',
     desc: 'مقايسات وفواتير السباكة والصحي والصرف',
     about: 'كل أعمال السباكة والصحي وشبكات المياه والصرف: تأسيس وتشطيب وصيانة.',
     features: [
@@ -41,7 +41,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'hvac', dir: 'HVAC', source: 'Hesabaty-HAVC',
-    name: 'التكييف والتبريد', full: 'أرزقي — التكييف',
+    name: 'التكييف والتبريد', full: 'أرزقي | Arzoqi — التكييف',
     desc: 'تركيب وصيانة وإصلاح أجهزة التكييف',
     about: 'إدارة ومحاسبة أعمال التكييف والتبريد: التركيب والصيانة والإصلاح وقطع الغيار.',
     features: [
@@ -55,7 +55,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'painting', dir: 'Painting', source: 'Hesabaty-painting',
-    name: 'النقاشة والدهانات', full: 'أرزقي — النقاشة',
+    name: 'النقاشة والدهانات', full: 'أرزقي | Arzoqi — النقاشة',
     desc: 'مساحات الحوائط والأسقف والمقايسات',
     about: 'احسب مساحات الحوائط والأسقف بدقة، وأدِر مشاريع النقاشة من المقايسة لحد الفاتورة الختامية.',
     features: [
@@ -69,7 +69,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'flooring', dir: 'Flooring', source: 'Hesabaty-Flooring',
-    name: 'الأرضيات والتشطيبات', full: 'أرزقي — الأرضيات',
+    name: 'الأرضيات والتشطيبات', full: 'أرزقي | Arzoqi — الأرضيات',
     desc: 'بلاط وباركيه ورخام وإنترلوك وسلالم',
     about: 'احسب المساحات والكميات والخامات والمصنعية والأرباح لكل أعمال الأرضيات والتشطيبات.',
     features: [
@@ -83,7 +83,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'gypsum', dir: 'Gypsum', source: 'Hesabaty-Gebsum',
-    name: 'الجبس والديكورات', full: 'أرزقي — الجبس',
+    name: 'الجبس والديكورات', full: 'أرزقي | Arzoqi — الجبس',
     desc: 'جبسون بورد وجبس بلدي وكرانيش وبانوهات',
     about: 'المصنعية والخامات والكميات لأعمال الجبسون بورد والجبس البلدي والديكورات.',
     features: [
@@ -97,7 +97,7 @@ window.HISABATI_TRADES = [
   },
   {
     id: 'plastering', dir: 'Plastering', source: 'Hesabaty-plaster',
-    name: 'المحارة والواجهات', full: 'أرزقي — المحارة',
+    name: 'المحارة والواجهات', full: 'أرزقي | Arzoqi — المحارة',
     desc: 'محارة وجرافيت ودهارة وتشطيبات واجهات',
     about: 'احسب مساحات وخامات ومصنعية المحارة الداخلية والخارجية والجرافيت والدهارة، وتشطيبات الواجهات بالأدوار والمناطق.',
     features: [

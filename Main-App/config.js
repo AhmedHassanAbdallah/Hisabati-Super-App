@@ -7,10 +7,10 @@
  */
 window.HISABATI_CONFIG = {
   googleClientId: '911657691701-1n6h1c3gjnbaqp8anjch3e3kvr3semis.apps.googleusercontent.com',
-  driveFolderName: 'أرزقي — نسخ احتياطية',
+  driveFolderName: 'أرزقي | Arzoqi — نسخ احتياطية',
   developer: {
     name: 'أحمد حسن عبدالله',
-    role: 'مطوّر ومصمّم أرزقي',
+    role: 'مطوّر ومصمّم أرزقي | Arzoqi',
     photo: '../Shared-Assets/images/developer.jpg',
     whatsapp: '201015421255',
     phoneDisplay: '+20 101 542 1255',

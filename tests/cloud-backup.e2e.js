@@ -165,7 +165,7 @@ const idbMedia = (page, name) => page.evaluate(n => new Promise(res => {
   const files = [...drive.files.values()];
   const folder = files.find(f => f.mimeType === 'application/vnd.google-apps.folder');
   const bk = files.find(f => (f.appProperties || {}).hisabati === 'backup');
-  check('اتعمل فولدر "أرزقي — نسخ احتياطية" على درايف', !!folder && folder.name === 'أرزقي — نسخ احتياطية');
+  check('اتعمل فولدر "أرزقي | Arzoqi — نسخ احتياطية" على درايف', !!folder && folder.name === 'أرزقي | Arzoqi — نسخ احتياطية');
   check('ملف النسخة جوه الفولدر باسم واضح', !!bk && bk.parents[0] === folder.id && /^hisabati-backup-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}\.json$/.test(bk.name), bk && bk.name);
   const snap = JSON.parse(bk.content);
   check('النسخة فيها كل مفاتيح الأقسام بنفس القيم بالظبط', JSON.stringify(Object.fromEntries(Object.entries(snap.localStorage).sort())) === JSON.stringify(dataA));

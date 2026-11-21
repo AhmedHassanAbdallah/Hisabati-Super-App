@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#011a51">
-  <title>سياسة الخصوصية — أرزقي</title>
-  <meta name="description" content="سياسة الخصوصية لتطبيق أرزقي: البيانات المحلية، تسجيل الدخول بجوجل، والنسخ الاحتياطي على جوجل درايف.">
+  <meta name="theme-color" content="#002624">
+  <title>سياسة الخصوصية — أرزقي | Arzoqi</title>
+  <meta name="description" content="سياسة الخصوصية لتطبيق أرزقي | Arzoqi: البيانات المحلية، تسجيل الدخول بجوجل، والنسخ الاحتياطي على جوجل درايف.">
   <link rel="icon" type="image/png" sizes="192x192" href="../Shared-Assets/icons/icon-192.png">
-  <link rel="stylesheet" href="../Shared-Assets/fonts/cairo.css">
+  <link rel="stylesheet" href="../Shared-Assets/fonts/arzoqi-fonts.css">
+  <link rel="stylesheet" href="../Shared-Assets/brand/arzaqi.css">
   <style>
-    :root { --bg: #f1f4f9; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e3e9f2; --accent: #f17700; --primary: #01429c; color-scheme: light; }
+    :root { --bg: #eff5f5; --surface: #fff; --text: #04201e; --muted: #53716e; --border: #e0ebea; --accent: #f17700; --primary: #0b5450; color-scheme: light; }
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #060f20; --surface: #0f1f38; --text: #e9eff8; --muted: #9db0cb; --border: #213a5e; --primary: #8fb3ec; color-scheme: dark; }
+      :root { --bg: #001312; --surface: #012523; --text: #e6f1f0; --muted: #94b7b3; --border: #004440; --primary: #74c2bb; color-scheme: dark; }
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Cairo', system-ui, sans-serif; font-weight: 600; background: var(--bg); color: var(--text); line-height: 1.9; }
+    body { margin: 0; font-family: var(--az-font); font-weight: 600; background: var(--bg); color: var(--text); line-height: 1.9; }
     header { position: relative; overflow: hidden; color: #fff; text-align: center; padding: calc(env(safe-area-inset-top, 0px) + 26px) 16px 30px;
-      background: linear-gradient(165deg, #01429c, #011a51 50%, #010f33); border-radius: 0 0 28px 28px; }
+      background: linear-gradient(165deg, #0b5450, #002624 50%, #001715); border-radius: 0 0 28px 28px; }
     header::before { content: ""; position: absolute; width: 240px; height: 240px; border-radius: 50%; top: -120px; left: -60px; background: radial-gradient(circle, rgba(251,191,0,.45), transparent 65%); }
     header img.brand { height: 74px; width: auto; max-width: 90%; position: relative; }
     header h1 { margin: 8px 0 0; font-size: 1.45rem; font-weight: 900; position: relative; }
-    header p { margin: 0; color: #c3d0e3; font-size: .85rem; position: relative; }
+    header p { margin: 0; color: #bdd5d2; font-size: .85rem; position: relative; }
     main { max-width: 760px; margin: 0 auto; padding: 16px; }
     section { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 12px; }
     h2 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 900; color: var(--primary); border-inline-start: 4px solid var(--accent); padding-inline-start: 9px; }
@@ -39,9 +40,9 @@
 </head>
 <body>
   <header>
-    <img class="brand" src="../Shared-Assets/brand/arzaqi-logo-on-dark.png" alt="أرزقي">
+    <div class="brand az-lockup az-lockup-drawer"><span class="az-ar">أرزقي</span><span class="az-sep" aria-hidden="true"></span><img class="az-wm" src="../Shared-Assets/brand/arzoqi-wordmark-dark.png" alt="Arzoqi"></div>
     <h1>سياسة الخصوصية</h1>
-    <p>أرزقي — حسابات وفواتير كل المهن · آخر تحديث: 18 نوفمبر 2026</p>
+    <p>أرزقي | Arzoqi — حسابات وفواتير كل المهن · آخر تحديث: 18 نوفمبر 2026</p>
   </header>
   <main>
     <a class="back" href="./">→ الرجوع لأرزقي</a>
@@ -66,7 +67,7 @@
       <p>لما تختار "تسجيل الدخول بحساب جوجل"، جوجل بتطلب موافقتك على الصلاحيات دي بس:</p>
       <ul>
         <li><b>اسمك وصورتك وإيميلك</b> (<code>openid</code>, <code>email</code>, <code>profile</code>): علشان نعرض حسابك جوه التطبيق. بيتحفظوا على جهازك بس.</li>
-        <li><b>ملفات جوجل درايف اللي التطبيق بيعملها</b> (<code>drive.file</code>): التطبيق بيعمل فولدر اسمه "أرزقي — نسخ احتياطية" ويحفظ فيه ملفات النسخ. الصلاحية دي <b>ما بتسمحش</b> للتطبيق يشوف أو يعدّل أي ملفات تانية على الدرايف بتاعك.</li>
+        <li><b>ملفات جوجل درايف اللي التطبيق بيعملها</b> (<code>drive.file</code>): التطبيق بيعمل فولدر اسمه "أرزقي | Arzoqi — نسخ احتياطية" ويحفظ فيه ملفات النسخ. الصلاحية دي <b>ما بتسمحش</b> للتطبيق يشوف أو يعدّل أي ملفات تانية على الدرايف بتاعك.</li>
       </ul>
       <p>صلاحية الدخول (التوكن) بتفضل في ذاكرة الصفحة بس، وبتنتهي تلقائياً، وما بتتبعتش لأي مكان غير خدمات جوجل نفسها.</p>
     </section>
@@ -95,7 +96,7 @@
       <h2>حذف بياناتك</h2>
       <ul>
         <li><b>من الجهاز:</b> امسح أي فاتورة أو عنصر من جوه التطبيق، أو امسح بيانات الموقع/التطبيق من إعدادات المتصفح أو الموبايل.</li>
-        <li><b>النسخ على درايف:</b> احذفها من "حسابي والنسخ الاحتياطي" جوه التطبيق، أو احذف فولدر "أرزقي — نسخ احتياطية" من جوجل درايف.</li>
+        <li><b>النسخ على درايف:</b> احذفها من "حسابي والنسخ الاحتياطي" جوه التطبيق، أو احذف فولدر "أرزقي | Arzoqi — نسخ احتياطية" من جوجل درايف.</li>
         <li><b>إلغاء صلاحية جوجل:</b> سجّل خروج من التطبيق، أو الغِ وصول أرزقي من <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">صفحة صلاحيات حساب جوجل</a>.</li>
       </ul>
     </section>
@@ -115,7 +116,7 @@
       <div class="dev">
         <img src="../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله">
         <div>
-          <p><b>أحمد حسن عبدالله</b> — مطوّر ومصمّم أرزقي</p>
+          <p><b>أحمد حسن عبدالله</b> — مطوّر ومصمّم أرزقي | Arzoqi</p>
           <p>واتساب: <a href="https://wa.me/201015421255" target="_blank" rel="noopener" dir="ltr">+20 101 542 1255</a></p>
           <p>فيسبوك: <a href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">صفحة المطوّر</a></p>
         </div>
@@ -124,10 +125,10 @@
 
     <section class="en" lang="en">
       <h2>English summary</h2>
-      <p><b>Arzaqi</b> (أرزقي) is an offline-first accounting and invoicing app for trades. All business data is stored locally on the user's device. There is no Arzaqi server.</p>
+      <p><b>Arzoqi</b> (أرزقي) is an offline-first accounting and invoicing app for trades. All business data is stored locally on the user's device. There is no Arzoqi server.</p>
       <p><b>Google sign-in is optional</b> and is used only for backup and restore to the user's own Google Drive. Requested scopes: <code>openid</code>, <code>email</code>, <code>profile</code> (to show the signed-in account) and <code>https://www.googleapis.com/auth/drive.file</code> (to create and read only the backup files and folder that the app itself creates). The app cannot see any other Drive files.</p>
       <p>Backups are uploaded directly from the device to the user's Drive and downloaded from it on restore. Access tokens are kept in memory only. No data is sold, shared, used for advertising or read by humans.</p>
-      <p>Arzaqi's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+      <p>Arzoqi's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
       <p>Users can delete backups in the app or in Google Drive, and revoke access at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>. Contact: Ahmed Hassan Abdallah — WhatsApp +20 101 542 1255.</p>
     </section>
   </main>

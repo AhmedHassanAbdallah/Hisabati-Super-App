@@ -37,7 +37,7 @@
   }
 
   /* ================= الأقسام الرئيسية ================= */
-  const VIEW_TITLES = { home: 'أرزقي للأرضيات', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
+  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
   let currentView = 'home';
   function switchView(key) {
     if (UI.depth()) { UI.closeAllThen(() => switchView(key)); return; }

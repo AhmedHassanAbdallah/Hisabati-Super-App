@@ -1,5 +1,5 @@
 /*
- * أرزقي — لحسابات المصنعية: تطبيق أندرويد مستقل بالكامل
+ * أرزقي | Arzoqi — لحسابات المصنعية: تطبيق أندرويد مستقل بالكامل
  * تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  *
@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
     private static final String BASE = "https://" + APP_HOST + "/";
     private static final String HOME_URL = BASE + "Main-App/index.html";
     private static final String RELEASES_URL = "https://github.com/AhmedHassanAbdallah/Hisabati-Super-App/releases";
-    private static final int NAVY = Color.parseColor("#011a51");
+    private static final int NAVY = Color.parseColor("#002624");
     private static final int REQ_FILE_CHOOSER = 1001;
     private static final int REQ_STORAGE = 1002;
     private static final int REQ_AUTH = 1003;
@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
         s.setSupportMultipleWindows(false);
-        s.setMediaPlaybackRequiresUserGesture(true);
+        s.setMediaPlaybackRequiresUserGesture(false); // فيديو الافتتاح (صامت) بيشتغل لوحده
 
         SectionBridge bridge = new SectionBridge();
         for (String name : SECTION_BRIDGES) webView.addJavascriptInterface(bridge, name);
@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
         sectionBar.setGravity(Gravity.CENTER_VERTICAL);
         sectionBar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         sectionBar.setPadding(dp(10), 0, dp(10), 0);
-        sectionBar.setBackgroundColor(Color.parseColor("#010f33"));
+        sectionBar.setBackgroundColor(Color.parseColor("#001715"));
         sectionBar.setVisibility(View.GONE);
 
         TextView home = new TextView(this);
@@ -534,7 +534,7 @@ public class MainActivity extends Activity {
         @JavascriptInterface
         public void downloadUpdate(final String url, final String version) {
             handler.post(() -> {
-                toast("التحديثات بتوصل مع تحديث تطبيق أرزقي");
+                toast("التحديثات بتوصل مع تحديث تطبيق أرزقي | Arzoqi");
                 js("window.onAppUpdateProgress && window.onAppUpdateProgress(0,'failed')");
                 openExternalUri(Uri.parse(RELEASES_URL));
             });
@@ -592,14 +592,14 @@ public class MainActivity extends Activity {
                 ContentValues v = new ContentValues();
                 v.put(MediaStore.MediaColumns.DISPLAY_NAME, safeName);
                 v.put(MediaStore.MediaColumns.MIME_TYPE, mime == null ? "application/json" : mime);
-                v.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Arzaqi");
+                v.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Arzoqi");
                 Uri uri = cr.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, v);
                 if (uri == null) throw new IOException("insert failed");
                 try (OutputStream out = cr.openOutputStream(uri)) {
                     if (out == null) throw new IOException("stream failed");
                     out.write(bytes);
                 }
-                toast("✔ تم الحفظ في التنزيلات ← Arzaqi\n" + safeName);
+                toast("✔ تم الحفظ في التنزيلات ← Arzoqi\n" + safeName);
                 return;
             }
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -607,10 +607,10 @@ public class MainActivity extends Activity {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE);
                 return;
             }
-            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Arzaqi");
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Arzoqi");
             if (!dir.exists() && !dir.mkdirs()) throw new IOException("mkdir failed");
             try (FileOutputStream out = new FileOutputStream(new File(dir, safeName))) { out.write(bytes); }
-            toast("✔ تم الحفظ في التنزيلات ← Arzaqi\n" + safeName);
+            toast("✔ تم الحفظ في التنزيلات ← Arzoqi\n" + safeName);
         } catch (Exception e) {
             try {
                 File f = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), safeName);

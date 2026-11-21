@@ -1,30 +1,35 @@
+@import url("../fonts/arzoqi-fonts.css");
 /*
- * أرزقي — ألوان الأقسام.
+ * أرزقي | Arzoqi — ألوان وخطوط الأقسام.
  * بيتحمّل آخر حاجة في كل قسم، وبيبدّل متغيرات الألوان بتاعته (الكحلي/البرتقالي) بهوية أرزقي
- * (أزرق ملكي + أصفر الخوذة + برتقالي المسطرين) — من غير ما نعدّل ملفات التصميم الأصلية للقسم.
+ * (تيل لوجو Arzoqi + برتقالي وأصفر القوس) — من غير ما نعدّل ملفات التصميم الأصلية للقسم.
  */
 :root {
-  --navy-950: #010f33;
-  --navy-900: #011a51;
-  --navy-800: #012a6f;
-  --navy-700: #01429c;
-  --navy-600: #1f6fd6;
+  --navy-950: #001715;
+  --navy-900: #002624;
+  --navy-800: #033935;
+  --navy-700: #0b5450;
+  --navy-600: #0f847d;
   --orange-400: #ff9a3c;
   --orange-500: #f17700;
   --orange-600: #ee6300;
   --amber-400: #fbbf00;
-  --primary-soft: #e6efff;
+  --primary-soft: #e0f3f1;
   --accent-soft: #fff4d1;
-  --bg: #f1f5fb;
-  --border: #dfe7f3;
+  --bg: #eff6f6;
+  --border: #dbeae8;
 }
 :root[data-theme="dark"] {
-  --bg: #020c26; --surface: #0a1c45; --surface-2: #0f2556; --border: #1c3a73;
-  --text: #eaf1fb; --muted: #a3b6d3; --primary: #8cb8f5; --primary-soft: #102a5e; --accent-soft: #3a2a05;
+  --bg: #001210; --surface: #012523; --surface-2: #02302d; --border: #034743;
+  --text: #e7f3f2; --muted: #99bdb9; --primary: #71c7c0; --primary-soft: #003633; --accent-soft: #3a2a05;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #020c26; --surface: #0a1c45; --surface-2: #0f2556; --border: #1c3a73;
-    --text: #eaf1fb; --muted: #a3b6d3; --primary: #8cb8f5; --primary-soft: #102a5e; --accent-soft: #3a2a05;
+    --bg: #001210; --surface: #012523; --surface-2: #02302d; --border: #034743;
+    --text: #e7f3f2; --muted: #99bdb9; --primary: #71c7c0; --primary-soft: #003633; --accent-soft: #3a2a05;
   }
 }
+
+/* خطوط الهوية: IBM Plex Sans Arabic للعربي + Inter للاتيني والأرقام */
+html, body { font-family: var(--az-font, 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif) !important; }
+body *:not(code):not(pre):not(kbd):not(samp):not(svg):not(svg *) { font-family: inherit !important; }

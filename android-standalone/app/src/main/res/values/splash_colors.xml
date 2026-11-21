@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- خلفية الافتتاح بنفس لون فيديو هوية أرزقي | Arzoqi -->
+    <color name="splash_bg">#FFF8FAF9</color>
+</resources>

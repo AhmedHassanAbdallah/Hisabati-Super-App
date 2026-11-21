@@ -18,7 +18,7 @@
   const API = 'https://www.googleapis.com/drive/v3';
   const UPLOAD = 'https://www.googleapis.com/upload/drive/v3/files';
   const FOLDER_MIME = 'application/vnd.google-apps.folder';
-  const FOLDER_NAME = CFG.driveFolderName || 'أرزقي — نسخ احتياطية';
+  const FOLDER_NAME = CFG.driveFolderName || 'أرزقي | Arzoqi — نسخ احتياطية';
 
   let token = null;          // { access_token, expires_at }
   let tokenClient = null;

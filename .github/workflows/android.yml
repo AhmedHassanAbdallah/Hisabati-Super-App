@@ -1,4 +1,4 @@
-# بناء تطبيق حساباتي للأندرويد (APK — Trusted Web Activity) ونشره كرابط تحميل مباشر في Releases.
+# بناء تطبيق أرزقي | Arzoqi للأندرويد (APK — Trusted Web Activity) ونشره كرابط تحميل مباشر في Releases.
 # التطبيق بيفتح الموقع جوه Chrome بملء الشاشة، فكل الأقسام وتسجيل الدخول بجوجل والطباعة بتشتغل زي الموقع.
 # مفتاح التوقيع: بيتعمل أول مرة ويتحفظ مشفّر في android/keystore.enc بكلمة السر HISABATI_KEY_PASSWORD
 # (Settings ← Secrets and variables ← Actions). نفس المفتاح لازم يفضل علشان التحديثات تتثبت فوق القديم.
@@ -111,7 +111,7 @@ jobs:
       - name: Summary
         run: |
           {
-            echo "## حساباتي ${{ steps.ver.outputs.version }}"
+            echo "## أرزقي | Arzoqi (ويب) ${{ steps.ver.outputs.version }}"
             echo ""
             if [ "${{ steps.key.outputs.signed }}" = "true" ]; then
               echo "✅ APK موقّع — هيتنشر في Releases"
@@ -143,5 +143,5 @@ jobs:
             gh release upload "v$VER" out/hisabati.apk out/hisabati.aab --clobber
             gh release edit "v$VER" --notes-file notes.md --latest
           else
-            gh release create "v$VER" out/hisabati.apk out/hisabati.aab --title "حساباتي $VER" --notes-file notes.md --latest
+            gh release create "v$VER" out/hisabati.apk out/hisabati.aab --title "أرزقي | Arzoqi (ويب) $VER" --notes-file notes.md --latest
           fi

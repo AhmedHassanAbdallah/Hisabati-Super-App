@@ -17,8 +17,8 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
 -  <meta name="description" content="حساباتي نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
 -  <title>حساباتي نقاشة - حسابات وفواتير النقاشة والدهانات</title>
-+  <meta name="description" content="أرزقي نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
-+  <title>أرزقي نقاشة - حسابات وفواتير النقاشة والدهانات</title>
++  <meta name="description" content="أرزقي | Arzoqi — نقاشة: نظام متكامل لحسابات النقاشة والدهانات — مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير - تصميم وتطوير أحمد حسن عبدالله">
++  <title>أرزقي | Arzoqi — نقاشة: حسابات وفواتير النقاشة والدهانات</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -54,7 +54,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
 -      <h1 id="tabTitle">حساباتي نقاشة</h1>
-+      <h1 id="tabTitle">أرزقي نقاشة</h1>
++      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
@@ -63,7 +63,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
  
        <div class="copyright">
 -        <b>حساباتي نقاشة</b> — حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
-+        <b>أرزقي نقاشة</b> — حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
++        <b>أرزقي | Arzoqi</b> — نقاشة: حسابات وفواتير النقاشة والدهانات · الإصدار <span id="aboutVersion"></span><br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
@@ -94,7 +94,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال نقاشة ودهانات';
    const DEFAULT_TECH = 'للنقاشة والدهانات والديكورات';
 -  const VIEW_TITLES = { home: 'حساباتي نقاشة', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
-+  const VIEW_TITLES = { home: 'أرزقي نقاشة', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
++  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', pricing: 'بيانات المشروع', rooms: 'الأعمال والمقاسات', costs: 'التكاليف', summary: 'الحساب النهائي', docs: 'المشاريع والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
    const EDITOR_VIEWS = ['pricing', 'rooms', 'costs', 'summary'];
  
    /* ---------------- محرك النقاشة: الأنواع والقوائم الجاهزة ---------------- */
@@ -112,7 +112,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
      document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
 -    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'حساباتي نقاشة';
-+    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي نقاشة';
++    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
@@ -130,7 +130,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
 -        <span>صدرت بواسطة تطبيق <b>حساباتي نقاشة</b></span>
-+        <span>صدرت بواسطة تطبيق <b>أرزقي نقاشة</b></span>
++        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — نقاشة</span>
        </footer>`;
    }
    const signHTML = (a, b) => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
@@ -207,7 +207,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    "id": "./",
 -  "name": "حساباتي نقاشة - حسابات وفواتير النقاشة والدهانات",
 -  "short_name": "حساباتي نقاشة",
-+  "name": "أرزقي نقاشة - حسابات وفواتير النقاشة والدهانات",
++  "name": "أرزقي | Arzoqi — نقاشة",
 +  "short_name": "أرزقي نقاشة",
    "description": "نظام متكامل لإدارة أعمال النقاشة والدهانات: مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير الاحترافية. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
@@ -219,7 +219,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي نقاشة</title>
-+  <title>سياسة الخصوصية - أرزقي نقاشة</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · نقاشة</title>
    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
@@ -228,7 +228,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    <header>
      <h1>سياسة الخصوصية</h1>
 -    <p>تطبيق حساباتي نقاشة - حسابات وفواتير النقاشة والدهانات · آخر تحديث: 13 نوفمبر 2026</p>
-+    <p>تطبيق أرزقي نقاشة - حسابات وفواتير النقاشة والدهانات · آخر تحديث: 13 نوفمبر 2026</p>
++    <p>تطبيق أرزقي | Arzoqi — نقاشة: حسابات وفواتير النقاشة والدهانات · آخر تحديث: 13 نوفمبر 2026</p>
    </header>
    <main>
      <section>
@@ -249,7 +249,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
   * حتى لو الاتنين منشورين على نفس النطاق (github.io).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-@@ -113,6 +113,31 @@
+@@ -113,6 +113,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -258,7 +258,10 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hpaint-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)

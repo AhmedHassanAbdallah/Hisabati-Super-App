@@ -100,7 +100,7 @@ function printHeaderHTML(title, tag, date, line2) {
     <div class="inv-stripe"></div>`;
 }
 function printFooterHTML() {
-  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي HVAC</b></span></footer>`;
+  return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(business.techName || '')}</b>${business.techPhone ? ` · <span dir="ltr">${esc(business.techPhone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — HVAC</span></footer>`;
 }
 const signHTML = (a = 'توقيع الفني / القائم بالأعمال', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
 function notesHTML(title, items) {

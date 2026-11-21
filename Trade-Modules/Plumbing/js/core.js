@@ -485,7 +485,7 @@ function renderPickList() {
 }
 
 /* ---------------- التنقل بين الأقسام ---------------- */
-const VIEW_TITLES = { home: APP_NAME, info: 'بيانات المستند', lines: 'بنود الأعمال', summary: 'الحساب والمدفوعات', docs: 'المقايسات والفواتير', ledger: 'العملاء', more: 'المزيد' };
+const VIEW_TITLES = { home: 'أرزقي | Arzoqi', info: 'بيانات المستند', lines: 'بنود الأعمال', summary: 'الحساب والمدفوعات', docs: 'المقايسات والفواتير', ledger: 'العملاء', more: 'المزيد' };
 const EDITOR_VIEWS = ['info', 'lines', 'summary'];
 let currentView = 'home';
 let lastTab = 'home';
@@ -506,7 +506,7 @@ function showView(key) {
   const order = EDITOR_VIEWS.indexOf(key);
   EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
   document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
-  document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || APP_NAME;
+  document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
   document.getElementById('addLineFab').classList.toggle('hidden', key !== 'lines');
   renderCurrentView();
   window.scrollTo({ top: 0, behavior: 'smooth' });

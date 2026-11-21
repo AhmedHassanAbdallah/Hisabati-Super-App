@@ -23,7 +23,7 @@
   }
   function footer() {
     const st = S.db().settings;
-    return `<div class="d-foot"><span>${esc(st.bizName || '')} ${st.bizPhone ? '· ' + esc(st.bizPhone) : ''}</span><span>تم الإعداد بـ <b>HESABATI PLASTER</b></span></div>`;
+    return `<div class="d-foot"><span>${esc(st.bizName || '')} ${st.bizPhone ? '· ' + esc(st.bizPhone) : ''}</span><span>تم الإعداد بـ <b>أرزقي | Arzoqi</b> — المحارة</span></div>`;
   }
   function signs(a, b) { return `<div class="d-sign"><div>${esc(a || 'توقيع المقاول')}</div><div>${esc(b || 'توقيع العميل')}</div></div>`; }
   function totalsBox(rows, netLabel, net) {
@@ -271,7 +271,7 @@
   }
   function closeDoc() {
     document.getElementById('printModal').classList.remove('open');
-    document.title = 'HESABATI PLASTER — أرزقي للمحارة والواجهات';
+    document.title = 'أرزقي | Arzoqi — المحارة والواجهات';
     CUR_DOC = null;
   }
   window.addEventListener('resize', fitPreview);

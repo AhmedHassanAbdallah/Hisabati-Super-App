@@ -1,8 +1,8 @@
 /* أرزقي — تصميم الفاتورة الموحدة (A4، يمين لشمال، نصوص حقيقية قابلة للتعديل) */
 .az-inv {
-  --az-b9: #011a51; --az-b8: #012a6f; --az-b7: #01429c; --az-y: #fbbf00; --az-o: #f17700;
-  --az-ink: #0b1630; --az-mut: #52627c; --az-line: #d9e3f1;
-  color: var(--az-ink) !important; font-family: 'Cairo', system-ui, sans-serif; direction: rtl;
+  --az-b9: #002624; --az-b8: #033935; --az-b7: #0b5450; --az-y: #fbbf00; --az-o: #f17700;
+  --az-ink: #011c1b; --az-mut: #476966; --az-line: #d5e6e4;
+  color: var(--az-ink) !important; font-family: 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif; direction: rtl;
   display: flex; flex-direction: column; min-height: calc(297mm - 17mm); font-weight: 700;
 }
 .az-inv svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; vertical-align: -2px; }
@@ -29,16 +29,16 @@
 .az-inv .az-stripe i:nth-child(3) { flex: 1; background: var(--az-o) !important; }
 
 /* ---------- العميل: سطر واحد ---------- */
-.az-inv .az-client { background: #f4f8fe !important; border: 1px solid var(--az-line); border-radius: 10px; padding: 6px 10px; margin-bottom: 8px; }
+.az-inv .az-client { background: #f2f9f9 !important; border: 1px solid var(--az-line); border-radius: 10px; padding: 6px 10px; margin-bottom: 8px; }
 .az-inv .az-client-row { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 8px; font-size: 12.5px; line-height: 1.6; }
 .az-inv .az-c { display: inline-flex; align-items: center; gap: 4px; color: var(--az-ink) !important; }
 .az-inv .az-c svg { color: var(--az-b7); }
 .az-inv .az-c em { font-style: normal; color: var(--az-mut) !important; }
 .az-inv .az-c b { font-weight: 900; }
-.az-inv .az-dot { color: #a9b8cf !important; font-size: 10px; }
+.az-inv .az-dot { color: #a1bebb !important; font-size: 10px; }
 .az-inv .az-client-note { font-size: 10.5px; color: var(--az-mut) !important; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .az-inv .az-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 8px; }
-.az-inv .az-chips .inv-chip, .az-inv .inv-chip { border: 1px solid #cfdcf0 !important; background: #f4f8fe !important; color: var(--az-b8) !important; border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 800; }
+.az-inv .az-chips .inv-chip, .az-inv .inv-chip { border: 1px solid #c8e1de !important; background: #f2f9f9 !important; color: var(--az-b8) !important; border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 800; }
 .az-inv .inv-chip b { color: var(--az-o) !important; }
 
 /* ---------- جداول البنود (جداول القسم نفسه بتنسيق موحد) ---------- */
@@ -50,7 +50,7 @@
 .az-inv .p-table th { font-weight: 800 !important; padding: 5px 6px; border-left: 1px solid rgba(255,255,255,.18) !important; }
 .az-inv .p-table td { padding: 4px 6px; border-bottom: 1px solid var(--az-line) !important; border-left: 1px solid var(--az-line) !important; color: var(--az-ink) !important; }
 .az-inv .p-table th:last-child, .az-inv .p-table td:last-child { border-left: 0 !important; }
-.az-inv .p-table tbody tr:nth-child(even) { background: #f7faff !important; }
+.az-inv .p-table tbody tr:nth-child(even) { background: #f5fbfb !important; }
 .az-inv .p-table td.money, .az-inv .p-table tfoot td:last-child { font-weight: 900 !important; color: var(--az-b8) !important; white-space: nowrap; }
 .az-inv .p-table tfoot tr { background: #fff7d6 !important; }
 .az-inv .p-table tfoot td { font-weight: 900 !important; border-bottom: 0 !important; border-top: 1.5px solid var(--az-y) !important; }
@@ -59,16 +59,16 @@
 /* ---------- تحت: الضمان والملاحظات + صندوق الحساب ---------- */
 .az-inv .az-bottom { display: grid; grid-template-columns: 1fr 76mm; gap: 10px; align-items: start; margin-top: 4px; break-inside: avoid; page-break-inside: avoid; }
 .az-inv .az-side { display: grid; gap: 8px; min-width: 0; }
-.az-inv .az-warranty { display: flex; gap: 8px; align-items: flex-start; border: 1.5px dashed #7fa6dc; border-radius: 10px; padding: 7px 10px; background: #f6faff !important; }
+.az-inv .az-warranty { display: flex; gap: 8px; align-items: flex-start; border: 1.5px dashed #67b4ad; border-radius: 10px; padding: 7px 10px; background: #f5fbfa !important; }
 .az-inv .az-warranty > svg { width: 20px; height: 20px; color: var(--az-b7); margin-top: 2px; }
 .az-inv .az-w-lbl { font-size: 11px; color: var(--az-b7) !important; font-weight: 900; }
 .az-inv .az-w-txt { font-size: 12px; line-height: 1.6; min-height: 1.6em; outline: none; white-space: pre-wrap; }
-.az-inv .az-w-txt:empty::before { content: attr(data-placeholder); color: #9aabc4; font-weight: 700; }
+.az-inv .az-w-txt:empty::before { content: attr(data-placeholder); color: #92b1ae; font-weight: 700; }
 .az-inv .inv-notes { border: 1px solid var(--az-line) !important; border-radius: 10px; padding: 6px 10px; background: #fff !important; font-size: 11px; line-height: 1.65; }
 .az-inv .inv-notes h4 { font-size: 12px; color: var(--az-b8) !important; margin: 0 0 2px; }
 .az-inv .inv-notes ul { margin: 0; padding-inline-start: 16px; }
 .az-inv .az-sign { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
-.az-inv .az-sign div { border-top: 1.5px solid #9fb3d1; padding-top: 4px; text-align: center; font-size: 11px; color: var(--az-mut) !important; margin-top: 22px; }
+.az-inv .az-sign div { border-top: 1.5px solid #94bab7; padding-top: 4px; text-align: center; font-size: 11px; color: var(--az-mut) !important; margin-top: 22px; }
 
 .az-inv .az-totals { position: relative; border: 1.5px solid var(--az-b8); border-radius: 12px; overflow: hidden; background: #fff !important; }
 .az-inv .az-totals-title { background: var(--az-b8) !important; color: #fff !important; font-size: 12.5px; font-weight: 900; padding: 5px 10px; }
@@ -76,7 +76,7 @@
 .az-inv .az-totals td { padding: 4px 10px; border-bottom: 1px solid var(--az-line); color: var(--az-ink) !important; }
 .az-inv .az-totals td:last-child { text-align: left; white-space: nowrap; font-weight: 900; }
 .az-inv .az-totals tr.minus td:last-child { color: #c0392b !important; }
-.az-inv .az-totals tr.az-sum { background: #f4f8fe !important; }
+.az-inv .az-totals tr.az-sum { background: #f2f9f9 !important; }
 .az-inv .az-totals tr.az-sum td { font-weight: 900; color: var(--az-b8) !important; font-size: 12.5px; }
 .az-inv .az-totals tr.az-paid { background: #ecfbf3 !important; }
 .az-inv .az-totals tr.az-paid td { color: #08734a !important; }
@@ -100,7 +100,10 @@
 
 /* ---------- الفوتر ---------- */
 .az-inv .az-foot { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--az-mut) !important; font-size: 11px; font-weight: 800; border-top: 1px solid var(--az-line); }
-.az-inv .az-foot img { height: 24px; width: auto; display: block; }
+.az-inv .az-foot-brand { display: inline-flex; align-items: center; gap: 6px; direction: rtl; }
+.az-inv .az-foot-brand b { font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 700 !important; font-size: 15px; line-height: 1; color: var(--az-b8) !important; }
+.az-inv .az-foot-brand i { width: 2px; height: 16px; border-radius: 2px; background: linear-gradient(#fbbf00, #f98a00) !important; }
+.az-inv .az-foot img { height: 22px; width: auto; display: block; }
 
 @media print {
   .az-inv { min-height: 0; }

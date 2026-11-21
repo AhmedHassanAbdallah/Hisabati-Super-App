@@ -193,7 +193,7 @@ function docHTML(s) {
   return `${head}${client}${body}
     <div class="inv-bottom"><div class="inv-notes"><h4>ملاحظات</h4><div contenteditable="true">${notes.length ? notes.map(n => esc(n)).join('<br>') : '—'}</div></div><div class="inv-side">${totals}</div></div>
     ${sign}
-    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي للجبس</b></span></footer>`;
+    <footer class="inv-foot"><span>${esc(st.bizName || 'أرزقي للجبس والديكورات')}</span><span>صدر من تطبيق <b>أرزقي | Arzoqi</b> — الجبس</span></footer>`;
 }
 
 /* ---------------- المعاينة والطباعة ---------------- */

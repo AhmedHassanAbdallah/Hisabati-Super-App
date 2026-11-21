@@ -1,7 +1,7 @@
-# أرزقي — تطبيق الأندرويد المستقل
+# أرزقي | Arzoqi — تطبيق الأندرويد المستقل
 
 ## الفرق بين النسختين
-| | **أرزقي (ويب)** (`android/`, TWA) | **أرزقي** (`android-standalone/`) |
+| | **أرزقي | Arzoqi (ويب)** (`android/`, TWA) | **أرزقي | Arzoqi** (`android-standalone/`) |
 |---|---|---|
 | Package | `com.ahmedhassan.hisabati` | `com.ahmedhassan.arzaqi` |
 | مكان الملفات | الموقع (بيتحمّل ويتخزن في Chrome) | **جوه التطبيق نفسه** |
@@ -11,8 +11,8 @@
 | تسجيل الدخول بجوجل | مكتبة جوجل للويب | **أصلي** (Google Identity على أندرويد) |
 | الطباعة / PDF | Chrome | طباعة أندرويد (نفس التطبيقات الأصلية) |
 | مكان البيانات | Chrome | جوه التطبيق |
-| ملفات الرفع | `hisabati.apk` / `hisabati.aab` | `arzaqi.apk` / `arzaqi.aab` |
-| صفحة الإصدارات | Releases ← `v1.x` | Releases ← `arzaqi-v2.x` |
+| ملفات الرفع | `hisabati.apk` / `hisabati.aab` | `arzoqi.apk` / `arzoqi.aab` |
+| صفحة الإصدارات | Releases ← `v1.x` | Releases ← `arzoqi-v2.x` |
 
 البيانات بين النسختين (أو بين التطبيق والموقع) بتتنقل بالنسخة الاحتياطية على جوجل درايف.
 
@@ -22,7 +22,7 @@
   خطوة في البناء بتتأكد إن الملفات جوه التطبيق مطابقة للموقع بايت ببايت.
 * التطبيق بيقدّم لكل قسم نفس الجسر اللي تطبيقه الأصلي كان بيقدّمه (`HesabatyApp`، `HesabatiPlumbingApp`،
   `HesabatiHvacApp`، `HFloorApp`، `PlasterApp`) بنفس الوظائف: الطباعة/PDF، حفظ النسخ في
-  التنزيلات ← `Hisabati`، فتح واتساب وفيسبوك، ورقم إصدار القسم.
+  التنزيلات ← `Arzoqi`، فتح واتساب وفيسبوك، ورقم إصدار القسم.
 * كل قسم بيتفتح كصفحة كاملة وفوقه شريط أصلي **"كل المهن"** — علشان طباعة أندرويد تطبع فاتورة القسم نفسها.
 * زرار الرجوع: يقفل نافذة القسم ← الصفحة اللي قبلها ← الرئيسية ← يخرج. (أندرويد 16: predictive back.)
 * تحديثات الأقسام (فقاعة "تحديث جديد" جوه أي قسم) بتفتح صفحة إصدارات أرزقي، لأن الأقسام بتتحدّث مع التطبيق.
@@ -32,7 +32,7 @@
 1. Google Cloud ← مشروع **Hesabaty** ← **Google Auth Platform ← Clients ← Create client**.
 2. Application type: **Android**.
 3. Package name: `com.ahmedhassan.arzaqi`
-4. SHA-1 certificate fingerprint: البصمة المكتوبة في صفحة الإصدار `arzaqi-v…` (سطر SHA-1).
+4. SHA-1 certificate fingerprint: البصمة المكتوبة في صفحة الإصدار `arzoqi-v…` (سطر SHA-1).
 5. Create. (مش محتاج تبعت حاجة — التطبيق بيتعرّف تلقائياً بالـ Package + SHA-1.)
 6. لما ترفعه على جوجل بلاي: كرّر نفس الخطوات ببصمة **SHA-1** بتاعة **App signing key**
    من Play Console ← App integrity (لأن جوجل بلاي بتعيد توقيع التطبيق).

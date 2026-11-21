@@ -283,7 +283,7 @@
   }
   function footerHTML() {
     const s = db().settings;
-    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي للأرضيات</b></span></footer>`;
+    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — الأرضيات</span></footer>`;
   }
   function signHTML(a, b) { return `<div class="inv-sign"><div ${CE}>${a || 'توقيع القائم بالأعمال'}</div><div ${CE}>${b || 'اعتماد العميل'}</div></div>`; }
   function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }

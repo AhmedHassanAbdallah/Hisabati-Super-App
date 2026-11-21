@@ -300,7 +300,7 @@
     const head = document.getElementById('appHeader');
     const isTab = !!v.tab;
     head.innerHTML = isTab
-      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'أرزقي للمحارة والواجهات')}</div><h1>${esc(out.title || 'HESABATI PLASTER')}</h1></div>
+      ? `<img class="brand-ic" src="./icons/icon-192.png" alt=""><div class="titles"><div class="sub">${esc(out.sub || 'المحارة والواجهات')}</div><h1>${esc(out.title || 'أرزقي | Arzoqi')}</h1></div>
          <button type="button" class="icon-btn" data-act="toggleTheme" aria-label="الوضع الليلي">${icon(isDark() ? 'sun' : 'moon')}</button>`
       : `<button type="button" class="icon-btn" data-act="back" aria-label="رجوع">${icon('back')}</button><div class="titles"><h1>${esc(out.title || '')}</h1>${out.sub ? `<div class="sub">${esc(out.sub)}</div>` : ''}</div>
          ${(out.actions || []).map(a => `<button type="button" class="icon-btn${a.accent ? ' accent' : ''}" data-act="${esc(a.act)}"${a.data ? Object.keys(a.data).map(k => ` data-${k}="${esc(a.data[k])}"`).join('') : ''} aria-label="${esc(a.label || '')}">${icon(a.icon)}</button>`).join('')}`;

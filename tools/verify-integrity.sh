@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # أرزقي (Hisabati Super App) — integrity check (read-only).
 #  1) Each copied trade module matches the baseline snapshot taken from the original repository,
-#     EXCEPT the files listed in .provenance/changes/<Section>.sha256 — the intended Arzaqi changes
+#     EXCEPT the files listed in .provenance/changes/<Section>.sha256 — the intended Arzoqi changes
 #     (name, theme, icons, unified invoice), each pinned to its exact new checksum.
 #     Readable diffs of those changes: .provenance/changes/<Section>.patch
 #  2) (optional) The original repositories are unchanged: same HEAD commit,
@@ -65,7 +65,7 @@ PY
   if [ "$bad" != "0" ] || [ "$miss" != "0" ]; then
     echo "FAIL  $4  (unexpected changes: $bad, missing: $miss) ${*:9}"; fail=1
   else
-    echo "OK    $4  ($same identical to the original + $chg intended Arzaqi changes)"
+    echo "OK    $4  ($same identical to the original + $chg intended Arzoqi changes)"
   fi
 }
 

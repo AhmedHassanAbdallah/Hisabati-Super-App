@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  const LAUNCHER_VERSION = '2.0.0'; // داخلي بس — مش بيظهر للمستخدم
+  const LAUNCHER_VERSION = '2.1.0'; // داخلي بس — مش بيظهر للمستخدم
   const LAST_KEY = 'hisabati_super_last_v1';
   const THEME_KEY = 'hisabati_super_theme_v1';
   const TRADES = window.HISABATI_TRADES || [];
@@ -223,7 +223,7 @@
     current = null;
     $('runner').hidden = true;
     document.body.dataset.view = 'home';
-    document.title = 'أرزقي — لحسابات المصنعية';
+    document.title = 'أرزقي | Arzoqi — لحسابات المصنعية';
     renderHome();
     if (was) { const b = document.querySelector(`[data-trade="${was.id}"]`); if (b) b.focus({ preventScroll: true }); }
   }
@@ -500,7 +500,7 @@
   async function renderAccountSheet() {
     const body = $('accountBody');
     const acc = Cloud.account();
-    const privacy = `<p class="fine">${icon('shield')} أرزقي بيوصل بس للملفات اللي هو بيعملها على درايف بتاعك، ومفيش أي سيرفر بيشوف بياناتك. <a href="./privacy.html">سياسة الخصوصية</a></p>`;
+    const privacy = `<p class="fine">${icon('shield')} أرزقي | Arzoqi بيوصل بس للملفات اللي هو بيعملها على درايف بتاعك، ومفيش أي سيرفر بيشوف بياناتك. <a href="./privacy.html">سياسة الخصوصية</a></p>`;
     if (!acc) {
       body.innerHTML = `<div class="about">
           <h2>احفظ شغلك على جوجل درايف</h2>

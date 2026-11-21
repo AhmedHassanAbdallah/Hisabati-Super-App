@@ -14,13 +14,13 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 -  <meta name="apple-mobile-web-app-title" content="حساباتي للأرضيات">
-+  <meta name="apple-mobile-web-app-title" content="أرزقي للأرضيات">
++  <meta name="apple-mobile-web-app-title" content="أرزقي Arzoqi">
    <meta name="author" content="أحمد حسن عبدالله">
    <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
 -  <meta name="description" content="حساباتي للأرضيات والتشطيبات: حساب المساحات والكميات والخامات والمصنعية والأرباح، وإدارة المشروعات والعملاء والعمال، وإصدار الفواتير والمقايسات — يعمل بدون إنترنت.">
 -  <title>حساباتي للأرضيات — HESABATI FLOORING</title>
-+  <meta name="description" content="أرزقي للأرضيات والتشطيبات: حساب المساحات والكميات والخامات والمصنعية والأرباح، وإدارة المشروعات والعملاء والعمال، وإصدار الفواتير والمقايسات — يعمل بدون إنترنت.">
-+  <title>أرزقي للأرضيات — HESABATI FLOORING</title>
++  <meta name="description" content="أرزقي | Arzoqi — الأرضيات والتشطيبات: حساب المساحات والكميات والخامات والمصنعية والأرباح، وإدارة المشروعات والعملاء والعمال، وإصدار الفواتير والمقايسات — يعمل بدون إنترنت.">
++  <title>أرزقي | Arzoqi — الأرضيات والتشطيبات</title>
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -43,7 +43,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
 -      <h1 id="tabTitle">حساباتي للأرضيات</h1>
-+      <h1 id="tabTitle">أرزقي للأرضيات</h1>
++      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
      </div>
      <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
@@ -61,7 +61,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
  
    /* ================= الأقسام الرئيسية ================= */
 -  const VIEW_TITLES = { home: 'حساباتي للأرضيات', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
-+  const VIEW_TITLES = { home: 'أرزقي للأرضيات', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
++  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
    let currentView = 'home';
    function switchView(key) {
      if (UI.depth()) { UI.closeAllThen(() => switchView(key)); return; }
@@ -97,7 +97,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    function footerHTML() {
      const s = db().settings;
 -    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>حساباتي للأرضيات</b></span></footer>`;
-+    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي للأرضيات</b></span></footer>`;
++    return `<footer class="inv-foot"><span ${CE}>شكراً لثقتكم — <b>${esc(s.bizName || s.ownerName || '')}</b>${s.phone ? ` · <span dir="ltr">${esc(s.phone)}</span>` : ''}</span><span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b> — الأرضيات</span></footer>`;
    }
    function signHTML(a, b) { return `<div class="inv-sign"><div ${CE}>${a || 'توقيع القائم بالأعمال'}</div><div ${CE}>${b || 'اعتماد العميل'}</div></div>`; }
    function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }
@@ -188,7 +188,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
            <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
            <div class="dev-links"><a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener">${icon('chat')} واتساب</a><a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">${icon('facebook')} فيسبوك</a></div><div class="dev-phone">+20 101 542 1255</div></div>
 -          <div class="copyright"><b>حساباتي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
-+          <div class="copyright"><b>أرزقي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
++          <div class="copyright"><b>أرزقي | Arzoqi</b> — الأرضيات والتشطيبات · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
          act(body, {
            apply: () => root.SWUpdate.apply(),
            check: () => { if (!root.SWUpdate) { UI.toast('التحديث التلقائي غير متاح هنا'); return; } root.SWUpdate.check().then(r => UI.toast(r ? '✔️ في تحديث جديد — اضغط تحديث الآن' : '✔️ أنت على آخر إصدار')).catch(() => UI.toast('⚠️ مفيش إنترنت دلوقتي', 'err')); }
@@ -234,7 +234,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    "id": "./",
 -  "name": "حساباتي للأرضيات والتشطيبات",
 -  "short_name": "حساباتي للأرضيات",
-+  "name": "أرزقي للأرضيات والتشطيبات",
++  "name": "أرزقي | Arzoqi — الأرضيات والتشطيبات",
 +  "short_name": "أرزقي للأرضيات",
    "description": "حساب المساحات والكميات والخامات والمصنعية والأرباح لأعمال الأرضيات والتشطيبات، وإدارة المشروعات والعملاء والعمال وإصدار الفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
@@ -246,7 +246,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 -  <title>سياسة الخصوصية — حساباتي للأرضيات</title>
-+  <title>سياسة الخصوصية — أرزقي للأرضيات</title>
++  <title>سياسة الخصوصية — أرزقي | Arzoqi · الأرضيات والتشطيبات</title>
    <link rel="stylesheet" href="./fonts/cairo.css">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --primary: #10284a; --border: #e2e8f1; }
@@ -255,7 +255,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
  <body>
  <main>
 -  <h1>سياسة الخصوصية — حساباتي للأرضيات والتشطيبات</h1>
-+  <h1>سياسة الخصوصية — أرزقي للأرضيات والتشطيبات</h1>
++  <h1>سياسة الخصوصية — أرزقي | Arzoqi · الأرضيات والتشطيبات</h1>
    <div class="card"><h2>بياناتك على جهازك أنت بس</h2>
      <p>كل البيانات اللي بتسجلها في التطبيق (المشروعات، العملاء، الفواتير، الخامات، العمال، المصروفات، الملاحظات) بتتحفظ على جهازك فقط داخل التخزين المحلي للمتصفح أو التطبيق. التطبيق ما بيرفعش أي بيانات لأي سيرفر، ومفيش تسجيل دخول ولا حساب.</p></div>
    <div class="card"><h2>بدون تتبع وبدون إعلانات</h2>
@@ -274,7 +274,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
   *  - الـ Service Worker ده نطاقه مجلد التطبيق بس، وبيتعامل مع الطلبات اللي جوه المجلد ده بس.
   *
   * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
-@@ -21,6 +21,31 @@
+@@ -21,6 +21,34 @@
    './js/calc.js', './js/finance.js', './js/store.js', './js/ui.js', './js/app.js', './js/modules.js', './js/calculators.js', './js/docs.js',
    './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
  ];
@@ -284,7 +284,10 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
++  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
 +self.addEventListener("install", event => {
 +  event.waitUntil(caches.open(AZ_SHARED_CACHE)

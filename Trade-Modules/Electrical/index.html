@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="author" content="أحمد حسن عبدالله">
   <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
-  <meta name="description" content="أرزقي: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
-  <title>أرزقي - حاسبة وفواتير الكهرباء</title>
+  <meta name="description" content="أرزقي | Arzoqi: حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء - تصميم وتطوير أحمد حسن عبدالله">
+  <title>أرزقي | Arzoqi — حاسبة وفواتير الكهرباء</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -684,7 +684,7 @@
     <img class="brand-ic" src="./icons/icon-192.png" alt="">
     <div class="titles">
       <div class="sub" id="greetLine">أهلاً بيك</div>
-      <h1 id="tabTitle">أرزقي</h1>
+      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
     </div>
     <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
   </header>
@@ -1001,7 +1001,7 @@
       </div>
 
       <div class="copyright">
-        <b>أرزقي</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
+        <b>أرزقي | Arzoqi</b> — حاسبة وفواتير الكهرباء · الإصدار <span id="aboutVersion"></span><br>
         © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
         التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
         <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
@@ -1359,7 +1359,7 @@
   const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال كهرباء';
   const DEFAULT_TECH = 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية';
   const ROOM_PRESETS = ['الريسبشن', 'الصالة', 'غرفة النوم الرئيسية', 'غرفة الأطفال', 'غرفة المعيشة', 'المطبخ', 'الحمام', 'الطرقة والمدخل', 'البلكونة'];
-  const VIEW_TITLES = { home: 'أرزقي', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
+  const VIEW_TITLES = { home: 'أرزقي | Arzoqi', pricing: 'بيانات الفاتورة', rooms: 'الغرف واللوحة', summary: 'الحساب النهائي', docs: 'الفواتير والكشوفات', ledger: 'العملاء (النوتة)', more: 'المزيد' };
   const EDITOR_VIEWS = ['pricing', 'rooms', 'summary'];
   // نظام البنود المنفصلة
   const WORK_PRESETS = ['تقفيل لوحة', 'تركيب لوحة', 'سحب خط', 'تأسيس نقطة', 'تركيب نجفة', 'تركيب إسبوتات', 'تركيب سخان', 'تركيب شفاط', 'تغيير بريزة / مفتاح', 'صيانة وكشف أعطال'];
@@ -1661,7 +1661,7 @@
     const order = EDITOR_VIEWS.indexOf(key);
     EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
     document.getElementById('headerTitle').textContent = (key === 'rooms' && isItemsMode(getCurrentInvoice())) ? 'بنود الفاتورة' : VIEW_TITLES[key];
-    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي';
+    document.getElementById('tabTitle').textContent = VIEW_TITLES[key] || 'أرزقي | Arzoqi';
     document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
     if (isEd) renderEditorBar();
     if (key === 'home') renderHome();
@@ -2618,7 +2618,7 @@
     return `
       <footer class="inv-foot">
         <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
-        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
+        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b></span>
       </footer>`;
   }
 
@@ -2881,7 +2881,7 @@
 
       <footer class="inv-foot">
         <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
-        <span>صدرت بواسطة تطبيق <b>أرزقي</b></span>
+        <span>صدرت بواسطة تطبيق <b>أرزقي | Arzoqi</b></span>
       </footer>`;
     azElectricalInvoice(inv, t);
   }

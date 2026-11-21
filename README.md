@@ -1,4 +1,4 @@
-# أرزقي — لحسابات المصنعية (Arzaqi · Hisabati Super App)
+# أرزقي | Arzoqi — لحسابات المصنعية (Hisabati Super App)
 
 تطبيق واحد بيجمع كل تطبيقات حساباتي للمهن. افتح التطبيق ← اختار المهنة ← التطبيق الأصلي
 بتاعها بيشتغل جوه التطبيق الموحد بنفس حساباته وفواتيره وبياناته بالظبط.
@@ -17,8 +17,8 @@ original app for that trade runs inside the unified app — unchanged.
 | المحارة — Plastering | `Trade-Modules/Plastering` | Hesabaty-plaster @ `ac46676` | 1.0.0 |
 
 ## Golden rule
-`Trade-Modules/*` are copies of the original repositories plus the **intended Arzaqi changes only**
-(name, theme, icons, unified invoice) — each changed file is pinned in `.provenance/changes/`.
+`Trade-Modules/*` are copies of the original repositories plus the **intended Arzoqi changes only**
+(bilingual name أرزقي | Arzoqi, theme, fonts, icons, unified invoice) — each changed file is pinned in `.provenance/changes/`.
 The original repositories are never modified. See `Documentation/ARZAQI.md`.
 
 ## Run
@@ -35,9 +35,9 @@ tools/run-trade-suites.sh                           # every app's own test suite
 ```
 
 ## Android apps
-* `android/` — **حساباتي** (TWA, runs the site in Chrome): `hisabati.apk` / `hisabati.aab` in Releases `v*`.
-* `android-standalone/` — **أرزقي** (all sections inside the app, no Chrome needed):
-  `arzaqi.apk` / `.aab` in Releases `arzaqi-v*`.
+* `android/` — **أرزقي | Arzoqi (ويب)** (TWA, runs the site in Chrome): `hisabati.apk` / `hisabati.aab` in Releases `v*`.
+* `android-standalone/` — **أرزقي | Arzoqi** (all sections inside the app, no Chrome needed):
+  `arzoqi.apk` / `.aab` in Releases `arzoqi-v*`.
 * Both build automatically on GitHub Actions; both open in Android Studio (Gradle wrapper included).
 * Google Play: `Documentation/PLAY-STORE.md` (listing text, images, data safety, steps).
 

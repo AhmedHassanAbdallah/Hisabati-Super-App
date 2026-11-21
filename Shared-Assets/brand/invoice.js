@@ -124,8 +124,10 @@
       + '<div class="az-sign"><div ' + CE + '>' + esc(m.signLabel || 'توقيع الصنايعي') + '</div><div ' + CE + '>توقيع العميل</div></div>'
       + '</div>';
 
+    // الاسم الرسمي بالعربي والإنجليزي: «أرزقي | Arzoqi» — والإنجليزي هو لوجو الكلمة الرسمي
     var foot = '<footer class="az-foot"><span>تم التصدير من خلال تطبيق</span>'
-      + '<img src="' + BASE + 'arzaqi-logo-on-light.png" alt="أرزقي"></footer>';
+      + '<span class="az-foot-brand"><b>أرزقي</b><i aria-hidden="true"></i>'
+      + '<img src="' + BASE + 'arzoqi-wordmark-light.png" alt="Arzoqi"></span></footer>';
 
     return '<div class="az-inv' + (paidInFull ? ' az-is-paid' : '') + '">' + head + client + chips
       + '<div class="az-body">' + (m.bodyHTML || '') + '</div>'

@@ -402,7 +402,7 @@
   U.VIEWS.about = {
     parent: () => ['more'],
     render() {
-      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>HESABATI PLASTER</h2><p>أرزقي للمحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
+      const html = `<div class="dev-card"><img src="./icons/icon-192.png" alt=""><h2>أرزقي | Arzoqi</h2><p>المحارة وتشطيبات الواجهات<br>الإصدار ${esc(window.APP_VERSION || '')}</p></div>
         <div class="card"><div class="kv">
           <div class="kv-row"><span>العمل بدون إنترنت</span><strong>${'serviceWorker' in navigator ? 'مفعّل' : 'غير مدعوم في المتصفح ده'}</strong></div>
           <div class="kv-row"><span>حالة الاتصال الآن</span><strong>${navigator.onLine ? 'متصل' : 'بدون إنترنت'}</strong></div>

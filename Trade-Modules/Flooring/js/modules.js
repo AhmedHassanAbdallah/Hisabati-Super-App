@@ -608,7 +608,7 @@
           <div class="stack">${root.SWUpdate && root.SWUpdate.waiting ? `<button type="button" class="btn btn-accent" data-act="apply">${icon('download')} تحديث الآن</button>` : ''}<button type="button" class="btn btn-soft" data-act="check">${icon('refresh')} البحث عن تحديث</button></div></div>
           <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
           <div class="dev-links"><a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener">${icon('chat')} واتساب</a><a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">${icon('facebook')} فيسبوك</a></div><div class="dev-phone">+20 101 542 1255</div></div>
-          <div class="copyright"><b>أرزقي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
+          <div class="copyright"><b>أرزقي | Arzoqi</b> — الأرضيات والتشطيبات · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
         act(body, {
           apply: () => root.SWUpdate.apply(),
           check: () => { if (!root.SWUpdate) { UI.toast('التحديث التلقائي غير متاح هنا'); return; } root.SWUpdate.check().then(r => UI.toast(r ? '✔️ في تحديث جديد — اضغط تحديث الآن' : '✔️ أنت على آخر إصدار')).catch(() => UI.toast('⚠️ مفيش إنترنت دلوقتي', 'err')); }

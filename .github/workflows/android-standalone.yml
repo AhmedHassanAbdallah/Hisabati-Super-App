@@ -1,4 +1,4 @@
-# بناء "أرزقي — لحسابات المصنعية" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
+# بناء "أرزقي | Arzoqi — لحسابات المصنعية" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
 # بيتبني من نفس ملفات الموقع (Main-App / Shared-Assets / Trade-Modules) من غير أي تعديل عليها،
 # وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام السبعة) قبل النشر.
 # التوقيع: نفس مفتاح التطبيق (android/keystore.enc + HISABATI_KEY_PASSWORD).
@@ -88,8 +88,8 @@ jobs:
       - name: Collect
         run: |
           mkdir -p out
-          cp android-standalone/app/build/outputs/apk/release/*.apk out/arzaqi.apk
-          cp android-standalone/app/build/outputs/bundle/release/*.aab out/arzaqi.aab
+          cp android-standalone/app/build/outputs/apk/release/*.apk out/arzoqi.apk
+          cp android-standalone/app/build/outputs/bundle/release/*.aab out/arzoqi.aab
           ls -la out
 
       - uses: actions/upload-artifact@v4
@@ -100,7 +100,7 @@ jobs:
       - name: Summary
         run: |
           {
-            echo "## أرزقي ${{ steps.ver.outputs.version }}"
+            echo "## أرزقي | Arzoqi ${{ steps.ver.outputs.version }}"
             echo ""
             echo "- Package: \`com.ahmedhassan.arzaqi\`"
             echo "- SHA-1 (لعميل Android في Google Cloud): \`${{ steps.key.outputs.sha1 }}\`"
@@ -157,20 +157,20 @@ jobs:
           VER: ${{ needs.build.outputs.version }}
           SHA1: ${{ needs.build.outputs.sha1 }}
         run: |
-          TAG="arzaqi-v$VER"
+          TAG="arzoqi-v$VER"
           {
-            echo "**أرزقي — لحسابات المصنعية** — كل الأقسام جوه التطبيق، بيشتغل من غير إنترنت ومن غير Chrome."
+            echo "**أرزقي | Arzoqi — لحسابات المصنعية** — كل الأقسام جوه التطبيق، بيشتغل من غير إنترنت ومن غير Chrome."
             echo ""
             python3 -c "import json;d=json.load(open('version.json'));print('\n'.join('- '+n for n in d['notes']))"
             echo ""
-            echo "- **arzaqi.apk**: للتثبيت المباشر على الموبايل."
-            echo "- **arzaqi.aab**: للرفع على جوجل بلاي."
+            echo "- **arzoqi.apk**: للتثبيت المباشر على الموبايل."
+            echo "- **arzoqi.aab**: للرفع على جوجل بلاي."
             echo ""
             echo "Package: \`com.ahmedhassan.arzaqi\` · SHA-1: \`$SHA1\`"
           } > notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" out/arzaqi.apk out/arzaqi.aab --clobber
+            gh release upload "$TAG" out/arzoqi.apk out/arzoqi.aab --clobber
             gh release edit "$TAG" --notes-file notes.md --latest=false
           else
-            gh release create "$TAG" out/arzaqi.apk out/arzaqi.aab --title "أرزقي $VER" --notes-file notes.md --latest=false
+            gh release create "$TAG" out/arzoqi.apk out/arzoqi.aab --title "أرزقي | Arzoqi $VER" --notes-file notes.md --latest=false
           fi
