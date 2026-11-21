@@ -72,14 +72,16 @@
       + '<div class="az-biz">'
       + (logo ? '<div class="az-biz-logo"><img src="' + esc(logo) + '" alt=""></div>' : '')
       + '<div class="az-biz-text">'
-      + '<h1 ' + CE + '>' + esc(name || 'اسم الصنايعي') + '</h1>'
+      + '<div class="az-biz-name" ' + CE + '>' + esc(name || 'اسم الصنايعي') + '</div>'
       + (trade ? '<p class="az-trade" ' + CE + '>' + esc(trade) + '</p>' : '')
       + (phone ? '<p class="az-phone">' + ICON.phone + '<b dir="ltr" ' + CE + '>' + esc(phone) + '</b></p>' : '')
+      + (b.address && !p.name ? '<p class="az-trade" ' + CE + '>' + esc(b.address) + '</p>' : '')
       + '</div></div>'
       + '<div class="az-doc">'
-      + '<span class="az-doc-type"><span ' + CE + '>' + esc(m.docLabel || 'فاتورة') + '</span></span>'
+      + '<h1 class="az-doc-type"><span ' + CE + '>' + esc(m.docLabel || 'فاتورة') + '</span></h1>'
       + (m.number ? '<span class="az-doc-line">رقم: <b dir="ltr" ' + CE + '>' + esc(m.number) + '</b></span>' : '')
       + '<span class="az-doc-line">التاريخ: <b ' + CE + '>' + esc(m.date || '-') + '</b></span>'
+      + (m.currency ? '<span class="az-doc-line">العملة: <b ' + CE + '>' + esc(m.currency) + '</b></span>' : '')
       + '</div></header>'
       + '<div class="az-stripe"><i></i><i></i><i></i></div>';
 
@@ -91,7 +93,10 @@
     var client = '<section class="az-client"><div class="az-client-row">' + parts.join('<span class="az-dot">•</span>') + '</div>'
       + (c.note ? '<div class="az-client-note" ' + CE + '>ملحوظة: ' + esc(c.note) + '</div>' : '') + '</section>';
 
-    var chips = (m.chips && m.chips.length) ? '<div class="az-chips">' + m.chips.join('') + '</div>' : '';
+    var allChips = (m.fields || []).filter(function (f) { return f && f.value; }).map(function (f) {
+      return '<span class="inv-chip navy" ' + CE + '>' + esc(f.label) + ': <b>' + esc(f.value) + '</b></span>';
+    }).concat(m.chips || []);
+    var chips = allChips.length ? '<div class="az-chips inv-pricing">' + allChips.join('') + '</div>' : '';
 
     // ---------- صندوق الحساب ----------
     var rows = (t.lines || []).filter(function (l) { return l && Number(l[1]); }).map(function (l) {
@@ -105,7 +110,7 @@
       + (m.billable ? '<tr class="az-paid"><td ' + CE + '>' + esc(t.paidLabel || 'الواصل من العميل') + '</td><td ' + CE + '>- ' + money(paid) + '</td></tr>' : '')
       + '</table>'
       + (m.billable
-        ? '<div class="az-net' + (paidInFull ? ' done' : '') + '"><span ' + CE + '>' + (remaining < -0.005 ? 'زيادة للعميل' : 'المتبقي على العميل') + '</span><strong ' + CE + '>' + money(Math.abs(remaining)) + '</strong></div>'
+        ? '<div class="az-net' + (paidInFull ? ' done' : '') + '"><span ' + CE + '>' + (remaining < -0.005 ? 'زيادة للعميل' : 'المتبقي المطلوب سداده') + '</span><strong ' + CE + '>' + money(Math.abs(remaining)) + '</strong></div>'
         : '<div class="az-net"><span ' + CE + '>' + esc(m.netLabel || 'إجمالي العرض') + '</span><strong ' + CE + '>' + money(total) + '</strong></div>')
       + '</div>';
     var stamp = paidInFull ? '<div class="az-stamp-wrap"><div class="az-stamp" aria-label="تم السداد بالكامل"><span class="s1">تم السداد</span><span class="s2">بالكامل</span><span class="s3">' + esc(m.date || '') + '</span></div></div>' : '';
@@ -186,5 +191,14 @@
     sheet.innerHTML = render(model);
   }
 
-  window.ArzaqiInvoice = { render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet };
+  function fieldsFromHTML(html) {
+    if (!html) return [];
+    var tmp = document.createElement('div'); tmp.innerHTML = html;
+    return Array.prototype.map.call(tmp.querySelectorAll('.inv-field, .d-field'), function (f) {
+      var l = f.querySelector('.lbl'), v = f.querySelector('.val');
+      return { label: l ? l.textContent.trim() : '', value: v ? v.textContent.trim() : '' };
+    });
+  }
+
+  window.ArzaqiInvoice = { render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet, fieldsFromHTML: fieldsFromHTML };
 })();

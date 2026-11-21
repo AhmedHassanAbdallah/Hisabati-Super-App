@@ -116,3 +116,26 @@ Screenshots: `Documentation/screenshots/`.
 * Not testable automatically: native Google sign-in on a device (needs the Android OAuth client —
   `ANDROID-STANDALONE.md`), and the Android print dialog (needs a person).
 
+
+## 8. Arzaqi 2.0.0 — new identity + unified invoice (2026-11-21)
+Only the copies in `Trade-Modules/` were changed; every changed file is pinned in
+`.provenance/changes/<Section>.sha256` with a readable diff in `.patch`
+(regenerate with `tools/update-change-pins.sh`).
+
+| Check | Result |
+|---|---|
+| `tools/verify-integrity.sh /home/user` | **ALL CHECKS PASSED** — originals: same HEAD, clean tree, every file identical; copies = original + listed changes only (Electrical 8, Plumbing 18, HVAC 16, Painting 8, Flooring 17, Gypsum 22, Plastering 15 files) |
+| `tools/run-trade-suites.sh` (each app's own tests on the copies) | **12/12 suites PASS** |
+| `tests/launcher.e2e.js` | 151 passed · 0 failed |
+| `tests/launcher.offline.js` | 20 passed · 0 failed |
+| `tests/native-mode.e2e.js` | 14 passed · 0 failed |
+| `tests/cloud-backup.e2e.js` | 36 passed · 0 failed |
+| Offline: each section opened, network cut, reloaded | 7/7 load with Arzaqi theme + unified invoice + logo |
+
+Intended differences that the original suites see (handled, not hidden):
+* App name حساباتي → أرزقي. One Plumbing check asserts the old name; the copy's test now expects
+  `أرزقي السباكة` (pinned change in `Plumbing/tests/run-tests.js`). Every other check is unchanged.
+* The shared Arzaqi files (`Shared-Assets/brand/section-theme.css`, `invoice.js`, `invoice.css`, logo) live
+  outside each section's folder, so each section's service worker caches them too — under the section's own
+  cache prefix (the sections' cache-isolation checks still pass).
+* Invoices: the document type is the page's `<h1>` as before; the craftsman's name is above it with logo and phone.

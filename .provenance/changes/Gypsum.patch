@@ -1,10 +1,9 @@
-Binary files Gypsum/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-192.png differ
-Binary files Gypsum/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-512.png differ
-Binary files Gypsum/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-maskable-192.png differ
-Binary files Gypsum/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Gypsum/index.html /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/index.html
---- Gypsum/index.html	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/index.html	2026-11-20 23:11:30.898840066 +0000
+Binary files Gypsum/icons/icon-192.png and Trade-Modules/Gypsum/icons/icon-192.png differ
+Binary files Gypsum/icons/icon-512.png and Trade-Modules/Gypsum/icons/icon-512.png differ
+Binary files Gypsum/icons/icon-maskable-192.png and Trade-Modules/Gypsum/icons/icon-maskable-192.png differ
+Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/icon-maskable-512.png differ
+--- Gypsum/index.html
++++ Trade-Modules/Gypsum/index.html
 @@ -3,14 +3,14 @@
  <head>
    <meta charset="UTF-8">
@@ -63,9 +62,8 @@ diff -ruN --no-dereference Gypsum/index.html /home/user/Hisabati-Super-App/Trade
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
        </div>
-diff -ruN --no-dereference Gypsum/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/app.js
---- Gypsum/js/app.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/app.js	2026-11-20 23:08:29.193504389 +0000
+--- Gypsum/js/app.js
++++ Trade-Modules/Gypsum/js/app.js
 @@ -1,10 +1,10 @@
  /*
 - * حساباتي للجبس والديكورات — تشغيل التطبيق: التنقل، الرئيسية، الإعدادات، النسخ الاحتياطي، التحديثات
@@ -88,9 +86,8 @@ diff -ruN --no-dereference Gypsum/js/app.js /home/user/Hisabati-Super-App/Trade-
    renderView(v);
    window.scrollTo(0, 0);
  }
-diff -ruN --no-dereference Gypsum/js/data/catalog.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/data/catalog.js
---- Gypsum/js/data/catalog.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/data/catalog.js	2026-11-20 23:08:29.195980752 +0000
+--- Gypsum/js/data/catalog.js
++++ Trade-Modules/Gypsum/js/data/catalog.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — البيانات الثابتة: العملات، الوحدات، التصنيفات، الخامات المبدئية
@@ -98,9 +95,8 @@ diff -ruN --no-dereference Gypsum/js/data/catalog.js /home/user/Hisabati-Super-A
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   * ملاحظة: لا توجد أسعار ثابتة — كل الأسعار يدخلها المستخدم.
   */
-diff -ruN --no-dereference Gypsum/js/engine/board.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/board.js
---- Gypsum/js/engine/board.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/board.js	2026-11-20 23:08:29.195751743 +0000
+--- Gypsum/js/engine/board.js
++++ Trade-Modules/Gypsum/js/engine/board.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — محرك حسابات الجبسون بورد
@@ -108,9 +104,8 @@ diff -ruN --no-dereference Gypsum/js/engine/board.js /home/user/Hisabati-Super-A
   * أسقف معلقة / قواطيع / بيت نور / تكسية حوائط / تكسية أعمدة وكمرات
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-diff -ruN --no-dereference Gypsum/js/engine/core.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/core.js
---- Gypsum/js/engine/core.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/core.js	2026-11-20 23:08:29.195000719 +0000
+--- Gypsum/js/engine/core.js
++++ Trade-Modules/Gypsum/js/engine/core.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — HESABATI GYPSUM
@@ -118,9 +113,8 @@ diff -ruN --no-dereference Gypsum/js/engine/core.js /home/user/Hisabati-Super-Ap
   * محرك الحسابات: أدوات مشتركة (بدون أي اعتماد على الواجهة)
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-diff -ruN --no-dereference Gypsum/js/engine/decor.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/decor.js
---- Gypsum/js/engine/decor.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/decor.js	2026-11-20 23:08:29.195526229 +0000
+--- Gypsum/js/engine/decor.js
++++ Trade-Modules/Gypsum/js/engine/decor.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — محرك الكرانيش والبانوهات والروزتات والزخارف
@@ -128,9 +122,8 @@ diff -ruN --no-dereference Gypsum/js/engine/decor.js /home/user/Hisabati-Super-A
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * الكرانيش والبراويز تُحسب بخطة قص حقيقية (أقل عدد أعواد)، ثم تُطبَّق نسبة
-diff -ruN --no-dereference Gypsum/js/engine/finance.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/finance.js
---- Gypsum/js/engine/finance.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/finance.js	2026-11-20 23:08:29.195191988 +0000
+--- Gypsum/js/engine/finance.js
++++ Trade-Modules/Gypsum/js/engine/finance.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — المحرك المالي
@@ -138,9 +131,8 @@ diff -ruN --no-dereference Gypsum/js/engine/finance.js /home/user/Hisabati-Super
   * طرق المحاسبة / نوع الاتفاق / إجماليات المشروع / الأرباح / بيانات المستندات
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-diff -ruN --no-dereference Gypsum/js/engine/plaster.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/plaster.js
---- Gypsum/js/engine/plaster.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/engine/plaster.js	2026-11-20 23:08:29.195359505 +0000
+--- Gypsum/js/engine/plaster.js
++++ Trade-Modules/Gypsum/js/engine/plaster.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — محرك حسابات الجبس البلدي واللياسة الجبسية
@@ -148,9 +140,8 @@ diff -ruN --no-dereference Gypsum/js/engine/plaster.js /home/user/Hisabati-Super
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * الكمية (كجم) = المساحة × السمك (مم) × عدد الطبقات × معدل الاستهلاك (كجم/م²/مم) × (1 + الهالك)
-diff -ruN --no-dereference Gypsum/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/store.js
---- Gypsum/js/store.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/store.js	2026-11-20 23:08:29.193294385 +0000
+--- Gypsum/js/store.js
++++ Trade-Modules/Gypsum/js/store.js
 @@ -1,6 +1,6 @@
  /*
 - * حساباتي للجبس والديكورات — التخزين المحلي (Offline First)
@@ -169,9 +160,8 @@ diff -ruN --no-dereference Gypsum/js/store.js /home/user/Hisabati-Super-App/Trad
      const inc = normalize(raw);
      if (mode === 'merge') {
        LISTS.forEach(k => {
-diff -ruN --no-dereference Gypsum/js/ui/base.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/base.js
---- Gypsum/js/ui/base.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/base.js	2026-11-20 23:08:29.193728372 +0000
+--- Gypsum/js/ui/base.js
++++ Trade-Modules/Gypsum/js/ui/base.js
 @@ -1,12 +1,12 @@
  /*
 - * حساباتي للجبس والديكورات — أدوات الواجهة المشتركة
@@ -187,9 +177,8 @@ diff -ruN --no-dereference Gypsum/js/ui/base.js /home/user/Hisabati-Super-App/Tr
  if (IN_APP) {
    window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
    window.print = function () { try { window.HesabatyApp.print(printJobName); } catch (e) {} };
-diff -ruN --no-dereference Gypsum/js/ui/calc.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/calc.js
---- Gypsum/js/ui/calc.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/calc.js	2026-11-20 23:08:29.194284830 +0000
+--- Gypsum/js/ui/calc.js
++++ Trade-Modules/Gypsum/js/ui/calc.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — واجهة الحاسبات
@@ -197,9 +186,8 @@ diff -ruN --no-dereference Gypsum/js/ui/calc.js /home/user/Hisabati-Super-App/Tr
   * كل حاسبة: إدخال → نتيجة فورية (كميات + خامات) → تسعير حسب نوع الاتفاق → إضافة لمشروع
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
-diff -ruN --no-dereference Gypsum/js/ui/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/docs.js
---- Gypsum/js/ui/docs.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/docs.js	2026-11-20 23:16:52.835816873 +0000
+--- Gypsum/js/ui/docs.js
++++ Trade-Modules/Gypsum/js/ui/docs.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — الفواتير والمقايسات وعروض الأسعار والمستخلصات والتقارير
@@ -254,9 +242,8 @@ diff -ruN --no-dereference Gypsum/js/ui/docs.js /home/user/Hisabati-Super-App/Tr
  }
  
  /* ---------------- المعاينة والطباعة ---------------- */
-diff -ruN --no-dereference Gypsum/js/ui/manage.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/manage.js
---- Gypsum/js/ui/manage.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/manage.js	2026-11-20 23:08:29.194513300 +0000
+--- Gypsum/js/ui/manage.js
++++ Trade-Modules/Gypsum/js/ui/manage.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — الخامات والمخزون / العمال / المصروفات / النوتة
@@ -264,9 +251,8 @@ diff -ruN --no-dereference Gypsum/js/ui/manage.js /home/user/Hisabati-Super-App/
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  'use strict';
-diff -ruN --no-dereference Gypsum/js/ui/projects.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/projects.js
---- Gypsum/js/ui/projects.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/js/ui/projects.js	2026-11-20 23:08:29.194800218 +0000
+--- Gypsum/js/ui/projects.js
++++ Trade-Modules/Gypsum/js/ui/projects.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للجبس والديكورات — العملاء والمشروعات والبنود والمدفوعات
@@ -274,9 +260,8 @@ diff -ruN --no-dereference Gypsum/js/ui/projects.js /home/user/Hisabati-Super-Ap
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  'use strict';
-diff -ruN --no-dereference Gypsum/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/manifest.json
---- Gypsum/manifest.json	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/manifest.json	2026-11-20 23:08:29.192610266 +0000
+--- Gypsum/manifest.json
++++ Trade-Modules/Gypsum/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "/Hesabaty-Gebsum/",
@@ -287,9 +272,8 @@ diff -ruN --no-dereference Gypsum/manifest.json /home/user/Hisabati-Super-App/Tr
    "description": "حساب المصنعية والخامات والكميات وإدارة مشروعات الجبسون بورد والجبس البلدي والكرانيش والبانوهات. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Gypsum/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/privacy.html
---- Gypsum/privacy.html	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/privacy.html	2026-11-20 23:08:29.193097398 +0000
+--- Gypsum/privacy.html
++++ Trade-Modules/Gypsum/privacy.html
 @@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -308,9 +292,8 @@ diff -ruN --no-dereference Gypsum/privacy.html /home/user/Hisabati-Super-App/Tra
    </header>
    <main>
      <section>
-diff -ruN --no-dereference Gypsum/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/service-worker.js
---- Gypsum/service-worker.js	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/service-worker.js	2026-11-20 23:08:29.192904753 +0000
+--- Gypsum/service-worker.js
++++ Trade-Modules/Gypsum/service-worker.js
 @@ -1,9 +1,9 @@
  /*
 - * حساباتي للجبس والديكورات - Service Worker (العمل بدون إنترنت)
@@ -323,9 +306,40 @@ diff -ruN --no-dereference Gypsum/service-worker.js /home/user/Hisabati-Super-Ap
   * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
   * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
   */
-diff -ruN --no-dereference Gypsum/version.json /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/version.json
---- Gypsum/version.json	2026-11-17 17:29:51.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Gypsum/version.json	2026-11-20 23:08:29.192749732 +0000
+@@ -18,6 +18,31 @@
+   "./js/ui/base.js", "./js/ui/calc.js", "./js/ui/projects.js", "./js/ui/manage.js", "./js/ui/docs.js", "./js/app.js",
+   "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-192.png", "./icons/icon-maskable-512.png"
+ ];
++
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
+ 
+ self.addEventListener("install", event => {
+   event.waitUntil(caches.open(APP_CACHE).then(c => c.addAll(APP_FILES.map(u => new Request(u, { cache: "reload" })))));
+--- Gypsum/version.json
++++ Trade-Modules/Gypsum/version.json
 @@ -2,7 +2,7 @@
    "version": "1.0.0",
    "date": "2026-11-17",

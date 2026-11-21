@@ -1,10 +1,9 @@
-Binary files HVAC/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-192.png differ
-Binary files HVAC/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-512.png differ
-Binary files HVAC/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-maskable-192.png differ
-Binary files HVAC/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/HVAC/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference HVAC/index.html /home/user/Hisabati-Super-App/Trade-Modules/HVAC/index.html
---- HVAC/index.html	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/index.html	2026-11-20 23:11:30.851337955 +0000
+Binary files HVAC/icons/icon-192.png and Trade-Modules/HVAC/icons/icon-192.png differ
+Binary files HVAC/icons/icon-512.png and Trade-Modules/HVAC/icons/icon-512.png differ
+Binary files HVAC/icons/icon-maskable-192.png and Trade-Modules/HVAC/icons/icon-maskable-192.png differ
+Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-maskable-512.png differ
+--- HVAC/index.html
++++ Trade-Modules/HVAC/index.html
 @@ -3,19 +3,19 @@
  <head>
    <meta charset="UTF-8">
@@ -94,9 +93,8 @@ diff -ruN --no-dereference HVAC/index.html /home/user/Hisabati-Super-App/Trade-M
          AIR CONDITIONING &amp; REFRIGERATION MANAGEMENT<br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
-diff -ruN --no-dereference HVAC/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/app.js
---- HVAC/js/app.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/app.js	2026-11-20 23:08:29.178686311 +0000
+--- HVAC/js/app.js
++++ Trade-Modules/HVAC/js/app.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - app.js
@@ -149,9 +147,8 @@ diff -ruN --no-dereference HVAC/js/app.js /home/user/Hisabati-Super-App/Trade-Mo
    else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    else if (state === 'applying') txt.textContent = 'جاري التحديث... التطبيق هيفتح تاني بالإصدار الجديد';
  };
-diff -ruN --no-dereference HVAC/js/calc.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/calc.js
---- HVAC/js/calc.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/calc.js	2026-11-20 23:08:29.179715606 +0000
+--- HVAC/js/calc.js
++++ Trade-Modules/HVAC/js/calc.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - calc.js
@@ -159,9 +156,8 @@ diff -ruN --no-dereference HVAC/js/calc.js /home/user/Hisabati-Super-App/Trade-M
     الحاسبات المتخصصة: التركيب، الصيانة، الفريون، النحاس، قطع الغيار،
     اليومية، مرجع قدرات الأجهزة، وتحويل العملات (مرجعي فقط).
     كل حاسبة تقدر تضيف نتيجتها كبنود في فاتورة.
-diff -ruN --no-dereference HVAC/js/catalog.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/catalog.js
---- HVAC/js/catalog.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/catalog.js	2026-11-20 23:08:29.180379024 +0000
+--- HVAC/js/catalog.js
++++ Trade-Modules/HVAC/js/catalog.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - catalog.js
@@ -169,9 +165,8 @@ diff -ruN --no-dereference HVAC/js/catalog.js /home/user/Hisabati-Super-App/Trad
     تصنيفات أعمال التكييف والتبريد، طرق المحاسبة، أنواع الأجهزة
     والفريون والمستندات، وتنظيف البيانات المحفوظة والمستوردة.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
-diff -ruN --no-dereference HVAC/js/core.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/core.js
---- HVAC/js/core.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/core.js	2026-11-20 23:08:29.178328170 +0000
+--- HVAC/js/core.js
++++ Trade-Modules/HVAC/js/core.js
 @@ -1,6 +1,6 @@
  /* =========================================================
 -   حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
@@ -202,9 +197,8 @@ diff -ruN --no-dereference HVAC/js/core.js /home/user/Hisabati-Super-App/Trade-M
  const CURRENCIES = [
    { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
    { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
-diff -ruN --no-dereference HVAC/js/customers.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/customers.js
---- HVAC/js/customers.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/customers.js	2026-11-20 23:08:29.180092035 +0000
+--- HVAC/js/customers.js
++++ Trade-Modules/HVAC/js/customers.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - customers.js
@@ -212,9 +206,8 @@ diff -ruN --no-dereference HVAC/js/customers.js /home/user/Hisabati-Super-App/Tr
     العملاء وحساباتهم، أجهزة كل عميل، وسجل الزيارات والتقارير الفنية.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
     ========================================================= */
-diff -ruN --no-dereference HVAC/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/docs.js
---- HVAC/js/docs.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/docs.js	2026-11-20 23:08:29.179476219 +0000
+--- HVAC/js/docs.js
++++ Trade-Modules/HVAC/js/docs.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - docs.js
@@ -222,9 +215,8 @@ diff -ruN --no-dereference HVAC/js/docs.js /home/user/Hisabati-Super-App/Trade-M
     محرك المحاسبة: الفواتير والمقايسات وعروض الأسعار، البنود بطرق
     الحساب المختلفة، المدفوعات (عربون ودفعات)، وربط المخزون.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
-diff -ruN --no-dereference HVAC/js/modules.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/modules.js
---- HVAC/js/modules.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/modules.js	2026-11-20 23:08:29.177914225 +0000
+--- HVAC/js/modules.js
++++ Trade-Modules/HVAC/js/modules.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي HVAC - modules.js
@@ -259,9 +251,8 @@ diff -ruN --no-dereference HVAC/js/modules.js /home/user/Hisabati-Super-App/Trad
     ========================================================= */
  const MAT_PRESETS = ['ماسورة نحاس', 'عزل حراري', 'كابل كهرباء', 'خرطوم صرف', 'حوامل', 'شريط عزل', 'وصلات', 'أكواع', 'فريون', 'كابستور', 'مسامير وخوابير', 'سيليكون', 'جلبة حائط'];
  const MAT_UNITS = ['قطعة', 'متر', 'لفة', 'كجم', 'علبة', 'طقم'];
-diff -ruN --no-dereference HVAC/js/print.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/print.js
---- HVAC/js/print.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/js/print.js	2026-11-20 23:13:29.331628880 +0000
+--- HVAC/js/print.js
++++ Trade-Modules/HVAC/js/print.js
 @@ -1,6 +1,6 @@
  /* =========================================================
 -   حساباتي HVAC - print.js
@@ -280,7 +271,7 @@ diff -ruN --no-dereference HVAC/js/print.js /home/user/Hisabati-Super-App/Trade-
  }
  const signHTML = (a = 'توقيع الفني / القائم بالأعمال', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
  function notesHTML(title, items) {
-@@ -163,6 +163,24 @@
+@@ -163,6 +163,25 @@
      d.lines.some(l => l.kind === 'refrigerant') ? 'كمية الفريون حسب بيانات الشركة المصنعة ولوحة بيانات الجهاز.' : '',
      business.terms ? esc(business.terms) : ''
    ]);
@@ -295,7 +286,8 @@ diff -ruN --no-dereference HVAC/js/print.js /home/user/Hisabati-Super-App/Trade-
 +      + (d.warrantyTerms ? (d.warrantyMonths ? ' — ' : '') + d.warrantyTerms : '');
 +    return ArzaqiInvoice.render({
 +      section: 'hvac', docKey: d.id, docLabel: info.label, number: d.number, date: fmtDate(d.date), billable: t.billable,
-+      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, logo: business.showLogo ? business.logoData : '' },
++      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' },
++      currency: currentCurrency().name + ' (' + CUR + ')', fields: ArzaqiInvoice.fieldsFromHTML(devicesPrintField(d.deviceIds, d.deviceText)),
 +      client: { name: d.clientName, phone: d.clientPhone, address: d.clientAddress, note: cust ? cust.note : '' },
 +      chips: chips.filter(c => c.indexOf('الضمان:') < 0), bodyHTML: tables, notesHTML: notes, money,
 +      totals: { lines, total: t.total, paid: t.paid, paidLabel: 'الواصل من العميل' + (t.payments.length ? ' (' + t.payments.length + ' دفعة)' : '') },
@@ -305,9 +297,8 @@ diff -ruN --no-dereference HVAC/js/print.js /home/user/Hisabati-Super-App/Trade-
    const kindRows = KIND_ORDER.filter(k => t.byKind[k]).map(k => `<tr><td ${CE}>${esc(LINE_KINDS[k])}</td><td ${CE}>${money(t.byKind[k])}</td></tr>`).join('');
    return `
      ${printHeaderHTML(info.label, d.number, fmtDate(d.date), `عدد البنود: <b>${d.lines.length}</b>`)}
-diff -ruN --no-dereference HVAC/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/HVAC/manifest.json
---- HVAC/manifest.json	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/manifest.json	2026-11-20 23:08:29.176578887 +0000
+--- HVAC/manifest.json
++++ Trade-Modules/HVAC/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "/Hesabaty-HAVC/",
@@ -318,9 +309,8 @@ diff -ruN --no-dereference HVAC/manifest.json /home/user/Hisabati-Super-App/Trad
    "description": "تطبيق متكامل لإدارة ومحاسبة أعمال التكييف والتبريد والصيانة والتركيب والإصلاح. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference HVAC/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/HVAC/privacy.html
---- HVAC/privacy.html	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/privacy.html	2026-11-20 23:08:29.177004145 +0000
+--- HVAC/privacy.html
++++ Trade-Modules/HVAC/privacy.html
 @@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -347,9 +337,8 @@ diff -ruN --no-dereference HVAC/privacy.html /home/user/Hisabati-Super-App/Trade
 +  <footer>© 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة. · بيانات أرزقي HVAC منفصلة تماماً عن تطبيقات أرزقي الأخرى. · <a href="./">العودة للتطبيق</a></footer>
  </body>
  </html>
-diff -ruN --no-dereference HVAC/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/HVAC/service-worker.js
---- HVAC/service-worker.js	2026-11-15 00:15:45.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/HVAC/service-worker.js	2026-11-20 23:08:29.176762651 +0000
+--- HVAC/service-worker.js
++++ Trade-Modules/HVAC/service-worker.js
 @@ -1,6 +1,6 @@
  /*
 - * حساباتي HVAC - Service Worker
@@ -359,3 +348,35 @@ diff -ruN --no-dereference HVAC/service-worker.js /home/user/Hisabati-Super-App/
   * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
+@@ -122,6 +122,31 @@
+ }
+ 
+ /* ---------- دورة حياة الـ Service Worker ---------- */
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = "hesabati-hvac-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
++
+ self.addEventListener("install", event => {
+   event.waitUntil((async () => {
+     const cache = await caches.open(APP_PREFIX + SW_VERSION);

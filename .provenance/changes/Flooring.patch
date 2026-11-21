@@ -1,10 +1,9 @@
-Binary files Flooring/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-192.png differ
-Binary files Flooring/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-512.png differ
-Binary files Flooring/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-maskable-192.png differ
-Binary files Flooring/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Flooring/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Flooring/index.html /home/user/Hisabati-Super-App/Trade-Modules/Flooring/index.html
---- Flooring/index.html	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/index.html	2026-11-20 23:11:30.883852064 +0000
+Binary files Flooring/icons/icon-192.png and Trade-Modules/Flooring/icons/icon-192.png differ
+Binary files Flooring/icons/icon-512.png and Trade-Modules/Flooring/icons/icon-512.png differ
+Binary files Flooring/icons/icon-maskable-192.png and Trade-Modules/Flooring/icons/icon-maskable-192.png differ
+Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/icons/icon-maskable-512.png differ
+--- Flooring/index.html
++++ Trade-Modules/Flooring/index.html
 @@ -3,15 +3,15 @@
  <head>
    <meta charset="UTF-8">
@@ -48,9 +47,8 @@ diff -ruN --no-dereference Flooring/index.html /home/user/Hisabati-Super-App/Tra
      </div>
      <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-diff -ruN --no-dereference Flooring/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/app.js
---- Flooring/js/app.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/app.js	2026-11-20 23:08:29.190686642 +0000
+--- Flooring/js/app.js
++++ Trade-Modules/Flooring/js/app.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — التطبيق الرئيسي: الرئيسية، المشروعات، صفحة المشروع، العملاء
@@ -67,9 +65,8 @@ diff -ruN --no-dereference Flooring/js/app.js /home/user/Hisabati-Super-App/Trad
    let currentView = 'home';
    function switchView(key) {
      if (UI.depth()) { UI.closeAllThen(() => switchView(key)); return; }
-diff -ruN --no-dereference Flooring/js/calc.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calc.js
---- Flooring/js/calc.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calc.js	2026-11-20 23:08:29.192199404 +0000
+--- Flooring/js/calc.js
++++ Trade-Modules/Flooring/js/calc.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — محرك الحسابات
@@ -77,9 +74,8 @@ diff -ruN --no-dereference Flooring/js/calc.js /home/user/Hisabati-Super-App/Tra
   * HESABATI FLOORING — Calculation engine
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-diff -ruN --no-dereference Flooring/js/calculators.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calculators.js
---- Flooring/js/calculators.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/calculators.js	2026-11-20 23:08:29.191385658 +0000
+--- Flooring/js/calculators.js
++++ Trade-Modules/Flooring/js/calculators.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — شاشات الحاسبات (المنطق نفسه في calc.js)
@@ -87,9 +83,8 @@ diff -ruN --no-dereference Flooring/js/calculators.js /home/user/Hisabati-Super-
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  (function (root) {
-diff -ruN --no-dereference Flooring/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/docs.js
---- Flooring/js/docs.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/docs.js	2026-11-20 23:16:06.792069627 +0000
+--- Flooring/js/docs.js
++++ Trade-Modules/Flooring/js/docs.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — الفواتير والمستندات والطباعة (PDF بالعربي من نظام الطباعة)
@@ -146,9 +141,8 @@ diff -ruN --no-dereference Flooring/js/docs.js /home/user/Hisabati-Super-App/Tra
      openPrint(html, `${docTitle(d)} ${d.number || ''} ${cl.name || ''}`.trim());
    }
  
-diff -ruN --no-dereference Flooring/js/finance.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/finance.js
---- Flooring/js/finance.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/finance.js	2026-11-20 23:08:29.191981239 +0000
+--- Flooring/js/finance.js
++++ Trade-Modules/Flooring/js/finance.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — الحسابات المالية (المشروعات، الأرباح، المخزون، العمال، المستندات)
@@ -156,9 +150,8 @@ diff -ruN --no-dereference Flooring/js/finance.js /home/user/Hisabati-Super-App/
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * قواعد ثابتة تمنع احتساب أي مبلغ مرتين:
-diff -ruN --no-dereference Flooring/js/modules.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/modules.js
---- Flooring/js/modules.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/modules.js	2026-11-20 23:08:29.190095274 +0000
+--- Flooring/js/modules.js
++++ Trade-Modules/Flooring/js/modules.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — الخامات والمخزون، العمال، المصروفات، النوتة، أنواع الأعمال، الإعدادات، النسخ الاحتياطي
@@ -199,9 +192,8 @@ diff -ruN --no-dereference Flooring/js/modules.js /home/user/Hisabati-Super-App/
          act(body, {
            apply: () => root.SWUpdate.apply(),
            check: () => { if (!root.SWUpdate) { UI.toast('التحديث التلقائي غير متاح هنا'); return; } root.SWUpdate.check().then(r => UI.toast(r ? '✔️ في تحديث جديد — اضغط تحديث الآن' : '✔️ أنت على آخر إصدار')).catch(() => UI.toast('⚠️ مفيش إنترنت دلوقتي', 'err')); }
-diff -ruN --no-dereference Flooring/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/store.js
---- Flooring/js/store.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/store.js	2026-11-20 23:08:29.189446661 +0000
+--- Flooring/js/store.js
++++ Trade-Modules/Flooring/js/store.js
 @@ -1,8 +1,8 @@
  /*
 - * حساباتي للأرضيات — التخزين المحلي (Offline First)
@@ -226,9 +218,8 @@ diff -ruN --no-dereference Flooring/js/store.js /home/user/Hisabati-Super-App/Tr
        return null;
      },
      restore(obj) {
-diff -ruN --no-dereference Flooring/js/ui.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/ui.js
---- Flooring/js/ui.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/js/ui.js	2026-11-20 23:08:29.191011390 +0000
+--- Flooring/js/ui.js
++++ Trade-Modules/Flooring/js/ui.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي للأرضيات — أدوات الواجهة: الأيقونات، الرسائل، النوافذ المنبثقة، الصفحات، النماذج
@@ -236,9 +227,8 @@ diff -ruN --no-dereference Flooring/js/ui.js /home/user/Hisabati-Super-App/Trade
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  (function (root) {
-diff -ruN --no-dereference Flooring/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Flooring/manifest.json
---- Flooring/manifest.json	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/manifest.json	2026-11-20 23:08:29.188720739 +0000
+--- Flooring/manifest.json
++++ Trade-Modules/Flooring/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "./",
@@ -249,9 +239,8 @@ diff -ruN --no-dereference Flooring/manifest.json /home/user/Hisabati-Super-App/
    "description": "حساب المساحات والكميات والخامات والمصنعية والأرباح لأعمال الأرضيات والتشطيبات، وإدارة المشروعات والعملاء والعمال وإصدار الفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Flooring/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Flooring/privacy.html
---- Flooring/privacy.html	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/privacy.html	2026-11-20 23:08:29.189234189 +0000
+--- Flooring/privacy.html
++++ Trade-Modules/Flooring/privacy.html
 @@ -3,7 +3,7 @@
  <head>
    <meta charset="UTF-8">
@@ -270,9 +259,8 @@ diff -ruN --no-dereference Flooring/privacy.html /home/user/Hisabati-Super-App/T
    <div class="card"><h2>بياناتك على جهازك أنت بس</h2>
      <p>كل البيانات اللي بتسجلها في التطبيق (المشروعات، العملاء، الفواتير، الخامات، العمال، المصروفات، الملاحظات) بتتحفظ على جهازك فقط داخل التخزين المحلي للمتصفح أو التطبيق. التطبيق ما بيرفعش أي بيانات لأي سيرفر، ومفيش تسجيل دخول ولا حساب.</p></div>
    <div class="card"><h2>بدون تتبع وبدون إعلانات</h2>
-diff -ruN --no-dereference Flooring/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Flooring/service-worker.js
---- Flooring/service-worker.js	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/service-worker.js	2026-11-20 23:08:29.189087179 +0000
+--- Flooring/service-worker.js
++++ Trade-Modules/Flooring/service-worker.js
 @@ -1,10 +1,10 @@
  /*
 - * حساباتي للأرضيات — Service Worker (العمل بدون إنترنت)
@@ -286,9 +274,40 @@ diff -ruN --no-dereference Flooring/service-worker.js /home/user/Hisabati-Super-
   *  - الـ Service Worker ده نطاقه مجلد التطبيق بس، وبيتعامل مع الطلبات اللي جوه المجلد ده بس.
   *
   * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
-diff -ruN --no-dereference Flooring/version.json /home/user/Hisabati-Super-App/Trade-Modules/Flooring/version.json
---- Flooring/version.json	2026-11-17 16:31:26.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Flooring/version.json	2026-11-20 23:08:29.188876124 +0000
+@@ -21,6 +21,31 @@
+   './js/calc.js', './js/finance.js', './js/store.js', './js/ui.js', './js/app.js', './js/modules.js', './js/calculators.js', './js/docs.js',
+   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
+ ];
++
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
+ 
+ self.addEventListener('install', event => {
+   event.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' })))));
+--- Flooring/version.json
++++ Trade-Modules/Flooring/version.json
 @@ -2,7 +2,7 @@
    "version": "1.0.0",
    "date": "2026-11-17",

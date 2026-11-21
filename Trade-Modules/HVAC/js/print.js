@@ -174,7 +174,8 @@ function buildDocHTML(d) {
       + (d.warrantyTerms ? (d.warrantyMonths ? ' — ' : '') + d.warrantyTerms : '');
     return ArzaqiInvoice.render({
       section: 'hvac', docKey: d.id, docLabel: info.label, number: d.number, date: fmtDate(d.date), billable: t.billable,
-      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, logo: business.showLogo ? business.logoData : '' },
+      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' },
+      currency: currentCurrency().name + ' (' + CUR + ')', fields: ArzaqiInvoice.fieldsFromHTML(devicesPrintField(d.deviceIds, d.deviceText)),
       client: { name: d.clientName, phone: d.clientPhone, address: d.clientAddress, note: cust ? cust.note : '' },
       chips: chips.filter(c => c.indexOf('الضمان:') < 0), bodyHTML: tables, notesHTML: notes, money,
       totals: { lines, total: t.total, paid: t.paid, paidLabel: 'الواصل من العميل' + (t.payments.length ? ' (' + t.payments.length + ' دفعة)' : '') },

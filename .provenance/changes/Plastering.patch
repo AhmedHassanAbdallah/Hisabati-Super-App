@@ -1,10 +1,9 @@
-Binary files Plastering/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-192.png differ
-Binary files Plastering/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-512.png differ
-Binary files Plastering/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-maskable-192.png differ
-Binary files Plastering/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plastering/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Plastering/index.html /home/user/Hisabati-Super-App/Trade-Modules/Plastering/index.html
---- Plastering/index.html	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/index.html	2026-11-20 23:11:30.912117841 +0000
+Binary files Plastering/icons/icon-192.png and Trade-Modules/Plastering/icons/icon-192.png differ
+Binary files Plastering/icons/icon-512.png and Trade-Modules/Plastering/icons/icon-512.png differ
+Binary files Plastering/icons/icon-maskable-192.png and Trade-Modules/Plastering/icons/icon-maskable-192.png differ
+Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering/icons/icon-maskable-512.png differ
+--- Plastering/index.html
++++ Trade-Modules/Plastering/index.html
 @@ -3,12 +3,12 @@
  <head>
    <meta charset="UTF-8">
@@ -30,9 +29,8 @@ diff -ruN --no-dereference Plastering/index.html /home/user/Hisabati-Super-App/T
  </head>
  <body>
    <div id="app">
-diff -ruN --no-dereference Plastering/js/admin.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/admin.js
---- Plastering/js/admin.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/admin.js	2026-11-20 23:08:29.198378217 +0000
+--- Plastering/js/admin.js
++++ Trade-Modules/Plastering/js/admin.js
 @@ -375,7 +375,7 @@
          <input type="file" id="restoreFile" accept=".json,application/json" class="hidden">
          <div class="hint mt" style="text-align:center">${lb ? 'آخر نسخة: ' + new Date(lb).toLocaleString('ar-EG') : 'لم يتم عمل نسخة احتياطية بعد'}</div></div>
@@ -69,9 +67,8 @@ diff -ruN --no-dereference Plastering/js/admin.js /home/user/Hisabati-Super-App/
          U.confirmBox('تأكيد أخير: كل المشروعات والعملاء والمخزن هيتمسحوا.', () => { S.resetAll(); U.applyTheme(); U.toast('تم المسح'); U.go('home'); }, { yes: 'امسح' });
        }, { yes: 'متابعة' });
      }
-diff -ruN --no-dereference Plastering/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/docs.js
---- Plastering/js/docs.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/docs.js	2026-11-20 23:17:29.885708908 +0000
+--- Plastering/js/docs.js
++++ Trade-Modules/Plastering/js/docs.js
 @@ -12,7 +12,7 @@
    function header(docName, no, date) {
      const st = S.db().settings;
@@ -126,9 +123,8 @@ diff -ruN --no-dereference Plastering/js/docs.js /home/user/Hisabati-Super-App/T
      CUR_DOC = null;
    }
    window.addEventListener('resize', fitPreview);
-diff -ruN --no-dereference Plastering/js/engine.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/engine.js
---- Plastering/js/engine.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/engine.js	2026-11-20 23:08:29.197981759 +0000
+--- Plastering/js/engine.js
++++ Trade-Modules/Plastering/js/engine.js
 @@ -1,6 +1,6 @@
  /*
   * HESABATI PLASTER — محرك الحسابات
@@ -137,9 +133,8 @@ diff -ruN --no-dereference Plastering/js/engine.js /home/user/Hisabati-Super-App
   *
   * هذا الملف مستقل تماماً عن الواجهة: لا يلمس DOM ولا التخزين.
   * يعمل في المتصفح (window.PlasterEngine) وفي Node للاختبارات (require).
-diff -ruN --no-dereference Plastering/js/store.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/store.js
---- Plastering/js/store.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/store.js	2026-11-20 23:08:29.197114212 +0000
+--- Plastering/js/store.js
++++ Trade-Modules/Plastering/js/store.js
 @@ -2,7 +2,7 @@
   * HESABATI PLASTER — طبقة التخزين المحلي (Offline First)
   *
@@ -158,9 +153,8 @@ diff -ruN --no-dereference Plastering/js/store.js /home/user/Hisabati-Super-App/
      DB = normalize(data);
      saveNow();
      return DB;
-diff -ruN --no-dereference Plastering/js/ui.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/ui.js
---- Plastering/js/ui.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/ui.js	2026-11-20 23:08:29.197347110 +0000
+--- Plastering/js/ui.js
++++ Trade-Modules/Plastering/js/ui.js
 @@ -300,7 +300,7 @@
      const head = document.getElementById('appHeader');
      const isTab = !!v.tab;
@@ -170,9 +164,8 @@ diff -ruN --no-dereference Plastering/js/ui.js /home/user/Hisabati-Super-App/Tra
           <button type="button" class="icon-btn" data-act="toggleTheme" aria-label="الوضع الليلي">${icon(isDark() ? 'sun' : 'moon')}</button>`
        : `<button type="button" class="icon-btn" data-act="back" aria-label="رجوع">${icon('back')}</button><div class="titles"><h1>${esc(out.title || '')}</h1>${out.sub ? `<div class="sub">${esc(out.sub)}</div>` : ''}</div>
           ${(out.actions || []).map(a => `<button type="button" class="icon-btn${a.accent ? ' accent' : ''}" data-act="${esc(a.act)}"${a.data ? Object.keys(a.data).map(k => ` data-${k}="${esc(a.data[k])}"`).join('') : ''} aria-label="${esc(a.label || '')}">${icon(a.icon)}</button>`).join('')}`;
-diff -ruN --no-dereference Plastering/js/views.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/views.js
---- Plastering/js/views.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/js/views.js	2026-11-20 23:08:29.198722167 +0000
+--- Plastering/js/views.js
++++ Trade-Modules/Plastering/js/views.js
 @@ -70,7 +70,7 @@
        </div>
        <div class="home-row"><h2 class="home-h" style="margin:0">آخر المشروعات</h2><button type="button" class="link-btn" data-act="go" data-view="projects">عرض الكل</button></div>
@@ -182,9 +175,8 @@ diff -ruN --no-dereference Plastering/js/views.js /home/user/Hisabati-Super-App/
      }
    };
  
-diff -ruN --no-dereference Plastering/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Plastering/manifest.json
---- Plastering/manifest.json	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/manifest.json	2026-11-20 23:08:29.196335438 +0000
+--- Plastering/manifest.json
++++ Trade-Modules/Plastering/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "/Hesabaty-plaster/",
@@ -195,9 +187,8 @@ diff -ruN --no-dereference Plastering/manifest.json /home/user/Hisabati-Super-Ap
    "description": "حساب مساحات وخامات ومصنعية المحارة والجرافيت والدهارة والمعجون وتشطيبات الواجهات، وإدارة المشروعات والعملاء والعمال والمخزن والفواتير — يعمل بدون إنترنت.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Plastering/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Plastering/privacy.html
---- Plastering/privacy.html	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/privacy.html	2026-11-20 23:08:29.196828292 +0000
+--- Plastering/privacy.html
++++ Trade-Modules/Plastering/privacy.html
 @@ -14,7 +14,7 @@
  </head>
  <body>
@@ -216,9 +207,8 @@ diff -ruN --no-dereference Plastering/privacy.html /home/user/Hisabati-Super-App
    </ul>
  </main>
  </body>
-diff -ruN --no-dereference Plastering/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Plastering/service-worker.js
---- Plastering/service-worker.js	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/service-worker.js	2026-11-20 23:08:29.196677099 +0000
+--- Plastering/service-worker.js
++++ Trade-Modules/Plastering/service-worker.js
 @@ -1,7 +1,7 @@
  /*
   * HESABATI PLASTER — Service Worker (العمل بدون إنترنت)
@@ -228,9 +218,40 @@ diff -ruN --no-dereference Plastering/service-worker.js /home/user/Hisabati-Supe
   *  - أسماء الكاش تبدأ بـ "hplaster-" فقط.
   *  - التنظيف يمسح كاش "hplaster-" القديم فقط ولا يلمس أي كاش آخر
   *    (مثل hesabaty-app-* الخاص بتطبيق الكهرباء).
-diff -ruN --no-dereference Plastering/version.json /home/user/Hisabati-Super-App/Trade-Modules/Plastering/version.json
---- Plastering/version.json	2026-11-19 20:47:38.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plastering/version.json	2026-11-20 23:08:29.196471468 +0000
+@@ -34,6 +34,31 @@
+   './icons/icon-maskable-192.png',
+   './icons/icon-maskable-512.png'
+ ];
++
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
+ 
+ self.addEventListener('install', event => {
+   event.waitUntil(caches.open(APP_CACHE).then(c => c.addAll(APP_FILES.map(u => new Request(u, { cache: 'reload' })))));
+--- Plastering/version.json
++++ Trade-Modules/Plastering/version.json
 @@ -2,7 +2,7 @@
    "version": "1.0.0",
    "date": "2026-11-18",

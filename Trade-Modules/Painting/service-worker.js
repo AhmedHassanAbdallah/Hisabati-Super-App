@@ -113,6 +113,31 @@ async function setVersion(version) {
 }
 
 /* ---------- دورة حياة الـ Service Worker ---------- */
+/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
+   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
+   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
+const AZ_SHARED_CACHE = "hpaint-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
+const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
+  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
+self.addEventListener("install", event => {
+  event.waitUntil(caches.open(AZ_SHARED_CACHE)
+    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
+    .catch(() => {}));
+});
+self.addEventListener("fetch", event => {
+  const req = event.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
+  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
+    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
+    const hit = await cache.match(req, { ignoreSearch: true });
+    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
+    return fresh;
+  }));
+});
+
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(APP_PREFIX + SW_VERSION);

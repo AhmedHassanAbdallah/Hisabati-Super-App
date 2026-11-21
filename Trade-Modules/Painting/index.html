@@ -5171,6 +5171,7 @@
       const chips = h.chips.slice();
       if (inv.projectName) chips.unshift(`<span class="inv-chip navy" ${CE}>المشروع: <b>${esc(inv.projectName)}</b></span>`);
       return ArzaqiInvoice.render({
+        currency: currentCurrency().name + ' (' + currentCurrency().sym + ')',
         section: 'painting', docKey: inv.id + ':' + type, docLabel: D.tag, number: docNo(D.prefix, inv.serial), date: inv.date, billable: billing,
         business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
         client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },

@@ -328,7 +328,7 @@ async function browserTests() {
   check('التطبيق اشتغل بدون أخطاء', errors.length === 0, errors);
   check('عملاء التطبيقات الأخرى لم يتم استيرادهم تلقائياً', (await ev(() => DB.customers.length + DB.docs.length + DB.projects.length)) === 0);
   check('العملة والمظهر مستقلين (لم تُقرأ إعدادات التطبيقات الأخرى)', (await ev(() => settings.currency + '/' + settings.theme)) === 'EGP/auto');
-  check('اسم التطبيق وهويته: حساباتي السباكة', (await page.title()).includes('حساباتي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
+  check('اسم التطبيق وهويته: أرزقي السباكة', (await page.title()).includes('أرزقي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
   await shot('01-home');
 
   /* ---------- العملاء والمشروعات ---------- */

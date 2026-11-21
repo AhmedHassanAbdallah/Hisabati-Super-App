@@ -1,10 +1,9 @@
-Binary files Plumbing/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/icons/icon-192.png differ
-Binary files Plumbing/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/icons/icon-512.png differ
-Binary files Plumbing/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/icons/icon-maskable-192.png differ
-Binary files Plumbing/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Plumbing/index.html /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/index.html
---- Plumbing/index.html	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/index.html	2026-11-20 23:11:30.838875451 +0000
+Binary files Plumbing/icons/icon-192.png and Trade-Modules/Plumbing/icons/icon-192.png differ
+Binary files Plumbing/icons/icon-512.png and Trade-Modules/Plumbing/icons/icon-512.png differ
+Binary files Plumbing/icons/icon-maskable-192.png and Trade-Modules/Plumbing/icons/icon-maskable-192.png differ
+Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/icons/icon-maskable-512.png differ
+--- Plumbing/index.html
++++ Trade-Modules/Plumbing/index.html
 @@ -3,19 +3,19 @@
  <head>
    <meta charset="UTF-8">
@@ -94,9 +93,8 @@ diff -ruN --no-dereference Plumbing/index.html /home/user/Hisabati-Super-App/Tra
          PLUMBING &amp; SANITARY WORK ACCOUNTING<br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
-diff -ruN --no-dereference Plumbing/js/app.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/app.js
---- Plumbing/js/app.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/app.js	2026-11-20 23:08:29.173478423 +0000
+--- Plumbing/js/app.js
++++ Trade-Modules/Plumbing/js/app.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - app.js
@@ -149,9 +147,8 @@ diff -ruN --no-dereference Plumbing/js/app.js /home/user/Hisabati-Super-App/Trad
    else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    else if (state === 'applying') txt.textContent = 'جاري التحديث... التطبيق هيفتح تاني بالإصدار الجديد';
  };
-diff -ruN --no-dereference Plumbing/js/calc.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/calc.js
---- Plumbing/js/calc.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/calc.js	2026-11-20 23:08:29.174633922 +0000
+--- Plumbing/js/calc.js
++++ Trade-Modules/Plumbing/js/calc.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - calc.js
@@ -159,9 +156,8 @@ diff -ruN --no-dereference Plumbing/js/calc.js /home/user/Hisabati-Super-App/Tra
     الحاسبات: النقاط، الحمام، المطبخ، المواسير والشبكات (مع الهالك
     وطول العود والوصلات)، القطع والأدوات الصحية، الطلمبات والخزانات،
     الحفر بالمتر المكعب، اليومية، الصيانة، وتحويل العملات (مرجعي).
-diff -ruN --no-dereference Plumbing/js/catalog.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/catalog.js
---- Plumbing/js/catalog.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/catalog.js	2026-11-20 23:08:29.175398114 +0000
+--- Plumbing/js/catalog.js
++++ Trade-Modules/Plumbing/js/catalog.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - catalog.js
@@ -169,9 +165,8 @@ diff -ruN --no-dereference Plumbing/js/catalog.js /home/user/Hisabati-Super-App/
     تصنيفات أعمال السباكة والصحي، طرق المحاسبة، تعريف النقطة،
     أنواع المستندات والخامات، وتنظيف البيانات المحفوظة والمستوردة.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
-diff -ruN --no-dereference Plumbing/js/core.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/core.js
---- Plumbing/js/core.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/core.js	2026-11-20 23:08:29.173192706 +0000
+--- Plumbing/js/core.js
++++ Trade-Modules/Plumbing/js/core.js
 @@ -1,6 +1,6 @@
  /* =========================================================
 -   حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف
@@ -202,9 +197,8 @@ diff -ruN --no-dereference Plumbing/js/core.js /home/user/Hisabati-Super-App/Tra
  const CURRENCIES = [
    { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
    { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
-diff -ruN --no-dereference Plumbing/js/customers.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/customers.js
---- Plumbing/js/customers.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/customers.js	2026-11-20 23:08:29.175061769 +0000
+--- Plumbing/js/customers.js
++++ Trade-Modules/Plumbing/js/customers.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - customers.js
@@ -212,9 +206,8 @@ diff -ruN --no-dereference Plumbing/js/customers.js /home/user/Hisabati-Super-Ap
     العملاء وحساباتهم، مشروعات كل عميل (حصر ومصروفات وأرباح)،
     وسجل الصيانة والإصلاح والزيارات.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
-diff -ruN --no-dereference Plumbing/js/docs.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/docs.js
---- Plumbing/js/docs.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/docs.js	2026-11-20 23:08:29.174291468 +0000
+--- Plumbing/js/docs.js
++++ Trade-Modules/Plumbing/js/docs.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - docs.js
@@ -222,9 +215,8 @@ diff -ruN --no-dereference Plumbing/js/docs.js /home/user/Hisabati-Super-App/Tra
     محرك المحاسبة: المقايسات والفواتير وعروض الأسعار، البنود بطرق
     الحساب المختلفة (نقطة، حمام، مطبخ، متر، قطعة، يومية، مقاولة، زيارة،
     متر مكعب، مراحل، توريد وتركيب)، منع تكرار البنود، المدفوعات، والمخزون.
-diff -ruN --no-dereference Plumbing/js/modules.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/modules.js
---- Plumbing/js/modules.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/modules.js	2026-11-20 23:08:29.172665569 +0000
+--- Plumbing/js/modules.js
++++ Trade-Modules/Plumbing/js/modules.js
 @@ -1,5 +1,5 @@
  /* =========================================================
 -   حساباتي السباكة - modules.js
@@ -259,9 +251,8 @@ diff -ruN --no-dereference Plumbing/js/modules.js /home/user/Hisabati-Super-App/
     ========================================================= */
  const MAT_PRESETS = ['ماسورة PPR', 'ماسورة PVC', 'كوع', 'تيه', 'جلبة', 'مخفض', 'محبس', 'محبس زاوية', 'خلاط حوض', 'خلاط دش', 'شطاف', 'قاعدة حمام', 'حوض', 'سيفون', 'صفاية', 'خرطوم توصيل', 'تيفلون', 'كلبس', 'لاصق PVC'];
  const MAT_UNITS = ['قطعة', 'متر', 'عود', 'لفة', 'كجم', 'علبة', 'طقم'];
-diff -ruN --no-dereference Plumbing/js/print.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/print.js
---- Plumbing/js/print.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/js/print.js	2026-11-20 23:11:54.772627851 +0000
+--- Plumbing/js/print.js
++++ Trade-Modules/Plumbing/js/print.js
 @@ -1,6 +1,6 @@
  /* =========================================================
 -   حساباتي السباكة - print.js
@@ -280,7 +271,7 @@ diff -ruN --no-dereference Plumbing/js/print.js /home/user/Hisabati-Super-App/Tr
  }
  const signHTML = (a = 'توقيع السباك / المقاول', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
  function notesHTML(title, items) {
-@@ -180,6 +180,24 @@
+@@ -180,6 +180,25 @@
      d.lines.some(lineFromClient) ? 'الخامات والأدوات الموردة من العميل غير محسوبة في الإجمالي (تُحسب مصنعية تركيبها فقط).' : '',
      business.terms ? esc(business.terms) : ''
    ]);
@@ -295,7 +286,8 @@ diff -ruN --no-dereference Plumbing/js/print.js /home/user/Hisabati-Super-App/Tr
 +      + (d.warrantyTerms ? (d.warrantyMonths ? ' — ' : '') + d.warrantyTerms : '');
 +    return ArzaqiInvoice.render({
 +      section: 'plumbing', docKey: d.id, docLabel: info.label, number: d.number, date: fmtDate(d.date), billable: t.billable,
-+      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, logo: business.showLogo ? business.logoData : '' },
++      business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' },
++      currency: currentCurrency().name + ' (' + CUR + ')', fields: ArzaqiInvoice.fieldsFromHTML(projectPrintField(d.projectId, d.siteText)),
 +      client: { name: d.clientName, phone: d.clientPhone, address: d.clientAddress, note: cust ? cust.note : '' },
 +      chips: chips.filter(c => c.indexOf('الضمان:') < 0), bodyHTML: tables, notesHTML: notes, money,
 +      totals: { lines, total: t.total, paid: t.paid, paidLabel: 'الواصل من العميل' + (t.payments.length ? ' (' + t.payments.length + ' دفعة)' : '') },
@@ -305,9 +297,8 @@ diff -ruN --no-dereference Plumbing/js/print.js /home/user/Hisabati-Super-App/Tr
    const kindRows = KIND_ORDER.filter(k => t.byKind[k]).map(k => `<tr><td ${CE}>${esc(LINE_KINDS[k])}</td><td ${CE}>${money(t.byKind[k])}</td></tr>`).join('');
    return `
      ${printHeaderHTML(info.label, d.number, fmtDate(d.date), `عدد البنود: <b>${d.lines.length}</b>`)}
-diff -ruN --no-dereference Plumbing/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/manifest.json
---- Plumbing/manifest.json	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/manifest.json	2026-11-20 23:08:29.171286858 +0000
+--- Plumbing/manifest.json
++++ Trade-Modules/Plumbing/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "/Hesabaty-plumbing/",
@@ -318,9 +309,8 @@ diff -ruN --no-dereference Plumbing/manifest.json /home/user/Hisabati-Super-App/
    "description": "نظام متكامل لإدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف: التأسيس والتشطيب والصيانة والخامات والعمال والمقايسات والفواتير. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Plumbing/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/privacy.html
---- Plumbing/privacy.html	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/privacy.html	2026-11-20 23:08:29.171791020 +0000
+--- Plumbing/privacy.html
++++ Trade-Modules/Plumbing/privacy.html
 @@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -347,9 +337,8 @@ diff -ruN --no-dereference Plumbing/privacy.html /home/user/Hisabati-Super-App/T
 +  <footer>© 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة. · بيانات أرزقي السباكة منفصلة تماماً عن تطبيقات أرزقي الأخرى. · <a href="./">العودة للتطبيق</a></footer>
  </body>
  </html>
-diff -ruN --no-dereference Plumbing/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/service-worker.js
---- Plumbing/service-worker.js	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/service-worker.js	2026-11-20 23:08:29.171614809 +0000
+--- Plumbing/service-worker.js
++++ Trade-Modules/Plumbing/service-worker.js
 @@ -1,6 +1,6 @@
  /*
 - * حساباتي السباكة - Service Worker
@@ -359,9 +348,51 @@ diff -ruN --no-dereference Plumbing/service-worker.js /home/user/Hisabati-Super-
   * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-diff -ruN --no-dereference Plumbing/version.json /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/version.json
---- Plumbing/version.json	2026-11-16 12:48:00.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Plumbing/version.json	2026-11-20 23:08:29.171444245 +0000
+@@ -122,6 +122,31 @@
+ }
+ 
+ /* ---------- دورة حياة الـ Service Worker ---------- */
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
++
+ self.addEventListener("install", event => {
+   event.waitUntil((async () => {
+     const cache = await caches.open(APP_PREFIX + SW_VERSION);
+--- Plumbing/tests/run-tests.js
++++ Trade-Modules/Plumbing/tests/run-tests.js
+@@ -328,7 +328,7 @@
+   check('التطبيق اشتغل بدون أخطاء', errors.length === 0, errors);
+   check('عملاء التطبيقات الأخرى لم يتم استيرادهم تلقائياً', (await ev(() => DB.customers.length + DB.docs.length + DB.projects.length)) === 0);
+   check('العملة والمظهر مستقلين (لم تُقرأ إعدادات التطبيقات الأخرى)', (await ev(() => settings.currency + '/' + settings.theme)) === 'EGP/auto');
+-  check('اسم التطبيق وهويته: حساباتي السباكة', (await page.title()).includes('حساباتي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
++  check('اسم التطبيق وهويته: أرزقي السباكة', (await page.title()).includes('أرزقي السباكة') && (await page.textContent('.brand-tag')).includes('PLUMBING'));
+   await shot('01-home');
+ 
+   /* ---------- العملاء والمشروعات ---------- */
+--- Plumbing/version.json
++++ Trade-Modules/Plumbing/version.json
 @@ -2,7 +2,7 @@
    "version": "1.0.0",
    "date": "2026-11-15",

@@ -2645,6 +2645,7 @@
       section: 'electrical', docKey: inv.id, docLabel: 'فاتورة', date: inv.date, billable: true,
       business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
       client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
+      currency: currentCurrency().name + ' (' + CUR + ')',
       money, totals: { lines, total: t.grandTotal - (inv.discountAmount || 0) + (t.materialsDue || 0), paid: inv.paidAmount || 0 },
       signLabel: 'توقيع الكهربائي'
     });

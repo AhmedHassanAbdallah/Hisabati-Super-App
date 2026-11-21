@@ -1,10 +1,9 @@
-Binary files Painting/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Painting/icons/icon-192.png differ
-Binary files Painting/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Painting/icons/icon-512.png differ
-Binary files Painting/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Painting/icons/icon-maskable-192.png differ
-Binary files Painting/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Painting/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Trade-Modules/Painting/index.html
---- Painting/index.html	2026-11-14 20:45:20.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Painting/index.html	2026-11-20 23:15:19.717415330 +0000
+Binary files Painting/icons/icon-192.png and Trade-Modules/Painting/icons/icon-192.png differ
+Binary files Painting/icons/icon-512.png and Trade-Modules/Painting/icons/icon-512.png differ
+Binary files Painting/icons/icon-maskable-192.png and Trade-Modules/Painting/icons/icon-maskable-192.png differ
+Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/icons/icon-maskable-512.png differ
+--- Painting/index.html
++++ Trade-Modules/Painting/index.html
 @@ -3,14 +3,14 @@
  <head>
    <meta charset="UTF-8">
@@ -135,10 +134,11 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
        </footer>`;
    }
    const signHTML = (a, b) => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
-@@ -5156,6 +5158,28 @@
+@@ -5155,6 +5157,29 @@
+     } else {
        noteItems = termsList(inv);
        if (!noteItems.length) noteItems = contract ? ['الحساب بنظام المقاولة الإجمالية حسب الاتفاق.'] : ['الحساب حسب المقاسات الفعلية بعد خصم الفتحات.', 'إجمالي كل بند = الكمية × سعر الوحدة.'];
-     }
++    }
 +    // أرزقي: الفاتورة الموحدة (نفس أرقام القسم)
 +    if (window.ArzaqiInvoice) {
 +      const tmp = document.createElement('div'); tmp.innerHTML = html;
@@ -152,6 +152,7 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
 +      const chips = h.chips.slice();
 +      if (inv.projectName) chips.unshift(`<span class="inv-chip navy" ${CE}>المشروع: <b>${esc(inv.projectName)}</b></span>`);
 +      return ArzaqiInvoice.render({
++        currency: currentCurrency().name + ' (' + currentCurrency().sym + ')',
 +        section: 'painting', docKey: inv.id + ':' + type, docLabel: D.tag, number: docNo(D.prefix, inv.serial), date: inv.date, billable: billing,
 +        business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
 +        client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
@@ -160,11 +161,10 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
 +        totals: { lines, total: billing ? r4(t.netContract + t.materialsDue) : t.netContract, paid: t.paid },
 +        signLabel: 'توقيع النقاش / المقاول', netLabel: 'إجمالي ' + D.tag
 +      });
-+    }
+     }
      const settled = DOC_TYPES[type].billing && round2(t.netRemaining) <= 0 && t.grandTotal > 0;
      html += `<div class="inv-bottom"><div class="inv-side">${settled ? `<div style="text-align:center"><span class="paid-stamp" ${CE}>تم السداد بالكامل ✓</span></div>` : ''}${notesBoxHTML(type === 'quote' ? 'شروط العرض' : type === 'estimate' ? 'طريقة الحساب' : 'ملاحظات وشروط', noteItems)}${signHTML('توقيع القائم بالأعمال', type === 'quote' ? 'موافقة العميل' : 'اعتماد العميل')}</div>${totalsBoxHTML(inv, t, type)}</div>`;
-     html += printFooterHTML();
-@@ -5457,7 +5481,7 @@
+@@ -5457,7 +5482,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: BACKUP_APP_ID, backupVersion: 1, appVersion: APP_VERSION, exportedAt: new Date().toISOString(), customers, settings, matLists, notes }),
@@ -173,7 +173,7 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
      showAppToast('✔️ تم تنزيل النسخة الكاملة (المشاريع + النوتة + الخامات + الملاحظات)');
    }
    function exportLedgerJSON() {
-@@ -5480,7 +5504,7 @@
+@@ -5480,7 +5505,7 @@
      });
      return { added, updated };
    }
@@ -182,7 +182,7 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
    function isElectricalBackup(o) {
      if (!o || typeof o !== 'object') return false;
      if (o.app === BACKUP_APP_ID) return false;
-@@ -5493,7 +5517,7 @@
+@@ -5493,7 +5518,7 @@
      reader.onload = function (e) {
        let imported;
        try { imported = JSON.parse(e.target.result); } catch (err) { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
@@ -191,7 +191,7 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
        if (imported && imported.type === 'hesabaty-painting-ledger' && Array.isArray(imported.customers)) {
          showAppConfirm(`استعادة نوتة بها ${imported.customers.length} عميل؟ سيتم دمجها مع النوتة الحالية دون حذف أي سجل.`, () => {
            const r = mergeCustomers(imported.customers);
-@@ -5752,7 +5776,7 @@
+@@ -5752,7 +5777,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -200,9 +200,8 @@ diff -ruN --no-dereference Painting/index.html /home/user/Hisabati-Super-App/Tra
      else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    };
    // يستدعيها التطبيق كل ما ترجع له
-diff -ruN --no-dereference Painting/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Painting/manifest.json
---- Painting/manifest.json	2026-11-14 20:45:20.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Painting/manifest.json	2026-11-20 23:08:29.187844885 +0000
+--- Painting/manifest.json
++++ Trade-Modules/Painting/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "./",
@@ -213,9 +212,8 @@ diff -ruN --no-dereference Painting/manifest.json /home/user/Hisabati-Super-App/
    "description": "نظام متكامل لإدارة أعمال النقاشة والدهانات: مساحات الحوائط والأسقف، المقاولات، العملاء، الخامات، العمال والمصروفات، والمقايسات والفواتير الاحترافية. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Painting/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Painting/privacy.html
---- Painting/privacy.html	2026-11-14 20:45:20.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Painting/privacy.html	2026-11-20 23:08:29.188321681 +0000
+--- Painting/privacy.html
++++ Trade-Modules/Painting/privacy.html
 @@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -240,9 +238,8 @@ diff -ruN --no-dereference Painting/privacy.html /home/user/Hisabati-Super-App/T
      </section>
      <section>
        <h2>ما لا يقوم به التطبيق</h2>
-diff -ruN --no-dereference Painting/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Painting/service-worker.js
---- Painting/service-worker.js	2026-11-14 20:45:20.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Painting/service-worker.js	2026-11-20 23:08:29.188152850 +0000
+--- Painting/service-worker.js
++++ Trade-Modules/Painting/service-worker.js
 @@ -1,6 +1,6 @@
  /*
 - * حساباتي نقاشة (HESABATI PAINTING) - Service Worker
@@ -252,3 +249,35 @@ diff -ruN --no-dereference Painting/service-worker.js /home/user/Hisabati-Super-
   * حتى لو الاتنين منشورين على نفس النطاق (github.io).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
+@@ -113,6 +113,31 @@
+ }
+ 
+ /* ---------- دورة حياة الـ Service Worker ---------- */
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = "hpaint-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
++
+ self.addEventListener("install", event => {
+   event.waitUntil((async () => {
+     const cache = await caches.open(APP_PREFIX + SW_VERSION);

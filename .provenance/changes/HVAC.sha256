@@ -10,7 +10,7 @@ af7730c9cc283e52dc48c2900395bf15af52f1bcb2ad650ad815276c1113a01d  ./js/app.js
 2fb162bd3acba61f93a3c2c892d77210e8f78cd3588cdbd3f86e73d5e328daa9  ./js/customers.js
 ed7bfac28ec2b9cdf3dd326a17b7d6c3d23a361bc99f2b05ab15a6b163d9950a  ./js/docs.js
 57410aa4229a9095b1c89f1bfb9603ed0e6bc3cbf4017eab82de3991280e45b2  ./js/modules.js
-415b89b42801b1e89694e1e1d01b696500b046dd43ff1e431ebf40e3fb130438  ./js/print.js
+5ea9d5ca5dee19ebfb1b36b9775d7b2050fd28f4bdf141dc83eecf5c0cdfc910  ./js/print.js
 2ab50e7f1b9e7c7c31031edd0436d8e24d12caaaf43b81f5cc067fe9e3c29bb5  ./manifest.json
 fed27fa969892ec21fc2e6d7c91cac7eee595de0b72eb269b57f023f68ed760b  ./privacy.html
-a27ed9a9034339420ea881d5007bef4fc91f4f495ca574c791b394b5cac3888e  ./service-worker.js
+78869c65cceac11b2bfdc2004646eda84ed7ee5a82c5bf7edf6962dcfc177c29  ./service-worker.js

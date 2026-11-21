@@ -1,10 +1,9 @@
-Binary files Electrical/icons/icon-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-192.png differ
-Binary files Electrical/icons/icon-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-512.png differ
-Binary files Electrical/icons/icon-maskable-192.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-maskable-192.png differ
-Binary files Electrical/icons/icon-maskable-512.png and /home/user/Hisabati-Super-App/Trade-Modules/Electrical/icons/icon-maskable-512.png differ
-diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/Trade-Modules/Electrical/index.html
---- Electrical/index.html	2026-11-15 12:27:42.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/index.html	2026-11-20 23:14:30.818911014 +0000
+Binary files Electrical/icons/icon-192.png and Trade-Modules/Electrical/icons/icon-192.png differ
+Binary files Electrical/icons/icon-512.png and Trade-Modules/Electrical/icons/icon-512.png differ
+Binary files Electrical/icons/icon-maskable-192.png and Trade-Modules/Electrical/icons/icon-maskable-192.png differ
+Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical/icons/icon-maskable-512.png differ
+--- Electrical/index.html
++++ Trade-Modules/Electrical/index.html
 @@ -3,14 +3,14 @@
  <head>
    <meta charset="UTF-8">
@@ -95,7 +94,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
-@@ -2616,11 +2618,38 @@
+@@ -2616,11 +2618,39 @@
      return `
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -127,6 +126,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
 +      section: 'electrical', docKey: inv.id, docLabel: 'فاتورة', date: inv.date, billable: true,
 +      business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' },
 +      client: { name: inv.clientName, phone: inv.clientPhone, address: inv.clientAddress, note: cust ? cust.note : '' },
++      currency: currentCurrency().name + ' (' + CUR + ')',
 +      money, totals: { lines, total: t.grandTotal - (inv.discountAmount || 0) + (t.materialsDue || 0), paid: inv.paidAmount || 0 },
 +      signLabel: 'توقيع الكهربائي'
 +    });
@@ -135,7 +135,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
    function buildItemsInvoiceHTML(inv) {
      autoFitTypographyForRoomCount(Math.round(inv.items.length * 0.8));
      const t = computeInvoice(inv);
-@@ -2679,6 +2708,7 @@
+@@ -2679,6 +2709,7 @@
          </div>
        </div>
        ${printFooterHTML()}`;
@@ -143,7 +143,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
    }
  
    function buildSinglePageHTML() {
-@@ -2850,8 +2880,9 @@
+@@ -2850,8 +2881,9 @@
  
        <footer class="inv-foot">
          <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -154,7 +154,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
    }
  
    function openSinglePagePreview(autoPrint = false) {
-@@ -4087,7 +4118,7 @@
+@@ -4087,7 +4119,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: 'hesabaty', backupVersion: 3, exportedAt: new Date().toISOString(), customers, settings, matLists }),
@@ -163,7 +163,7 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
      showAppToast('✔️ تم تنزيل النسخة الكاملة (الفواتير + النوتة + كشوفات الخامات)');
    }
    // نسخة النوتة فقط
-@@ -4390,7 +4421,7 @@
+@@ -4390,7 +4422,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -172,9 +172,8 @@ diff -ruN --no-dereference Electrical/index.html /home/user/Hisabati-Super-App/T
      else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    };
    // يستدعيها التطبيق كل ما ترجع له
-diff -ruN --no-dereference Electrical/manifest.json /home/user/Hisabati-Super-App/Trade-Modules/Electrical/manifest.json
---- Electrical/manifest.json	2026-11-15 12:27:42.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/manifest.json	2026-11-20 23:08:29.169270169 +0000
+--- Electrical/manifest.json
++++ Trade-Modules/Electrical/manifest.json
 @@ -1,7 +1,7 @@
  {
    "id": "/Ezaza/",
@@ -185,9 +184,8 @@ diff -ruN --no-dereference Electrical/manifest.json /home/user/Hisabati-Super-Ap
    "description": "حاسبة نقاط تأسيسات الكهرباء وإعداد فواتير العملاء بسهولة واحترافية. تصميم وتطوير: أحمد حسن عبدالله.",
    "lang": "ar",
    "dir": "rtl",
-diff -ruN --no-dereference Electrical/privacy.html /home/user/Hisabati-Super-App/Trade-Modules/Electrical/privacy.html
---- Electrical/privacy.html	2026-11-15 12:27:42.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/privacy.html	2026-11-20 23:08:29.169643491 +0000
+--- Electrical/privacy.html
++++ Trade-Modules/Electrical/privacy.html
 @@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -206,9 +204,8 @@ diff -ruN --no-dereference Electrical/privacy.html /home/user/Hisabati-Super-App
    </header>
    <main>
      <section>
-diff -ruN --no-dereference Electrical/service-worker.js /home/user/Hisabati-Super-App/Trade-Modules/Electrical/service-worker.js
---- Electrical/service-worker.js	2026-11-15 12:27:42.000000000 +0000
-+++ /home/user/Hisabati-Super-App/Trade-Modules/Electrical/service-worker.js	2026-11-20 23:08:29.169477471 +0000
+--- Electrical/service-worker.js
++++ Trade-Modules/Electrical/service-worker.js
 @@ -1,5 +1,5 @@
  /*
 - * حساباتي - Service Worker
@@ -216,3 +213,35 @@ diff -ruN --no-dereference Electrical/service-worker.js /home/user/Hisabati-Supe
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * نظام الإصدارات:
+@@ -111,6 +111,31 @@
+ }
+ 
+ /* ---------- دورة حياة الـ Service Worker ---------- */
++/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
++   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
++   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
++const AZ_SHARED_CACHE = "hesabaty-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
++const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzaqi-logo-on-light.png"]
++  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
++self.addEventListener("install", event => {
++  event.waitUntil(caches.open(AZ_SHARED_CACHE)
++    .then(c => c.addAll(AZ_SHARED_FILES.map(u => new Request(u, { cache: "reload" }))))
++    .catch(() => {}));
++});
++self.addEventListener("fetch", event => {
++  const req = event.request;
++  if (req.method !== "GET") return;
++  const url = new URL(req.url);
++  if (url.origin !== self.location.origin || !url.pathname.startsWith(AZ_SHARED_PATH)) return;
++  event.respondWith(caches.open(AZ_SHARED_CACHE).then(async cache => {
++    const fresh = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; });
++    const hit = await cache.match(req, { ignoreSearch: true });
++    if (hit) { event.waitUntil(fresh.catch(() => {})); return hit; }
++    return fresh;
++  }));
++});
++
+ self.addEventListener("install", event => {
+   event.waitUntil((async () => {
+     const cache = await caches.open(APP_PREFIX + SW_VERSION);

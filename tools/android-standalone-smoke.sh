@@ -26,6 +26,10 @@ if wait_for "HISABATI_CHECK https://appassets.androidplatform.net/Main-App/index
 else
   echo "::error::الواجهة الرئيسية ما اتحملتش"; fail=1
 fi
+adb logcat -d > logcat-00-home.txt || true
+echo "::group::سجل فتح الرئيسية"
+grep -E "Hisabati|AndroidRuntime|FATAL|ActivityTaskManager.*$PKG|cr_|chromium" logcat-00-home.txt | tail -120
+echo "::endgroup::"
 sleep 2; adb exec-out screencap -p > shots/00-home.png || true
 
 for d in Electrical Plumbing HVAC Painting Flooring Gypsum Plastering; do
