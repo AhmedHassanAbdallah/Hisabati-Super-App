@@ -224,6 +224,14 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
     العملاء وحساباتهم، أجهزة كل عميل، وسجل الزيارات والتقارير الفنية.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
     ========================================================= */
+@@ -126,6 +126,7 @@
+       </div>
+     </section>
+     ${c.note ? `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>` : ''}
++    <div data-az-crew="hvac:${esc(c.id)}" data-sec="التكييف" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.billed}" data-paid="${st.paid}" data-cur="${esc(CUR)}"></div>
+     <div class="segmented" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px" id="custTabs">
+       <button type="button" data-t="acc" class="${custTab === 'acc' ? 'on' : ''}">الحساب</button>
+       <button type="button" data-t="dev" class="${custTab === 'dev' ? 'on' : ''}">الأجهزة (${st.devices.length})</button>
 --- HVAC/js/docs.js
 +++ Trade-Modules/HVAC/js/docs.js
 @@ -1,5 +1,5 @@
@@ -280,7 +288,16 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
     قبل الطباعة، بهوامش مطابقة للمعاينة، ومتعددة الصفحات.
     المستندات: فواتير التركيب/الصيانة/الإصلاح/قطع الغيار/الختامية،
     المقايسة، عرض السعر، إيصال الدفعة، كشف حساب العميل، عقد الصيانة،
-@@ -100,7 +100,7 @@
+@@ -53,6 +53,8 @@
+ }
+ window.addEventListener('resize', fitPreview);
+ function openPreview(html, jobName, autoPrint) {
++// أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
++  if (window.ArzaqiInvoice) html = ArzaqiInvoice.skinHTML(html, { titleFrom: 'h1', business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' } });
+   document.getElementById('printSheet').innerHTML = html;
+   printJobName = jobName || APP_NAME;
+   openOverlay('preview');
+@@ -100,7 +102,7 @@
      <div class="inv-stripe"></div>`;
  }
  function printFooterHTML() {
@@ -289,7 +306,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
  }
  const signHTML = (a = 'توقيع الفني / القائم بالأعمال', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
  function notesHTML(title, items) {
-@@ -163,6 +163,25 @@
+@@ -163,6 +165,25 @@
      d.lines.some(l => l.kind === 'refrigerant') ? 'كمية الفريون حسب بيانات الشركة المصنعة ولوحة بيانات الجهاز.' : '',
      business.terms ? esc(business.terms) : ''
    ]);
@@ -375,7 +392,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabati-hvac-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

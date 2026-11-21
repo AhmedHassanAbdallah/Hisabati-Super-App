@@ -1573,7 +1573,9 @@
   const LINEAR_DECOR_PRESETS = ['كورنيشة', 'كرانيش', 'وزرة', 'بانوهات', 'فواصل', 'زوايا', 'حلية'];
   // إضافات داخل الغرفة بالمقطوعية
   const ROOM_EXTRA_PRESETS = ['جنب ديكوري', 'سقف ديكوري (جبس بورد)', 'بانوه', 'نيش', 'كرانيش', 'ورق حائط', 'حائط ديكور (استوكو / قطيفة)'];
-  const POLICIES = { full: 'خصم كامل', none: 'بدون خصم', percent: 'خصم نسبة %', fixed: 'خصم مساحة محددة' };
+  // أرزقي: «مقطوعية بالمتر» = الصنايعي بيحدد كام متر مربع يتخصم (متر، متر ونص، مترين، أو أي رقم) — المقاس اختياري
+  const POLICIES = { full: 'خصم كامل بالمقاس', none: 'بدون خصم', percent: 'خصم نسبة %', fixed: 'خصم مقطوعية بالمتر' };
+  const FIXED_PRESETS = [1, 1.5, 2];
   const NOTE_KINDS = {
     color: { label: 'لون دهان', icon: 'palette' }, agreement: { label: 'تفاصيل الاتفاق', icon: 'file' },
     client: { label: 'ملاحظات العميل', icon: 'user' }, exec: { label: 'تعليمات التنفيذ', icon: 'list' },
@@ -2060,10 +2062,10 @@
     const unitArea = r4(o.w * o.h);
     const area = r4(unitArea * o.count);
     let deduct = 0, skipped = false;
-    if (minArea > 0 && unitArea < minArea) skipped = true;
+    if (o.policy === 'fixed') deduct = o.value * o.count; // مقطوعية: المساحة اللي الصنايعي حددها (من غير ما تعتمد على المقاس)
+    else if (minArea > 0 && unitArea < minArea) skipped = true;
     else if (o.policy === 'full') deduct = area;
     else if (o.policy === 'percent') deduct = area * Math.min(100, o.value) / 100;
-    else if (o.policy === 'fixed') deduct = Math.min(o.value, unitArea) * o.count;
     deduct = r4(deduct * faces);
     // جوانب الفتحة (عمق الحلق): الباب = جنبين + علوي، الشباك = 4 جوانب
     const perim = o.kind === 'door' ? (2 * o.h + o.w) : 2 * (o.w + o.h);
@@ -2071,11 +2073,11 @@
     return { unitArea, area, deduct, skipped, reveal };
   }
   function openingText(o, c) {
-    let t = `${o.count > 1 ? fmtQ(o.count) + ' ' : ''}${OPENING_KINDS[o.kind]} ${L(`${fmtQ(o.w)} × ${fmtQ(o.h)}`)}`;
-    if (c.skipped) t += ' (أصغر من الحد — بدون خصم)';
+    let t = `${o.count > 1 ? fmtQ(o.count) + ' ' : ''}${OPENING_KINDS[o.kind]}${o.w > 0 && o.h > 0 ? ' ' + L(`${fmtQ(o.w)} × ${fmtQ(o.h)}`) : ''}`;
+    if (o.policy === 'fixed') t += ` (مقطوعية ${L(fmtQ(o.value))} م²${o.count > 1 ? ' للواحد' : ''})`;
+    else if (c.skipped) t += ' (أصغر من الحد — بدون خصم)';
     else if (o.policy === 'none') t += ' (بدون خصم)';
     else if (o.policy === 'percent') t += ` (${L(fmtQ(o.value) + '%')})`;
-    else if (o.policy === 'fixed') t += ` (خصم ${L(fmtQ(o.value))} م²)`;
     return t;
   }
   // حساب بند واحد: يرجع المساحة والإجمالي وسطور الفاتورة وتفصيل طريقة الحساب
@@ -2114,7 +2116,7 @@
       let deduct = 0, reveal = 0;
       const ops = [];
       w.openings.forEach(o => {
-        if (!(o.w > 0 && o.h > 0 && o.count > 0)) return;
+        if (!(o.count > 0) || !((o.w > 0 && o.h > 0) || (o.policy === 'fixed' && o.value > 0))) return;
         const c = computeOpening(o, faces, w.minArea);
         deduct += c.deduct; reveal += c.reveal;
         ops.push(openingText(o, c));
@@ -2741,6 +2743,7 @@
       renderWorkSheetBody();
     }
     else if (act === 'delOpening') { wf.openings.splice(i, 1); renderWorkSheetBody(); }
+    else if (act === 'openingFixed') { const op = wf.openings[i]; if (op) { op.policy = 'fixed'; op.value = Number(d.v) || 0; } renderWorkSheetBody(); }
     else if (act === 'addGyp') { wf.gypsum.push({ name: 'جبسون بورد', width: 0, length: 0, factor: 2, own: false, price: 0 }); renderWorkSheetBody(); }
     else if (act === 'delGyp') { wf.gypsum.splice(i, 1); renderWorkSheetBody(); }
     else if (act === 'addLin') { wf.linears.push({ name: 'كورنيشة', length: 0, price: linearListPrice('كورنيشة') }); renderWorkSheetBody(); }
@@ -2875,8 +2878,10 @@
           <div class="grid-2">
             <div class="mini"><span class="mini-lbl">الخصم من الحائط</span><select ${a} data-k="policy" data-rr="1">${optList(POLICIES, op.policy)}</select></div>
             ${op.policy === 'percent' ? mInput('النسبة %', `${a} data-k="value" data-t="n"`, op.value, '50')
-              : op.policy === 'fixed' ? mInput('م² للواحدة', `${a} data-k="value" data-t="n"`, op.value) : (wf.reveals ? mInput('عمق الجنب (م)', `${a} data-k="depth" data-t="n"`, op.depth, '0.2') : '<div></div>')}
+              : op.policy === 'fixed' ? mInput('يتخصم كام م² (للواحد)', `${a} data-k="value" data-t="n"`, op.value, 'مثلاً 1.5') : (wf.reveals ? mInput('عمق الجنب (م)', `${a} data-k="depth" data-t="n"`, op.depth, '0.2') : '<div></div>')}
           </div>
+          ${op.policy === 'fixed' ? `<div class="chips" style="margin-top:6px">${FIXED_PRESETS.map(v => `<button type="button" class="chip${op.value === v ? ' on' : ''}" data-act="openingFixed" data-i="${i}" data-v="${v}">${fmtQ(v)} م²</button>`).join('')}</div>
+            <p class="hint" style="margin:4px 0 0">المقطوعية مش بتعتمد على مقاس ${OPENING_KINDS[op.kind]} — بيتخصم الرقم اللي انت حددته بس.</p>` : ''}
           ${wf.reveals && (op.policy === 'percent' || op.policy === 'fixed') ? `<div class="grid-2" style="margin-top:6px">${mInput('عمق الجنب (م)', `${a} data-k="depth" data-t="n"`, op.depth, '0.2')}<div></div></div>` : ''}
         </div>`;
       }).join('');
@@ -3063,7 +3068,7 @@
     if (!wf) return;
     if (!wfStagesOn) wf.stages = [];
     else wf.stages = wf.stages.filter(s => s.name.trim() || s.price > 0);
-    wf.openings = wf.openings.filter(o => (o.w > 0 && o.h > 0) || o.paint);
+    wf.openings = wf.openings.filter(o => (o.w > 0 && o.h > 0) || o.paint || (o.policy === 'fixed' && o.value > 0));
     wf.extras = wf.extras.filter(x => String(x.name || '').trim() || x.price > 0);
     wf.gypsum = wf.gypsum.filter(g => g.width > 0 && g.length > 0);
     wf.linears = wf.linears.filter(x => x.length > 0);
@@ -3857,6 +3862,8 @@
       </section>`;
 
     if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
+    // أرزقي: نوتة العمال واليوميات (مشتركة بين كل الأقسام)
+    html += `<div data-az-crew="painting:${esc(c.id)}" data-sec="النقاشة" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.invoicesTotal}" data-paid="${st.net}" data-cur="${esc(CUR)}"></div>`;
 
     html += `
       <div class="segmented" style="margin-bottom:12px">
@@ -5284,6 +5291,8 @@
     return html;
   }
   function showPreview(html, jobName, shareFn, autoPrint) {
+  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+    if (window.ArzaqiInvoice) html = ArzaqiInvoice.skinHTML(html, { titleFrom: 'h1', business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, address: appData.techAddress, logo: appData.showLogo ? appData.logoData : '' } });
     document.getElementById('printSheet').innerHTML = html;
     printJobName = jobName;
     previewShare = shareFn || null;

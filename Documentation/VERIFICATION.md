@@ -150,3 +150,12 @@ Intended differences that the original suites see (handled, not hidden):
 
 Intended differences seen by the original suites: the Plumbing title check now expects `أرزقي | Arzoqi — السباكة`
 (pinned in `Plumbing/tests/run-tests.js`); the Drive folder is `أرزقي | Arzoqi — نسخ احتياطية` (launcher cloud test).
+
+## 10. 2.2.0 — workers' daily log, all printables unified, Painting door lump-sum deduction (2026-11-22)
+* `tests/crew.e2e.js` (19 passed · 0 failed): card on the customer page in all 7 sections; daily entries for several workers, payouts,
+  expenses, who is owed, manual job value, net profit, printable sheet, shared workers across sections — see run below.
+* Painting's own suite has 4 new checks for the lump-sum door deduction (pinned in `Painting/tools/test-calcs.js`).
+* Converted printables spot-checked: Plumbing receipt + statement, Electrical material list, Painting / Gypsum /
+  Flooring / Plastering statements — header, client row, tables, totals and footer all in the unified style.
+* Full run: launcher 151 / offline 20 / native 14 / cloud 36 passed · 0 failed; `tools/run-trade-suites.sh` 12/12 PASS;
+  `tools/verify-integrity.sh /home/user` ALL CHECKS PASSED.

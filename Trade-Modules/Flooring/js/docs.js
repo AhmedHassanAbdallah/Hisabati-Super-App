@@ -289,6 +289,8 @@
   function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }
 
   function openPrint(html, jobName) {
+  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+    if (root.ArzaqiInvoice) { const s = db().settings; html = root.ArzaqiInvoice.skinHTML(html, { business: { name: s.bizName || s.ownerName, trade: s.bizName ? s.ownerName : '', phone: [s.phone, s.phone2].filter(Boolean).join(' - '), address: s.address, logo: s.showLogo ? s.logo : '' } }); }
     let pageRef = null;
     UI.openPage({
       title: 'معاينة قبل الطباعة', sub: 'A4 · اضغط على أي نص لتعديله قبل الطباعة',

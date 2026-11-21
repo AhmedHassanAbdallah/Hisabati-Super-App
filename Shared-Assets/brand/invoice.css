@@ -119,3 +119,16 @@
 .az-inv .p-table td.t { text-align: right; font-weight: 800 !important; }
 .az-inv .p-table td.t small { display: block; font-size: 10px; color: var(--az-mut) !important; font-weight: 700; }
 .az-inv .p-table td.m { font-weight: 900 !important; color: var(--az-b8) !important; white-space: nowrap; }
+
+/* ---------- باقي المستندات (إيصالات، كشوف، تقارير، كشوف خامات…) جوه شكل أرزقي ---------- */
+.az-skin .inv-totals, .az-skin .d-totals { border: 1.5px solid var(--az-b8) !important; border-radius: 12px; overflow: hidden; }
+.az-skin .p-totals-table td, .az-skin .d-totals td { color: var(--az-ink) !important; border-bottom: 1px solid var(--az-line) !important; background: #fff !important; }
+.az-skin .p-totals-table tr.sub td, .az-skin .d-totals tr.sub td { background: #eef7f6 !important; color: var(--az-b8) !important; }
+.az-skin .p-totals-table tr.minus td:last-child, .az-skin .d-totals tr.minus td:last-child { color: #c0392b !important; }
+.az-skin .p-totals-table tr.paid td:last-child, .az-skin .d-totals tr.paid td:last-child { color: #0f8a5f !important; }
+.az-skin .inv-net, .az-skin .d-net { background: linear-gradient(90deg, #ffd23f, var(--az-y)) !important; color: var(--az-b9) !important; }
+.az-skin .inv-net span, .az-skin .inv-net strong, .az-skin .d-net span, .az-skin .d-net strong { color: var(--az-b9) !important; }
+.az-skin .inv-sign div, .az-skin .d-sign div { color: var(--az-mut) !important; border-bottom-color: #9bb8b4 !important; }
+.az-skin .inv-notes, .az-skin .d-notes { border-color: var(--az-line) !important; }
+.az-skin .inv-notes h4, .az-skin .d-notes h4 { color: var(--az-b8) !important; }
+.az-skin .az-body { flex: 1; }

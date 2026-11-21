@@ -202,7 +202,9 @@ function openPrint(s) {
   if (!s) return;
   printSnap = s;
   const m = $('printPreviewModal');
-  $('printSheet').innerHTML = docHTML(s);
+  const st = DB().settings;
+// أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+  $('printSheet').innerHTML = window.ArzaqiInvoice ? ArzaqiInvoice.skinHTML(docHTML(s), { business: { name: st.bizName || st.ownerName, trade: st.bizName ? st.ownerName : '', phone: [st.phone, st.phone2].filter(Boolean).join(' / '), address: st.address, logo: st.showLogo ? st.logo : '' } }) : docHTML(s);
   hydrateIcons($('printSheet'));
   printJobName = `${(DT[s.type] || {}).name || 'مستند'} ${docNo(s)}${s.client && s.client.name ? ' - ' + s.client.name : ''}`;
   m.style.display = 'block'; m.scrollTop = 0;

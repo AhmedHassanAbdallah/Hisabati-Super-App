@@ -261,7 +261,9 @@
     const d = buildDoc(type, opts || {});
     if (!d) { U.toast('المستند غير متاح — تأكد من وجود عميل/بيانات'); return; }
     CUR_DOC = d;
-    document.getElementById('printSheet').innerHTML = d.html;
+    const st = S.db().settings;
+  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+    document.getElementById('printSheet').innerHTML = window.ArzaqiInvoice ? ArzaqiInvoice.skinHTML(d.html, { business: { name: st.bizName, trade: st.bizTitle, phone: st.bizPhone, address: st.bizAddress, logo: st.logo && st.showLogo !== false ? st.logo : '' } }) : d.html;
     document.getElementById('printModal').classList.add('open');
     document.getElementById('printModal').scrollTop = 0;
     document.title = d.title;

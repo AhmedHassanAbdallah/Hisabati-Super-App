@@ -443,6 +443,7 @@ function renderCustomerPage(el, id) {
       <button type="button" class="btn btn-wa" onclick="sendCustomerStatement('${id}')">${icon('send')} واتساب</button>
     </div>
     ${c.notes ? `<div class="note-card"><div class="nt">ملاحظات العميل</div><div class="nb">${esc(c.notes)}</div></div>` : ''}
+    <div data-az-crew="gypsum:${esc(c.id)}" data-sec="الجبس" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${s.revenue}" data-paid="${s.paid}" data-cur="${esc(cur().sym)}"></div>
     <div class="sec-title">المشروعات</div>${s.projects.slice().reverse().map(projectCardHTML).join('') || '<div class="hint">مفيش مشروعات.</div>'}
     <div class="sec-title">الدفعات</div><div class="card">${pays.map(x => `<div class="entry" onclick="openPaymentSheet('${x.id}')"><div class="e-ic">${icon('cash')}</div><div class="e-info"><div class="e-title">${money(x.amount)}</div><div class="e-meta">${esc([fmtDate(x.date), x.projectId ? projName(byId('projects', x.projectId)) : 'بدون مشروع', x.note].filter(Boolean).join(' · '))}</div></div></div>`).join('') || '<div class="hint">مفيش دفعات.</div>'}</div>
     <div class="sec-title">النوتة<span class="sp"></span><button type="button" class="link-btn" onclick="openNoteSheet(null,{customerId:'${id}'})">+ ملاحظة</button></div>

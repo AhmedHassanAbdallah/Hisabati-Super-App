@@ -65,6 +65,14 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    let currentView = 'home';
    function switchView(key) {
      if (UI.depth()) { UI.closeAllThen(() => switchView(key)); return; }
+@@ -740,6 +740,7 @@
+           <div class="btn-row" style="margin-bottom:10px"><button type="button" class="btn btn-accent" data-act="pay">${icon('cash')} تسجيل دفعة</button><button type="button" class="btn btn-soft" data-act="proj">${icon('briefcase')} مشروع جديد</button></div>
+           <div class="btn-row" style="margin-bottom:14px"><button type="button" class="btn btn-ghost" data-act="stmt">${icon('printer')} كشف حساب PDF</button><button type="button" class="btn btn-wa" data-act="wa">${icon('send')} كشف واتساب</button></div>
+           ${c.phone ? `<a class="btn btn-ghost" style="margin-bottom:14px" href="tel:${esc(c.phone)}">${icon('phone')} اتصال بالعميل</a>` : ''}
++          <div data-az-crew="flooring:${esc(c.id)}" data-sec="الأرضيات" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${a.value}" data-paid="${a.paid}" data-cur="${esc(UI.curSym())}"></div>
+           <div class="section-head"><h3>المشروعات<span class="count">${a.projects.length}</span></h3></div>
+           ${a.projects.length ? a.projects.map(x => projectCardHTML(x.project)).join('') : '<div class="home-empty" style="margin-bottom:12px">مفيش مشروعات للعميل ده</div>'}
+           ${a.docs.length ? `<div class="section-head"><h3>فواتير منفصلة<span class="count">${a.docs.length}</span></h3></div>${a.docs.map(Docs.cardHTML).join('')}` : ''}
 --- Flooring/js/calc.js
 +++ Trade-Modules/Flooring/js/calc.js
 @@ -1,5 +1,5 @@
@@ -92,7 +100,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  (function (root) {
-@@ -283,7 +283,7 @@
+@@ -283,12 +283,14 @@
    }
    function footerHTML() {
      const s = db().settings;
@@ -101,7 +109,14 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    }
    function signHTML(a, b) { return `<div class="inv-sign"><div ${CE}>${a || 'توقيع القائم بالأعمال'}</div><div ${CE}>${b || 'اعتماد العميل'}</div></div>`; }
    function notesHTML(list) { list = list.filter(Boolean); return list.length ? `<div class="inv-notes" ${CE}><h4>ملاحظات</h4><ul>${list.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''; }
-@@ -323,7 +323,7 @@
+ 
+   function openPrint(html, jobName) {
++  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
++    if (root.ArzaqiInvoice) { const s = db().settings; html = root.ArzaqiInvoice.skinHTML(html, { business: { name: s.bizName || s.ownerName, trade: s.bizName ? s.ownerName : '', phone: [s.phone, s.phone2].filter(Boolean).join(' - '), address: s.address, logo: s.showLogo ? s.logo : '' } }); }
+     let pageRef = null;
+     UI.openPage({
+       title: 'معاينة قبل الطباعة', sub: 'A4 · اضغط على أي نص لتعديله قبل الطباعة',
+@@ -323,7 +325,7 @@
    }
    function doPrint(jobName) {
      const old = document.title;
@@ -110,7 +125,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
      if (root.HFloorApp && typeof root.HFloorApp.print === 'function') { try { root.HFloorApp.print(document.title); } catch (e) { UI.toast('⚠️ تعذرت الطباعة', 'err'); } }
      else { try { window.print(); } catch (e) { UI.toast('⚠️ الطباعة مش متاحة في المتصفح ده', 'err'); } }
      setTimeout(() => { document.title = old; }, 1500);
-@@ -363,6 +363,30 @@
+@@ -363,6 +365,30 @@
          <div class="inv-totals"><table class="p-totals-table">${totals.map(([l, v, c]) => `<tr${c ? ` class="${c}"` : ''}><td ${CE}>${l}</td><td ${CE}>${v} ${esc(UI.curSym())}</td></tr>`).join('')}</table>
          <div class="inv-net"><span ${CE}>${netLabel}</span><strong ${CE}>${money(netVal)}</strong></div></div></div>
        ${footerHTML()}`;
@@ -284,7 +299,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

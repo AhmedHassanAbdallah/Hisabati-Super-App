@@ -154,7 +154,25 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    }
  
    function openSinglePagePreview(autoPrint = false) {
-@@ -4087,7 +4119,7 @@
+@@ -3113,6 +3145,8 @@
+       </section>`;
+ 
+     if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
++    // أرزقي: نوتة العمال واليوميات (مشتركة بين كل الأقسام)
++    html += `<div data-az-crew="electrical:${esc(c.id)}" data-sec="الكهرباء" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.invoicesTotal}" data-paid="${st.net}" data-cur="${esc(CUR)}"></div>`;
+ 
+     // صفحتان منفصلتان: حساب الشغل / حساب الخامات
+     html += `
+@@ -3957,6 +3991,8 @@
+     if (!l) return;
+     if (!l.items.length) { showAppToast('⚠️ ضيف الخامات الأول قبل الطباعة'); return; }
+     buildMatListHTML(l);
++  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
++    if (window.ArzaqiInvoice) ArzaqiInvoice.skin(document.getElementById('printSheet'), { titleFrom: 'h1', business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' } });
+     printJobName = 'كشف خامات ' + matListName(l);
+     openOverlay('preview');
+     const modal = document.getElementById('printPreviewModal');
+@@ -4087,7 +4123,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: 'hesabaty', backupVersion: 3, exportedAt: new Date().toISOString(), customers, settings, matLists }),
@@ -163,7 +181,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      showAppToast('✔️ تم تنزيل النسخة الكاملة (الفواتير + النوتة + كشوفات الخامات)');
    }
    // نسخة النوتة فقط
-@@ -4390,7 +4422,7 @@
+@@ -4390,7 +4426,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -222,7 +240,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabaty-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

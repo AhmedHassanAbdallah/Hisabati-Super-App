@@ -132,6 +132,7 @@ PAGES.customer = function (id) {
       </div>
     </section>
     ${c.note ? `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>` : ''}
+    <div data-az-crew="plumbing:${esc(c.id)}" data-sec="السباكة" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.billed}" data-paid="${st.paid}" data-cur="${esc(CUR)}"></div>
     <div class="segmented seg-5" style="grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px" id="custTabs">
       <button type="button" data-t="acc" class="${custTab === 'acc' ? 'on' : ''}">الحساب</button>
       <button type="button" data-t="proj" class="${custTab === 'proj' ? 'on' : ''}">مشاريع ${st.projects.length || ''}</button>

@@ -104,9 +104,9 @@
       return '<tr class="' + (sign === '-' ? 'minus' : '') + '"><td ' + CE + '>' + l[0] + '</td><td ' + CE + '>' + (sign ? sign + ' ' : '') + money(Math.abs(Number(l[1]))) + '</td></tr>';
     }).join('');
     var box = '<div class="az-totals">'
-      + '<div class="az-totals-title">' + (m.billable ? 'حساب الفاتورة' : 'ملخص الحساب') + '</div>'
+      + '<div class="az-totals-title">' + esc(m.boxTitle || (m.billable ? 'حساب الفاتورة' : 'ملخص الحساب')) + '</div>'
       + '<table>' + rows
-      + '<tr class="az-sum"><td ' + CE + '>' + esc(t.totalLabel || (m.billable ? 'الإجمالي المستحق' : 'الإجمالي')) + '</td><td ' + CE + '>' + money(total) + '</td></tr>'
+      + (t.noSum ? '' : '<tr class="az-sum"><td ' + CE + '>' + esc(t.totalLabel || (m.billable ? 'الإجمالي المستحق' : 'الإجمالي')) + '</td><td ' + CE + '>' + money(total) + '</td></tr>')
       + (m.billable ? '<tr class="az-paid"><td ' + CE + '>' + esc(t.paidLabel || 'الواصل من العميل') + '</td><td ' + CE + '>- ' + money(paid) + '</td></tr>' : '')
       + '</table>'
       + (m.billable
@@ -116,12 +116,14 @@
     var stamp = paidInFull ? '<div class="az-stamp-wrap"><div class="az-stamp" aria-label="تم السداد بالكامل"><span class="s1">تم السداد</span><span class="s2">بالكامل</span><span class="s3">' + esc(m.date || '') + '</span></div></div>' : '';
 
     // ---------- الضمان + الملاحظات + التوقيع ----------
+    // m.noWarranty: مستندات مش فواتير (كشوف، إيصالات، تقارير) — m.signs: توقيعات مختلفة أو [] من غير توقيع
+    var signs = m.signs || [m.signLabel || 'توقيع الصنايعي', 'توقيع العميل'];
     var side = '<div class="az-side">'
-      + '<div class="az-warranty' + (warranty ? '' : ' empty') + '">' + ICON.shield
-      + '<div><div class="az-w-lbl">الضمان</div><div class="az-w-txt" ' + CE + ' data-az-warranty="' + esc(key) + '" data-placeholder="اكتب الضمان هنا (اختياري)">' + esc(warranty) + '</div></div></div>'
+      + (m.noWarranty ? '' : '<div class="az-warranty' + (warranty ? '' : ' empty') + '">' + ICON.shield
+      + '<div><div class="az-w-lbl">الضمان</div><div class="az-w-txt" ' + CE + ' data-az-warranty="' + esc(key) + '" data-placeholder="اكتب الضمان هنا (اختياري)">' + esc(warranty) + '</div></div></div>')
       + (m.notesHTML || '')
       + stamp
-      + '<div class="az-sign"><div ' + CE + '>' + esc(m.signLabel || 'توقيع الصنايعي') + '</div><div ' + CE + '>توقيع العميل</div></div>'
+      + (signs.length ? '<div class="az-sign">' + signs.map(function (x) { return '<div ' + CE + '>' + esc(x) + '</div>'; }).join('') + '</div>' : '')
       + '</div>';
 
     // الاسم الرسمي بالعربي والإنجليزي: «أرزقي | Arzoqi» — والإنجليزي هو لوجو الكلمة الرسمي
@@ -143,6 +145,12 @@
     saveExtra(el.getAttribute('data-az-warranty'), { warranty: txt });
   });
 
+  // نوتة العمال واليوميات (مشتركة بين كل الأقسام)
+  if (!window.ArzoqiCrew && !document.querySelector('script[data-az-crew]')) {
+    var cs = document.createElement('script');
+    cs.src = BASE + 'crew.js'; cs.setAttribute('data-az-crew', '1');
+    (document.head || document.documentElement).appendChild(cs);
+  }
   // تحميل التصميم مرة واحدة
   if (!document.querySelector('link[data-az-invoice]')) {
     var l = document.createElement('link');
@@ -202,5 +210,79 @@
     });
   }
 
-  window.ArzaqiInvoice = { render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet, fieldsFromHTML: fieldsFromHTML };
+  /**
+   * باقي المستندات (إيصالات، كشوف حساب، تقارير، كشوف خامات، عقود، شهادات…) بنفس شكل أرزقي:
+   * بياخد الورقة اللي القسم عملها زي ما هي، ويبدّل الهيدر بهيدر أرزقي (بياناتك واللوجو + نوع المستند ورقمه وتاريخه)،
+   * وبيانات العميل بسطر العميل الموحد، والفوتر بـ «تم التصدير من خلال تطبيق أرزقي | Arzoqi» — والمحتوى نفسه
+   * (الجداول والأرقام والتوقيعات) بيفضل زي ما القسم حسبه بالظبط، بس بألوان وخطوط الهوية.
+   * o.titleFrom: 'h1' لو عنوان المستند في الـ h1 (الكهرباء/النقاشة/السباكة/التكييف)، غير كده من مربع المستند.
+   * o.business: بيانات الصنايعي من إعدادات القسم (لو "بياناتي" فاضية).
+   */
+  function skin(root, o) {
+    o = o || {};
+    if (!root || root.querySelector('.az-inv')) return false;
+    var head = root.querySelector('header.inv-head, .d-head');
+    if (!head) return false;
+    var p = profile(), b = o.business || {};
+    var name = p.name || b.name || '', trade = p.name ? (p.trade || '') : (p.trade || b.trade || '');
+    var phone = p.phone || b.phone || '', logo = p.logo || b.logo || '';
+    var box = head.querySelector('.inv-doc, .d-doc');
+    var tagEl = box && box.querySelector('.tag'), tag = tagEl ? tagEl.textContent.trim() : '';
+    var h1 = head.querySelector('h1'), h1t = h1 ? h1.textContent.trim() : '';
+    var label = o.titleFrom === 'h1' ? h1t : tag, number = o.titleFrom === 'h1' && /\d/.test(tag) ? tag : '';
+    var lines = [];
+    if (box) Array.prototype.forEach.call(box.querySelectorAll('.d'), function (sp) {
+      var t = sp.textContent.trim();
+      if (!t) return;
+      if (/^رقم/.test(t) && !number) { var bb = sp.querySelector('b'); number = (bb ? bb.textContent : t.replace(/^رقم[:\s]*/, '')).trim(); return; }
+      lines.push('<span class="az-doc-line" ' + CE + '>' + sp.innerHTML + '</span>');
+    });
+    var newHead = '<header class="az-head"><div class="az-biz">'
+      + (logo ? '<div class="az-biz-logo"><img src="' + esc(logo) + '" alt=""></div>' : '')
+      + '<div class="az-biz-text"><div class="az-biz-name" ' + CE + '>' + esc(name || 'اسم الصنايعي') + '</div>'
+      + (trade ? '<p class="az-trade" ' + CE + '>' + esc(trade) + '</p>' : '')
+      + (phone ? '<p class="az-phone">' + ICON.phone + '<b dir="ltr" ' + CE + '>' + esc(phone) + '</b></p>' : '')
+      + (b.address && !p.name ? '<p class="az-trade" ' + CE + '>' + esc(b.address) + '</p>' : '')
+      + '</div></div><div class="az-doc"><h1 class="az-doc-type"><span ' + CE + '>' + esc(label || 'مستند') + '</span></h1>'
+      + (number ? '<span class="az-doc-line">رقم: <b dir="ltr" ' + CE + '>' + esc(number) + '</b></span>' : '')
+      + lines.join('') + '</div></header><div class="az-stripe"><i></i><i></i><i></i></div>';
+    // العميل في سطر واحد، وباقي الخانات (المشروع، الجهاز…) شارات صغيرة
+    var cl = root.querySelector('.inv-client, .d-client'), client = '', chips = '';
+    if (cl) {
+      var f = fieldsFromHTML(cl.outerHTML), c = {}, rest = [];
+      f.forEach(function (x) {
+        if (!x.value || /^[-—–]+$/.test(x.value)) return;
+        if (!c.name && /^العميل/.test(x.label)) c.name = x.value;
+        else if (!c.phone && /هاتف|الهاتف|تليفون/.test(x.label)) c.phone = x.value;
+        else if (!c.address && /عنوان/.test(x.label)) c.address = x.value;
+        else rest.push(x);
+      });
+      if (c.name || c.phone || c.address) {
+        var parts = [];
+        if (c.name) parts.push('<span class="az-c">' + ICON.user + '<em>العميل:</em> <b ' + CE + '>' + esc(c.name) + '</b></span>');
+        if (c.phone) parts.push('<span class="az-c">' + ICON.phone + '<b dir="ltr" ' + CE + '>' + esc(c.phone) + '</b></span>');
+        if (c.address) parts.push('<span class="az-c az-c-addr">' + ICON.pin + '<span ' + CE + '>' + esc(c.address) + '</span></span>');
+        client = '<section class="az-client"><div class="az-client-row">' + parts.join('<span class="az-dot">•</span>') + '</div></section>';
+      }
+      if (rest.length) chips = '<div class="az-chips inv-pricing">' + rest.map(function (x) { return '<span class="inv-chip navy" ' + CE + '>' + esc(x.label) + ': <b>' + esc(x.value) + '</b></span>'; }).join('') + '</div>';
+    }
+    // الورقة ممكن تكون جوه غلاف: بنشتغل على العنصر اللي فيه الهيدر
+    var host = head.parentNode;
+    [head, cl].concat(Array.prototype.slice.call(host.querySelectorAll('.inv-stripe, .d-stripe, footer.inv-foot, .d-foot')))
+      .forEach(function (el) { if (el && el.parentNode) el.parentNode.removeChild(el); });
+    var body = Array.prototype.map.call(host.children, function (el) { return el.outerHTML; }).join('');
+    root = host;
+    var foot = '<footer class="az-foot"><span>تم التصدير من خلال تطبيق</span><span class="az-foot-brand"><b>أرزقي</b><i aria-hidden="true"></i>'
+      + '<img src="' + BASE + 'arzoqi-wordmark-light.png" alt="Arzoqi"></span></footer>';
+    root.innerHTML = '<div class="az-inv az-skin">' + newHead + client + chips + '<div class="az-body">' + body + '</div>' + foot + '</div>';
+    return true;
+  }
+
+  function skinHTML(html, o) {
+    if (!html || html.indexOf('az-inv') >= 0) return html;
+    var tmp = document.createElement('div'); tmp.innerHTML = html;
+    return skin(tmp, o) ? tmp.innerHTML : html;
+  }
+
+  window.ArzaqiInvoice = { skinHTML: skinHTML, render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet, fieldsFromHTML: fieldsFromHTML, skin: skin };
 })();

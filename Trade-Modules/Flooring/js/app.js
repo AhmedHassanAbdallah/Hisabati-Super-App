@@ -740,6 +740,7 @@
           <div class="btn-row" style="margin-bottom:10px"><button type="button" class="btn btn-accent" data-act="pay">${icon('cash')} تسجيل دفعة</button><button type="button" class="btn btn-soft" data-act="proj">${icon('briefcase')} مشروع جديد</button></div>
           <div class="btn-row" style="margin-bottom:14px"><button type="button" class="btn btn-ghost" data-act="stmt">${icon('printer')} كشف حساب PDF</button><button type="button" class="btn btn-wa" data-act="wa">${icon('send')} كشف واتساب</button></div>
           ${c.phone ? `<a class="btn btn-ghost" style="margin-bottom:14px" href="tel:${esc(c.phone)}">${icon('phone')} اتصال بالعميل</a>` : ''}
+          <div data-az-crew="flooring:${esc(c.id)}" data-sec="الأرضيات" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${a.value}" data-paid="${a.paid}" data-cur="${esc(UI.curSym())}"></div>
           <div class="section-head"><h3>المشروعات<span class="count">${a.projects.length}</span></h3></div>
           ${a.projects.length ? a.projects.map(x => projectCardHTML(x.project)).join('') : '<div class="home-empty" style="margin-bottom:12px">مفيش مشروعات للعميل ده</div>'}
           ${a.docs.length ? `<div class="section-head"><h3>فواتير منفصلة<span class="count">${a.docs.length}</span></h3></div>${a.docs.map(Docs.cardHTML).join('')}` : ''}

@@ -3145,6 +3145,8 @@
       </section>`;
 
     if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
+    // أرزقي: نوتة العمال واليوميات (مشتركة بين كل الأقسام)
+    html += `<div data-az-crew="electrical:${esc(c.id)}" data-sec="الكهرباء" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.invoicesTotal}" data-paid="${st.net}" data-cur="${esc(CUR)}"></div>`;
 
     // صفحتان منفصلتان: حساب الشغل / حساب الخامات
     html += `
@@ -3989,6 +3991,8 @@
     if (!l) return;
     if (!l.items.length) { showAppToast('⚠️ ضيف الخامات الأول قبل الطباعة'); return; }
     buildMatListHTML(l);
+  // أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+    if (window.ArzaqiInvoice) ArzaqiInvoice.skin(document.getElementById('printSheet'), { titleFrom: 'h1', business: { name: appData.techName || appData.invoiceTitle, trade: appData.techName ? appData.invoiceTitle : '', phone: appData.techPhone, logo: appData.showLogo ? appData.logoData : '' } });
     printJobName = 'كشف خامات ' + matListName(l);
     openOverlay('preview');
     const modal = document.getElementById('printPreviewModal');

@@ -53,6 +53,8 @@ function fitPreview() {
 }
 window.addEventListener('resize', fitPreview);
 function openPreview(html, jobName, autoPrint) {
+// أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
+  if (window.ArzaqiInvoice) html = ArzaqiInvoice.skinHTML(html, { titleFrom: 'h1', business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' } });
   document.getElementById('printSheet').innerHTML = html;
   printJobName = jobName || APP_NAME;
   openOverlay('preview');

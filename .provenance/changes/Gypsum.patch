@@ -242,6 +242,17 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  }
  
  /* ---------------- المعاينة والطباعة ---------------- */
+@@ -180,7 +202,9 @@
+   if (!s) return;
+   printSnap = s;
+   const m = $('printPreviewModal');
+-  $('printSheet').innerHTML = docHTML(s);
++  const st = DB().settings;
++// أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
++  $('printSheet').innerHTML = window.ArzaqiInvoice ? ArzaqiInvoice.skinHTML(docHTML(s), { business: { name: st.bizName || st.ownerName, trade: st.bizName ? st.ownerName : '', phone: [st.phone, st.phone2].filter(Boolean).join(' / '), address: st.address, logo: st.showLogo ? st.logo : '' } }) : docHTML(s);
+   hydrateIcons($('printSheet'));
+   printJobName = `${(DT[s.type] || {}).name || 'مستند'} ${docNo(s)}${s.client && s.client.name ? ' - ' + s.client.name : ''}`;
+   m.style.display = 'block'; m.scrollTop = 0;
 --- Gypsum/js/ui/manage.js
 +++ Trade-Modules/Gypsum/js/ui/manage.js
 @@ -1,5 +1,5 @@
@@ -260,6 +271,14 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  'use strict';
+@@ -443,6 +443,7 @@
+       <button type="button" class="btn btn-wa" onclick="sendCustomerStatement('${id}')">${icon('send')} واتساب</button>
+     </div>
+     ${c.notes ? `<div class="note-card"><div class="nt">ملاحظات العميل</div><div class="nb">${esc(c.notes)}</div></div>` : ''}
++    <div data-az-crew="gypsum:${esc(c.id)}" data-sec="الجبس" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${s.revenue}" data-paid="${s.paid}" data-cur="${esc(cur().sym)}"></div>
+     <div class="sec-title">المشروعات</div>${s.projects.slice().reverse().map(projectCardHTML).join('') || '<div class="hint">مفيش مشروعات.</div>'}
+     <div class="sec-title">الدفعات</div><div class="card">${pays.map(x => `<div class="entry" onclick="openPaymentSheet('${x.id}')"><div class="e-ic">${icon('cash')}</div><div class="e-info"><div class="e-title">${money(x.amount)}</div><div class="e-meta">${esc([fmtDate(x.date), x.projectId ? projName(byId('projects', x.projectId)) : 'بدون مشروع', x.note].filter(Boolean).join(' · '))}</div></div></div>`).join('') || '<div class="hint">مفيش دفعات.</div>'}</div>
+     <div class="sec-title">النوتة<span class="sp"></span><button type="button" class="link-btn" onclick="openNoteSheet(null,{customerId:'${id}'})">+ ملاحظة</button></div>
 --- Gypsum/manifest.json
 +++ Trade-Modules/Gypsum/manifest.json
 @@ -1,7 +1,7 @@
@@ -316,7 +335,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

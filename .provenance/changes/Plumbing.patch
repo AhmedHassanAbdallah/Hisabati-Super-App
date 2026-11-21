@@ -224,6 +224,14 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
     العملاء وحساباتهم، مشروعات كل عميل (حصر ومصروفات وأرباح)،
     وسجل الصيانة والإصلاح والزيارات.
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
+@@ -132,6 +132,7 @@
+       </div>
+     </section>
+     ${c.note ? `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>` : ''}
++    <div data-az-crew="plumbing:${esc(c.id)}" data-sec="السباكة" data-name="${esc(c.name)}" data-phone="${esc(c.phone || '')}" data-address="${esc(c.address || '')}" data-rev="${st.billed}" data-paid="${st.paid}" data-cur="${esc(CUR)}"></div>
+     <div class="segmented seg-5" style="grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:12px" id="custTabs">
+       <button type="button" data-t="acc" class="${custTab === 'acc' ? 'on' : ''}">الحساب</button>
+       <button type="button" data-t="proj" class="${custTab === 'proj' ? 'on' : ''}">مشاريع ${st.projects.length || ''}</button>
 --- Plumbing/js/docs.js
 +++ Trade-Modules/Plumbing/js/docs.js
 @@ -1,5 +1,5 @@
@@ -280,7 +288,16 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
     قبل الطباعة، بهوامش مطابقة للمعاينة، ومتعددة الصفحات (عربي RTL).
     المستندات: مقايسات التأسيس/التشطيب/التغذية/الصرف/الحمام/المطبخ،
     عرض السعر، فاتورة الأعمال، فاتورة التوريد والتركيب، فاتورة الصيانة،
-@@ -102,7 +102,7 @@
+@@ -54,6 +54,8 @@
+ }
+ window.addEventListener('resize', fitPreview);
+ function openPreview(html, jobName, autoPrint) {
++// أرزقي: كل المستندات اللي بتتطبع بنفس شكل الفواتير الموحدة (هيدر بياناتك + سطر العميل + فوتر أرزقي | Arzoqi)
++  if (window.ArzaqiInvoice) html = ArzaqiInvoice.skinHTML(html, { titleFrom: 'h1', business: { name: business.techName || business.title, trade: business.techName ? business.title : '', phone: business.techPhone, address: business.techAddress, logo: business.showLogo ? business.logoData : '' } });
+   document.getElementById('printSheet').innerHTML = html;
+   printJobName = jobName || APP_NAME;
+   openOverlay('preview');
+@@ -102,7 +104,7 @@
      <div class="inv-stripe"></div>`;
  }
  function printFooterHTML() {
@@ -289,7 +306,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  }
  const signHTML = (a = 'توقيع السباك / المقاول', b = 'اعتماد العميل') => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
  function notesHTML(title, items) {
-@@ -180,6 +180,25 @@
+@@ -180,6 +182,25 @@
      d.lines.some(lineFromClient) ? 'الخامات والأدوات الموردة من العميل غير محسوبة في الإجمالي (تُحسب مصنعية تركيبها فقط).' : '',
      business.terms ? esc(business.terms) : ''
    ]);
@@ -375,7 +392,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

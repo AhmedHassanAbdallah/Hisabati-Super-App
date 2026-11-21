@@ -85,6 +85,18 @@ function serve() {
   check('عدم الخصم: الصافي 15', near(pol.none, 15), pol.none);
   check('خصم نسبة 50%: 1.1 م²', near(pol.pct, 1.1), pol.pct);
   check('خصم مساحة محددة 1.5 × 2 باب = 3 م²', near(pol.fixed, 3), pol.fixed);
+  // أرزقي: خصم الباب مقطوعية بالمتر (من غير مقاس) — الصنايعي بيحدد المساحة
+  const lump = await page.evaluate(() => {
+    const w = o => computeWork(normWork(Object.assign({ type: 'room', length: 4, width: 3, height: 3, price: 40 }, o)));
+    const a = w({ openings: [{ kind: 'door', w: 0, h: 0, policy: 'fixed', value: 1.5 }] });
+    const b = w({ openings: [{ kind: 'door', w: 0.9, h: 2.1, policy: 'fixed', value: 2.5 }] });
+    const c = w({ openings: [{ kind: 'door', w: 0.9, h: 2.1, policy: 'full' }] });
+    return { a: a.deduct, aTxt: a.details.join(' | '), b: b.deduct, c: c.deduct, total: a.total };
+  });
+  check('باب مقطوعية 1.5 م² من غير مقاس: الخصم 1.5 م²', near(lump.a, 1.5) && /مقطوعية\W*1\.5/.test(lump.aTxt), lump);
+  check('مقطوعية أكبر من مقاس الباب (2.5 م²) بتتخصم زي ما الصنايعي حددها', near(lump.b, 2.5), lump.b);
+  check('الخصم الكامل بالمقاس لسه زي ما هو (0.9 × 2.1 = 1.89 م²)', near(lump.c, 1.89), lump.c);
+  check('حساب الغرفة: (42 − 1.5) × 40 = 1,620 + السقف', near(lump.total, (42 - 1.5 + 12) * 40), lump.total);
   check('تجاهل الفتحات الأصغر من 2 م²: يخصم الباب بس 2.2', near(pol.minArea, 2.2), pol.minArea);
   check('الوشين: 30 م² − 4.4 = 25.6', near(pol.faces.gross, 30) && near(pol.faces.net, 25.6), [pol.faces.gross, pol.faces.net]);
   check('عدد الأجزاء 3: 45 م²', near(pol.parts, 45), pol.parts);
