@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
         s.setLoadWithOverviewMode(true);
         s.setUseWideViewPort(true);
         s.setSupportMultipleWindows(false);
-        s.setMediaPlaybackRequiresUserGesture(false); // فيديو الافتتاح (صامت) بيشتغل لوحده
+        s.setMediaPlaybackRequiresUserGesture(true);
 
         SectionBridge bridge = new SectionBridge();
         for (String name : SECTION_BRIDGES) webView.addJavascriptInterface(bridge, name);
