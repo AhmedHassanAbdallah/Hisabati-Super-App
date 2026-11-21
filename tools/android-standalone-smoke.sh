@@ -24,7 +24,17 @@ adb shell am start -W -n "$ACT"
 if wait_for "HISABATI_CHECK https://appassets.androidplatform.net/Main-App/index.html"; then
   echo "✔ الواجهة الرئيسية اتحملت: $(grep -o 'HISABATI_CHECK https://appassets.androidplatform.net/Main-App/[^ ]* .*' logcat.txt | tail -1)"
 else
-  echo "::error::الواجهة الرئيسية ما اتحملتش"; fail=1
+  # أول تشغيل للـ WebView على المحاكي ساعات بيعلق (حصلت مرتين قبل كده والأقسام بعدها اشتغلت عادي):
+  # نقفل التطبيق ونفتحه تاني مرة واحدة قبل ما نعتبرها مشكلة — ولو اشتغلت التانية بنكتب تحذير
+  echo "::warning::الواجهة الرئيسية ما اتحملتش في أول فتحة — بنعيد فتح التطبيق مرة"
+  adb logcat -d > logcat-00-home-first.txt || true
+  adb shell am force-stop "$PKG"; sleep 2; adb logcat -c || true
+  adb shell am start -W -n "$ACT" >/dev/null
+  if wait_for "HISABATI_CHECK https://appassets.androidplatform.net/Main-App/index.html"; then
+    echo "✔ الواجهة الرئيسية اتحملت في الفتحة التانية: $(grep -o 'HISABATI_CHECK https://appassets.androidplatform.net/Main-App/[^ ]* .*' logcat.txt | tail -1)"
+  else
+    echo "::error::الواجهة الرئيسية ما اتحملتش"; fail=1
+  fi
 fi
 adb logcat -d > logcat-00-home.txt || true
 echo "::group::سجل فتح الرئيسية"
