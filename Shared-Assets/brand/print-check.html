@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arzoqi print check</title>
+<!--
+  صفحة فحص للمحاكي بس (tools/android-standalone-smoke.sh) — مش ظاهرة في أي مكان في التطبيق.
+  بتفتح الطباعة من جسر التطبيق زي فواتير الأقسام بالظبط، والاختبار بيصوّر معاينة الطباعة ويتأكد إن
+  حوالين الورقة أبيض مش كحلي (لون خلفية الـ WebView).
+-->
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; background: #0b1f1d; color: #fff; font: 16px sans-serif; }
+  @page { size: A4 portrait; margin: 12mm; }
+  .mark { width: 60mm; height: 60mm; margin: 20mm auto; background: #ff00ff; }
+  @media print {
+    :root { color-scheme: light; }
+    html, body { background: #fff !important; color: #000; }
+    .mark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<p>Arzoqi print check</p>
+<div class="mark"></div>
+<script>
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var b = window.HesabatyApp;
+      if (b && b.print) b.print('Arzoqi print check');
+    }, 800);
+  });
+</script>
+</body>
+</html>

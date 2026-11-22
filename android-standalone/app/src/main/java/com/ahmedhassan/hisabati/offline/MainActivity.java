@@ -571,13 +571,29 @@ public class MainActivity extends Activity {
         try {
             PrintManager pm = (PrintManager) getSystemService(Context.PRINT_SERVICE);
             String job = (title == null || title.trim().isEmpty()) ? "أرزقي" : title.trim();
-            PrintDocumentAdapter adapter = webView.createPrintDocumentAdapter(job);
+            // هوامش الورقة في الـ PDF بتتلوّن بلون خلفية الـ WebView نفسه (الكحلي) مش بلون الصفحة،
+            // فده اللي كان بيعمل الإطار الغامق حوالين الفاتورة. بنخليها بيضا طول ما الطباعة شغالة،
+            // وبنرجّعها لما نظام الطباعة يخلص (onFinish).
+            webView.setBackgroundColor(Color.WHITE);
+            final PrintDocumentAdapter inner = webView.createPrintDocumentAdapter(job);
+            PrintDocumentAdapter adapter = new PrintDocumentAdapter() {
+                @Override public void onStart() { inner.onStart(); }
+                @Override public void onLayout(PrintAttributes o, PrintAttributes n, android.os.CancellationSignal c,
+                                               LayoutResultCallback cb, Bundle extras) { inner.onLayout(o, n, c, cb, extras); }
+                @Override public void onWrite(android.print.PageRange[] pages, android.os.ParcelFileDescriptor dest,
+                                              android.os.CancellationSignal c, WriteResultCallback cb) { inner.onWrite(pages, dest, c, cb); }
+                @Override public void onFinish() {
+                    inner.onFinish();
+                    handler.post(() -> webView.setBackgroundColor(NAVY));
+                }
+            };
             PrintAttributes attrs = new PrintAttributes.Builder()
                     .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                     .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
                     .build();
             pm.print(job, adapter, attrs);
         } catch (Exception e) {
+            webView.setBackgroundColor(NAVY);
             toast("تعذر فتح الطباعة على هذا الجهاز");
         }
     }

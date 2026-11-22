@@ -61,6 +61,21 @@ for d in Electrical Plumbing HVAC Painting Flooring Gypsum Plastering; do
   fi
 done
 
+# الطباعة / حفظ PDF: معاينة الطباعة لازم تبقى ورقة بيضا من غير إطار بلون خلفية التطبيق (حصلت في 2.2.1)
+adb logcat -c || true
+adb shell am start -W -n "$ACT" -e path "Shared-Assets/brand/print-check.html" >/dev/null
+ok=1
+for t in 1 2 3; do
+  sleep 8
+  adb exec-out screencap -p > shots/print-preview.png || true
+  if python3 tools/print-frame-check.py shots/print-preview.png; then ok=0; break; fi
+done
+[ $ok -eq 0 ] || fail=1
+adb logcat -d > logcat-print.txt || true
+adb shell input keyevent KEYCODE_BACK; sleep 2
+adb shell input keyevent KEYCODE_BACK; sleep 2
+adb shell dumpsys activity activities | grep -q "mResumedActivity.*$PKG" || adb shell am start -W -n "$ACT" >/dev/null
+
 # زرار الرجوع وإعادة الفتح
 adb shell input keyevent KEYCODE_BACK; sleep 2
 adb shell am start -W -n "$ACT" >/dev/null; sleep 5

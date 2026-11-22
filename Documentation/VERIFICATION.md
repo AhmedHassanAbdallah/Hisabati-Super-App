@@ -166,3 +166,13 @@ A4 sheet dark when printing — a black frame in every exported PDF. Fix (print-
 color-scheme and white page/backdrops in `@media print`. `tests/print-white.e2e.js`: 0/7 before the fix, 7/7 after;
 PDF exports of all 7 sections rendered with white corners. All suites pass (launcher 151, offline 20, native 14,
 cloud 36, crew 19; 12/12 section suites).
+
+## 12. 2.2.2 — the frame around printed pages in the Android app (2026-11-22)
+The user still saw a frame in the app's print preview. Its color sampled from the screenshot is exactly `#002624` —
+the native WebView background (`webView.setBackgroundColor(NAVY)`), not any page color: the Android WebView print
+adapter fills whatever the document does not cover (page margins) with the view's own background, so the CSS fix of
+2.2.1 could not reach it. Fix (`android-standalone` MainActivity `doPrint`): the WebView background is white while
+the print job runs and goes back to navy in the adapter's `onFinish`. New emulator check: the smoke test opens
+`Shared-Assets/brand/print-check.html` (dark page that prints through the same bridge as the sections' invoices),
+screenshots the system print preview, and `tools/print-frame-check.py` requires the page's magenta marker to be
+visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels; the limit is 150).

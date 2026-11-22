@@ -15,6 +15,7 @@ on:
       - "Trade-Modules/**"
       - "version.json"
       - "tools/android-standalone-smoke.sh"
+      - "tools/print-frame-check.py"
       - ".github/workflows/android-standalone.yml"
   workflow_dispatch:
 
