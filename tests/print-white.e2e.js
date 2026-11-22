@@ -1,5 +1,5 @@
 /*
- * الطباعة و"حفظ PDF" في الوضع الغامق: الورقة لازم تطلع بيضا من غير إطار أسود حواليها (في الأقسام التسعة).
+ * الطباعة و"حفظ PDF" في الوضع الغامق: الورقة لازم تطلع بيضا من غير إطار أسود حواليها (في الأقسام العشرة).
  * وكمان: هوامش الصفحة (@page) لازم تفضل صفر حتى بعد ما نوتة العمال تتحمّل (crew.css كانت بتفرض 8 مم على أي طباعة:
  * الفاتورة تصغر عن المعاينة، وحوالين الورقة يتلوّن بلون خلفية تطبيق أندرويد).
  * usage: node tests/print-white.e2e.js http://127.0.0.1:8790/
@@ -16,6 +16,7 @@ const C = {
   Plastering: () => { UI.S.db().clients.push({ id: 'c1', name: 'م. خالد' }); Docs.openDoc('statement', { cid: 'c1' }); },
   Metalwork: () => { const A = window.MetalApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'MTL-0001', customerId: 'c1', title: '', date: '2026-11-22', items: [], materials: [], consumables: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
   Carpentry: () => { const A = window.CarpApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'CRP-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
+  Masonry: () => { const A = window.MasonApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'BLD-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
 };
 (async () => {
   const b = await chromium.launch(); let ok = 0, bad = 0;

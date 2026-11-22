@@ -217,3 +217,21 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   layouts added to the project and printed, natural wood, materials library, custom work type reused, other methods
   (m², parts, daily, hour, lump, board), reload persistence, search/filters, Back button, dark/light, currencies.
 * Suites: launcher 187, offline 24, native 14, cloud 38, crew 21, print-white 9, auto-backup 35; `run-trade-suites` 16/16.
+
+## 16. 2.5.0 — new section: البناء وأعمال المباني وحساب الطوب (Masonry) (2026-11-22)
+* `Trade-Modules/Masonry` is an original Arzoqi section; `tools/verify-integrity.sh` lists it as NEW (ALL CHECKS PASSED).
+* `tests/calc.test.js` 25/25: the spec's 10 tests — wall 10 × 3 = 30 m²; door 1 × 2.1 → 27.9; door + 2 windows 1.2 × 1.2 →
+  openings 4.98, net 25.02; brick 25 × 12 × 6.5 with 1 cm joints per bond (half 51.282/m², one 102.564/m², 1½, 2, edge);
+  1,000 + 5% = 1,050; block 40 × 20 with 1 cm joints on 8 × 3 → 11.61/m² → 279; three walls with two brick types grouped
+  separately; mortar 1 m³ + 10% with 1:4 and dry factor 1.3 → 9 bags + 1.144 m³ sand; labour by every method; and a full
+  project (bricks + blocks + mortar + labour + workers + transport + waste + discount + payments + profit). Also: identical
+  walls, oversize openings, mm/cm/m, count by volume (estimate), packs rounded up, wall mortar = wall − brick volume
+  (hollow voids not counted as mortar), missing mix inputs reported instead of invented, sand by load, plaster, floor
+  layers, stone, demolition, workers with advances, and no NaN/Infinity/negatives.
+* `tests/e2e.js` 115/115 through the real UI: the 10 spec tests typed in, waste none/%/qty, brick price per piece/thousand/
+  pack, block calculator, multi-wall + room (4 walls), quick calculation without a customer, “+ إضافة نوع طوب” from the
+  library and from inside the calculator, plaster/floor/stone/demolition, workers tool → project labour cost, costs
+  (qty × price, amount, % of materials), discount, payments, profit; invoice/quote/materials/internal costs (internal
+  costs and profit never on the invoice), edit/duplicate/delete, reload persistence, search by brick name, dark/light,
+  currency, storage limited to `hmas_*`.
+* Suites: launcher 205, offline 26, native 14, cloud 39, crew 22, print-white 10, auto-backup 35; `run-trade-suites` 18/18.

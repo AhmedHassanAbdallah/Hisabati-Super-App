@@ -1,7 +1,7 @@
 /*
  * أرزقي — محرك النسخ الاحتياطي (محلي، من غير أي شبكة).
  *
- * بيجمع بيانات الأقسام التسعة بس، عن طريق بادئات مفاتيح التخزين بتاعة كل قسم
+ * بيجمع بيانات الأقسام العشرة بس، عن طريق بادئات مفاتيح التخزين بتاعة كل قسم
  * (اتحصرت من كود كل قسم)، ومن غير ما يلمس كود الأقسام نفسها:
  *   الكهرباء  ahmed_elec_* , hesabaty_*
  *   السباكة   hesabati_plumbing_*   + IndexedDB hesabati_plumbing_media (الصور)
@@ -27,6 +27,7 @@
     { id: 'plastering', prefixes: ['hplaster_'], idb: [] },
     { id: 'metalwork', prefixes: ['hmetal_'], idb: [] },
     { id: 'carpentry', prefixes: ['hcarp_'], idb: [] },
+    { id: 'masonry', prefixes: ['hmas_'], idb: [] },
     // بيانات أرزقي المشتركة: بياناتي في الفاتورة + إضافات الفواتير (الضمان)
     { id: 'arzaqi', prefixes: ['arzaqi_'], idb: [] }
   ];
