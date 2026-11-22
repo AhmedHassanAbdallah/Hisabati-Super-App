@@ -105,6 +105,16 @@
     return loadGsi().then(() => go());          // أول مرة: المكتبة لسه بتتحمل
   }
 
+  /* توكن من غير ما نعرض أي حاجة للمستخدم (للنسخ التلقائي):
+     تطبيق الأندرويد بيطلبه من جوجل في الخلفية، ولو محتاج موافقة بيرجع غلط ونأجل.
+     المتصفح: جوجل بتفتح نافذة لأي طلب جديد، فبنستخدم بس التوكن اللي اتاخد في نفس الفتحة. */
+  function silentToken() {
+    if (!isConfigured()) return Promise.reject(new Error('not-configured'));
+    if (token && token.expires_at - Date.now() > 60000) return Promise.resolve(token);
+    if (NATIVE) return nativeToken(false);
+    return Promise.reject(new Error('needs-interaction'));
+  }
+
   async function api(url, opts) {
     const o = Object.assign({}, opts || {});
     o.headers = Object.assign({ Authorization: 'Bearer ' + token.access_token }, o.headers || {});
@@ -147,6 +157,13 @@
     folderId = c.id; return folderId;
   }
 
+  // رقم ثابت للجهاز ده (علشان تنظيف النسخ التلقائية يمسح نسخ الجهاز ده بس، مش نسخ موبايل تاني)
+  function deviceId() {
+    let id = lsGet('hisabati_super_device_v1');
+    if (!id) { id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); lsSet('hisabati_super_device_v1', id); }
+    return id;
+  }
+
   async function listBackups() {
     // كل النسخ اللي التطبيق عملها (حتى اللي في فولدر "حساباتي" القديم قبل تغيير الاسم)
     const query = `trashed=false and appProperties has { key='hisabati' and value='backup' }`;
@@ -154,7 +171,8 @@
     return (r.files || []).map(f => ({
       id: f.id, name: f.name, createdTime: f.createdTime, size: Number(f.size) || 0,
       items: Number((f.appProperties || {}).items) || 0,
-      device: (f.appProperties || {}).device || ''
+      device: (f.appProperties || {}).device || '',
+      auto: (f.appProperties || {}).auto === '1'
     }));
   }
 
@@ -167,13 +185,16 @@
     return 'جهاز';
   }
 
-  async function uploadBackup(snap) {
+  async function uploadBackup(snap, opts) {
+    const auto = !!(opts && opts.auto);
     const fid = await ensureFolder();
     const d = new Date(snap.createdAt);
     const pad = n => String(n).padStart(2, '0');
-    const name = `hisabati-backup-${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
+    const name = `hisabati-${auto ? 'auto-' : ''}backup-${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
     const items = window.HisabatiBackup.totalItems(snap);
-    const meta = { name, parents: [fid], mimeType: 'application/json', appProperties: { hisabati: 'backup', items: String(items), device: deviceLabel() } };
+    const props = { hisabati: 'backup', items: String(items), device: deviceLabel() };
+    if (auto) { props.auto = '1'; props.dev = deviceId(); }
+    const meta = { name, parents: [fid], mimeType: 'application/json', appProperties: props };
     const body = JSON.stringify(snap);
     const boundary = 'hisabati' + Math.random().toString(36).slice(2);
     const multipart = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(meta)}\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n${body}\r\n--${boundary}--`;
@@ -195,9 +216,18 @@
     await api(`${API}/files/${encodeURIComponent(id)}`, { method: 'DELETE' });
   }
 
+  // بنسيب آخر keep نسخ تلقائية من الجهاز ده ونمسح الأقدم. النسخ اليدوية ونسخ الأجهزة التانية ما بتتلمسش.
+  async function pruneAuto(keep) {
+    const query = `trashed=false and appProperties has { key='hisabati' and value='backup' } and appProperties has { key='auto' and value='1' } and appProperties has { key='dev' and value='${deviceId()}' }`;
+    const r = await (await api(`${API}/files?q=${q(query)}&orderBy=createdTime desc&pageSize=100&fields=files(id,createdTime)&spaces=drive`)).json();
+    const old = (r.files || []).slice(keep);
+    for (const f of old) await deleteBackup(f.id);
+    return old.length;
+  }
+
   window.HisabatiCloud = {
     isConfigured, account, preload, requestToken, signIn, signOut, isNative: () => !!NATIVE,
-    listBackups, uploadBackup, downloadBackup, deleteBackup,
+    listBackups, uploadBackup, downloadBackup, deleteBackup, pruneAuto, silentToken,
     lastBackupAt: () => lsGet('hisabati_super_last_backup_v1'),
     hasToken: () => !!(token && token.expires_at - Date.now() > 60000)
   };

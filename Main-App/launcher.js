@@ -150,12 +150,21 @@
       return;
     }
     const last = Cloud.lastBackupAt();
-    const stale = !last || (Date.now() - new Date(last).getTime()) > 3 * 86400000;
+    const st = autoState(), on = st.on !== false;
+    // آخر مرة اتأكدنا إن مفيش تغيير من بعد آخر نسخة = البيانات متأمنة لحد الوقت ده
+    const safeAt = Math.max(last ? new Date(last).getTime() : 0, st.checkedAt ? new Date(st.checkedAt).getTime() : 0);
+    const stale = !safeAt || (Date.now() - safeAt) > 3 * 86400000;
+    const unchanged = on && st.checkedAt && last && new Date(st.checkedAt) > new Date(last);
+    const autoNote = !on ? 'مقفول — النسخ بإيدك بس'
+      : st.waiting === 'web' ? 'بيشتغل لوحده في تطبيق أرزقي على الموبايل — هنا دوس «نسخة دلوقتي»'
+      : 'نسخة كل يوم لوحدها لما تفتح التطبيق، لو فيه تغيير';
     c.innerHTML = `<div class="cloud-top">
         <div class="cloud-ic">${acc.picture ? `<img src="${esc(acc.picture)}" alt="" referrerpolicy="no-referrer">` : icon('user')}</div>
         <div class="cloud-text"><strong>${esc(acc.name)}</strong>
-        <span class="${stale ? 'warn' : ''}">${last ? 'آخر نسخة احتياطية ' + esc(ago(last)) : 'لسه ما عملتش نسخة احتياطية من الجهاز ده'}</span></div>
+        <span class="${stale ? 'warn' : ''}">${last ? 'آخر نسخة احتياطية ' + esc(ago(last)) + (unchanged ? ' · مفيش تغيير من بعدها' : '') : 'لسه ما عملتش نسخة احتياطية من الجهاز ده'}</span></div>
       </div>
+      <label class="auto-row"><span class="auto-text"><strong>${icon('cloud-up')} نسخ احتياطي تلقائي</strong><small>${esc(autoNote)}</small></span>
+        <input type="checkbox" data-act="auto-toggle"${on ? ' checked' : ''} aria-label="نسخ احتياطي تلقائي كل يوم"></label>
       <div class="cloud-actions">
         <button class="btn primary" type="button" data-act="backup">${icon('cloud-up')} نسخة دلوقتي</button>
         <button class="btn ghost" type="button" data-act="open-account">${icon('cloud-down')} النسخ المحفوظة</button>
@@ -398,6 +407,7 @@
     try {
       const acc = await Cloud.signIn();
       toast(`أهلاً يا ${acc.given || acc.name} — اتسجل دخولك ✓`);
+      saveAuto({ waiting: '' });
       renderHome();
       backups = null;
       if (openLayerName() === 'account') renderAccountSheet();
@@ -422,12 +432,60 @@
       const snap = await Backup.collect();
       if (!Backup.totalItems(snap)) { toast('لسه مفيش بيانات في أي قسم علشان نحفظها.'); return; }
       await Cloud.uploadBackup(snap);
+      saveAuto({ hash: fingerprint(snap), checkedAt: snap.createdAt, waiting: '' });
       toast('اتحفظت نسخة احتياطية على جوجل درايف ✓');
       backups = null;
       renderCloudCard();
       if (openLayerName() === 'account') await loadBackups(true);
     } catch (e) { toast(cloudError(e)); }
     finally { busy = false; setBusyButtons(false); }
+  }
+
+  /* ---------- النسخ الاحتياطي التلقائي ----------
+     لو مسجل دخول والمفتاح شغال: نسخة واحدة في اليوم، في الخلفية، لو البيانات اتغيرت من آخر نسخة.
+     بيحتفظ بآخر 10 نسخ تلقائية من الجهاز ده ويمسح الأقدم (النسخ اليدوية ما بتتمسحش).
+     لو مفيش نت أو جوجل محتاجة موافقة: من غير أي رسالة، ونحاول تاني الفتحة الجاية. */
+  const AUTO_KEY = 'hisabati_super_auto_v1';
+  const AUTO_KEEP = 10;
+  const AUTO_RECHECK = 6 * 3600000; // لو اتأكدنا إن مفيش تغيير، ما نعيدش الفحص قبل 6 ساعات
+  function autoState() { try { return JSON.parse(lsGet(AUTO_KEY) || '{}') || {}; } catch (e) { return {}; } }
+  function saveAuto(patch) { lsSet(AUTO_KEY, JSON.stringify(Object.assign(autoState(), patch))); }
+  function fingerprint(snap) {
+    const s = JSON.stringify([snap.localStorage, snap.indexedDB || {}]);
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(36) + '.' + s.length;
+  }
+  const sameDay = (a, b) => new Date(a).toDateString() === new Date(b).toDateString();
+  let autoRunning = false;
+  async function autoBackup() {
+    if (autoRunning || busy || !Cloud.account() || !Cloud.isConfigured()) return;
+    const st = autoState();
+    if (st.on === false) return;
+    if (navigator.onLine === false) return;
+    const last = Cloud.lastBackupAt();
+    if (last && sameDay(last, Date.now())) return;                       // فيه نسخة النهارده
+    if (st.checkedAt && Date.now() - new Date(st.checkedAt).getTime() < AUTO_RECHECK && sameDay(st.checkedAt, Date.now())) return;
+    autoRunning = true;
+    try {
+      const snap = await Backup.collect();
+      if (!Backup.totalItems(snap)) return;
+      const fp = fingerprint(snap);
+      if (fp === st.hash) { saveAuto({ checkedAt: new Date().toISOString(), waiting: '' }); renderCloudCard(); return; }
+      try { await Cloud.silentToken(); }
+      catch (e) { if (String(e && e.message) === 'needs-interaction') { saveAuto({ waiting: 'web' }); renderCloudCard(); } return; }
+      if (busy) return;
+      busy = true; // زرار «نسخة دلوقتي» يستنى لحد ما النسخة التلقائية تخلص
+      try {
+        await Cloud.uploadBackup(snap, { auto: true });
+        saveAuto({ hash: fp, checkedAt: snap.createdAt, waiting: '' });
+        try { await Cloud.pruneAuto(AUTO_KEEP); } catch (e) {}
+      } finally { busy = false; }
+      backups = null;
+      renderCloudCard();
+      if (openLayerName() === 'account') renderAccountSheet();
+    } catch (e) { /* من غير رسايل — هنحاول الفتحة الجاية */ }
+    finally { autoRunning = false; }
   }
 
   async function doRestore(id, skipAsk) {
@@ -517,7 +575,7 @@
     else if (!backups.length) list = `<div class="empty">لسه مفيش نسخ احتياطية على حسابك.<br>اعمل أول نسخة دلوقتي ☝️</div>`;
     else list = `<div class="bk-list">${backups.map((b, i) => `<div class="bk" style="--i:${i}">
           <div class="bk-ic">${icon('doc')}</div>
-          <div class="bk-text"><strong>${esc(fmtDate(b.createdTime))}</strong>
+          <div class="bk-text"><strong>${esc(fmtDate(b.createdTime))}${b.auto ? ' <span class="bk-auto">تلقائية</span>' : ''}</strong>
           <small>${esc(ago(b.createdTime))}${b.device ? ' · ' + esc(b.device) : ''}${b.items ? ' · ' + b.items + ' عنصر' : ''} · ${esc(fmtSize(b.size))}</small></div>
           <button class="bk-btn" type="button" data-restore="${esc(b.id)}">استرجاع</button>
           <button class="bk-del" type="button" data-delete="${esc(b.id)}" aria-label="حذف النسخة">${icon('trash')}</button>
@@ -545,6 +603,7 @@
     switch (a.dataset.act) {
       case 'signin': doSignIn(); break;
       case 'backup': doBackup(); break;
+      case 'auto-toggle': saveAuto({ on: !!a.checked }); renderCloudCard(); toast(a.checked ? 'النسخ التلقائي اشتغل — نسخة كل يوم لو فيه تغيير' : 'النسخ التلقائي اتقفل'); if (a.checked) autoBackup(); break;
       case 'open-account': openLayer('account'); if (Cloud.hasToken()) loadBackups(); break;
       case 'open-profile': openLayer('profile'); break;
       case 'load': loadBackups(true); break;
@@ -651,6 +710,9 @@
   renderDrawer();
   renderHome();
   Cloud.preload();
+  setTimeout(autoBackup, 4000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') setTimeout(autoBackup, 1500); });
+  window.onAppResume = () => setTimeout(autoBackup, 1500); // تطبيق الأندرويد بينادي دي لما يرجع قدامك
 
   // رابط مباشر لقسم: Main-App/#electrical (وكمان اختصارات أيقونة التطبيق)
   const startId = decodeURIComponent(location.hash.slice(1));

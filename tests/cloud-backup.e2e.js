@@ -49,7 +49,8 @@ async function googleApis(route) {
     if (fm) list = list.filter(f => f.mimeType === fm[1] && f.name === fm[2]);
     const pm = q.match(/'([^']+)' in parents/);
     if (pm) list = list.filter(f => (f.parents || []).includes(pm[1]));
-    if (/appProperties has \{ key='hisabati' and value='backup' \}/.test(q)) list = list.filter(f => (f.appProperties || {}).hisabati === 'backup');
+    // كل شروط appProperties زي درايف الحقيقي
+    for (const [, k, v] of q.matchAll(/appProperties has \{ key='([^']+)' and value='([^']*)' \}/g)) list = list.filter(f => (f.appProperties || {})[k] === v);
     list.sort((a, b) => b.createdTime.localeCompare(a.createdTime));
     return json(route, 200, { files: list.map(f => ({ id: f.id, name: f.name, createdTime: f.createdTime, size: String(f.content ? Buffer.byteLength(f.content) : 0), appProperties: f.appProperties })) });
   }

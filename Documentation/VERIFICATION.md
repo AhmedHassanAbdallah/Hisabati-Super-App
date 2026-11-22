@@ -191,3 +191,12 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   with the app background on Android). Moved inside the notebook sheet. `tests/print-white.e2e.js` now also loads
   `crew.css` and requires all @page margins to be 0: 0/8 with the old file, 8/8 after.
 * Suites: launcher 169, offline 22, native 14, cloud 37, crew 20, print-white 8; `run-trade-suites` 14/14.
+
+## 14. 2.3.1 — automatic daily Drive backup (2026-11-22)
+* `tests/auto-backup.e2e.js` 35/35 (mock Google/Drive, simulated Android bridge): nothing happens or is stored when signed
+  out; first open after sign-in uploads one backup in the background with a non-interactive token and no message; once per
+  day; skipped when data is unchanged (card says «مفيش تغيير من بعدها»); a manual backup today counts; keeps the last 10
+  automatic backups of this device while manual backups and another phone's backups stay; «تلقائية» badge; the switch turns
+  it off/on; consent-required and offline do nothing until the next open; in the browser without a token no Google window opens.
+* The Drive mock in `tests/cloud-backup.e2e.js` now honours every `appProperties has {…}` filter like real Drive.
+* Suites: cloud 37, launcher 169, offline 22, native 14.
