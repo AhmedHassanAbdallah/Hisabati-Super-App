@@ -1,0 +1,19 @@
+{
+  "name": "أرزقي | Arzoqi — النجارة والأثاث",
+  "short_name": "أرزقي نجارة",
+  "description": "حساب مصنعية وتكاليف النجارة: غرف نوم ودواليب ومطابخ وأبواب وشبابيك وأثاث وديكور، وتقطيع الألواح، والخشب الطبيعي، والفواتير",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eff6f6",
+  "theme_color": "#002624",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

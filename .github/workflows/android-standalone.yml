@@ -1,6 +1,6 @@
 # بناء "أرزقي | Arzoqi — لحسابات المصنعية" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
 # بيتبني من نفس ملفات الموقع (Main-App / Shared-Assets / Trade-Modules) من غير أي تعديل عليها،
-# وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام الثمانية) قبل النشر.
+# وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام التسعة) قبل النشر.
 # التوقيع: نفس مفتاح التطبيق (android/keystore.enc + HISABATI_KEY_PASSWORD).
 # © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
 name: Android Standalone
@@ -79,7 +79,7 @@ jobs:
           for f in Main-App/index.html Main-App/launcher.js Shared-Assets/fonts/cairo.css \
                    Trade-Modules/Electrical/index.html Trade-Modules/Plumbing/index.html Trade-Modules/HVAC/index.html \
                    Trade-Modules/Painting/index.html Trade-Modules/Flooring/index.html Trade-Modules/Gypsum/index.html \
-                   Trade-Modules/Plastering/index.html Trade-Modules/Metalwork/index.html Trade-Modules/Metalwork/js/calc.js; do
+                   Trade-Modules/Plastering/index.html Trade-Modules/Metalwork/index.html Trade-Modules/Metalwork/js/calc.js Trade-Modules/Carpentry/index.html Trade-Modules/Carpentry/js/calc.js Trade-Modules/Carpentry/js/catalog.js; do
             test -f "$W/$f" || { echo "::error::ناقص $f"; exit 1; }
             cmp -s "$W/$f" "$f" || { echo "::error::$f مختلف عن الأصل"; exit 1; }
           done

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#002624">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="author" content="أحمد حسن عبدالله">
+  <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+  <meta name="description" content="أرزقي | Arzoqi — النجارة: حساب مصنعية وتكاليف غرف النوم والدواليب والمطابخ والأبواب والشبابيك والأثاث والديكور، وتقطيع الألواح، والخشب الطبيعي، والفواتير">
+  <title>أرزقي | Arzoqi — النجارة والأثاث</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script>
+    // المظهر المحفوظ قبل ظهور الصفحة (من غير وميض)
+    try {
+      var _t = (JSON.parse(localStorage.getItem('hcarp_settings_v1') || '{}') || {}).theme;
+      if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان وخطوط الهوية -->
+  <link rel="stylesheet" href="./css/carp.css">
+  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة + نوتة العمال -->
+  <!--
+    أرزقي | Arzoqi — النجارة والأثاث
+    تصميم وتطوير: أحمد حسن عبدالله
+    © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+  -->
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></symbol>
+
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M16 4a4 4 0 0 1 0 8"/><path d="M22 21a7 7 0 0 0-4-6.3"/></symbol>
+
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+
+    <symbol id="i-door" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1"/><rect x="8" y="5" width="8" height="6" rx=".5"/><rect x="8" y="13" width="8" height="6" rx=".5"/><path d="M14.5 12h1"/></symbol>
+
+    <symbol id="i-chair" viewBox="0 0 24 24"><path d="M7 3v10h10V3"/><path d="M7 8h10"/><path d="M5 13h14"/><path d="M7 13l-1 8M17 13l1 8M7.5 17h9"/></symbol>
+
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.7 7-6.6 0-3.4-2.3-5.4-3.6-7.4-.4 1.8-1.4 3-2.6 3.6.3-3.4-1-6.6-3.8-8.6.2 3.2-1.6 5.4-3.2 7.4C4.8 12.2 5 14 5 15.4 5 19.3 8 22 12 22z"/></symbol>
+
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/><path d="M10 11v6M14 11v6"/></symbol>
+
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></symbol>
+
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
+
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+
+    <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
+
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></symbol>
+
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 17V11M11 17V6M16 17v-4M20 17V9"/></symbol>
+    <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2z"/><path d="M5 18v2M19 18v2"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 19V6M21 19v-5a3 3 0 0 0-3-3H10v8"/><path d="M3 15h18"/><circle cx="6.5" cy="11" r="1.8"/></symbol>
+    <symbol id="i-wardrobe" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="18" rx="1.5"/><path d="M12 2v18M10 10v2M14 10v2M6 20v2M18 20v2"/></symbol>
+    <symbol id="i-kitchen" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="6" rx="1"/><rect x="3" y="12" width="18" height="9" rx="1"/><path d="M12 12v9M8 6h1M15 6h1M9 15h1M14 15h1"/></symbol>
+    <symbol id="i-window" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><path d="M3 8h18v3H3z"/><path d="M5 11v9M19 11v9M8 11v5h8v-5"/></symbol>
+    <symbol id="i-desk" viewBox="0 0 24 24"><path d="M2 8h20"/><path d="M4 8v12M20 8v12M14 8v8h6"/><path d="M14 12h6"/></symbol>
+    <symbol id="i-decor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M7 3v18M11 3v18M15 3v18M19 3v18"/></symbol>
+    <symbol id="i-wall" viewBox="0 0 24 24"><path d="M3 4h18v16H3z"/><path d="M3 9h18M3 15h18M8 4v5M15 4v5M11 9v6M18 9v6M6 15v5M14 15v5"/></symbol>
+    <symbol id="i-pergola" viewBox="0 0 24 24"><path d="M2 6h20M4 10h16"/><path d="M5 6v15M19 6v15M9 6v4M15 6v4M2 21h20"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+    <symbol id="i-cnc" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9h14v12"/><path d="M12 3v8M9 6h6"/><path d="M10 11l2 3 2-3"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0 5 5L22 14l-8 8-2.6-2.4a4 4 0 0 0-5-5L3 11l8-8z" transform="scale(.9) translate(1 1)"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 5h13v11H1zM14 9h4l3 3v4h-7"/><circle cx="5.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></symbol>
+    <symbol id="i-saw" viewBox="0 0 24 24"><path d="M3 15L15 3l3 3L6 18z"/><path d="M6 18l-3 3M8 13l1.5 1.5M10.5 10.5L12 12M13 8l1.5 1.5"/><rect x="15.5" y="14" width="6" height="7" rx="1"/></symbol>
+    <symbol id="i-log" viewBox="0 0 24 24"><ellipse cx="18" cy="12" rx="3.5" ry="6"/><path d="M18 6H6a3.5 6 0 0 0 0 12h12"/><path d="M18 9.5a1.2 2.5 0 1 1 0 5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h7z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  </defs>
+</svg>
+
+<div id="editorApp">
+  <header class="app-header tab-only" id="tabHeader">
+    <img class="brand-ic" src="./icons/icon-192.png" alt="">
+    <div class="titles">
+      <div class="sub" id="greetLine">أهلاً بيك</div>
+      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
+    </div>
+    <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><svg class="ic"><use href="#i-moon"/></svg></button>
+  </header>
+
+  <main class="container">
+    <!-- الرئيسية -->
+    <section class="view active" id="view-home">
+      <section class="home-sum">
+        <div class="hs-label">المتبقي لك عند العملاء</div>
+        <div class="hs-value"><span id="homeDue">0</span> <small class="cur">ج.م</small></div>
+        <div class="hs-stats">
+          <button type="button" data-act="view" data-view="jobs" data-filter="active"><span>مشاريع جارية</span><strong id="homeActive">0</strong></button>
+          <button type="button" data-act="view" data-view="customers"><span>العملاء</span><strong id="homeCust">0</strong></button>
+          <button type="button" class="mat" data-act="view" data-view="jobs"><span>شغل الشهر ده</span><strong id="homeMonth">0</strong></button>
+        </div>
+      </section>
+
+      <div class="quick">
+        <button type="button" class="q-tile dark" data-act="newJob"><span class="q-ic orange"><svg class="ic"><use href="#i-plus"/></svg></span><b>مشروع جديد</b><small>عميل + بنود من أي نوع + فاتورة</small></button>
+        <button type="button" class="q-tile" data-act="tool" data-tool="cut"><span class="q-ic orange-soft"><svg class="ic"><use href="#i-saw"/></svg></span><b>تقطيع الألواح</b><small>توزيع القطع وعدد الألواح والهالك</small></button>
+      </div>
+
+      <h2 class="home-h" style="margin-top:18px">اختار نوع الشغل</h2>
+      <div class="type-tiles" id="catTiles"></div>
+      <div id="myTypes"></div>
+
+      <div class="create-row" style="margin-top:12px">
+        <button type="button" class="create-opt" data-act="tool" data-tool="wood"><span class="q-ic"><svg class="ic"><use href="#i-log"/></svg></span><span><b>الخشب الطبيعي</b><small>م³ وقدم وقطعة</small></span></button>
+        <button type="button" class="create-opt" data-act="tool" data-tool="library"><span class="q-ic"><svg class="ic"><use href="#i-book"/></svg></span><span><b>مكتبة الخامات</b><small>أسعارك ومورّدينك</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="view" data-view="jobs"><span class="q-ic green"><svg class="ic"><use href="#i-history"/></svg></span><span><b>المشاريع السابقة</b><small>بحث وتعديل وتكرار</small></span></button>
+        <button type="button" class="create-opt" data-act="pickInvoice"><span class="q-ic green"><svg class="ic"><use href="#i-receipt"/></svg></span><span><b>الفواتير</b><small>فاتورة أو عرض سعر</small></span></button>
+      </div>
+
+      <div class="home-row"><h2 class="home-h" style="margin:0">آخر المشاريع</h2><button type="button" class="link-btn" data-act="view" data-view="jobs">عرض الكل</button></div>
+      <div id="homeRecent"></div>
+    </section>
+
+    <!-- المشاريع -->
+    <section class="view" id="view-jobs">
+      <div class="pick-bar hidden" id="pickBar"><svg class="ic"><use href="#i-receipt"/></svg><span>اختار المشروع اللي عايز فاتورته</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancelPick">إلغاء</button></div>
+      <div class="search-box"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="jobSearch" placeholder="دوّر باسم العميل أو المشروع أو البند" autocomplete="off"></div>
+      <div class="filter-chips" id="jobFilters">
+        <button type="button" class="chip on" data-f="all">الكل</button>
+        <button type="button" class="chip" data-f="active">جارية</button>
+        <button type="button" class="chip" data-f="due">عليها فلوس</button>
+        <button type="button" class="chip" data-f="quote">عروض أسعار</button>
+        <button type="button" class="chip" data-f="done">خلصانة</button>
+      </div>
+      <details class="adv" id="jobAdv">
+        <summary><svg class="ic"><use href="#i-calendar"/></svg> فلترة بالعميل أو التاريخ</summary>
+        <div class="field"><label for="jobCust">العميل</label><select id="jobCust"><option value="">كل العملاء</option></select></div>
+        <div class="row-2">
+          <div class="field"><label for="jobFrom">من تاريخ</label><input type="date" id="jobFrom"></div>
+          <div class="field"><label for="jobTo">لحد تاريخ</label><input type="date" id="jobTo"></div>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" data-act="clearJobFilter">مسح الفلترة</button>
+      </details>
+      <div class="list-sum" id="jobSum"></div>
+      <div id="jobList"></div>
+    </section>
+
+    <!-- العملاء -->
+    <section class="view" id="view-customers">
+      <div class="search-box"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="custSearch" placeholder="دوّر باسم العميل أو التليفون" autocomplete="off"></div>
+      <button type="button" class="btn btn-soft" data-act="newCustomer" style="margin-bottom:12px"><svg class="ic"><use href="#i-plus"/></svg> عميل جديد</button>
+      <div id="custList"></div>
+    </section>
+
+    <!-- المزيد -->
+    <section class="view" id="view-more">
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-sun"/></svg></span><h2>المظهر</h2></div>
+        <div class="segmented seg-3" id="themeSeg">
+          <button type="button" data-theme-set="auto">تلقائي</button>
+          <button type="button" data-theme-set="light">فاتح</button>
+          <button type="button" data-theme-set="dark">ليلي</button>
+        </div>
+        <p class="hint">«تلقائي» بيمشي مع وضع الموبايل.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic orange"><svg class="ic"><use href="#i-cash"/></svg></span><h2>العملة والمقاسات</h2></div>
+        <div class="field"><label for="currencySelect">العملة</label><select id="currencySelect"></select></div>
+        <div class="field"><label>وحدة المقاسات اللي بتبدأ بيها</label>
+          <div class="segmented seg-3" id="unitSeg"><button type="button" data-unit-set="mm">مليمتر</button><button type="button" data-unit-set="cm">سنتيمتر</button><button type="button" data-unit-set="m">متر</button></div>
+          <p class="hint">تقدر تغيّرها في أي بند. الحساب دايماً بيتحول للمتر (والمتر المربع والمكعب).</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-star"/></svg></span><h2>أنواع الشغل بتاعتك</h2></div>
+        <div id="moreTypes"></div>
+        <button type="button" class="btn btn-soft" data-act="newType" style="margin-top:8px"><svg class="ic"><use href="#i-plus"/></svg> إضافة نوع شغل جديد</button>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-receipt"/></svg></span><h2>بيانات الفاتورة</h2></div>
+        <div class="note">اسمك ولوجو ورقم تليفونك بيتاخدوا من «بياناتي» في الصفحة الرئيسية لأرزقي (نفس البيانات في كل الأقسام). لو فاضية، بيتاخدوا من هنا:</div>
+        <div class="field" style="margin-top:12px"><label for="bizName">اسم الورشة / النجار</label><input type="text" id="bizName" placeholder="مثلاً: ورشة النور للنجارة"></div>
+        <div class="row-2">
+          <div class="field"><label for="bizPhone">التليفون</label><input type="text" id="bizPhone" inputmode="tel" dir="ltr"></div>
+          <div class="field"><label for="bizAddress">العنوان</label><input type="text" id="bizAddress"></div>
+        </div>
+        <div class="field"><label for="bizTerms">ملاحظات ثابتة تحت كل فاتورة (اختياري)</label><textarea id="bizTerms" placeholder="مثلاً: مدة التنفيذ 30 يوم من استلام العربون"></textarea></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic orange"><svg class="ic"><use href="#i-chart"/></svg></span><h2>ملخص الشغل</h2></div>
+        <div class="sum-list" id="moreStats"></div>
+      </div>
+      <p class="copyright"><b>أرزقي | Arzoqi — النجارة والأثاث</b><br>بيانات القسم محفوظة على موبايلك، وبتدخل في النسخة الاحتياطية على جوجل درايف من الصفحة الرئيسية.<br>© 2026 أحمد حسن عبدالله — جميع الحقوق محفوظة</p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav tab-only" aria-label="أقسام التطبيق">
+    <button type="button" class="nav-item active" id="navBtn-home" data-act="view" data-view="home"><span class="pill"><svg class="ic"><use href="#i-home"/></svg></span>الرئيسية</button>
+    <button type="button" class="nav-item" id="navBtn-jobs" data-act="view" data-view="jobs"><span class="pill"><svg class="ic"><use href="#i-file"/></svg></span>المشاريع</button>
+    <div class="nav-center"><button type="button" class="nav-plus" id="navPlus" data-act="create" aria-label="إنشاء جديد"><svg class="ic"><use href="#i-plus"/></svg></button></div>
+    <button type="button" class="nav-item" id="navBtn-customers" data-act="view" data-view="customers"><span class="pill"><svg class="ic"><use href="#i-users"/></svg></span>العملاء</button>
+    <button type="button" class="nav-item" id="navBtn-more" data-act="view" data-view="more"><span class="pill"><svg class="ic"><use href="#i-grid"/></svg></span>المزيد</button>
+  </nav>
+</div>
+
+<!-- صفحة المشروع -->
+<div class="page-overlay" id="jobPage" role="dialog" aria-label="المشروع"></div>
+<!-- صفحة العميل -->
+<div class="page-overlay" id="custPage" role="dialog" aria-label="العميل"></div>
+<!-- الأدوات: تقطيع الألواح، الخشب الطبيعي، مكتبة الخامات -->
+<div class="page-overlay" id="toolPage" role="dialog" aria-label="الأدوات"></div>
+
+<!-- النافذة المنبثقة -->
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+
+<!-- تأكيد -->
+<div class="dialog-wrap" id="dialog"><div class="dialog">
+  <div class="d-ic" id="dlgIc"><svg class="ic"><use href="#i-trash"/></svg></div>
+  <h3 id="dlgTitle"></h3><p id="dlgMsg"></p>
+  <div class="btn-row"><button type="button" class="btn btn-ghost" id="dlgNo">لأ</button><button type="button" class="btn btn-danger" id="dlgYes">أيوه</button></div>
+</div></div>
+
+<!-- معاينة المستندات (ورقة A4) -->
+<div id="printPreviewModal">
+  <div class="preview-toolbar">
+    <div class="toolbar-row">
+      <button type="button" class="tb-btn close" data-act="closeTop" aria-label="قفل"><svg class="ic"><use href="#i-x"/></svg></button>
+      <div class="pv-docs" id="pvDocs"></div>
+      <div class="grow"></div>
+      <button type="button" class="tb-print" id="pvPrint"><svg class="ic"><use href="#i-print"/></svg> طباعة / PDF</button>
+    </div>
+    <div class="edit-hint">تقدر تعدّل أي كلام في الورقة بالضغط عليه قبل الطباعة</div>
+  </div>
+  <div class="page-label">معاينة — ورقة A4</div>
+  <div id="printViewport"><div id="printSheet"></div></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./js/calc.js"></script>
+<script src="./js/catalog.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

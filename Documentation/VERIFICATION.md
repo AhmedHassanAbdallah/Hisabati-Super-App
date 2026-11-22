@@ -200,3 +200,20 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   it off/on; consent-required and offline do nothing until the next open; in the browser without a token no Google window opens.
 * The Drive mock in `tests/cloud-backup.e2e.js` now honours every `appProperties has {…}` filter like real Drive.
 * Suites: cloud 37, launcher 169, offline 22, native 14.
+
+## 15. 2.4.0 — new section: النجارة والأثاث (Carpentry) (2026-11-22)
+* `Trade-Modules/Carpentry` is an original Arzoqi section; `tools/verify-integrity.sh` lists it as NEW (ALL CHECKS PASSED).
+* `tests/calc.test.js` 26/26: the spec's 7 examples (wardrobe 3 m × 1,500 = 4,500 in m/cm/mm; 3 doors × 1,200 = 3,600;
+  kitchen base 4 × 1,000 + wall 3 × 800 = 6,400; 5 tables × 700 = 3,500; 10 boards × 500 = 5,000; 5% waste = 250 per
+  material or as % of materials, never automatic; costs 10,500 vs price 15,000 → profit 4,500, margin 30%), every
+  pricing method, billed vs internal costs, discount, natural wood (m³, ft³, piece, m.run), and the panel nesting:
+  parts inside the trimmed sheet, no overlap with kerf, grain lock prevents rotation, oversize parts flagged,
+  several board types, shortage vs stock, sheets ≥ theoretical minimum.
+* Spec example 7 lists 8,000 + 1,500 + 5,000 + 1,000 = 15,500 as a cost of 10,500. Implemented as stated by the spec's
+  own rule ("المصنعية ليست الربح"): the carpenter's own labour price is not a cost; paid workers ("عمالة") are.
+* `tests/e2e.js` 106/106 through the real UI: the 6-step item sheet, the examples typed in, bedroom piece by piece,
+  doors with separate install and "شامل الحلق", kitchen zones, linked materials/accessories, costs/waste/profit,
+  discount, payments, invoice/quote/internal cost sheet (A4 PDF), edit/duplicate/delete, cutting tool with drawn
+  layouts added to the project and printed, natural wood, materials library, custom work type reused, other methods
+  (m², parts, daily, hour, lump, board), reload persistence, search/filters, Back button, dark/light, currencies.
+* Suites: launcher 187, offline 24, native 14, cloud 38, crew 21, print-white 9, auto-backup 35; `run-trade-suites` 16/16.
