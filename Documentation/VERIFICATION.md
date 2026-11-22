@@ -235,3 +235,25 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   costs and profit never on the invoice), edit/duplicate/delete, reload persistence, search by brick name, dark/light,
   currency, storage limited to `hmas_*`.
 * Suites: launcher 205, offline 26, native 14, cloud 39, crew 22, print-white 10, auto-backup 35; `run-trade-suites` 18/18.
+
+## 17. 2.6.0 — new section: التيار الخفيف وأنظمة الدش (Low Current & Satellite) (2026-11-22)
+* `Trade-Modules/LowCurrent` is an original Arzoqi section; `tools/verify-integrity.sh` lists it as NEW (ALL CHECKS PASSED).
+* `tests/calc.test.js` 40/40 — the spec's mandatory tests (section 31): one camera, several cameras, more cameras than
+  recorder channels, storage for different retention days, continuous vs motion recording; one network point, several
+  points, different cable lengths, waste, reels and leftover, point accessories; PoE with mixed consumption, port counts,
+  exceeded budget, reserve and standard mismatch; fiber routes, cores, spare cores, ends, splices, accessories; fire
+  alarm conventional and addressable with the "not an approved design" warning; access control one door / many doors
+  with different components and per-door cost; intercom villa and buildings with different apartment counts; PA with
+  different speakers/taps/zones and amplifier load (and low-impedance check); PBX gateways; dish single/Twin/Quad/Octo,
+  several receivers, motorized, multi-satellite DiSEqC, central dish for different floors/apartments, cable lengths,
+  waste, multiswitch, amplifiers, MATV/SMATV with signal-level estimate, dish cables, TV point cost; alarm, gates,
+  smart home (Zigbee/KNX), BMS, attendance, nurse call, IPTV; item lines with waste, supply vs install-only, auto
+  labour quantities; multi-system project with costs, discount, tax, payments and profit; warranty/contract/visit;
+  empty/negative/zero/text inputs never give NaN/Infinity.
+* `tests/e2e.js` 121/121 through the real UI: all 16 systems and the calculators, apply suggested quantities and manual
+  overrides, library add/search/copy/delete and pick into a line, saved labour prices and custom labour methods,
+  routes, notes and sharing, a project with 5 systems + workers/transport/expenses + discount + 14% tax + payments,
+  invoice/quote/materials list/internal costs (no internal costs on the invoice), quote → invoice, site and late due
+  date, maintenance/warranty records and contracts, reports, quick calculation without customer, reload persistence,
+  search by device, custom units and systems, dark/light, currency, storage limited to `hlow_*`.
+* Suites: launcher 223, offline 28, native 14, cloud 40, crew 23, print-white 11, auto-backup 35; `run-trade-suites` 20/20.

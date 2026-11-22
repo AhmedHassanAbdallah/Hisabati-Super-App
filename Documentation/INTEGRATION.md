@@ -14,6 +14,7 @@
 | Metalwork | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/app.js` PWA (added 2026-11-22) | `hmetal_*` |
 | Carpentry | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-22) | `hcarp_*` |
 | Masonry | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-22) | `hmas_*` |
+| LowCurrent | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-22) | `hlow_*` |
 
 All nine apps are static, framework-free Progressive Web Apps with an Android WebView
 wrapper (`android/`). There is no backend, build step or database server: data lives
@@ -44,7 +45,8 @@ Hisabati-Super-App/
 │   ├── Plastering/         (added 2026-11-20 from Hesabaty-plaster main)
 │   ├── Metalwork/          (added 2026-11-22 — original Arzoqi section, no source repository)
 │   ├── Carpentry/          (added 2026-11-22 — original Arzoqi section, no source repository)
-│   └── Masonry/            (added 2026-11-22 — original Arzoqi section, no source repository)
+│   ├── Masonry/            (added 2026-11-22 — original Arzoqi section, no source repository)
+│   └── LowCurrent/         (added 2026-11-22 — original Arzoqi section, no source repository)
 ├── Shared-Assets/          ← launcher icon + Cairo font (copied from Flooring's bundled font)
 ├── Documentation/
 ├── tests/launcher.e2e.js   ← end-to-end test of the launcher with every app
