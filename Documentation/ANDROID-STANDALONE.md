@@ -39,5 +39,5 @@
 
 ## البناء
 * تلقائي على GitHub Actions (`.github/workflows/android-standalone.yml`): بناء ← تجربة على محاكي أندرويد
-  (الرئيسية + الأقسام السبعة) ← نشر في Releases.
+  (الرئيسية + الأقسام الثمانية) ← نشر في Releases.
 * محلياً: افتح فولدر `android-standalone/` في Android Studio، أو `./gradlew assembleRelease bundleRelease`.

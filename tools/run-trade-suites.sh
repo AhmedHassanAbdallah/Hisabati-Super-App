@@ -20,6 +20,8 @@ for repo in "${!MAP[@]}"; do mkdir -p "$TMP/$repo"; cp -a "$ROOT/Trade-Modules/$
 # بنوصّلها لكل خادم اختبار علشان الاختبارات تجرب الفاتورة الموحدة نفسها
 cp -a "$ROOT/Shared-Assets" "$TMP/Shared-Assets"
 for repo in "${!MAP[@]}"; do ln -s "$TMP/Shared-Assets" "$TMP/$repo/Shared-Assets"; done
+# الحدادة: قسم أصلي في أرزقي (مش نسخة)، بيتجرب بنفس الطريقة
+mkdir -p "$TMP/Metalwork" && cp -a "$ROOT/Trade-Modules/Metalwork/." "$TMP/Metalwork/"
 
 ( cd "$TMP" && exec python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 ) & SRV=$!
 trap 'kill $SRV 2>/dev/null; rm -rf "$TMP"' EXIT
@@ -44,5 +46,7 @@ run plumbing-layout  Hesabaty-plumbing node tests/layout-audit.js
 run painting-calcs   Hesabaty-painting node tools/test-calcs.js
 run plaster-unit     Hesabaty-plaster  node --test tests/engine.test.js
 run plaster-e2e      Hesabaty-plaster  node tests/e2e.js
+run metalwork-unit   Metalwork         node --test tests/calc.test.js
+run metalwork-e2e    Metalwork         node tests/e2e.js "$B/Metalwork/"
 [ -n "${KEEP_LOGS:-}" ] && { cp -r "$LOGS" "$KEEP_LOGS"; echo "logs copied to $KEEP_LOGS"; }
 exit $fail

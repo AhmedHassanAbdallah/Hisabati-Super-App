@@ -119,8 +119,9 @@ html.azc-lock, html.azc-lock body { overflow: hidden !important; }
 #azCrewPrint { display: none; }
 @media print {
   html.azc-printing body > *:not(#azCrewPrint) { display: none !important; }
-  html.azc-printing body > #azCrewPrint { display: block !important; position: static !important; }
+  /* الهامش جوه الورقة نفسها: كل الأقسام طابعة بـ @page { margin: 0 }. قاعدة @page هنا كانت بتسري على أي طباعة
+     في الصفحة (مش كشف اليوميات بس)، فكانت بتصغّر فواتير القسم وتعمل إطار حوالين الورقة. */
+  html.azc-printing body > #azCrewPrint { display: block !important; position: static !important; padding: 8mm !important; }
   html.azc-printing, html.azc-printing body { background: #fff !important; overflow: visible !important; height: auto !important; }
   html.azc-printing .azc-ov { display: none !important; }
-  @page { size: A4; margin: 8mm; }
 }

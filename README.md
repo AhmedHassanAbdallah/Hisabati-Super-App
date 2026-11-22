@@ -15,6 +15,7 @@ original app for that trade runs inside the unified app — unchanged.
 | الأرضيات — Flooring | `Trade-Modules/Flooring` | Hesabaty-Flooring @ `8561116` | 1.0.0 |
 | الجبس — Gypsum | `Trade-Modules/Gypsum` | Hesabaty-Gebsum @ `04fda90` | 1.0.0 |
 | المحارة — Plastering | `Trade-Modules/Plastering` | Hesabaty-plaster @ `ac46676` | 1.0.0 |
+| الحدادة — Metalwork | `Trade-Modules/Metalwork` | — (original Arzoqi section, built here) | 1.0.0 |
 
 ## Golden rule
 `Trade-Modules/*` are copies of the original repositories plus the **intended Arzoqi changes only**

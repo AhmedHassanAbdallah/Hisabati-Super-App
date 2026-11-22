@@ -11,8 +11,9 @@
 | Flooring | Hesabaty-Flooring | `8561116` | 1.0.0 | HTML + `js/*.js` PWA | `hflooring_*` |
 | Gypsum | Hesabaty-Gebsum | `04fda90` | 1.0.0 | HTML + `js/**` PWA | `hgyp_*` |
 | Plastering | Hesabaty-plaster | `ac46676` | 1.0.0 | HTML + `js/*.js` PWA (added 2026-11-20) | `hplaster_*` |
+| Metalwork | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/app.js` PWA (added 2026-11-22) | `hmetal_*` |
 
-All seven apps are static, framework-free Progressive Web Apps with an Android WebView
+All eight apps are static, framework-free Progressive Web Apps with an Android WebView
 wrapper (`android/`). There is no backend, build step or database server: data lives
 in each app's own `localStorage` / IndexedDB keys, and each app's service worker uses its
 own cache-name prefix and resolves every path relative to its own folder.
@@ -38,7 +39,8 @@ Hisabati-Super-App/
 │   └── service-worker.js   (caches the launcher only)
 ├── Trade-Modules/          ← exact copies, unchanged
 │   ├── Electrical/ Plumbing/ HVAC/ Painting/ Flooring/ Gypsum/
-│   └── Plastering/         (added 2026-11-20 from Hesabaty-plaster main)
+│   ├── Plastering/         (added 2026-11-20 from Hesabaty-plaster main)
+│   └── Metalwork/          (added 2026-11-22 — original Arzoqi section, no source repository)
 ├── Shared-Assets/          ← launcher icon + Cairo font (copied from Flooring's bundled font)
 ├── Documentation/
 ├── tests/launcher.e2e.js   ← end-to-end test of the launcher with every app

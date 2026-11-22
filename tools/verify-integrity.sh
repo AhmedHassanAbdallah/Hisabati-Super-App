@@ -75,6 +75,18 @@ for src in "${!MAP[@]}"; do
   check_copy "$ROOT/Trade-Modules/$d" "$PROV/$src.sha256" "$PROV/changes/$d.sha256" "Trade-Modules/$d"
 done
 
+# الأقسام الأصلية في أرزقي (اتعملت هنا من الأول، مالهاش مستودع أصلي تتقارن بيه)
+NATIVE=(Metalwork)
+for d in "${NATIVE[@]}"; do
+  if [ -f "$ROOT/Trade-Modules/$d/index.html" ]; then echo "NEW   Trade-Modules/$d  (original Arzoqi section — no source repository to compare)"
+  else echo "FAIL  Trade-Modules/$d missing"; fail=1; fi
+done
+# أي فولدر تاني في Trade-Modules لازم يكون نسخة متسجلة أو قسم أصلي معروف
+for p in "$ROOT"/Trade-Modules/*/; do
+  d="$(basename "$p")"
+  printf '%s\n' "${MAP[@]}" "${NATIVE[@]}" | grep -qx "$d" || { echo "FAIL  Trade-Modules/$d is not a registered copy or native section"; fail=1; }
+done
+
 if [ -n "$ORIG" ]; then
   echo "== Originals vs. baseline ($ORIG)"
   while read -r name head _; do

@@ -1,0 +1,19 @@
+{
+  "name": "أرزقي | Arzoqi — الحدادة وتصنيع الحديد",
+  "short_name": "أرزقي حدادة",
+  "description": "حساب مصنعية الحدادة: بوابات ليزر ومشغولة، أبواب وأسقف صاج، منتجات بالقطعة، أعمال بالمقطوعية، تكاليف التشغيل والهالك، وفواتير العملاء",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eff6f6",
+  "theme_color": "#002624",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

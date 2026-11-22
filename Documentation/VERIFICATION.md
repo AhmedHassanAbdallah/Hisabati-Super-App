@@ -176,3 +176,18 @@ the print job runs and goes back to navy in the adapter's `onFinish`. New emulat
 `Shared-Assets/brand/print-check.html` (dark page that prints through the same bridge as the sections' invoices),
 screenshots the system print preview, and `tools/print-frame-check.py` requires the page's magenta marker to be
 visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels; the limit is 150).
+
+## 13. 2.3.0 — new section: الحدادة وتصنيع الحديد (Metalwork) + print margins (2026-11-22)
+* `Trade-Modules/Metalwork` is an original Arzoqi section (no source repository); `tools/verify-integrity.sh` lists it as
+  NEW and still verifies the seven copies against their originals (ALL CHECKS PASSED — no copy file changed).
+* `tests/calc.test.js` 19/19 — every spec example: laser 2×3×500 = 6 m² / 3,000; handmade 120 kg × 35 = 4,200;
+  sheet door 2×1×2×300 = 1,200; iron chair 5×250 = 1,250; lump sum 3,500; plus cm input, Arabic digits, "2,000" vs "2,5",
+  no NaN/Infinity/negatives, empty count = 1, discounts (amount/percent, capped), materials and consumables.
+* `tests/e2e.js` 123/123 — the same examples typed through the real UI, six work types in one job, consumables with and
+  without price, materials on the customer or on the smith, discount, payments, invoice / quote / statement (real A4 PDF),
+  edit / duplicate / delete with confirmation, reload persistence, search and filters, Back button, dark/light, currencies.
+* Print margins: `crew.css` had `@page { margin: 8mm }` inside `@media print`, which applies to every print on the page —
+  after a customer page loaded the workers' notebook, invoices printed smaller than the preview with an 8 mm margin (painted
+  with the app background on Android). Moved inside the notebook sheet. `tests/print-white.e2e.js` now also loads
+  `crew.css` and requires all @page margins to be 0: 0/8 with the old file, 8/8 after.
+* Suites: launcher 169, offline 22, native 14, cloud 37, crew 20, print-white 8; `run-trade-suites` 14/14.

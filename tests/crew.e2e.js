@@ -1,5 +1,5 @@
 /*
- * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام السبعة.
+ * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام الثمانية.
  * usage: node tests/crew.e2e.js http://127.0.0.1:8790/
  */
 const { chromium } = require('playwright');
@@ -14,6 +14,7 @@ const OPEN = {
   Flooring: () => { Store.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); App.openCustomer('c1'); },
   Gypsum: () => { DB().customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); openCustomer('c1'); },
   Plastering: () => { UI.S.db().clients.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); UI.go('client', 'c1'); },
+  Metalwork: () => { const A = window.MetalApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'MTL-0001', customerId: 'c1', title: '', date: '2026-11-22', items: [], materials: [], consumables: [], payments: [], discount: {} }); A.openJob('j1'); },
 };
 (async () => {
   const b = await chromium.launch();
