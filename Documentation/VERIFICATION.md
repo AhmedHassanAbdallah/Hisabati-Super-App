@@ -159,3 +159,10 @@ Intended differences seen by the original suites: the Plumbing title check now e
   Flooring / Plastering statements — header, client row, tables, totals and footer all in the unified style.
 * Full run: launcher 151 / offline 20 / native 14 / cloud 36 passed · 0 failed; `tools/run-trade-suites.sh` 12/12 PASS;
   `tools/verify-integrity.sh /home/user` ALL CHECKS PASSED.
+
+## 11. 2.2.1 — no black frame around printed pages in dark mode (2026-11-22)
+Cause: with the phone in dark mode the page kept `color-scheme: dark`, and Chrome/WebView paints the area around the
+A4 sheet dark when printing — a black frame in every exported PDF. Fix (print-only, `section-theme.css`): light
+color-scheme and white page/backdrops in `@media print`. `tests/print-white.e2e.js`: 0/7 before the fix, 7/7 after;
+PDF exports of all 7 sections rendered with white corners. All suites pass (launcher 151, offline 20, native 14,
+cloud 36, crew 19; 12/12 section suites).
