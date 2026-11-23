@@ -30,6 +30,7 @@
     { id: 'masonry', prefixes: ['hmas_'], idb: [] },
     { id: 'lowcurrent', prefixes: ['hlow_'], idb: [] },
     { id: 'aluminium', prefixes: ['halu_'], idb: [] },
+    { id: 'marble', prefixes: ['hmar_'], idb: ['hmar_media'] },
     // بيانات أرزقي المشتركة: بياناتي في الفاتورة + إضافات الفواتير (الضمان)
     { id: 'arzaqi', prefixes: ['arzaqi_'], idb: [] }
   ];

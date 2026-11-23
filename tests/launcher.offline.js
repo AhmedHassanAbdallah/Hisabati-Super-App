@@ -10,7 +10,7 @@
 const { chromium } = require('playwright');
 const BASE = (process.argv[2] || 'http://127.0.0.1:8790/').replace(/\/?$/, '/');
 const LAUNCHER = BASE + 'Main-App/';
-const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum'], ['plastering', 'Plastering'], ['metalwork', 'Metalwork'], ['carpentry', 'Carpentry'], ['masonry', 'Masonry'], ['lowcurrent', 'LowCurrent'], ['aluminium', 'Aluminium']];
+const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum'], ['plastering', 'Plastering'], ['metalwork', 'Metalwork'], ['carpentry', 'Carpentry'], ['masonry', 'Masonry'], ['lowcurrent', 'LowCurrent'], ['aluminium', 'Aluminium'], ['marble', 'Marble']];
 let passed = 0, failed = 0;
 const check = (n, c, x) => { if (c) { passed++; console.log('  ✔ ' + n); } else { failed++; console.log('  ✘ ' + n + (x !== undefined ? '  → ' + JSON.stringify(x) : '')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));

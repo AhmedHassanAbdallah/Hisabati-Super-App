@@ -1,6 +1,6 @@
 # بناء "أرزقي | Arzoqi — لحسابات المصنعية" — تطبيق أندرويد مستقل بالكامل (كل الأقسام جوه التطبيق) — APK + AAB لجوجل بلاي.
 # بيتبني من نفس ملفات الموقع (Main-App / Shared-Assets / Trade-Modules) من غير أي تعديل عليها،
-# وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام الـ 12) قبل النشر.
+# وبيتجرب على محاكي أندرويد حقيقي (الرئيسية + الأقسام الـ 13) قبل النشر.
 # التوقيع: نفس مفتاح التطبيق (android/keystore.enc + HISABATI_KEY_PASSWORD).
 # © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
 name: Android Standalone
@@ -82,7 +82,8 @@ jobs:
                    Trade-Modules/Plastering/index.html Trade-Modules/Metalwork/index.html Trade-Modules/Metalwork/js/calc.js Trade-Modules/Carpentry/index.html Trade-Modules/Carpentry/js/calc.js Trade-Modules/Carpentry/js/catalog.js \
                    Trade-Modules/Masonry/index.html Trade-Modules/Masonry/js/calc.js Trade-Modules/Masonry/js/catalog.js Trade-Modules/Masonry/js/app.js \
                    Trade-Modules/LowCurrent/index.html Trade-Modules/LowCurrent/js/calc.js Trade-Modules/LowCurrent/js/catalog.js Trade-Modules/LowCurrent/js/app.js \
-                   Trade-Modules/Aluminium/index.html Trade-Modules/Aluminium/js/calc.js Trade-Modules/Aluminium/js/catalog.js Trade-Modules/Aluminium/js/app.js; do
+                   Trade-Modules/Aluminium/index.html Trade-Modules/Aluminium/js/calc.js Trade-Modules/Aluminium/js/catalog.js Trade-Modules/Aluminium/js/app.js \
+                   Trade-Modules/Marble/index.html Trade-Modules/Marble/js/calc.js Trade-Modules/Marble/js/catalog.js Trade-Modules/Marble/js/app.js; do
             test -f "$W/$f" || { echo "::error::ناقص $f"; exit 1; }
             cmp -s "$W/$f" "$f" || { echo "::error::$f مختلف عن الأصل"; exit 1; }
           done

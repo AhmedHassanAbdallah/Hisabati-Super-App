@@ -4,7 +4,7 @@
  *   node tests/launcher.e2e.js [http://127.0.0.1:8790/] [مجلد_لقطات]
  *
  * بيتأكد من:
- *  1) قائمة المهن: 12 مهنة شغالة، ومن غير أرقام إصدارات.
+ *  1) قائمة المهن: 13 مهنة شغالة، ومن غير أرقام إصدارات.
  *  2) كل مهنة بتفتح جوه اللانشر من فولدر نسختها، وبتحمّل نفس المستند ونفس العنوان زي التشغيل المستقل،
  *     ومن غير أي أخطاء JavaScript.
  *  3) التطبيق جوه اللانشر بيكتب نفس مفاتيح التخزين بالظبط اللي بيكتبها لما يشتغل لوحده.
@@ -26,7 +26,7 @@ const LAUNCHER = BASE + 'Main-App/';
 const TRADES = [
   { id: 'electrical', dir: 'Electrical' }, { id: 'plumbing', dir: 'Plumbing' }, { id: 'hvac', dir: 'HVAC' },
   { id: 'painting', dir: 'Painting' }, { id: 'flooring', dir: 'Flooring' }, { id: 'gypsum', dir: 'Gypsum' },
-  { id: 'plastering', dir: 'Plastering' }, { id: 'metalwork', dir: 'Metalwork' }, { id: 'carpentry', dir: 'Carpentry' }, { id: 'masonry', dir: 'Masonry' }, { id: 'lowcurrent', dir: 'LowCurrent' }, { id: 'aluminium', dir: 'Aluminium' }
+  { id: 'plastering', dir: 'Plastering' }, { id: 'metalwork', dir: 'Metalwork' }, { id: 'carpentry', dir: 'Carpentry' }, { id: 'masonry', dir: 'Masonry' }, { id: 'lowcurrent', dir: 'LowCurrent' }, { id: 'aluminium', dir: 'Aluminium' }, { id: 'marble', dir: 'Marble' }
 ];
 
 let passed = 0, failed = 0;
@@ -89,7 +89,7 @@ const openPlus = async f => {
     await sleep(800);
     check('الجذر بيحوّل لـ Main-App/', page.url().startsWith(LAUNCHER));
     const enabled = await page.$$eval('.trade[data-trade]', els => els.map(e => e.dataset.trade));
-    check('12 مهنة شغالة بالترتيب', JSON.stringify(enabled) === JSON.stringify(TRADES.map(t => t.id)), enabled);
+    check('13 مهنة شغالة بالترتيب', JSON.stringify(enabled) === JSON.stringify(TRADES.map(t => t.id)), enabled);
     const disabled = await page.$$eval('.trade[disabled]', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim()));
     check('كل الأقسام متاحة (مفيش أقسام "قريباً")', disabled.length === 0, disabled);
     const homeText = await page.evaluate(() => document.body.innerText);
@@ -110,7 +110,7 @@ const openPlus = async f => {
     await page.click('#menuBtn'); await sleep(450);
     check('زرار القائمة بيفتحها', await drawerOpen());
     const items = await page.$$eval('#drawerTrades [data-open]', els => els.map(e => e.dataset.open));
-    check('القائمة فيها تعريف الـ 12 قسم بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
+    check('القائمة فيها تعريف الـ 13 قسم بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
     const dText = await page.evaluate(() => document.getElementById('drawer').innerText);
     check('القائمة فيها "عن أرزقي" وقسم المحارة', dText.includes('عن أرزقي') && dText.includes('المحارة والواجهات') && !dText.includes('قريباً'));
     check('القائمة ما فيهاش ذكر لـ "تطبيق" ولا إصدارات', !/تطبيق|إصدار/.test(dText), (dText.match(/[^\n]*(تطبيق|إصدار)[^\n]*/g) || []));

@@ -107,7 +107,8 @@ public class MainActivity extends Activity {
             {"Metalwork", "الحدادة وتصنيع الحديد"}, {"Carpentry", "النجارة والأثاث"},
             {"Masonry", "البناء وأعمال المباني"},
             {"LowCurrent", "التيار الخفيف وأنظمة الدش"},
-            {"Aluminium", "الألوميتال وUPVC"}
+            {"Aluminium", "الألوميتال وUPVC"},
+            {"Marble", "الرخام والجرانيت"}
     };
     /** أسماء الجسور زي ما كل قسم بيدوّر عليها في تطبيقه الأصلي */
     private static final String[] SECTION_BRIDGES = {"HesabatyApp", "HesabatiPlumbingApp", "HesabatiHvacApp", "HFloorApp", "PlasterApp"};

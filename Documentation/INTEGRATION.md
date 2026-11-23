@@ -16,6 +16,7 @@
 | Masonry | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-22) | `hmas_*` |
 | LowCurrent | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-22) | `hlow_*` |
 | Aluminium | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-23) | `halu_*` |
+| Marble | — (original Arzoqi section) | — | 1.0.0 | HTML + `js/calc.js` + `js/catalog.js` + `js/app.js` PWA (added 2026-11-23) | `hmar_*` + IndexedDB `hmar_media` |
 
 All nine apps are static, framework-free Progressive Web Apps with an Android WebView
 wrapper (`android/`). There is no backend, build step or database server: data lives
@@ -48,7 +49,8 @@ Hisabati-Super-App/
 │   ├── Carpentry/          (added 2026-11-22 — original Arzoqi section, no source repository)
 │   ├── Masonry/            (added 2026-11-22 — original Arzoqi section, no source repository)
 │   ├── LowCurrent/         (added 2026-11-22 — original Arzoqi section, no source repository)
-│   └── Aluminium/          (added 2026-11-23 — original Arzoqi section, no source repository)
+│   ├── Aluminium/          (added 2026-11-23 — original Arzoqi section, no source repository)
+│   └── Marble/             (added 2026-11-23 — original Arzoqi section, no source repository)
 ├── Shared-Assets/          ← launcher icon + Cairo font (copied from Flooring's bundled font)
 ├── Documentation/
 ├── tests/launcher.e2e.js   ← end-to-end test of the launcher with every app

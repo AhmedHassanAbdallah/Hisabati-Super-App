@@ -278,3 +278,35 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   job-linked work and advances; customer file and history; reports; delivery at the last stage; edit/delete; reload persistence;
   dark/light; no horizontal scroll on a phone; storage limited to `halu_*`.
 * Suites: launcher 241, offline 30, native 14, cloud 41, crew 24, print-white 12, auto-backup 35; `run-trade-suites` 22/22.
+
+## 19. 2.8.0 — new section: الرخام والجرانيت (Marble & Granite Works) (2026-11-23)
+* `Trade-Modules/Marble` is an original Arzoqi section; `tools/verify-integrity.sh` lists it as NEW (ALL CHECKS PASSED).
+* `tests/calc.test.js` 29/29 — section 36 of the spec: shapes (rect, square, triangle, trapezoid, circle, semicircle, corner cut, L, U,
+  manual area; curved without an area is refused, not estimated) in mm/cm/m; straight kitchen with back, edge and slab basis (estimate
+  labelled); L and U kitchens (each corner counted once); island/bar/ends; multi-corner kitchen by segments with different depths;
+  sink/hob/mixer cut-outs priced from settings and special cuts (corner, chamfer, drain, groove); backsplash with sockets/mixers;
+  stairs with equal steps (treads, risers, landing, skirting on the rake, nosing edge) and with different step sizes, risers off;
+  entrance with several shapes and materials, edges and holes; walls minus openings and weight from density (no assumed density);
+  square and round columns; facade with zones per material, openings, projections, fixing chosen by the user, scaffolding; floors
+  minus exclusions with tiles and border; linear metre and edges; slabs by area (waste, usable %, a second thickness size); pieces per
+  slab with kerf; waste by %, area, per piece, per slab (reusable remnants excluded) and manual; slab nesting (all pieces inside the
+  margin, no overlap with kerf, used + remnants + waste = slab area, grain-locked pieces never rotated, remnants used before a new slab,
+  large leftovers kept as remnants); nesting from stored remnants of the same material; Bookmatch/Waterfall numbering; finish, price,
+  margin, transport, payment plan; a full kitchen item (library prices, edges, cut-outs, auto labour, internal costs, install-only);
+  the project (multiple payments, remaining, discount, additions, returns, tax, worker logs, profit); a project slab plan per material;
+  workers.
+* `tests/e2e.js` 103/103 through the real UI: 9 work types on the home screen and the 35 calculators of section 31; library prices,
+  slab sizes, density, a new material with its family, finish, a second-thickness size and a photo (IndexedDB); edge/cut-out/finish
+  price tables, kerf/margin/remnant settings and a custom edge type; a site survey (MRB-0001) with straight, L, U, island and
+  multi-corner kitchens, sink and hob cut-outs, applying quantities with library and settings prices, auto labour, internal costs and
+  profit; stairs equal and step-by-step; an entrance with several shapes/materials, shape drawings, curved piece needing a manual area
+  and a piece photo; facade, floor and walls; items grouped by place; project slab plan; site photo; survey grouped by place,
+  measurements sheet, work order with slab drawings, quote with terms/duration/validity, % discount, invoice, deposit and
+  after-materials payments with method and reference, additions/returns, transport cost, profit card, internal costs sheet, materials
+  list; slab nesting with grain lock, remnants saved to stock and used first; slabs, waste (% and per slab), linear metre, vein
+  matching, note; manual remnant with original slab no. and location; workers (m² rate, job-linked work, advance); customer file;
+  reports with customer and work-type filters; delivery at the last of the 16 stages; edit/delete; reload persistence including
+  photos; dark/light; no horizontal scroll on a phone; storage limited to `hmar_*`; no console errors.
+* Wiring: launcher card (13 sections), backup prefix `hmar_` + IndexedDB `hmar_media`, launcher service worker, Android standalone
+  bundle/MainActivity/emulator smoke, CI file check, `run-trade-suites` (24 suites), `verify-integrity` NATIVE list.
+* Suites: launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35; `run-trade-suites` 24/24.

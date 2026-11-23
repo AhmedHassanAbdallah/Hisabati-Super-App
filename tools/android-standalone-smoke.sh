@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# اختبار تشغيل "أرزقي" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام الـ 12
+# اختبار تشغيل "أرزقي" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام الـ 13
 # من جوه التطبيق، ويتأكد إن كل صفحة اتحملت وجسرها موجود ومفيش أخطاء JavaScript ولا انهيار.
 set -uo pipefail
 PKG=com.ahmedhassan.arzaqi
@@ -42,7 +42,7 @@ grep -E "Hisabati|AndroidRuntime|FATAL|ActivityTaskManager.*$PKG|cr_|chromium" l
 echo "::endgroup::"
 sleep 2; adb exec-out screencap -p > shots/00-home.png || true
 
-for d in Electrical Plumbing HVAC Painting Flooring Gypsum Plastering Metalwork Carpentry Masonry LowCurrent Aluminium; do
+for d in Electrical Plumbing HVAC Painting Flooring Gypsum Plastering Metalwork Carpentry Masonry LowCurrent Aluminium Marble; do
   adb logcat -c || true
   adb shell am start -W -n "$ACT" -e path "Trade-Modules/$d/" >/dev/null
   if wait_for "HISABATI_CHECK https://appassets.androidplatform.net/Trade-Modules/$d/"; then
@@ -82,5 +82,5 @@ adb shell am start -W -n "$ACT" >/dev/null; sleep 5
 adb logcat -d > logcat.txt || true
 cat logcat-*.txt >> logcat.txt 2>/dev/null || true
 if grep -A4 "FATAL EXCEPTION" logcat.txt | grep -q "$PKG"; then echo "::error::التطبيق وقع"; fail=1; fi
-[ $fail -eq 0 ] && echo "✔ التطبيق المستقل اشتغل: الرئيسية + 12 قسم بدون أخطاء" || echo "✘ فيه مشاكل"
+[ $fail -eq 0 ] && echo "✔ التطبيق المستقل اشتغل: الرئيسية + 13 قسم بدون أخطاء" || echo "✘ فيه مشاكل"
 exit $fail
