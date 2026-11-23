@@ -1,5 +1,5 @@
 /*
- * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام الـ 11.
+ * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام الـ 12.
  * usage: node tests/crew.e2e.js http://127.0.0.1:8790/
  */
 const { chromium } = require('playwright');
@@ -18,6 +18,7 @@ const OPEN = {
   Carpentry: () => { const A = window.CarpApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'CRP-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
   Masonry: () => { const A = window.MasonApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'BLD-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
   LowCurrent: () => { const A = window.LowApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'LC-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
+  Aluminium: () => { const A = window.AluApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'ALU-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
 };
 (async () => {
   const b = await chromium.launch();

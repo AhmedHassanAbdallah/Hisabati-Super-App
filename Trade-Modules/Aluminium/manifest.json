@@ -1,0 +1,19 @@
+{
+  "name": "أرزقي | Arzoqi — الألوميتال وUPVC",
+  "short_name": "أرزقي ألوميتال",
+  "description": "ورشة الألوميتال وUPVC: مقاسات الفتحات، أنظمة القطاعات ومعادلات القص، Cut List Optimizer، الزجاج والإكسسوارات، الشتر والواجهات والشاور، المقايسة وعرض السعر والفاتورة وأمر التشغيل",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eff6f6",
+  "theme_color": "#002624",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

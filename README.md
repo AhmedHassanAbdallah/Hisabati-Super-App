@@ -19,6 +19,7 @@ original app for that trade runs inside the unified app — unchanged.
 | النجارة — Carpentry | `Trade-Modules/Carpentry` | — (original Arzoqi section, built here) | 1.0.0 |
 | البناء — Masonry | `Trade-Modules/Masonry` | — (original Arzoqi section, built here) | 1.0.0 |
 | التيار الخفيف — Low Current | `Trade-Modules/LowCurrent` | — (original Arzoqi section, built here) | 1.0.0 |
+| الألوميتال وUPVC — Aluminium | `Trade-Modules/Aluminium` | — (original Arzoqi section, built here) | 1.0.0 |
 
 ## Golden rule
 `Trade-Modules/*` are copies of the original repositories plus the **intended Arzoqi changes only**

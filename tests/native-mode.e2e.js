@@ -63,7 +63,7 @@ async function drive(route) {
     check(`${id}: اتفتح كصفحة كاملة من فولدره (مش iframe)`, p.url().split('#')[0] === BASE + 'Trade-Modules/' + dir + '/', p.url());
     await Promise.all([p.waitForNavigation(), p.goBack()]);
     await sleep(700);
-    check(`${id}: الرجوع رجّع للرئيسية`, p.url().startsWith(LAUNCHER) && (await p.$$('.trade[data-trade]')).length === 11, p.url());
+    check(`${id}: الرجوع رجّع للرئيسية`, p.url().startsWith(LAUNCHER) && (await p.$$('.trade[data-trade]')).length === 12, p.url());
   }
   check('آخر قسم اتفتح ظاهر في "كمّل شغلك"', (await p.textContent('#resumeCard')).includes('التكييف'));
   check('مفيش Service Worker للانشر جوه التطبيق', (await p.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).filter(r => r.scope.endsWith('/Main-App/')).length)) === 0);

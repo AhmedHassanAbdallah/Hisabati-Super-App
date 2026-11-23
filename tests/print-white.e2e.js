@@ -1,5 +1,5 @@
 /*
- * الطباعة و"حفظ PDF" في الوضع الغامق: الورقة لازم تطلع بيضا من غير إطار أسود حواليها (في الأقسام الـ 11).
+ * الطباعة و"حفظ PDF" في الوضع الغامق: الورقة لازم تطلع بيضا من غير إطار أسود حواليها (في الأقسام الـ 12).
  * وكمان: هوامش الصفحة (@page) لازم تفضل صفر حتى بعد ما نوتة العمال تتحمّل (crew.css كانت بتفرض 8 مم على أي طباعة:
  * الفاتورة تصغر عن المعاينة، وحوالين الورقة يتلوّن بلون خلفية تطبيق أندرويد).
  * usage: node tests/print-white.e2e.js http://127.0.0.1:8790/
@@ -18,6 +18,7 @@ const C = {
   Carpentry: () => { const A = window.CarpApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'CRP-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
   Masonry: () => { const A = window.MasonApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'BLD-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
   LowCurrent: () => { const A = window.LowApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'LC-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
+  Aluminium: () => { const A = window.AluApp; A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'ALU-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' }); },
 };
 (async () => {
   const b = await chromium.launch(); let ok = 0, bad = 0;

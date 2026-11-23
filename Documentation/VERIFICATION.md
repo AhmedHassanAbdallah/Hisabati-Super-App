@@ -257,3 +257,24 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
   date, maintenance/warranty records and contracts, reports, quick calculation without customer, reload persistence,
   search by device, custom units and systems, dark/light, currency, storage limited to `hlow_*`.
 * Suites: launcher 223, offline 28, native 14, cloud 40, crew 23, print-white 11, auto-backup 35; `run-trade-suites` 20/20.
+
+## 18. 2.7.0 — new section: الألوميتال وUPVC (Aluminium & UPVC) (2026-11-23)
+* `Trade-Modules/Aluminium` is an original Arzoqi section; `tools/verify-integrity.sh` lists it as NEW (ALL CHECKS PASSED).
+* `tests/calc.test.js` 29/29 — section 39 of the spec: the safe formula evaluator; small/large windows, 1/2/3 sashes, divisions,
+  fixed + moving, different glass (minimum billable area) and different systems giving different lengths; m/cm/mm equivalence;
+  bad formulas/negative lengths reported; estimate templates flagged; doors (hinged, double with bolt, sliding, folding, full glass,
+  with transoms); UPVC sliding/casement/tilt & turn/fixed with reinforcement steel; glass calculator with mixed pieces;
+  Cut List (multiple lengths/counts, kerf, trim, remnants kept vs waste, best fit uses fewer bars, stock bars of different lengths
+  and remnants used first, oversize pieces, spare %, inventory remnants); bars, waste, sashes; facade with uneven divisions + ACP;
+  shutter with motor weight check; mosquito screens; shower cabins; per-item cost/price/profit/per-piece profit with internal costs
+  and waste; install-only scope; the full accounting chain (discount %, additions, returns, tax, multiple payments, worker logs);
+  project cut plan with remnants; workers due; price/margin/payment plan/manufacturing/installation; no NaN/Infinity.
+* `tests/e2e.js` 95/95 through the real UI: library prices and bar lengths, a new system with catalogue formulas and live test,
+  formula errors, role mapping; a survey (مقايسة) with sliding/casement/double door/UPVC tilt & turn openings and fixed/folding
+  checks; apply quantities with library prices; per-piece profit; survey → quote (terms, duration, validity) → invoice; payments
+  with method/type/reference; additions/returns/transport/install costs/tax; stages; work order with cut list and bars; measurements
+  sheet; materials list; internal costs (never on customer documents); late delivery; remnants into stock; Cut Optimizer with
+  stock remnants; glass/shutter/mosquito/shower/facade/sashes/price/payment plan/waste/area/installation calculators; workers with
+  job-linked work and advances; customer file and history; reports; delivery at the last stage; edit/delete; reload persistence;
+  dark/light; no horizontal scroll on a phone; storage limited to `halu_*`.
+* Suites: launcher 241, offline 30, native 14, cloud 41, crew 24, print-white 12, auto-backup 35; `run-trade-suites` 22/22.
