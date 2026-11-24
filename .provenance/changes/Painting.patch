@@ -1,3 +1,44 @@
+--- /dev/null
++++ Trade-Modules/Painting/guide-steps.js
+@@ -0,0 +1,38 @@
++/* أرزقي | Arzoqi — النقاشة والدهانات: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  var wait = ['wait', 450], home = [['unwind'], ['click', '#navBtn-home'], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'painting', name: 'النقاشة والدهانات', version: 1, keys: ['hpaint_'], more: '#view-more', home: home,
++    layered: function () { return !!(history.state && history.state.ovDepth > 0); },
++    steps: [
++      { t: 'أهلاً بيك في قسم النقاشة', d: 'هنعمل مثال كامل: مشروع ← غرفة بالمقاسات ← التكاليف ← الحساب ← الفاتورة PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#view-home .home-sum' },
++      { t: 'مقايسة بالمقاسات', d: 'حوائط وغرف وأسقف بالمتر. (وفيه كمان «مقاولة إجمالية» بمبلغ متفق عليه.)', el: '#qMeasure', act: [['click', '#qMeasure'], wait] },
++      { t: 'العميل والمشروع', d: 'اسم العميل (بيقترح من النوتة) والتليفون والعنوان واسم المشروع.', el: '#clientName', act: [['fill', '#clientName', 'أ. محمد (مثال)'], ['fill', '#projectName', 'تشطيب شقة الدور الثالث']] },
++      { t: 'وصف الشغل والشروط', d: 'المراحل (معجون، سيلر، بلاستيك…) والشروط بتظهر في المستندات.', el: '#projectDesc' },
++      { t: 'قايمة الأسعار', d: 'اختار قايمة أسعارك للمشروع ده — أو عدّلها من الزرار جنبها.', el: '#projPriceList' },
++      { t: 'التالي: الأعمال', d: 'الخطوات فوق: المشروع ← الأعمال ← التكاليف ← الحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'ضيف بند', d: 'كل غرفة أو حائط أو سقف بند لوحده.', el: '#addRoomFab', act: [['click', '#addRoomFab'], wait] },
++      { t: 'نوع البند', d: 'غرفة، حائط، سقف، متر مربع، متر طولي، بالقطعة…', el: '#wType' },
++      { t: 'مقاسات الغرفة', d: 'الطول والعرض والارتفاع — والحوائط والسقف بيتحسبوا لوحدهم. وتقدر تخصم باب أو شباك أو تضيف جبسون وديكور.', el: '#workSheet [data-k="length"]', act: [['fill', '#workSheet [data-k="length"]', '5'], ['fill', '#workSheet [data-k="width"]', '4'], ['fill', '#workSheet [data-k="height"]', '3']] },
++      { t: 'سعر المتر', d: 'اكتب السعر أو اختاره من «قائمة أسعاري».', el: '#wPrice', act: [['fill', '#wPrice', '60']] },
++      { t: 'حفظ البند', d: 'دوس «حفظ البند» وضيف باقي الغرف بنفس الطريقة.', el: '#saveWorkBtn', act: [['click', '#saveWorkBtn'], ['wait', 600]] },
++      { t: 'التالي: التكاليف', d: 'بعد الأعمال روح للتكاليف.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'العمال والمصروفات', d: 'اليوميات والمصروفات وكشف الخامات للمشروع — علشان تعرف صافي ربحك.', el: '#view-costs button[onclick="openWorker(null)"]' },
++      { t: 'التالي: الحساب', d: 'آخر خطوة.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'المدفوع والخصم', d: 'اللي اندفع والخصم، وأعمال إضافية خارج الاتفاق — والمتبقي بيتحسب لوحده.', el: '#paidAmount' },
++      { t: 'طلّع الفاتورة PDF', d: 'من الزرار ده بتفتح فاتورة الأعمال.', el: '#view-summary button[onclick="openProjectDoc(\'invoice\')"]', act: [['click', '#view-summary button[onclick="openProjectDoc(\'invoice\')"]'], ['wait', 800]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والغرف والحساب. تقدر تعدّل أي كلمة بالضغط عليها، وتكبّر أو تصغّر الخط.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF وتبعته للعميل. كده عرفت تطلّع الفاتورة 🎉', el: '#printPreviewModal .tb-print' },
++      { part: 2, t: 'كل المستندات', d: 'مقايسة، عرض سعر، فاتورة ختامية، كشف حساب… من هنا.', el: '#view-summary button.btn-primary[onclick="openActions()"]', pre: [['back'], wait] },
++      { part: 2, t: 'واتساب', d: 'ابعت الفاتورة كرسالة أو انسخ نصها.', el: '#view-summary .btn-wa' },
++      { part: 2, t: 'مقاولة إجمالية', d: 'مبلغ متفق عليه + عربون ودفعات.', el: '#qContract', pre: home },
++      { part: 2, t: 'كشف خامات', d: 'معجون وبلاستيك وأدوات — للطباعة أو على حسابك.', el: '#qMat' },
++      { part: 2, t: 'تسجيل دفعة', d: 'عربون أو دفعة من أي عميل.', el: '#qPay' },
++      { part: 2, t: 'المشاريع', d: 'كل المشاريع الجارية والمنتهية.', el: '#navBtn-docs' },
++      { part: 2, t: 'العملاء', d: 'حساب كل عميل: المشاريع والدفعات والمتبقي.', el: '#navBtn-ledger' },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو هنا بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#techName', pre: [['click', '#navBtn-more'], wait] },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files Painting/icons/icon-192.png and Trade-Modules/Painting/icons/icon-192.png differ
 Binary files Painting/icons/icon-512.png and Trade-Modules/Painting/icons/icon-512.png differ
 Binary files Painting/icons/icon-maskable-192.png and Trade-Modules/Painting/icons/icon-maskable-192.png differ
@@ -44,12 +85,13 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex-shrink: 0; }
      input[type="color"] { direction: ltr; width: 100%; height: 48px; border: 1.5px solid var(--border); border-radius: 13px; background: var(--surface-2); padding: 4px; }
      .type-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
-@@ -738,17 +735,19 @@
+@@ -738,17 +735,20 @@
      }
  
    </style>
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
  
@@ -66,7 +108,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -1079,7 +1078,7 @@
+@@ -1079,7 +1079,7 @@
  
        <!-- عن المطور -->
        <div class="dev-card">
@@ -75,7 +117,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
          <div class="dev-name">أحمد حسن عبدالله</div>
          <div class="dev-role">مطوّر ومصمّم التطبيق</div>
          <div class="dev-links">
-@@ -1090,7 +1089,7 @@
+@@ -1090,7 +1090,7 @@
        </div>
  
        <div class="copyright">
@@ -84,7 +126,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
-@@ -1501,12 +1500,12 @@
+@@ -1501,12 +1501,12 @@
  
  <script>
    /* =========================================================
@@ -96,11 +138,11 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
 +     تطبيق مستقل تماماً عن «أرزقي» للكهرباء: مفاتيح تخزين وذاكرة وتحديثات منفصلة.
       ========================================================= */
 -  const APP_VERSION = '1.1.0';
-+  const APP_VERSION = '1.1.2';
++  const APP_VERSION = '1.1.3';
    // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
    const IS_BETA = /\/beta\//.test(location.pathname);
    const KEY_PREFIX = IS_BETA ? 'beta_' : '';
-@@ -1514,7 +1513,7 @@
+@@ -1514,7 +1514,7 @@
    const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
    const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Hesabaty-painting/releases/latest';
    const APK_ASSET = 'hesabaty-painting.apk';
@@ -109,7 +151,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    if (IN_APP) {
      // روابط واتساب وفيسبوك تفتح في تطبيقاتها، والطباعة عن طريق أندرويد (حفظ PDF أو طابعة)
      window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
-@@ -1531,7 +1530,7 @@
+@@ -1531,7 +1531,7 @@
    const BACKUP_APP_ID = 'hesabaty-painting';
    const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال نقاشة ودهانات';
    const DEFAULT_TECH = 'للنقاشة والدهانات والديكورات';
@@ -118,7 +160,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    const EDITOR_VIEWS = ['pricing', 'rooms', 'costs', 'summary'];
  
    /* ---------------- محرك النقاشة: الأنواع والقوائم الجاهزة ---------------- */
-@@ -1571,7 +1570,9 @@
+@@ -1571,7 +1571,9 @@
    const LINEAR_DECOR_PRESETS = ['كورنيشة', 'كرانيش', 'وزرة', 'بانوهات', 'فواصل', 'زوايا', 'حلية'];
    // إضافات داخل الغرفة بالمقطوعية
    const ROOM_EXTRA_PRESETS = ['جنب ديكوري', 'سقف ديكوري (جبس بورد)', 'بانوه', 'نيش', 'كرانيش', 'ورق حائط', 'حائط ديكور (استوكو / قطيفة)'];
@@ -129,7 +171,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    const NOTE_KINDS = {
      color: { label: 'لون دهان', icon: 'palette' }, agreement: { label: 'تفاصيل الاتفاق', icon: 'file' },
      client: { label: 'ملاحظات العميل', icon: 'user' }, exec: { label: 'تعليمات التنفيذ', icon: 'list' },
-@@ -1596,7 +1597,7 @@
+@@ -1596,7 +1598,7 @@
    // بنود القائمة الافتراضية بدون أي أسعار إجبارية — المستخدم يكتب أسعاره
    const DEFAULT_PRICE_ITEMS = [['المعجون', 'م²'], ['الصنفرة', 'م²'], ['البطانة', 'م²'], ['الدهان', 'م²'], ['المتر الطولي (كرانيش ووزرات)', 'م.ط'], ['اليومية', 'يومية'], ['الساعة الإضافية', 'ساعة']];
  
@@ -138,7 +180,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    const CURRENCIES = [
      { code: 'EGP', country: 'مصر', name: 'جنيه مصري', sym: 'ج.م', short: 'ج', dec: 2 },
      { code: 'SAR', country: 'السعودية', name: 'ريال سعودي', sym: 'ر.س', dec: 2 },
-@@ -1950,7 +1951,7 @@
+@@ -1950,7 +1952,7 @@
      const order = EDITOR_VIEWS.indexOf(key);
      EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
      document.getElementById('headerTitle').textContent = VIEW_TITLES[key] || '';
@@ -147,7 +189,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
-@@ -2058,10 +2059,10 @@
+@@ -2058,10 +2060,10 @@
      const unitArea = r4(o.w * o.h);
      const area = r4(unitArea * o.count);
      let deduct = 0, skipped = false;
@@ -160,7 +202,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      deduct = r4(deduct * faces);
      // جوانب الفتحة (عمق الحلق): الباب = جنبين + علوي، الشباك = 4 جوانب
      const perim = o.kind === 'door' ? (2 * o.h + o.w) : 2 * (o.w + o.h);
-@@ -2069,11 +2070,11 @@
+@@ -2069,11 +2071,11 @@
      return { unitArea, area, deduct, skipped, reveal };
    }
    function openingText(o, c) {
@@ -175,7 +217,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      return t;
    }
    // حساب بند واحد: يرجع المساحة والإجمالي وسطور الفاتورة وتفصيل طريقة الحساب
-@@ -2112,7 +2113,7 @@
+@@ -2112,7 +2114,7 @@
        let deduct = 0, reveal = 0;
        const ops = [];
        w.openings.forEach(o => {
@@ -184,7 +226,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
          const c = computeOpening(o, faces, w.minArea);
          deduct += c.deduct; reveal += c.reveal;
          ops.push(openingText(o, c));
-@@ -2405,7 +2406,7 @@
+@@ -2405,7 +2407,7 @@
      document.getElementById('verCurrent').textContent = IN_APP ? appVersion() : APP_VERSION;
      document.getElementById('copyYear').textContent = Math.max(2026, new Date().getFullYear());
      document.getElementById('storageNote').textContent = canStore
@@ -193,7 +235,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
        : '⚠️ التخزين على الجهاز غير متاح في الوضع ده (مثلاً تصفح خفي) — البيانات مش هتتحفظ بعد قفل الصفحة.';
  
      document.getElementById('invFilter').addEventListener('click', e => {
-@@ -2739,6 +2740,7 @@
+@@ -2739,6 +2741,7 @@
        renderWorkSheetBody();
      }
      else if (act === 'delOpening') { wf.openings.splice(i, 1); renderWorkSheetBody(); }
@@ -201,7 +243,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      else if (act === 'addGyp') { wf.gypsum.push({ name: 'جبسون بورد', width: 0, length: 0, factor: 2, own: false, price: 0 }); renderWorkSheetBody(); }
      else if (act === 'delGyp') { wf.gypsum.splice(i, 1); renderWorkSheetBody(); }
      else if (act === 'addLin') { wf.linears.push({ name: 'كورنيشة', length: 0, price: linearListPrice('كورنيشة') }); renderWorkSheetBody(); }
-@@ -2873,8 +2875,10 @@
+@@ -2873,8 +2876,10 @@
            <div class="grid-2">
              <div class="mini"><span class="mini-lbl">الخصم من الحائط</span><select ${a} data-k="policy" data-rr="1">${optList(POLICIES, op.policy)}</select></div>
              ${op.policy === 'percent' ? mInput('النسبة %', `${a} data-k="value" data-t="n"`, op.value, '50')
@@ -213,7 +255,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
            ${wf.reveals && (op.policy === 'percent' || op.policy === 'fixed') ? `<div class="grid-2" style="margin-top:6px">${mInput('عمق الجنب (م)', `${a} data-k="depth" data-t="n"`, op.depth, '0.2')}<div></div></div>` : ''}
          </div>`;
        }).join('');
-@@ -3061,7 +3065,7 @@
+@@ -3061,7 +3066,7 @@
      if (!wf) return;
      if (!wfStagesOn) wf.stages = [];
      else wf.stages = wf.stages.filter(s => s.name.trim() || s.price > 0);
@@ -222,7 +264,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      wf.extras = wf.extras.filter(x => String(x.name || '').trim() || x.price > 0);
      wf.gypsum = wf.gypsum.filter(g => g.width > 0 && g.length > 0);
      wf.linears = wf.linears.filter(x => x.length > 0);
-@@ -3855,6 +3859,8 @@
+@@ -3855,6 +3860,8 @@
        </section>`;
  
      if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
@@ -231,7 +273,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
  
      html += `
        <div class="segmented" style="margin-bottom:12px">
-@@ -5036,7 +5042,7 @@
+@@ -5036,7 +5043,7 @@
      return `
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -240,7 +282,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
        </footer>`;
    }
    const signHTML = (a, b) => `<div class="inv-sign"><div ${CE}>${a}</div><div ${CE}>${b}</div></div>`;
-@@ -5155,6 +5161,29 @@
+@@ -5155,6 +5162,29 @@
      } else {
        noteItems = termsList(inv);
        if (!noteItems.length) noteItems = contract ? ['الحساب بنظام المقاولة الإجمالية حسب الاتفاق.'] : ['الحساب حسب المقاسات الفعلية بعد خصم الفتحات.', 'إجمالي كل بند = الكمية × سعر الوحدة.'];
@@ -270,7 +312,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      }
      const settled = DOC_TYPES[type].billing && round2(t.netRemaining) <= 0 && t.grandTotal > 0;
      html += `<div class="inv-bottom"><div class="inv-side">${settled ? `<div style="text-align:center"><span class="paid-stamp" ${CE}>تم السداد بالكامل ✓</span></div>` : ''}${notesBoxHTML(type === 'quote' ? 'شروط العرض' : type === 'estimate' ? 'طريقة الحساب' : 'ملاحظات وشروط', noteItems)}${signHTML('توقيع القائم بالأعمال', type === 'quote' ? 'موافقة العميل' : 'اعتماد العميل')}</div>${totalsBoxHTML(inv, t, type)}</div>`;
-@@ -5259,6 +5288,8 @@
+@@ -5259,6 +5289,8 @@
      return html;
    }
    function showPreview(html, jobName, shareFn, autoPrint) {
@@ -279,7 +321,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      document.getElementById('printSheet').innerHTML = html;
      printJobName = jobName;
      previewShare = shareFn || null;
-@@ -5457,7 +5488,7 @@
+@@ -5457,7 +5489,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: BACKUP_APP_ID, backupVersion: 1, appVersion: APP_VERSION, exportedAt: new Date().toISOString(), customers, settings, matLists, notes }),
@@ -288,7 +330,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      showAppToast('✔️ تم تنزيل النسخة الكاملة (المشاريع + النوتة + الخامات + الملاحظات)');
    }
    function exportLedgerJSON() {
-@@ -5480,7 +5511,7 @@
+@@ -5480,7 +5512,7 @@
      });
      return { added, updated };
    }
@@ -297,7 +339,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    function isElectricalBackup(o) {
      if (!o || typeof o !== 'object') return false;
      if (o.app === BACKUP_APP_ID) return false;
-@@ -5493,7 +5524,7 @@
+@@ -5493,7 +5525,7 @@
      reader.onload = function (e) {
        let imported;
        try { imported = JSON.parse(e.target.result); } catch (err) { showAppToast('⚠️ ملف النسخة الاحتياطية غير صالح.'); return; }
@@ -306,7 +348,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
        if (imported && imported.type === 'hesabaty-painting-ledger' && Array.isArray(imported.customers)) {
          showAppConfirm(`استعادة نوتة بها ${imported.customers.length} عميل؟ سيتم دمجها مع النوتة الحالية دون حذف أي سجل.`, () => {
            const r = mergeCustomers(imported.customers);
-@@ -5752,7 +5783,7 @@
+@@ -5752,7 +5784,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -315,6 +357,13 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    };
    // يستدعيها التطبيق كل ما ترجع له
+@@ -5780,5 +5812,6 @@
+   initApp();
+   initServiceWorker();
+ </script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- Painting/manifest.json
 +++ Trade-Modules/Painting/manifest.json
 @@ -1,7 +1,7 @@
@@ -380,11 +429,18 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
   * (أو شغّل: node tools/bump-version.js 1.1.0 "ملاحظة 1" "ملاحظة 2").
   */
 -const SW_VERSION = "1.1.0";
-+const SW_VERSION = "1.1.2";
++const SW_VERSION = "1.1.3";
  
  const APP_PREFIX = "hpaint-app-";
  const META_CACHE = "hpaint-meta";
-@@ -33,8 +33,7 @@
+@@ -27,14 +27,13 @@
+ 
+ const APP_FILES = [
+   "./",
+-  "./index.html",
++  "./index.html", "./guide-steps.js",
+   "./manifest.json",
+   "./privacy.html",
    "./icons/icon-192.png",
    "./icons/icon-512.png",
    "./icons/icon-maskable-192.png",
@@ -403,7 +459,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hpaint-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -461,16 +517,23 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    check('عدد الأجزاء 3: 45 م²', near(pol.parts, 45), pol.parts);
 --- Painting/version.json
 +++ Trade-Modules/Painting/version.json
-@@ -1,7 +1,9 @@
+@@ -1,11 +1,12 @@
  {
 -  "version": "1.1.0",
 -  "date": "2026-11-14",
-+  "version": "1.1.2",
++  "version": "1.1.3",
 +  "date": "2026-11-24",
    "notes": [
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
      "دهان الأبواب والشبابيك: لاكيه · دوكو · أوستور بالقطعة أو مقطوعية لباب كبير",
-     "إضافات بالمقطوعية جوه الغرفة (جنب ديكوري وغيره)",
-     "سقف عادي أو سقف ديكوري بسعره، ومقاس سقف مختلف اختياري",
+-    "إضافات بالمقطوعية جوه الغرفة (جنب ديكوري وغيره)",
+-    "سقف عادي أو سقف ديكوري بسعره، ومقاس سقف مختلف اختياري",
+-    "جبسون بورد بالمتر المربع مع المضاعفة، وديكور بالمتر الطولي (كورنيشة)",
+-    "قوائم منسدلة أسهل، وكود درجة اللون في الملاحظات والفواتير"
++    "إضافات بالمقطوعية جوه الغرفة (جنب ديكوري وغيره)"
+   ]
+ }
 Deleted (moved to Shared-Assets or removed on purpose): Painting/icons/developer.jpg

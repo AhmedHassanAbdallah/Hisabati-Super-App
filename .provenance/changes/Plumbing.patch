@@ -1,3 +1,45 @@
+--- /dev/null
++++ Trade-Modules/Plumbing/guide-steps.js
+@@ -0,0 +1,39 @@
++/* أرزقي | Arzoqi — السباكة: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  var wait = ['wait', 450], home = [['unwind'], ['click', '#navBtn-home'], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'plumbing', name: 'السباكة', version: 1, keys: ['hesabati_plumbing_'], more: '#view-more', home: home,
++    layered: function () { return !!(history.state && history.state.ovDepth > 0); },
++    steps: [
++      { t: 'أهلاً بيك في قسم السباكة', d: 'هنعمل مثال كامل: فاتورة ← العميل ← بند نقاط ← الحساب ← الفاتورة PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#view-home .home-sum' },
++      { t: 'فاتورة / عرض سعر', d: 'من هنا تعمل فاتورة أعمال أو توريد وتركيب أو صيانة أو ختامية، أو مقايسة أو عرض سعر.', el: '#qDoc', act: [['click', '#qDoc'], wait] },
++      { t: 'اختار نوع المستند', d: 'الفواتير بتتسجل على حساب العميل، والمقايسات وعروض الأسعار للعرض بس. هنختار «فاتورة أعمال سباكة».', el: '#docTypeSheet [data-t="invoice"]', act: [['click', '#docTypeSheet [data-t="invoice"]'], wait] },
++      { t: 'بيانات العميل', d: 'اسم العميل (بيقترح من العملاء) والتليفون وعنوان الشغل.', el: '#clientName', act: [['fill', '#clientName', 'أ. محمد (مثال)'], ['fill', '#clientAddress', 'مدينة نصر']] },
++      { t: 'تفاصيل الشغل', d: 'وصف المكان ونطاق الشغل والشامل وغير الشامل والمدة وشروط الدفع والضمان — كلها اختيارية وبتظهر في المستند.', el: '#docScope' },
++      { t: 'التالي: البنود', d: 'الخطوات فوق: العميل والمشروع ← البنود ← الحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'أقسام البنود', d: 'نقاط، سباكة منزلية، تغذية، صرف، تركيب أدوات، سخانات، طلمبات، فلاتر، صيانة، مواسير، وصلات… أو من المخزن وقائمة الأسعار.', el: '#view-lines .chip[data-cat="points"]' },
++      { t: 'ضيف بند', d: 'دوس «بند» علشان تضيف شغلانة.', el: '#addLineFab', act: [['click', '#addLineFab'], wait] },
++      { t: 'اختار البند', d: 'اختار من الأسماء الجاهزة (نقطة حوض، قاعدة، دش…) أو اكتب اسمك.', el: '#formSheet .chip[data-i="0"]', act: [['click', '#formSheet .chip[data-i="0"]']] },
++      { t: 'الكمية والسعر', d: 'الكمية وطريقة الحساب (بالنقطة، بالحمام، بالمتر…) والسعر. وسعر التكلفة لو عايز تعرف ربحك.', el: '#lfQty', act: [['fill', '#lfQty', '6'], ['fill', '#lfPrice', '150']] },
++      { t: 'حفظ البند', d: 'دوس «حفظ البند» وضيف باقي البنود بنفس الطريقة.', el: '#formSheet [data-f="save"]', act: [['click', '#formSheet [data-f="save"]'], ['wait', 600]] },
++      { t: 'التالي: الحساب', d: 'بعد البنود روح للحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'إضافات وخصم', d: 'أعمال إضافية أو خصم، وتسجيل عربون أو سداد المتبقي من هنا.', el: '#docDisc' },
++      { t: 'طلّع الفاتورة PDF', d: 'من الزرار ده بتفتح الفاتورة.', el: '#view-summary button[onclick="openDocPreview(false)"]', act: [['click', '#view-summary button[onclick="openDocPreview(false)"]'], ['wait', 800]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والبنود والحساب. تقدر تعدّل أي كلمة بالضغط عليها، وتكبّر أو تصغّر الخط.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF وتبعته للعميل. كده عرفت تطلّع الفاتورة 🎉', el: '#printPreviewModal .tb-print' },
++      { part: 2, t: 'العربون والدفعات', d: 'سجّل عربون أو سداد على الفاتورة دي.', el: '#view-summary .btn-accent[onclick^="openPaymentForm"]', pre: [['back'], wait] },
++      { part: 2, t: 'مصروف على الشغلانة', d: 'أي مصروف بيتخصم من ربح الفاتورة.', el: '#view-summary [onclick^="openExpenseForm"]' },
++      { part: 2, t: 'واتساب', d: 'ابعت الفاتورة كرسالة أو انسخ نصها.', el: '#view-summary .btn-wa' },
++      { part: 2, t: 'مقايسة تأسيس', d: 'نقاط + مواسير + وصلات للعرض على العميل.', el: '#qEstimate', pre: home },
++      { part: 2, t: 'زيارة صيانة', d: 'الزيارات بتتسجل في سجل العميل.', el: '#qVisit' },
++      { part: 2, t: 'تسجيل دفعة', d: 'عربون أو دفعة من أي عميل.', el: '#qPay' },
++      { part: 2, t: 'الحاسبات', d: 'نقاط، حمامات، مواسير، حفر…', el: '#qCalc' },
++      { part: 2, t: 'المشروعات', d: 'حصر ومصروفات وأرباح كل مشروع.', el: '#qProjects' },
++      { part: 2, t: 'الفواتير', d: 'كل المستندات.', el: '#navBtn-docs' },
++      { part: 2, t: 'العملاء', d: 'حساب كل عميل ودفعاته وزياراته.', el: '#navBtn-ledger' },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو هنا بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#bizName', pre: [['click', '#navBtn-more'], wait] },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files Plumbing/icons/icon-192.png and Trade-Modules/Plumbing/icons/icon-192.png differ
 Binary files Plumbing/icons/icon-512.png and Trade-Modules/Plumbing/icons/icon-512.png differ
 Binary files Plumbing/icons/icon-maskable-192.png and Trade-Modules/Plumbing/icons/icon-maskable-192.png differ
@@ -51,16 +93,17 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      .calc-row { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; margin-bottom: 10px; }
      .calc-row .mini-f input, .calc-row .mini-f select { height: 44px; padding: 0 10px; font-size: .88rem; min-width: 0; width: 100%; }
      .calc-row .row-2 { gap: 6px; align-items: end; }
-@@ -736,6 +733,8 @@
+@@ -736,6 +733,9 @@
      .inv-notes ol { padding-right: 18px; }
      .inv-notes ol li { margin-bottom: 3px; }
    </style>
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
  
-@@ -748,7 +747,7 @@
+@@ -748,7 +748,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -69,7 +112,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -919,7 +918,7 @@
+@@ -919,7 +919,7 @@
        <h3 class="more-h">التطبيق وبياناتك</h3>
        <div class="card">
          <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
@@ -78,7 +121,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
          <div class="btn-row">
            <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
            <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
-@@ -945,13 +944,13 @@
+@@ -945,13 +945,13 @@
  
        <div class="card hidden" id="apkCard">
          <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
@@ -94,7 +137,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
          <div class="dev-name">أحمد حسن عبدالله</div>
          <div class="dev-role">مطوّر ومصمّم التطبيق</div>
          <div class="dev-links">
-@@ -962,7 +961,7 @@
+@@ -962,7 +962,7 @@
        </div>
  
        <div class="copyright">
@@ -103,6 +146,13 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
          PLUMBING &amp; SANITARY WORK ACCOUNTING<br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
+@@ -1138,5 +1138,6 @@
+ <script src="./js/calc.js"></script>
+ <script src="./js/print.js"></script>
+ <script src="./js/app.js"></script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- Plumbing/js/app.js
 +++ Trade-Modules/Plumbing/js/app.js
 @@ -1,5 +1,5 @@
@@ -191,7 +241,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
     ========================================================= */
 -const APP_VERSION = '1.0.0';
 -const APP_NAME = 'حساباتي السباكة';
-+const APP_VERSION = '1.0.1';
++const APP_VERSION = '1.0.2';
 +const APP_NAME = 'أرزقي السباكة';
  const IS_BETA = /\/beta\//.test(location.pathname);
 -// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة أو التكييف
@@ -410,11 +460,19 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
   * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
   */
 -const SW_VERSION = "1.0.0";
-+const SW_VERSION = "1.0.1";
++const SW_VERSION = "1.0.2";
  
  const APP_PREFIX = "hesabati-plumbing-app-";
  const META_CACHE = "hesabati-plumbing-meta";
-@@ -35,7 +35,6 @@
+@@ -28,14 +28,13 @@
+ 
+ const APP_FILES = [
+   "./",
+-  "./index.html",
++  "./index.html", "./guide-steps.js",
+   "./manifest.json",
+   "./privacy.html",
+   "./icons/icon-192.png",
    "./icons/icon-512.png",
    "./icons/icon-maskable-192.png",
    "./icons/icon-maskable-512.png",
@@ -431,7 +489,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -499,17 +557,22 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    /* ---------- العملاء والمشروعات ---------- */
 --- Plumbing/version.json
 +++ Trade-Modules/Plumbing/version.json
-@@ -1,8 +1,9 @@
+@@ -1,10 +1,12 @@
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-15",
-+  "version": "1.0.1",
++  "version": "1.0.2",
 +  "date": "2026-11-24",
    "notes": [
 -    "الإصدار الأول من حساباتي السباكة: مقايسات وفواتير السباكة والصحي",
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "الإصدار الأول من أرزقي السباكة: مقايسات وفواتير السباكة والصحي",
      "الحساب بالنقطة والحمام والمطبخ والمتر والقطعة واليومية والمقاولة والزيارة والمتر المكعب والمراحل",
-     "حاسبات النقاط والحمامات والمطابخ والمواسير والوصلات والخزانات والحفر",
-     "العملاء والمشروعات وسجل الصيانة والخامات والعمال والمصروفات والأرباح"
+-    "حاسبات النقاط والحمامات والمطابخ والمواسير والوصلات والخزانات والحفر",
+-    "العملاء والمشروعات وسجل الصيانة والخامات والعمال والمصروفات والأرباح"
++    "حاسبات النقاط والحمامات والمطابخ والمواسير والوصلات والخزانات والحفر"
+   ]
+ }
 Deleted (moved to Shared-Assets or removed on purpose): Plumbing/icons/developer.jpg

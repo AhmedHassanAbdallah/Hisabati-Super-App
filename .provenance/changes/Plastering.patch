@@ -1,3 +1,51 @@
+--- /dev/null
++++ Trade-Modules/Plastering/guide-steps.js
+@@ -0,0 +1,45 @@
++/* أرزقي | Arzoqi — المحارة والواجهات: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  // القسم ده بيتنقل بالـ # في العنوان، وكل الصفحات بتترسم جوه #main
++  var wait = ['wait', 450];
++  var closeDoc = ['eval', function () { var b = document.querySelector('#printModal [data-act="closeDoc"]'); if (b && b.getBoundingClientRect().width) b.click(); }];
++  var closeSheet = ['eval', function () { var b = document.querySelector('#sheet [data-act="closeSheet"]'); if (b && b.getBoundingClientRect().width) b.click(); }];
++  // جوه المشروع شريط التنقل اللي تحت مخفي، فبنرجع للرئيسية بنفس طريقة القسم (العنوان #/home)
++  var home = [closeDoc, closeSheet, ['eval', function () { if (location.hash !== '#/home') location.hash = '#/home'; }], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'plastering', name: 'المحارة والواجهات', version: 1, keys: ['hplaster_'], home: home,
++    more: function () { return /^#\/more\/?$/.test(location.hash) ? document.getElementById('main') : null; },
++    steps: [
++      { t: 'أهلاً بيك في قسم المحارة', d: 'هنعمل مثال كامل: مشروع ← غرفة بالمقاسات ← بند محارة ← فاتورة مصنعية PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#main .hero' },
++      { t: 'مشروع جديد', d: 'عميل + مساحات + بنود — وكل الحسابات بتطلع لوحدها.', el: '#main .q-tile[data-act="newProject"]', act: [['click', '#main .q-tile[data-act="newProject"]'], wait] },
++      { t: 'اسم المشروع والعميل', d: 'اسم المشروع، واختار العميل أو «عميل جديد»، والعنوان ونوع المبنى.', el: '#f_name', act: [['fill', '#f_name', 'فيلا التجمع (مثال)']] },
++      { t: 'طريقة التسعير', d: 'بالبنود (مجموع البنود) أو مقاولة كاملة بمبلغ — والخصم ونسبة الضمان.', el: '#f_pricing' },
++      { t: 'حفظ المشروع', d: 'دوس «حفظ» وهيتفتح المشروع.', el: '#formSave', act: [['click', '#formSave'], ['wait', 700]] },
++      { t: 'ضيف منطقة', d: 'كل غرفة أو واجهة أو سور أو سلم منطقة لوحدها بمقاساتها.', el: '#main [data-act="addZone"]', act: [['click', '#main [data-act="addZone"]'], wait] },
++      { t: 'نوع المنطقة', d: 'غرفة، حوائط وأسقف بأشكال، واجهات، سور، بلكونات، أعمدة، كرانيش، منور، سلالم… هنختار «غرفة».', el: '#sheet [data-oi="0"]', act: [['click', '#sheet [data-oi="0"]'], wait] },
++      { t: 'مقاسات الغرفة', d: 'الطول والعرض والارتفاع — والحوائط والسقف بيتحسبوا لوحدهم، وتقدر تخصم الأبواب والشبابيك.', el: '#main [data-bind="zn:measure.room.l"]', act: [['fill', '#main [data-bind="zn:measure.room.l"]', '5'], ['fill', '#main [data-bind="zn:measure.room.w"]', '4'], ['fill', '#main [data-bind="zn:measure.room.h"]', '3']] },
++      { t: 'ضيف بند', d: 'البند هو الشغل اللي هيتعمل في المنطقة دي. (وللواجهات فيه «نظام تشطيب جاهز» بيضيف كذا بند مرة واحدة.)', el: '#main [data-act="addItem"]', act: [['click', '#main [data-act="addItem"]'], wait] },
++      { t: 'نوع الشغل', d: 'محارة داخلية وخارجية، جرافيت، دهارة ومعجون، تشطيبات واجهات، تكاليف الموقع… هنختار «المحارة الداخلية».', el: '#sheet [data-oi="0"]', act: [['click', '#sheet [data-oi="0"]'], wait] },
++      { t: 'البند بالظبط', d: 'هنختار «محارة أسمنتية تقليدية».', el: '#sheet [data-oi="0"]', act: [['click', '#sheet [data-oi="0"]'], ['wait', 600]] },
++      { t: 'الكمية من المقاسات', d: 'الكمية بتتاخد من مقاس الغرفة لوحدها (الصافي أو الحوائط بس أو السقف بس).', el: '#main [data-bind="it:qtySource"]' },
++      { t: 'الخامات', d: 'السُمك ونسبة الخلط والهالك — والأسمنت والرمل بيتحسبوا، وتقدر تربطهم بالمخزن.', el: '#main [data-bind="it:calc.cement.thickness"]' },
++      { t: 'سعر المصنعية', d: 'مصنعية بس أو توريد وتنفيذ، واكتب سعر المتر.', el: '#main [data-bind="it:laborRate"]', act: [['fill', '#main [data-bind="it:laborRate"]', '90']] },
++      { t: 'رجوع للمشروع', d: 'كل حاجة بتتحفظ لوحدها. ارجع للمشروع.', el: '#appHeader [data-act="back"]', act: [['click', '#appHeader [data-act="back"]'], ['wait', 400], ['click', '#appHeader [data-act="back"]'], wait] },
++      { t: 'المنطقة بحسابها', d: 'المساحة والبنود وقيمتها.', el: '#main [data-act="openZone"]' },
++      { t: 'المستندات', d: 'من الزرار ده بتوصل لكل مستندات المشروع.', el: '#appHeader [data-act="projDocs"]', act: [['click', '#appHeader [data-act="projDocs"]'], wait] },
++      { t: 'اختار المستند', d: 'مقايسات (أعمال، محارة، جرافيت، واجهات)، عرض سعر، فواتير، مستخلص، كشف حساب، تقرير تكلفة، كشف خامات. هنختار «فاتورة مصنعية».', el: '#main [data-act="openDoc"][data-type="inv_labor"]', act: [['click', '#main [data-act="openDoc"][data-type="inv_labor"]'], ['wait', 900]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والبنود والحساب. تقدر تعدّل أي كلمة بالضغط عليها.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF، أو تبعتها واتساب من جنبه. كده عرفت تطلّع الفاتورة 🎉', el: '#printModal [data-act="printDoc"]' },
++      { part: 2, t: 'المراحل والحسابات', d: 'جوه المشروع: مراحل التنفيذ ونسبة الإنجاز، والحسابات: الدفعات والمصروفات والعمال والربح.', el: '#main [data-act="projTab"][data-tab="money"]', pre: [closeDoc, wait] },
++      { part: 2, t: 'الملخص', d: 'ملخص المشروع: القيمة والمدفوع والمتبقي والتكلفة والربح.', el: '#main [data-act="projTab"][data-tab="sum"]' },
++      { part: 2, t: 'حاسبة سريعة', d: 'محارة، جرافيت، معجون، واجهات — من غير مشروع.', el: '#main .q-tile[data-view="calc"]', pre: home },
++      { part: 2, t: 'تسجيل دفعة', d: 'دفعة من عميل على مشروع.', el: '#main .q-tile[data-act="quickPayment"]' },
++      { part: 2, t: 'حركة مخزن', d: 'شراء، بيع، صرف خامات للمشروع.', el: '#main .q-tile[data-act="quickMove"]' },
++      { part: 2, t: 'العمال والعملاء والتقارير', d: 'اليوميات والسلف، وكشف حساب كل عميل، والأرباح.', el: '#main .q-tile[data-view="workers"]' },
++      { part: 2, t: 'المشروعات', d: 'كل المشروعات بحالتها.', el: '.nav-item[data-tab="projects"]' },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو في «الإعدادات وبيانات المستندات» بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#main [data-view="settings"]', pre: [['click', '.nav-item[data-tab="more"]'], wait] },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files Plastering/icons/icon-192.png and Trade-Modules/Plastering/icons/icon-192.png differ
 Binary files Plastering/icons/icon-512.png and Trade-Modules/Plastering/icons/icon-512.png differ
 Binary files Plastering/icons/icon-maskable-192.png and Trade-Modules/Plastering/icons/icon-maskable-192.png differ
@@ -20,7 +68,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -16,14 +16,13 @@
+@@ -16,14 +16,14 @@
      // تطبيق المظهر المحفوظ قبل ظهور الصفحة (مفتاح خاص بتطبيق المحارة فقط)
      try { var _t = localStorage.getItem('hplaster_theme'); if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}
    </script>
@@ -30,6 +78,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    <link rel="stylesheet" href="./css/app.css">
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
    <div id="app">
@@ -38,6 +87,13 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
      <main class="container" id="main"></main>
    </div>
  
+@@ -73,5 +73,6 @@
+   <script src="./js/admin.js"></script>
+   <script src="./js/docs.js"></script>
+   <script src="./js/app.js"></script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- Plastering/js/admin.js
 +++ Trade-Modules/Plastering/js/admin.js
 @@ -45,6 +45,7 @@
@@ -91,7 +147,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    'use strict';
    const U = window.UI, S = U.S;
 -  window.APP_VERSION = '1.0.0';
-+  window.APP_VERSION = '1.0.2';
++  window.APP_VERSION = '1.0.3';
  
    S.load();
    U.applyTheme();
@@ -277,25 +333,34 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
   *  - أسماء الكاش تبدأ بـ "hplaster-" فقط.
   *  - التنظيف يمسح كاش "hplaster-" القديم فقط ولا يلمس أي كاش آخر
   *    (مثل hesabaty-app-* الخاص بتطبيق الكهرباء).
-@@ -9,7 +9,7 @@
+@@ -9,14 +9,14 @@
   *
   * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
   */
 -const VERSION = '1.0.0';
-+const VERSION = '1.0.2';
++const VERSION = '1.0.3';
  const PREFIX = 'hplaster-';
  const APP_CACHE = PREFIX + 'app-' + VERSION;
  const RUNTIME_CACHE = PREFIX + 'runtime';
-@@ -35,6 +35,34 @@
+ 
+ const APP_FILES = [
+   './',
+-  './index.html',
++  './index.html', './guide-steps.js',
+   './manifest.json',
+   './privacy.html',
+   './css/app.css',
+@@ -34,6 +34,34 @@
+   './icons/icon-maskable-192.png',
    './icons/icon-maskable-512.png'
  ];
- 
++
 +/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
 +   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -317,10 +382,9 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
 +    return fresh;
 +  }));
 +});
-+
+ 
  self.addEventListener('install', event => {
    event.waitUntil(caches.open(APP_CACHE).then(c => c.addAll(APP_FILES.map(u => new Request(u, { cache: 'reload' })))));
- });
 @@ -54,16 +82,6 @@
    if (req.method !== 'GET') return;
    const url = new URL(req.url);
@@ -340,17 +404,22 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    const scope = new URL('./', self.location).pathname;
 --- Plastering/version.json
 +++ Trade-Modules/Plastering/version.json
-@@ -1,8 +1,10 @@
+@@ -1,10 +1,12 @@
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-18",
-+  "version": "1.0.2",
++  "version": "1.0.3",
 +  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للمحارة وتشطيبات الواجهات",
+-    "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات",
+-    "المشروعات والعملاء والعمال والمخزن والمستندات والتقارير",
+-    "يعمل بالكامل بدون إنترنت"
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "أول إصدار من أرزقي للمحارة وتشطيبات الواجهات",
-     "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات",
-     "المشروعات والعملاء والعمال والمخزن والمستندات والتقارير",
-     "يعمل بالكامل بدون إنترنت"
++    "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات"
+   ]
+ }

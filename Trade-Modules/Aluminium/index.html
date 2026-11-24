@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان وخطوط الهوية -->
   <link rel="stylesheet" href="./css/alu.css">
   <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة + نوتة العمال -->
+  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
   <!--
     أرزقي | Arzoqi — الألوميتال وUPVC
     تصميم وتطوير: أحمد حسن عبدالله
@@ -220,12 +221,13 @@
       </div>
       <div class="card">
         <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-receipt"/></svg></span><h2>بيانات الفاتورة</h2></div>
-        <div class="note">اسمك ولوجو ورقم تليفونك بيتاخدوا من «بياناتي» في الصفحة الرئيسية لأرزقي (نفس البيانات في كل الأقسام). لو فاضية، بيتاخدوا من هنا:</div>
+        <div class="note">البيانات اللي تكتبها هنا (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتير ومستندات القسم ده. اللي تسيبه فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية لأرزقي.</div>
         <div class="field" style="margin-top:12px"><label for="bizName">اسم الورشة</label><input type="text" id="bizName" placeholder="مثلاً: ورشة النور للألوميتال"></div>
         <div class="row-2">
           <div class="field"><label for="bizPhone">التليفون</label><input type="text" id="bizPhone" inputmode="tel" dir="ltr"></div>
           <div class="field"><label for="bizAddress">العنوان</label><input type="text" id="bizAddress"></div>
         </div>
+        <div class="field"><label>اللوجو (اختياري)</label><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><img id="bizLogoImg" alt="" hidden style="width:56px;height:56px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid var(--border)"><button type="button" class="btn btn-ghost btn-sm" id="bizLogoBtn" style="width:auto">اختار لوجو</button><button type="button" class="btn btn-danger btn-sm" id="bizLogoDel" hidden style="width:auto">شيل اللوجو</button></div></div>
         <div class="field"><label for="bizTerms">ملاحظات ثابتة تحت كل فاتورة (اختياري)</label><textarea id="bizTerms" placeholder="مثلاً: الضمان سنة على التركيب والإكسسوارات"></textarea></div>
       </div>
       <div class="card">
@@ -285,5 +287,6 @@
 <script src="./js/calc.js"></script>
 <script src="./js/catalog.js"></script>
 <script src="./js/app.js"></script>
+<script src="./guide-steps.js"></script>
 </body>
 </html>

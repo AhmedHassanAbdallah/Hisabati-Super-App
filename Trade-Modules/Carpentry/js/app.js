@@ -259,6 +259,30 @@
   [['bizName', 'name'], ['bizPhone', 'phone'], ['bizAddress', 'address']].forEach(function (p) { $(p[0]).addEventListener('input', function () { settings.business[p[1]] = this.value.trim(); saveSettings(); }); });
   $('bizTerms').addEventListener('input', function () { settings.terms = this.value; saveSettings(); });
 
+  // لوجو القسم: بيظهر في فواتير ومستندات القسم ده (ولو مفيش، لوجو «بياناتي» في الصفحة الرئيسية)
+  function renderBizLogo() { var l = settings.business.logo || ''; $('bizLogoImg').hidden = !l; if (l) $('bizLogoImg').src = l; $('bizLogoDel').hidden = !l; $('bizLogoBtn').textContent = l ? 'تغيير اللوجو' : 'اختار لوجو'; }
+  $('bizLogoBtn').addEventListener('click', function () {
+    var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+    inp.addEventListener('change', function () {
+      var f = inp.files && inp.files[0]; if (!f) return;
+      var rd = new FileReader();
+      rd.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+          var m = 320, sc = Math.min(1, m / Math.max(img.width, img.height)), cv = document.createElement('canvas');
+          cv.width = Math.round(img.width * sc); cv.height = Math.round(img.height * sc); cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+          settings.business.logo = cv.toDataURL('image/png'); saveSettings(); renderBizLogo(); toast('اتحفظ اللوجو');
+        };
+        img.onerror = function () { toast('الملف ده مش صورة'); };
+        img.src = rd.result;
+      };
+      rd.readAsDataURL(f);
+    });
+    inp.click();
+  });
+  $('bizLogoDel').addEventListener('click', function () { delete settings.business.logo; saveSettings(); renderBizLogo(); toast('اتشال اللوجو'); });
+  renderBizLogo();
+
   // ---------------- العملاء: إضافة وتعديل ----------------
   function findCustByName(name) { var n = String(name || '').trim(); return db.customers.find(function (c) { return c.name.trim() === n; }) || null; }
   function ensureCustomer(name, phone) {
@@ -1117,7 +1141,7 @@
   // المستندات: فاتورة — عرض سعر — كشف حساب — كشف التكاليف (داخلي) — خطة التقطيع
   // ====================================================================
   var pv = null;
-  function business() { var b = settings.business || {}; return { name: b.name || '', trade: 'أعمال النجارة والأثاث', phone: b.phone || '', address: b.address || '' }; }
+  function business() { var b = settings.business || {}; return { name: b.name || '', trade: 'أعمال النجارة والأثاث', phone: b.phone || '', address: b.address || '', logo: b.logo || '' }; }
   function detailsText(it) {
     var cat = K.cat(it.cat), bits = [];
     var dt = dimsText(it); if (dt) bits.push(dt);

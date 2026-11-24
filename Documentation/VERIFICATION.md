@@ -351,3 +351,27 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
 * Versions: app 2.8.2; the 11 changed sections bumped one patch level (SW + version.json + APP_VERSION). Integrity: ALL CHECKS PASSED;
   465/465 cached files present.
 * Suites: `run-trade-suites` 24/24; launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35.
+
+## 22. 2.8.3 — «طريقة الاستخدام» in every section + section business data on invoices (2026-11-24)
+* **Usage guide:** `Shared-Assets/brand/guide.js` + `guide.css` (engine) and one `guide-steps.js` per section (13). On-screen
+  spotlight on the real buttons/fields with a step card (n of N, next/previous/skip). Part 1 walks a full example from opening the
+  section to the PDF invoice, then offers «ابدأ استخدام التطبيق» or «كمّل شرح باقي الأجزاء». Shown automatically on the first open
+  only; always available from «المزيد». Steps marked `since` + a higher `version` show a one-time «الجديد في القسم» tour.
+* **No effect on user data:** the section's own storage keys (same prefixes as `backup.js`) + `arzaqi_inv_extra_v1` are snapshotted
+  before the example and restored exactly afterwards; if the app is closed mid-way they are restored on the next open before the
+  section's scripts read storage. Large data (>1.5 MB) keeps its temporary copy in sessionStorage so the section's own saves never run
+  out of room (checked with 1.6 MB: copy in sessionStorage, data identical afterwards). No section storage or backup code changed.
+* **Engine fixes found by the tests:** the step card is always clamped inside the screen; elements are scrolled into view even where
+  `scrollIntoView` does not move the page (Painting); visibility ignores closed off-screen sheets; each section declares its own
+  history layering (`ovDepth` / `hfDepth` / `hg` / hash navigation) so «back» never leaves the section.
+* **`tests/guide.e2e.js`** (all 13 sections, 11 checks each): auto-start on first open; walks every step like a user; every step finds
+  its element; card and highlight on screen at every step; part 1 ends at the PDF; no warnings/errors; data identical afterwards;
+  no second auto-start; «طريقة الاستخدام» in المزيد; app closed mid-guide → data restored on the next open.
+* **Business data precedence:** `ArzaqiInvoice.bizInfo` — name/phone/logo (and address) from the section's «المزيد» win on that
+  section's invoices and documents; anything left empty (or the old shipped defaults) falls back to «بياناتي». Logo field added to the
+  six native sections. `tests/biz-precedence.e2e.js`: 26/26 (13 sections × with/without section data).
+* Versions: app 2.8.3; all 13 sections bumped one patch level (SW + version.json + APP_VERSION). Every section SW caches
+  `guide.js`, `guide.css` and its `guide-steps.js` (504/504 cached files exist; every local file each page loads is cached).
+  `tools/update-change-pins.sh` + `tools/verify-integrity.sh` → ALL CHECKS PASSED (originals untouched).
+* Suites: `run-trade-suites` 24/24; launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35,
+  biz-precedence 26, guide 143.

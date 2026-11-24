@@ -7,11 +7,11 @@
  * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
  * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const SW_VERSION = "1.0.2";
+const SW_VERSION = "1.0.3";
 const APP_CACHE = "hgyp-app-" + SW_VERSION;
 const RUNTIME_CACHE = "hgyp-runtime";
 const APP_FILES = [
-  "./", "./index.html", "./manifest.json", "./privacy.html", "./version.json",
+  "./", "./index.html", "./guide-steps.js", "./manifest.json", "./privacy.html", "./version.json",
   "./css/app.css",
   "./js/engine/core.js", "./js/engine/board.js", "./js/engine/plaster.js", "./js/engine/decor.js", "./js/engine/finance.js",
   "./js/data/catalog.js", "./js/store.js",
@@ -24,7 +24,7 @@ const APP_FILES = [
    الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
   "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

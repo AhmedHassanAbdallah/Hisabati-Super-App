@@ -76,7 +76,7 @@ jobs:
       - name: Check bundled web files
         run: |
           W=android-standalone/app/build/generated/hisabati-web/www
-          for f in Main-App/index.html Main-App/launcher.js Shared-Assets/fonts/cairo.css \
+          for f in Main-App/index.html Main-App/launcher.js Shared-Assets/fonts/cairo.css Shared-Assets/brand/guide.js Shared-Assets/brand/guide.css Trade-Modules/Electrical/guide-steps.js Trade-Modules/Marble/guide-steps.js \
                    Trade-Modules/Electrical/index.html Trade-Modules/Plumbing/index.html Trade-Modules/HVAC/index.html \
                    Trade-Modules/Painting/index.html Trade-Modules/Flooring/index.html Trade-Modules/Gypsum/index.html \
                    Trade-Modules/Plastering/index.html Trade-Modules/Metalwork/index.html Trade-Modules/Metalwork/js/calc.js Trade-Modules/Carpentry/index.html Trade-Modules/Carpentry/js/calc.js Trade-Modules/Carpentry/js/catalog.js \

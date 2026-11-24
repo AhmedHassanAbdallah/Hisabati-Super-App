@@ -3,7 +3,7 @@
  * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
  */
 'use strict';
-const APP_VERSION = '1.0.2';
+const APP_VERSION = '1.0.3';
 const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
 let currentView = 'home';
 

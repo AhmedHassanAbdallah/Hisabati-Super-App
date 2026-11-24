@@ -1,3 +1,42 @@
+--- /dev/null
++++ Trade-Modules/Electrical/guide-steps.js
+@@ -0,0 +1,36 @@
++/* أرزقي | Arzoqi — الكهرباء: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  var wait = ['wait', 450], home = [['unwind'], ['click', '#navBtn-home'], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'electrical', name: 'الكهرباء', version: 1, keys: ['ahmed_elec_', 'hesabaty_'], more: '#view-more', home: home,
++    layered: function () { return !!(history.state && history.state.ovDepth > 0); },
++    steps: [
++      { t: 'أهلاً بيك في قسم الكهرباء', d: 'هنعمل مثال كامل: عميل ← غرفة بالنقاط ← الحساب ← الفاتورة PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#view-home .home-sum' },
++      { t: 'فاتورة بالنقاط', d: 'الطريقة الأساسية: الغرف بالبرايز والإسبوتات + اللوحة والصواعد، وكله بيتحسب نقاط. (وفيه كمان «فاتورة بنود» لكل شغلانة بسعرها.)', el: '#qPoints', act: [['click', '#qPoints'], wait] },
++      { t: 'بيانات العميل', d: 'اسم العميل (التطبيق بيقترح من النوتة) والتليفون والعنوان.', el: '#clientName', act: [['fill', '#clientName', 'أ. محمد (مثال)'], ['fill', '#clientAddress', 'المعادي']] },
++      { t: 'سعر النقطة', d: '«تسعيرة موحدة»: سعر واحد للنقطة، وسعر متر البروفايل. أو «النظام القديم» بسعر لكل نوع.', el: '#newPointPrice' },
++      { t: 'التالي: الشغل', d: 'الخطوات فوق: العميل ← الغرف ← الحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'اللوحة والصواعد', d: 'عدد خطوط اللوحة والصواعد، وكل خط بكام نقطة.', el: '#mainPanelLines', act: [['fill', '#mainPanelLines', '8']] },
++      { t: 'ضيف غرفة', d: 'كل غرفة بالبرايز والإسبوتات والليد.', el: '#addRoomFab', act: [['click', '#addRoomFab'], wait] },
++      { t: 'اسم الغرفة', d: 'اختار من الأسماء الجاهزة أو اكتب.', el: '#roomName', act: [['fill', '#roomName', 'الصالة']] },
++      { t: 'النقاط في الغرفة', d: 'عدد البرايز والإسبوتات ومتر الليد — والإجمالي بيتحسب وانت بتكتب.', el: '#roomSockets', act: [['fill', '#roomSockets', '6'], ['fill', '#roomSpots', '8']] },
++      { t: 'حفظ الغرفة', d: 'دوس «حفظ الغرفة» وضيف باقي الغرف بنفس الطريقة.', el: '#saveRoomBtn', act: [['click', '#saveRoomBtn'], ['wait', 600]] },
++      { t: 'التالي: الحساب', d: 'بعد الغرف روح للحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'المدفوع والخصم', d: 'اكتب اللي اندفع والخصم لو فيه، والمتبقي بيتحسب لوحده.', el: '#paidAmount' },
++      { t: 'طلّع الفاتورة PDF', d: 'من الزرار ده بتفتح الفاتورة.', el: '#view-summary button[onclick="openSinglePagePreview(false)"]', act: [['click', '#view-summary button[onclick="openSinglePagePreview(false)"]'], ['wait', 800]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والغرف والحساب. تقدر تعدّل أي كلمة بالضغط عليها، وتكبّر أو تصغّر الخط.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF وتبعته للعميل. كده عرفت تطلّع الفاتورة 🎉', el: '#printPreviewModal .tb-print' },
++      { part: 2, t: 'واتساب', d: 'ابعت الفاتورة كرسالة واتساب أو انسخ نصها.', el: '#view-summary .btn-wa', pre: [['back'], wait] },
++      { part: 2, t: 'حفظ', d: '«تم ✓ حفظ» والفاتورة بتتسجل في النوتة على حساب العميل.', el: '#ebNext' },
++      { part: 2, t: 'فاتورة بنود', d: 'كل شغلانة بسعرها: تقفيل لوحة، سحب خط، تركيب نجفة…', el: '#qItems', pre: home },
++      { part: 2, t: 'كشف خامات', d: 'الخامات المطلوبة للطباعة، أو على حسابك وتتحاسب عليها.', el: '#qMat' },
++      { part: 2, t: 'تسجيل دفعة', d: 'أي فلوس استلمتها من عميل بتنزل في النوتة.', el: '#qPay' },
++      { part: 2, t: 'زرار +', d: 'من أي مكان: فاتورة، كشف خامات، دفعة، أو عميل جديد.', el: '#navPlus' },
++      { part: 2, t: 'الفواتير', d: 'كل الفواتير وكشوف الخامات.', el: '#navBtn-docs' },
++      { part: 2, t: 'العملاء (النوتة)', d: 'حساب كل عميل: الفواتير والدفعات والمتبقي واليومية.', el: '#navBtn-ledger' },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو هنا بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#techName', pre: [['click', '#navBtn-more'], wait] },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files Electrical/icons/icon-192.png and Trade-Modules/Electrical/icons/icon-192.png differ
 Binary files Electrical/icons/icon-512.png and Trade-Modules/Electrical/icons/icon-512.png differ
 Binary files Electrical/icons/icon-maskable-192.png and Trade-Modules/Electrical/icons/icon-maskable-192.png differ
@@ -35,12 +74,13 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      تصميم وتطوير: أحمد حسن عبدالله
      © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
      يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
-@@ -672,17 +669,19 @@
+@@ -672,17 +669,20 @@
        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
      }
    </style>
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
  
@@ -57,7 +97,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -988,7 +987,7 @@
+@@ -988,7 +988,7 @@
  
        <!-- عن المطور -->
        <div class="dev-card">
@@ -66,7 +106,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
          <div class="dev-name">أحمد حسن عبدالله</div>
          <div class="dev-role">مطوّر ومصمّم التطبيق</div>
          <div class="dev-links">
-@@ -999,7 +998,7 @@
+@@ -999,7 +999,7 @@
        </div>
  
        <div class="copyright">
@@ -75,7 +115,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
-@@ -1331,18 +1330,18 @@
+@@ -1331,18 +1331,18 @@
  
  <script>
    /* =========================================================
@@ -85,7 +125,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
       © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
       ========================================================= */
 -  const APP_VERSION = '2.4.1';
-+  const APP_VERSION = '2.4.3';
++  const APP_VERSION = '2.4.4';
    // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
    const IS_BETA = /\/beta\//.test(location.pathname);
    const KEY_PREFIX = IS_BETA ? 'beta_' : '';
@@ -97,7 +137,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    if (IN_APP) {
      // روابط واتساب وفيسبوك تفتح في تطبيقاتها، والطباعة عن طريق أندرويد (حفظ PDF أو طابعة)
      window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
-@@ -1357,7 +1356,7 @@
+@@ -1357,7 +1357,7 @@
    const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال كهرباء';
    const DEFAULT_TECH = 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية';
    const ROOM_PRESETS = ['الريسبشن', 'الصالة', 'غرفة النوم الرئيسية', 'غرفة الأطفال', 'غرفة المعيشة', 'المطبخ', 'الحمام', 'الطرقة والمدخل', 'البلكونة'];
@@ -106,7 +146,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    const EDITOR_VIEWS = ['pricing', 'rooms', 'summary'];
    // نظام البنود المنفصلة
    const WORK_PRESETS = ['تقفيل لوحة', 'تركيب لوحة', 'سحب خط', 'تأسيس نقطة', 'تركيب نجفة', 'تركيب إسبوتات', 'تركيب سخان', 'تركيب شفاط', 'تغيير بريزة / مفتاح', 'صيانة وكشف أعطال'];
-@@ -1659,7 +1658,7 @@
+@@ -1659,7 +1659,7 @@
      const order = EDITOR_VIEWS.indexOf(key);
      EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
      document.getElementById('headerTitle').textContent = (key === 'rooms' && isItemsMode(getCurrentInvoice())) ? 'بنود الفاتورة' : VIEW_TITLES[key];
@@ -115,7 +155,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
-@@ -2616,11 +2615,39 @@
+@@ -2616,11 +2616,39 @@
      return `
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -156,7 +196,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    function buildItemsInvoiceHTML(inv) {
      autoFitTypographyForRoomCount(Math.round(inv.items.length * 0.8));
      const t = computeInvoice(inv);
-@@ -2679,6 +2706,7 @@
+@@ -2679,6 +2707,7 @@
          </div>
        </div>
        ${printFooterHTML()}`;
@@ -164,7 +204,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    }
  
    function buildSinglePageHTML() {
-@@ -2850,8 +2878,9 @@
+@@ -2850,8 +2879,9 @@
  
        <footer class="inv-foot">
          <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -175,7 +215,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    }
  
    function openSinglePagePreview(autoPrint = false) {
-@@ -3113,6 +3142,8 @@
+@@ -3113,6 +3143,8 @@
        </section>`;
  
      if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
@@ -184,7 +224,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
  
      // صفحتان منفصلتان: حساب الشغل / حساب الخامات
      html += `
-@@ -3957,6 +3988,8 @@
+@@ -3957,6 +3989,8 @@
      if (!l) return;
      if (!l.items.length) { showAppToast('⚠️ ضيف الخامات الأول قبل الطباعة'); return; }
      buildMatListHTML(l);
@@ -193,7 +233,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      printJobName = 'كشف خامات ' + matListName(l);
      openOverlay('preview');
      const modal = document.getElementById('printPreviewModal');
-@@ -4087,7 +4120,7 @@
+@@ -4087,7 +4121,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: 'hesabaty', backupVersion: 3, exportedAt: new Date().toISOString(), customers, settings, matLists }),
@@ -202,7 +242,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      showAppToast('✔️ تم تنزيل النسخة الكاملة (الفواتير + النوتة + كشوفات الخامات)');
    }
    // نسخة النوتة فقط
-@@ -4390,7 +4423,7 @@
+@@ -4390,7 +4424,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -211,6 +251,13 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      else if (state === 'failed') { txt.textContent = 'التحميل وقف — تأكد من الإنترنت وجرب تاني'; btn.disabled = false; }
    };
    // يستدعيها التطبيق كل ما ترجع له
+@@ -4419,5 +4453,6 @@
+   initApp();
+   initServiceWorker();
+ </script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- Electrical/manifest.json
 +++ Trade-Modules/Electrical/manifest.json
 @@ -1,7 +1,7 @@
@@ -268,11 +315,18 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
   * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
   */
 -const SW_VERSION = "2.4.1";
-+const SW_VERSION = "2.4.3";
++const SW_VERSION = "2.4.4";
  
  const APP_PREFIX = "hesabaty-app-";
  const META_CACHE = "hesabaty-meta";
-@@ -31,8 +31,7 @@
+@@ -25,14 +25,13 @@
+ 
+ const APP_FILES = [
+   "./",
+-  "./index.html",
++  "./index.html", "./guide-steps.js",
+   "./manifest.json",
+   "./privacy.html",
    "./icons/icon-192.png",
    "./icons/icon-512.png",
    "./icons/icon-maskable-192.png",
@@ -291,7 +345,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabaty-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -328,16 +382,22 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
 +});
 --- Electrical/version.json
 +++ Trade-Modules/Electrical/version.json
-@@ -1,7 +1,9 @@
+@@ -1,10 +1,12 @@
  {
 -  "version": "2.4.1",
 -  "date": "2026-11-15",
-+  "version": "2.4.3",
++  "version": "2.4.4",
 +  "date": "2026-11-24",
    "notes": [
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
      "زرار حذف جنب كل فاتورة في قايمة الفواتير وفي الرئيسية",
-     "زرار حذف جنب كل كشف خامات",
-     "بيسألك قبل الحذف عشان مفيش حاجة تتمسح بالغلط",
+-    "زرار حذف جنب كل كشف خامات",
+-    "بيسألك قبل الحذف عشان مفيش حاجة تتمسح بالغلط",
+-    "لو الفاتورة أو الكشف مربوط بعميل، بيتشال من نوتته تلقائي"
++    "زرار حذف جنب كل كشف خامات"
+   ]
+ }
 Deleted (moved to Shared-Assets or removed on purpose): Electrical/icons/developer.jpg

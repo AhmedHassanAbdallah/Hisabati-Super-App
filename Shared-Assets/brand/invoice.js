@@ -2,7 +2,7 @@
  * أرزقي — الفاتورة الموحدة لكل الأقسام.
  *
  * كل قسم بيحسب أرقامه بنفسه (زي ما هو) وبيبعتها هنا، والملف ده بيرسم الفاتورة بشكل واحد:
- *   1) فوق: بيانات الصنايعي + اللوجو + التليفون (من "بياناتي في الفاتورة" في أرزقي، ولو فاضية من إعدادات القسم)
+ *   1) فوق: بيانات الصنايعي + اللوجو + التليفون — من بيانات القسم (المزيد) لو اتكتبت، واللي فاضي بيتاخد من «بياناتي» في أرزقي
  *   2) العميل في سطر واحد: الاسم · التليفون · العنوان — وتحته ملحوظة العميل بخط صغير
  *   3) جداول البنود بتاعة القسم (نفس محتواها) بتنسيق موحد
  *   4) صندوق الحساب: بنود الحساب (المصنعية، الخامات على العميل، العمالة على العميل …) ← الإجمالي ← الواصل من العميل ← المتبقي
@@ -12,7 +12,7 @@
  *
  * ArzaqiInvoice.render({
  *   section, docKey, docLabel, number, date, billable,
- *   business: { name, trade, phone, logo },             // احتياطي لو "بياناتي" فاضية
+ *   business: { name, trade, phone, logo, address },    // بيانات القسم — ليها الأولوية، و«بياناتي» هي الأساس لو فاضية
  *   client: { name, phone, address, note },
  *   chips: [html], bodyHTML, notesHTML,
  *   totals: { lines: [[label, amount, sign]], total, totalLabel, paid, paidLabel },
@@ -49,14 +49,31 @@
     shield: '<svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'
   };
 
+  /*
+   * بيانات الصنايعي في رأس المستند: اللي اتكتب في «المزيد» جوه القسم ليه الأولوية في فواتير القسم ده،
+   * واللي فاضي (أو لسه بالقيمة الافتراضية اللي القسم بييجي بيها) بيتاخد من «بياناتي» في الصفحة الرئيسية.
+   * كل خانة لوحدها: الاسم، التليفون، اللوجو.
+   */
+  var SECTION_DEFAULTS = ['كشف حساب ومستخلص أعمال كهرباء', 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية',
+    'كشف حساب ومستخلص أعمال نقاشة ودهانات', 'للنقاشة والدهانات والديكورات', 'فاتورة أعمال تكييف وتبريد', 'أعمال السباكة والصحي'];
+  function own(v) { v = String(v == null ? '' : v).trim(); return v && SECTION_DEFAULTS.indexOf(v) < 0 ? v : ''; }
+  function bizInfo(p, b) {
+    p = p || {}; b = b || {};
+    var secName = own(b.name), useSec = !!secName || !p.name;
+    return {
+      name: secName || p.name || b.name || '',
+      trade: secName ? (b.trade || p.trade || '') : (p.name ? (p.trade || '') : (p.trade || b.trade || '')),
+      phone: own(b.phone) || p.phone || '',
+      logo: b.logo || p.logo || '',
+      address: useSec ? (b.address || '') : ''
+    };
+  }
+
   function render(m) {
     var money = m.money || function (v) { return String(v); };
     var p = profile();
     var b = m.business || {};
-    var name = p.name || b.name || '';
-    var trade = p.name ? (p.trade || '') : (p.trade || b.trade || '');
-    var phone = p.phone || b.phone || '';
-    var logo = p.logo || b.logo || '';
+    var bz = bizInfo(p, b), name = bz.name, trade = bz.trade, phone = bz.phone, logo = bz.logo;
     var key = m.section && m.docKey ? (m.section + ':' + m.docKey) : '';
     var ex = key ? extraFor(key) : {};
     var warranty = ex.warranty != null ? ex.warranty : (m.warranty || p.warranty || '');
@@ -75,7 +92,7 @@
       + '<div class="az-biz-name" ' + CE + '>' + esc(name || 'اسم الصنايعي') + '</div>'
       + (trade ? '<p class="az-trade" ' + CE + '>' + esc(trade) + '</p>' : '')
       + (phone ? '<p class="az-phone">' + ICON.phone + '<b dir="ltr" ' + CE + '>' + esc(phone) + '</b></p>' : '')
-      + (b.address && !p.name ? '<p class="az-trade" ' + CE + '>' + esc(b.address) + '</p>' : '')
+      + (bz.address ? '<p class="az-trade" ' + CE + '>' + esc(bz.address) + '</p>' : '')
       + '</div></div>'
       + '<div class="az-doc">'
       + '<h1 class="az-doc-type"><span ' + CE + '>' + esc(m.docLabel || 'فاتورة') + '</span></h1>'
@@ -216,7 +233,7 @@
    * وبيانات العميل بسطر العميل الموحد، والفوتر بـ «تم التصدير من خلال تطبيق أرزقي | Arzoqi» — والمحتوى نفسه
    * (الجداول والأرقام والتوقيعات) بيفضل زي ما القسم حسبه بالظبط، بس بألوان وخطوط الهوية.
    * o.titleFrom: 'h1' لو عنوان المستند في الـ h1 (الكهرباء/النقاشة/السباكة/التكييف)، غير كده من مربع المستند.
-   * o.business: بيانات الصنايعي من إعدادات القسم (لو "بياناتي" فاضية).
+   * o.business: بيانات الصنايعي من إعدادات القسم (ليها الأولوية، و«بياناتي» هي الأساس لو فاضية).
    */
   function skin(root, o) {
     o = o || {};
@@ -224,8 +241,7 @@
     var head = root.querySelector('header.inv-head, .d-head');
     if (!head) return false;
     var p = profile(), b = o.business || {};
-    var name = p.name || b.name || '', trade = p.name ? (p.trade || '') : (p.trade || b.trade || '');
-    var phone = p.phone || b.phone || '', logo = p.logo || b.logo || '';
+    var bz = bizInfo(p, b), name = bz.name, trade = bz.trade, phone = bz.phone, logo = bz.logo;
     var box = head.querySelector('.inv-doc, .d-doc');
     var tagEl = box && box.querySelector('.tag'), tag = tagEl ? tagEl.textContent.trim() : '';
     var h1 = head.querySelector('h1'), h1t = h1 ? h1.textContent.trim() : '';
@@ -242,7 +258,7 @@
       + '<div class="az-biz-text"><div class="az-biz-name" ' + CE + '>' + esc(name || 'اسم الصنايعي') + '</div>'
       + (trade ? '<p class="az-trade" ' + CE + '>' + esc(trade) + '</p>' : '')
       + (phone ? '<p class="az-phone">' + ICON.phone + '<b dir="ltr" ' + CE + '>' + esc(phone) + '</b></p>' : '')
-      + (b.address && !p.name ? '<p class="az-trade" ' + CE + '>' + esc(b.address) + '</p>' : '')
+      + (bz.address ? '<p class="az-trade" ' + CE + '>' + esc(bz.address) + '</p>' : '')
       + '</div></div><div class="az-doc"><h1 class="az-doc-type"><span ' + CE + '>' + esc(label || 'مستند') + '</span></h1>'
       + (number ? '<span class="az-doc-line">رقم: <b dir="ltr" ' + CE + '>' + esc(number) + '</b></span>' : '')
       + lines.join('') + '</div></header><div class="az-stripe"><i></i><i></i><i></i></div>';
@@ -284,5 +300,5 @@
     return skin(tmp, o) ? tmp.innerHTML : html;
   }
 
-  window.ArzaqiInvoice = { skinHTML: skinHTML, render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet, fieldsFromHTML: fieldsFromHTML, skin: skin };
+  window.ArzaqiInvoice = { bizInfo: bizInfo, skinHTML: skinHTML, render: render, profile: profile, esc: esc, kindLines: kindLines, harvest: harvest, wrapSheet: wrapSheet, fieldsFromHTML: fieldsFromHTML, skin: skin };
 })();

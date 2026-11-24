@@ -137,3 +137,10 @@ their version-pinning logic runs exactly as designed.
    standalone app.
 4. **Plastering** was added on 2026-11-20. It was copied from GitHub `main` @ `ac46676`;
    the local clone of `Hesabaty-plaster` in the first session was still empty and was not modified.
+
+## 5. Usage guide (since 2.8.3)
+Each section page loads `Shared-Assets/brand/guide.css` + `guide.js` in `<head>` (right after `invoice.js`) and its own
+`guide-steps.js` at the end of `<body>`. Both are additive `<script>`/`<link>` tags in the copies only (the originals stay
+read-only). The engine never changes how a section stores data: it snapshots the section's own keys before the walkthrough and puts
+them back afterwards (and on the next open if the app was closed mid-way). When a section's UI changes, update its
+`guide-steps.js`; `tests/guide.e2e.js` fails if any step no longer finds its element.

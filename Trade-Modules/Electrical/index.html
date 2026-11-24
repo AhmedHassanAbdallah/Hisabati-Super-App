@@ -671,6 +671,7 @@
   </style>
   <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
   <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
+  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
 </head>
 <body>
 
@@ -1334,7 +1335,7 @@
      تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
      © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
      ========================================================= */
-  const APP_VERSION = '2.4.3';
+  const APP_VERSION = '2.4.4';
   // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
   const IS_BETA = /\/beta\//.test(location.pathname);
   const KEY_PREFIX = IS_BETA ? 'beta_' : '';
@@ -4452,5 +4453,6 @@
   initApp();
   initServiceWorker();
 </script>
+<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
 </body>
 </html>

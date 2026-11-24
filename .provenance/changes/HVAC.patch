@@ -1,3 +1,44 @@
+--- /dev/null
++++ Trade-Modules/HVAC/guide-steps.js
+@@ -0,0 +1,38 @@
++/* أرزقي | Arzoqi — التكييف والتبريد: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  var wait = ['wait', 450], home = [['unwind'], ['click', '#navBtn-home'], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'hvac', name: 'التكييف والتبريد', version: 1, keys: ['hesabati_hvac_'], more: '#view-more', home: home,
++    layered: function () { return !!(history.state && history.state.ovDepth > 0); },
++    steps: [
++      { t: 'أهلاً بيك في قسم التكييف', d: 'هنعمل مثال كامل: فاتورة تركيب ← العميل والجهاز ← البنود ← الحساب ← الفاتورة PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#view-home .home-sum' },
++      { t: 'فاتورة تركيب', d: 'تركيب أجهزة + نحاس + خامات. (وفيه كمان صيانة وإصلاح ومقايسة وعرض سعر من «فاتورة / عرض سعر».)', el: '#qInstall', act: [['click', '#qInstall'], wait] },
++      { t: 'بيانات العميل', d: 'اسم العميل (بيقترح من العملاء) والتليفون وعنوان الشغل.', el: '#clientName', act: [['fill', '#clientName', 'أ. محمد (مثال)'], ['fill', '#clientAddress', 'الشيخ زايد']] },
++      { t: 'الجهاز والضمان', d: 'نوع الجهاز وقدرته، ومدة الضمان وشروطه — بيظهروا في الفاتورة وفي سجل الجهاز.', el: '#docDeviceText', act: [['fill', '#docDeviceText', 'سبليت 1.5 حصان']] },
++      { t: 'التالي: البنود', d: 'الخطوات فوق: العميل والجهاز ← البنود ← الحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'أقسام البنود', d: 'تركيب، صيانة وتنظيف، زيارات، إصلاح، فريون، نحاس وعزل، فك ونقل، قطع غيار… أو من المخزن وقائمة الأسعار.', el: '#view-lines .chip[data-cat="install"]' },
++      { t: 'ضيف بند', d: 'دوس «بند» علشان تضيف شغلانة.', el: '#addLineFab', act: [['click', '#addLineFab'], wait] },
++      { t: 'اختار البند', d: 'اختار من الأسماء الجاهزة أو اكتب اسمك.', el: '#formSheet .chip[data-i="0"]', act: [['click', '#formSheet .chip[data-i="0"]']] },
++      { t: 'الكمية والسعر', d: 'الكمية وطريقة الحساب (بالجهاز، بالمتر…) والسعر، وسعر التكلفة لو عايز تعرف ربحك.', el: '#lfQty', act: [['fill', '#lfPrice', '900']] },
++      { t: 'حفظ البند', d: 'دوس «حفظ البند» وضيف النحاس والخامات بنفس الطريقة.', el: '#formSheet [data-f="save"]', act: [['click', '#formSheet [data-f="save"]'], ['wait', 600]] },
++      { t: 'التالي: الحساب', d: 'بعد البنود روح للحساب.', el: '#ebNext', act: [['click', '#ebNext'], wait] },
++      { t: 'إضافات وخصم', d: 'رسوم انتقال أو سقالة أو خصم، وتسجيل العربون أو سداد المتبقي.', el: '#docDisc' },
++      { t: 'طلّع الفاتورة PDF', d: 'من الزرار ده بتفتح الفاتورة.', el: '#view-summary button[onclick="openDocPreview(false)"]', act: [['click', '#view-summary button[onclick="openDocPreview(false)"]'], ['wait', 800]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والبنود والحساب. تقدر تعدّل أي كلمة بالضغط عليها، وتكبّر أو تصغّر الخط.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF وتبعته للعميل. كده عرفت تطلّع الفاتورة 🎉', el: '#printPreviewModal .tb-print' },
++      { part: 2, t: 'العربون والدفعات', d: 'سجّل عربون أو سداد على الفاتورة دي.', el: '#view-summary .btn-accent[onclick^="openPaymentForm"]', pre: [['back'], wait] },
++      { part: 2, t: 'مصروف على الفاتورة', d: 'أي مصروف بيتخصم من ربحها.', el: '#view-summary [onclick^="openExpenseForm"]' },
++      { part: 2, t: 'واتساب', d: 'ابعت الفاتورة كرسالة أو انسخ نصها.', el: '#view-summary .btn-wa' },
++      { part: 2, t: 'زيارة صيانة', d: 'الزيارات بتتسجل في سجل الجهاز.', el: '#qVisit', pre: home },
++      { part: 2, t: 'فاتورة / عرض سعر', d: 'صيانة، إصلاح، مقايسة، عرض سعر…', el: '#qDoc' },
++      { part: 2, t: 'تسجيل دفعة', d: 'عربون أو دفعة من أي عميل.', el: '#qPay' },
++      { part: 2, t: 'الحاسبات', d: 'تركيب، فريون، نحاس…', el: '#qCalc' },
++      { part: 2, t: 'الأجهزة', d: 'أجهزة العملاء وسجل صيانة كل جهاز ومواعيد الصيانة الجاية.', el: '#qDevices' },
++      { part: 2, t: 'الفواتير', d: 'كل المستندات.', el: '#navBtn-docs' },
++      { part: 2, t: 'العملاء', d: 'حساب كل عميل ودفعاته وأجهزته.', el: '#navBtn-ledger' },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو هنا بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#bizName', pre: [['click', '#navBtn-more'], wait] },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files HVAC/icons/icon-192.png and Trade-Modules/HVAC/icons/icon-192.png differ
 Binary files HVAC/icons/icon-512.png and Trade-Modules/HVAC/icons/icon-512.png differ
 Binary files HVAC/icons/icon-maskable-192.png and Trade-Modules/HVAC/icons/icon-maskable-192.png differ
@@ -51,16 +92,17 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      .brand-tag { display: inline-block; font-size: .6rem; font-weight: 900; letter-spacing: .6px; background: rgba(255,255,255,.14); color: #bae6fd; padding: 0 7px; border-radius: 99px; margin-inline-start: 6px; vertical-align: middle; }
      .pg-actions { display: flex; gap: 8px; flex-shrink: 0; }
      .page-overlay .app-header .titles .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-@@ -726,6 +723,8 @@
+@@ -726,6 +723,9 @@
      .inv-notes ol { padding-right: 18px; }
      .inv-notes ol li { margin-bottom: 3px; }
    </style>
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
  
-@@ -738,7 +737,7 @@
+@@ -738,7 +738,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -69,7 +111,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -907,7 +906,7 @@
+@@ -907,7 +907,7 @@
        <h3 class="more-h">التطبيق وبياناتك</h3>
        <div class="card">
          <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
@@ -78,7 +120,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
          <div class="btn-row">
            <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
            <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
-@@ -933,13 +932,13 @@
+@@ -933,13 +933,13 @@
  
        <div class="card hidden" id="apkCard">
          <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
@@ -94,7 +136,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
          <div class="dev-name">أحمد حسن عبدالله</div>
          <div class="dev-role">مطوّر ومصمّم التطبيق</div>
          <div class="dev-links">
-@@ -950,7 +949,7 @@
+@@ -950,7 +950,7 @@
        </div>
  
        <div class="copyright">
@@ -103,6 +145,13 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
          AIR CONDITIONING &amp; REFRIGERATION MANAGEMENT<br>
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
+@@ -1122,5 +1122,6 @@
+ <script src="./js/calc.js"></script>
+ <script src="./js/print.js"></script>
+ <script src="./js/app.js"></script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- HVAC/js/app.js
 +++ Trade-Modules/HVAC/js/app.js
 @@ -1,5 +1,5 @@
@@ -191,7 +240,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
     ========================================================= */
 -const APP_VERSION = '1.0.2';
 -const APP_NAME = 'حساباتي HVAC';
-+const APP_VERSION = '1.0.3';
++const APP_VERSION = '1.0.4';
 +const APP_NAME = 'أرزقي HVAC';
  const IS_BETA = /\/beta\//.test(location.pathname);
 -// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة
@@ -410,11 +459,19 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
   * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
   */
 -const SW_VERSION = "1.0.2";
-+const SW_VERSION = "1.0.3";
++const SW_VERSION = "1.0.4";
  
  const APP_PREFIX = "hesabati-hvac-app-";
  const META_CACHE = "hesabati-hvac-meta";
-@@ -35,7 +35,6 @@
+@@ -28,14 +28,13 @@
+ 
+ const APP_FILES = [
+   "./",
+-  "./index.html",
++  "./index.html", "./guide-steps.js",
+   "./manifest.json",
+   "./privacy.html",
+   "./icons/icon-192.png",
    "./icons/icon-512.png",
    "./icons/icon-maskable-192.png",
    "./icons/icon-maskable-512.png",
@@ -431,7 +488,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = "hesabati-hvac-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -490,15 +547,21 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      if (p === '/' || p === '') p = '/index.html';
 --- HVAC/version.json
 +++ Trade-Modules/HVAC/version.json
-@@ -1,7 +1,8 @@
+@@ -1,10 +1,12 @@
  {
 -  "version": "1.0.2",
 -  "date": "2026-11-15",
-+  "version": "1.0.3",
++  "version": "1.0.4",
 +  "date": "2026-11-24",
    "notes": [
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
      "ضبط كل الصفحات على شاشة الموبايل: مفيش أي كلام طالع برا إطاره",
      "النصوص الطويلة (العقود، بيانات الجهاز، المخزن) بقت بتنزل سطر جديد جوه الإطار",
-     "الأرقام الكبيرة في مربعات الملخص بتظهر كاملة من غير ما تتقطع",
+-    "الأرقام الكبيرة في مربعات الملخص بتظهر كاملة من غير ما تتقطع",
+-    "عرض قدرة الجهاز (BTU/h) بالاتجاه الصحيح"
++    "الأرقام الكبيرة في مربعات الملخص بتظهر كاملة من غير ما تتقطع"
+   ]
+ }
 Deleted (moved to Shared-Assets or removed on purpose): HVAC/icons/developer.jpg

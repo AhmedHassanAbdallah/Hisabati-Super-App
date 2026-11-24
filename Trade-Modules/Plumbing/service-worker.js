@@ -15,7 +15,7 @@
  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
  */
-const SW_VERSION = "1.0.1";
+const SW_VERSION = "1.0.2";
 
 const APP_PREFIX = "hesabati-plumbing-app-";
 const META_CACHE = "hesabati-plumbing-meta";
@@ -28,7 +28,7 @@ const INDEX_URL = new URL("./index.html", self.location).href;
 
 const APP_FILES = [
   "./",
-  "./index.html",
+  "./index.html", "./guide-steps.js",
   "./manifest.json",
   "./privacy.html",
   "./icons/icon-192.png",
@@ -126,7 +126,7 @@ async function setVersion(version) {
    الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
   "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

@@ -9,14 +9,14 @@
  *
  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const VERSION = '1.0.2';
+const VERSION = '1.0.3';
 const PREFIX = 'hplaster-';
 const APP_CACHE = PREFIX + 'app-' + VERSION;
 const RUNTIME_CACHE = PREFIX + 'runtime';
 
 const APP_FILES = [
   './',
-  './index.html',
+  './index.html', './guide-steps.js',
   './manifest.json',
   './privacy.html',
   './css/app.css',
@@ -40,7 +40,7 @@ const APP_FILES = [
    الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
   "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]

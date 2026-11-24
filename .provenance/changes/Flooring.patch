@@ -1,3 +1,48 @@
+--- /dev/null
++++ Trade-Modules/Flooring/guide-steps.js
+@@ -0,0 +1,42 @@
++/* أرزقي | Arzoqi — الأرضيات: خطوات «طريقة الاستخدام» (المحرك في Shared-Assets/brand/guide.js) */
++(function () {
++  if (!window.ArzoqiGuide) return;
++  // النوافذ والصفحات هنا بتتعمل وقت الفتح، فبنشاور على اللي فوق خالص
++  function last(q) { var a = document.querySelectorAll(q); return a[a.length - 1] || null; }
++  function sh(sel) { return function () { var s = last('.sheet.open'); return s && s.querySelector(sel); }; }
++  function pg(sel) { return function () { var p = last('.page-overlay'); return p && p.querySelector(sel); }; }
++  var wait = ['wait', 450], home = [['unwind'], ['click', '#navBtn-home'], ['wait', 300]];
++  ArzoqiGuide.define({
++    id: 'flooring', name: 'الأرضيات', version: 1, keys: ['hflooring_'], more: '#view-more', home: home,
++    layered: function () { return !!(history.state && history.state.hfDepth > 0); },
++    steps: [
++      { t: 'أهلاً بيك في قسم الأرضيات', d: 'هنعمل مثال كامل: مشروع ← بند بالمتر ← فاتورة مصنعية ← PDF. ده مثال بس، وبياناتك هترجع زي ما هي في الآخر.', el: '#view-home .home-sum' },
++      { t: 'مشروع جديد', d: 'عميل + بنود + حساب المصنعية والخامات والربح.', el: '#view-home [data-act="newProject"]', act: [['click', '#view-home [data-act="newProject"]'], wait] },
++      { t: 'اسم المشروع والعميل', d: 'اسم يفرّق المشروع، واسم العميل وتليفونه (أو اختار عميل مسجل).', el: sh('[data-k="name"]'), act: [['fill', sh('[data-k="name"]'), 'شقة التجمع (مثال)'], ['fill', sh('[data-nc="name"]'), 'أ. محمد (مثال)']] },
++      { t: 'نوع الشغل والحالة', d: 'سيراميك، بورسلين، رخام، باركيه، إنترلوك… وحالة المشروع ومواعيده.', el: sh('[data-k="type"]') },
++      { t: 'حفظ المشروع', d: 'دوس «حفظ» وهيتفتح المشروع.', el: sh('[data-act="save"]'), act: [['click', sh('[data-act="save"]')], ['wait', 700]] },
++      { t: 'ضيف أول بند', d: 'كل شغلانة في المشروع بند: تركيب بورسلين، وزرة، درج…', el: pg('.btn-accent[data-act="add"]'), act: [['click', pg('.btn-accent[data-act="add"]')], wait] },
++      { t: 'اسم البند وطريقة الحساب', d: 'بالمتر المربع أو الطولي أو بالقطعة أو بالدرجة أو مقطوعية… ومصنعية بس أو توريد وتركيب. أو اختار من «أنواع الأعمال».', el: sh('[data-k="name"]'), act: [['fill', sh('[data-k="name"]'), 'تركيب بورسلين 60×60']] },
++      { t: 'الكمية والسعر', d: 'الكمية وسعر المصنعية — والإجمالي بيتحسب لوحده.', el: sh('[data-k="qty"]'), act: [['fill', sh('[data-k="qty"]'), '40'], ['fill', sh('[data-k="laborPrice"]'), '120']] },
++      { t: 'حفظ البند', d: 'دوس «حفظ البند» وضيف باقي البنود بنفس الطريقة.', el: sh('[data-act="save"]'), act: [['click', sh('[data-act="save"]')], ['wait', 700]] },
++      { t: 'حساب المشروع', d: 'قيمة المشروع والمدفوع والمتبقي وصافي الربح.', el: pg('.hero') },
++      { t: 'فاتورة من المشروع', d: 'الزرار ده بيعمل فاتورة أو مقايسة أو مستخلص من بنود المشروع.', el: pg('[aria-label="فاتورة من المشروع"]'), act: [['click', pg('[aria-label="فاتورة من المشروع"]')], wait] },
++      { t: 'نوع المستند', d: 'فاتورة مصنعية، توريد خامات، توريد وتركيب، مقايسة، عرض سعر، مستخلص أعمال. هنختار «فاتورة مصنعية».', el: sh('[data-id="labor"]'), act: [['click', sh('[data-id="labor"]')], ['wait', 700]] },
++      { t: 'الفاتورة', d: 'البنود نازلة من المشروع، وتقدر تضيف بند أو خصم أو مبلغ وتكتب ملاحظات.', el: pg('[data-k="discount"]') },
++      { t: 'طلّع الفاتورة PDF', d: 'من الزرار ده بتفتح المعاينة.', el: pg('.btn-accent[data-act="print"]'), act: [['click', pg('.btn-accent[data-act="print"]')], ['wait', 800]] },
++      { t: 'ده شكل الفاتورة', d: 'بياناتك واللوجو والعميل والبنود والحساب. تقدر تعدّل أي نص بالضغط عليه، وتكبّر أو تصغّر الخط من فوق.', el: '#printViewport' },
++      { t: 'اطبع أو احفظ PDF', d: 'من هنا بتطبع أو بتحفظ PDF وتبعته للعميل. كده عرفت تطلّع الفاتورة 🎉', el: pg('[data-print]') },
++      { part: 2, t: 'واتساب', d: 'ابعت الفاتورة كرسالة أو انسخها كنص، أو اعمل نسخة جديدة منها.', el: pg('[data-act="wa"]'), pre: [['back'], wait] },
++      { part: 2, t: 'المساحات والخامات والمصروفات والدفعات', d: 'جوه المشروع: حاسبة المساحات، والخامات المصروفة، والمصروفات، ودفعات العميل — وكله بيدخل في صافي الربح.', el: pg('[data-tab="areas"]'), pre: [['back'], wait] },
++      { part: 2, t: 'الخصم والإضافات', d: 'خصم أو مبالغ إضافية على المشروع.', el: pg('[data-act="adj"]') },
++      { part: 2, t: 'فاتورة / عرض سعر', d: 'مستند جديد من غير مشروع.', el: '#view-home [data-act="newDoc"]', pre: home },
++      { part: 2, t: 'المخزن', d: 'الخامات بأسعار الشراء والبيع والكميات.', el: '#view-home [data-act="newMaterial"]' },
++      { part: 2, t: 'تسجيل دفعة', d: 'أي مبلغ وصلك من عميل.', el: '#view-home [data-act="newPayment"]' },
++      { part: 2, t: 'الحاسبات', d: 'المساحات، البلاط، الباركيه، الإنترلوك، اللاصق، الترويبة…', el: '#navBtn-calc' },
++      { part: 2, t: 'المشروعات', d: 'كل المشروعات بحالتها.', el: '#navBtn-projects' },
++      { part: 2, t: 'العملاء والفواتير والعمال والتقارير', d: 'كل أدوات القسم في «المزيد».', el: '#view-more [data-act="customers"]', pre: [['click', '#navBtn-more'], wait] },
++      { part: 2, t: 'بياناتك في الفواتير', d: 'الاسم والتليفون واللوجو هنا بيظهروا في فواتير القسم ده، واللي فاضي بيتاخد من «بياناتي».', el: '#view-more [data-act="biz"]' },
++      { part: 2, t: 'طريقة الاستخدام', d: 'الشرح ده هنا دايماً — ارجعله في أي وقت.', el: '.azg-more' }
++    ]
++  });
++})();
 Binary files Flooring/icons/icon-192.png and Trade-Modules/Flooring/icons/icon-192.png differ
 Binary files Flooring/icons/icon-512.png and Trade-Modules/Flooring/icons/icon-512.png differ
 Binary files Flooring/icons/icon-maskable-192.png and Trade-Modules/Flooring/icons/icon-maskable-192.png differ
@@ -24,7 +69,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -19,23 +19,25 @@
+@@ -19,23 +19,26 @@
      // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح خاص بتطبيق الأرضيات فقط
      try { var _t = localStorage.getItem('hflooring_theme'); if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}
    </script>
@@ -40,6 +85,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    -->
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
++  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
  </head>
  <body>
  
@@ -54,15 +100,22 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
      </div>
      <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -79,7 +81,7 @@
+@@ -79,7 +82,7 @@
  
  <div id="appToast" class="toast" role="status" aria-live="polite"></div>
  
 -<script>window.APP_VERSION = '1.0.0';</script>
-+<script>window.APP_VERSION = '1.0.2';</script>
++<script>window.APP_VERSION = '1.0.3';</script>
  <script src="./js/calc.js"></script>
  <script src="./js/finance.js"></script>
  <script src="./js/store.js"></script>
+@@ -119,5 +122,6 @@
+     });
+   })();
+ </script>
++<script src="./guide-steps.js"></script><!-- أرزقي: طريقة الاستخدام -->
+ </body>
+ </html>
 --- Flooring/js/app.js
 +++ Trade-Modules/Flooring/js/app.js
 @@ -1,5 +1,5 @@
@@ -313,14 +366,15 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
   * (أو شغّل: node tools/bump-version.js 1.0.1 "ملاحظة")
   */
 -const VERSION = '1.0.0';
-+const VERSION = '1.0.2';
++const VERSION = '1.0.3';
  const PREFIX = 'hflooring-';
  const CACHE = PREFIX + 'app-' + VERSION;
  const SCOPE_PATH = new URL('./', self.location).pathname;
  const FILES = [
-   './', './index.html', './manifest.json', './privacy.html', './version.json',
+-  './', './index.html', './manifest.json', './privacy.html', './version.json',
 -  './css/app.css', './css/flooring.css', './fonts/cairo.css',
 -  './fonts/cairo-arabic.woff2', './fonts/cairo-latin.woff2', './fonts/cairo-latin-ext.woff2',
++  './', './index.html', './guide-steps.js', './manifest.json', './privacy.html', './version.json',
 +  './css/app.css', './css/flooring.css',
    './js/calc.js', './js/finance.js', './js/store.js', './js/ui.js', './js/app.js', './js/modules.js', './js/calculators.js', './js/docs.js',
 -  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
@@ -332,7 +386,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
-+const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
++const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "guide.js", "guide.css", "arzoqi-wordmark-light.png",
 +  "../fonts/arzoqi-fonts.css", "../fonts/cairo.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
@@ -359,20 +413,27 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    event.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' })))));
 --- Flooring/version.json
 +++ Trade-Modules/Flooring/version.json
-@@ -1,8 +1,10 @@
+@@ -1,12 +1,12 @@
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-17",
-+  "version": "1.0.2",
++  "version": "1.0.3",
 +  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للأرضيات والتشطيبات",
+-    "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة",
+-    "14 طريقة محاسبة داخل نفس المشروع",
+-    "المشروعات والعملاء والخامات والمخزون والعمال والمصروفات والأرباح والنوتة",
+-    "فواتير ومقايسات وعروض أسعار ومستخلصات وإيصالات وكشوف حساب PDF",
+-    "يعمل بدون إنترنت مع نسخ احتياطي واستعادة"
++    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
++    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "أول إصدار من أرزقي للأرضيات والتشطيبات",
-     "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة",
-     "14 طريقة محاسبة داخل نفس المشروع",
-     "المشروعات والعملاء والخامات والمخزون والعمال والمصروفات والأرباح والنوتة",
++    "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة"
+   ]
+ }
 Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-arabic.woff2
 Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-latin-ext.woff2
 Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-latin.woff2
