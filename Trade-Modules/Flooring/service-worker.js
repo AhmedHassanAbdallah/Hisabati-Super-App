@@ -10,16 +10,15 @@
  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 1.0.1 "ملاحظة")
  */
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 const PREFIX = 'hflooring-';
 const CACHE = PREFIX + 'app-' + VERSION;
 const SCOPE_PATH = new URL('./', self.location).pathname;
 const FILES = [
   './', './index.html', './manifest.json', './privacy.html', './version.json',
-  './css/app.css', './css/flooring.css', './fonts/cairo.css',
-  './fonts/cairo-arabic.woff2', './fonts/cairo-latin.woff2', './fonts/cairo-latin-ext.woff2',
+  './css/app.css', './css/flooring.css',
   './js/calc.js', './js/finance.js', './js/store.js', './js/ui.js', './js/app.js', './js/modules.js', './js/calculators.js', './js/docs.js',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
+  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png'
 ];
 
 /* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
@@ -28,7 +27,7 @@ const FILES = [
 const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
+  "../fonts/arzoqi-fonts.css", "../fonts/cairo.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
   .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);

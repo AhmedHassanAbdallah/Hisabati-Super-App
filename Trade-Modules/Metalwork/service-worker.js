@@ -5,17 +5,17 @@
  * عند إصدار تحديث: غيّر SW_VERSION هنا + version.json
  * © 2026 أحمد حسن عبدالله
  */
-const SW_VERSION = "1.0.0";
+const SW_VERSION = "1.0.1";
 const APP_CACHE = "hmetal-app-" + SW_VERSION;
 const APP_FILES = [
-  "./", "./index.html", "./manifest.json", "./version.json",
+  "./", "./index.html", "./privacy.html", "./manifest.json", "./version.json",
   "./css/app.css", "./css/metal.css", "./js/calc.js", "./js/app.js",
   "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-192.png", "./icons/icon-maskable-512.png"
 ];
 const AZ_SHARED_CACHE = "hmetal-arzaqi-shared";
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
+  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
   .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);

@@ -56,7 +56,9 @@ for root, dirs, files in os.walk(d):
         if base.get(rel) == h and rel not in chg: n_same += 1
         elif chg.get(rel) == h: n_chg += 1
         else: bad.append(rel)
-missing = [f for f in base if f not in present]
+# ملف اتشال عن قصد بيتسجل في changes بعلامة «-» (غير كده يبقى ناقص)
+missing = [f for f in base if f not in present and chg.get(f) != '-']
+n_chg += sum(1 for f in base if f not in present and chg.get(f) == '-')
 print(f"{n_same} {n_chg} {len(bad)} {len(missing)} " + " ".join((bad + missing)[:8]))
 PY
 )"

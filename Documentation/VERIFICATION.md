@@ -310,3 +310,34 @@ visible and no navy frame pixels (the user's screenshot gives 39,114 navy pixels
 * Wiring: launcher card (13 sections), backup prefix `hmar_` + IndexedDB `hmar_media`, launcher service worker, Android standalone
   bundle/MainActivity/emulator smoke, CI file check, `run-trade-suites` (24 suites), `verify-integrity` NATIVE list.
 * Suites: launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35; `run-trade-suites` 24/24.
+
+## 20. 2.8.1 — Cairo font, smaller bundle, privacy pages (2026-11-24)
+Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, package name, signing, OAuth client and section icons untouched).
+* **Font:** Cairo is the first `font-family` everywhere (launcher + 13 sections + all privacy pages + invoice + workers' note).
+  `Shared-Assets/fonts/arzoqi-fonts.css` declares the bundled Cairo variable font (weights 200–1000; arabic / latin / latin-ext);
+  IBM Plex Sans Arabic and Inter remain only as last fallbacks. All `fonts.googleapis.com` / `fonts.gstatic.com` links and
+  service-worker branches were removed from the app (also the standalone app's dead font-host shim). Verified in Chromium with every
+  external request blocked: 28/28 pages have Cairo as the computed first family and load `cairo-*.woff2` from local files.
+  Remaining mentions exist only outside the APK: the original sections' legacy `android/` + `tools/android-assets.sh` folders
+  (excluded from the bundle) and the `.provenance` diff records.
+* **Size:** PNGs optimised with `optipng -o5` (lossless; each file verified pixel-identical with the same dimensions before replacing,
+  every section keeps its own icon) — 5.62 MB → 3.75 MB. Exact duplicates removed: the identical `css/app.css` of 5 sections →
+  `Shared-Assets/brand/section-app.css`; 5 copies of `developer.jpg` → `Shared-Assets/images/developer.jpg`; Flooring's Cairo copy →
+  `Shared-Assets/fonts`. References and service-worker cache lists updated.
+* **Privacy:** `privacy.html` added to Metalwork, Carpentry, Masonry, LowCurrent, Aluminium, Marble (same template as Plumbing, with each
+  section's own data description) + footer link + service-worker cache entry. The old "uses the internet to download fonts" sentence
+  in the existing privacy pages was corrected (fonts are bundled now).
+* **WRITE_EXTERNAL_STORAGE (maxSdk 28) kept:** `doSaveFile` (saving the backup JSON to Downloads/Arzoqi) uses MediaStore on Android 10+,
+  but on Android 6–9 (minSdk 23–28) writes to the public Downloads folder, which needs this permission. Removing it would break backup
+  export on older phones.
+* **Versions:** app 2.8.1 (versionCode 20801); launcher SW 2.8.1; every section's `version.json`, service-worker version and
+  `APP_VERSION` constant bumped one patch level.
+* **Checks:** every file in every service-worker cache list exists (465 entries / 14 SWs); `node --check` on all 85 bundled JS files;
+  `tools/update-change-pins.sh` + `tools/verify-integrity.sh` (which now record and accept intentional deletions of duplicated files
+  as `-` entries) → ALL CHECKS PASSED.
+* **Layout:** Cairo's digits are wider than Inter's, so an extreme stress total (18,289,612,574.55 ج.م at 360 px) no longer fit on one
+  line in the Plumbing calculator. One shared rule in `section-theme.css` lets `.sum-total strong` wrap inside its card (normal amounts
+  stay on one line). The Plumbing/HVAC test servers did not send `text/css` / `font/woff2` content types (so Chromium ignored the shared
+  stylesheet in those audits); they now do, so the audits see the page exactly as the app renders it.
+* Suites: `run-trade-suites` 24/24 (plumbing-layout 0 issues, hvac-all 141/141 after the fix); launcher 259, offline 32, native 14,
+  cloud 42, crew 25, print-white 13, auto-backup 35. The APK itself is built and emulator-tested by CI (no Android SDK here).

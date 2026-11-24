@@ -4,7 +4,7 @@ Binary files HVAC/icons/icon-maskable-192.png and Trade-Modules/HVAC/icons/icon-
 Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-maskable-512.png differ
 --- HVAC/index.html
 +++ Trade-Modules/HVAC/index.html
-@@ -3,19 +3,19 @@
+@@ -3,31 +3,28 @@
  <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -28,9 +28,12 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      try {
        var _k = (/\/beta\//.test(location.pathname) ? 'beta_' : '') + 'hesabati_hvac_settings_v1';
        var _t = (JSON.parse(localStorage.getItem(_k) || '{}') || {}).theme;
-@@ -26,8 +26,8 @@
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+       if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+     } catch (e) {}
+   </script>
+-  <link rel="preconnect" href="https://fonts.googleapis.com">
+-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
    <!--
 -    حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
 -    تطبيق مستقل من عائلة حساباتي (بنفس نظام التصميم)
@@ -39,7 +42,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      تصميم وتطوير: أحمد حسن عبدالله
      © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
      يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
-@@ -669,7 +669,7 @@
+@@ -669,7 +666,7 @@
        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
      }
  
@@ -48,7 +51,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      .brand-tag { display: inline-block; font-size: .6rem; font-weight: 900; letter-spacing: .6px; background: rgba(255,255,255,.14); color: #bae6fd; padding: 0 7px; border-radius: 99px; margin-inline-start: 6px; vertical-align: middle; }
      .pg-actions { display: flex; gap: 8px; flex-shrink: 0; }
      .page-overlay .app-header .titles .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-@@ -726,6 +726,8 @@
+@@ -726,6 +723,8 @@
      .inv-notes ol { padding-right: 18px; }
      .inv-notes ol li { margin-bottom: 3px; }
    </style>
@@ -57,7 +60,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
  </head>
  <body>
  
-@@ -738,7 +740,7 @@
+@@ -738,7 +737,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -66,7 +69,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -907,7 +909,7 @@
+@@ -907,7 +906,7 @@
        <h3 class="more-h">التطبيق وبياناتك</h3>
        <div class="card">
          <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
@@ -75,7 +78,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
          <div class="btn-row">
            <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
            <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
-@@ -933,7 +935,7 @@
+@@ -933,13 +932,13 @@
  
        <div class="card hidden" id="apkCard">
          <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
@@ -84,7 +87,14 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
          <a class="btn btn-accent" id="apkLink" href="#" rel="noopener"><i data-icon="download"></i> تحميل تطبيق أندرويد</a>
        </div>
  
-@@ -950,7 +952,7 @@
+       <!-- عن المطور -->
+       <div class="dev-card">
+-        <img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
++        <img class="dev-avatar" src="../../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
+         <div class="dev-name">أحمد حسن عبدالله</div>
+         <div class="dev-role">مطوّر ومصمّم التطبيق</div>
+         <div class="dev-links">
+@@ -950,7 +949,7 @@
        </div>
  
        <div class="copyright">
@@ -167,7 +177,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
 --- HVAC/js/core.js
 +++ Trade-Modules/HVAC/js/core.js
-@@ -1,6 +1,6 @@
+@@ -1,16 +1,16 @@
  /* =========================================================
 -   حساباتي HVAC - إدارة ومحاسبة أعمال التكييف والتبريد
 -   تطبيق مستقل من عائلة حساباتي
@@ -176,11 +186,12 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
     تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
     ---------------------------------------------------------
-@@ -8,9 +8,9 @@
+    core.js: الثوابت، التخزين المستقل، العملات، المظهر، الأيقونات،
     النوافذ والصفحات وزر الرجوع، والتنقل بين الأقسام.
     ========================================================= */
- const APP_VERSION = '1.0.2';
+-const APP_VERSION = '1.0.2';
 -const APP_NAME = 'حساباتي HVAC';
++const APP_VERSION = '1.0.3';
 +const APP_NAME = 'أرزقي HVAC';
  const IS_BETA = /\/beta\//.test(location.pathname);
 -// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة
@@ -346,15 +357,17 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
    "dir": "rtl",
 --- HVAC/privacy.html
 +++ Trade-Modules/HVAC/privacy.html
-@@ -4,7 +4,7 @@
+@@ -4,8 +4,8 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي HVAC</title>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · HVAC</title>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/arzoqi-fonts.css"><!-- Cairo محلي -->
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+     @media (prefers-color-scheme: dark) {
 @@ -28,7 +28,7 @@
  <body>
    <header>
@@ -364,6 +377,15 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
    </header>
    <main>
      <section>
+@@ -45,7 +45,7 @@
+     </section>
+     <section>
+       <h2>الصلاحيات والاتصال بالإنترنت</h2>
+-      <p>يعمل التطبيق بالكامل بدون إنترنت، ويستخدم الإنترنت فقط لتنزيل الخطوط وتحديثات التطبيق. تنبيهات المواعيد محلية على الجهاز ولا تحتاج أي خادم. عند اختيار صورة لوجو أو صورة زيارة أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
++      <p>يعمل التطبيق بالكامل بدون إنترنت، ويستخدم الإنترنت فقط لتحديثات التطبيق (الخطوط موجودة جوه التطبيق). تنبيهات المواعيد محلية على الجهاز ولا تحتاج أي خادم. عند اختيار صورة لوجو أو صورة زيارة أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
+     </section>
+     <section>
+       <h2>حذف البيانات</h2>
 @@ -58,6 +58,6 @@
          فيسبوك: <a href="https://www.facebook.com/share/1CTcsmiTif/">صفحة المطور</a></p>
      </section>
@@ -383,7 +405,24 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
   * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-@@ -122,6 +122,34 @@
+@@ -15,7 +15,7 @@
+  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
+  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
+  */
+-const SW_VERSION = "1.0.2";
++const SW_VERSION = "1.0.3";
+ 
+ const APP_PREFIX = "hesabati-hvac-app-";
+ const META_CACHE = "hesabati-hvac-meta";
+@@ -35,7 +35,6 @@
+   "./icons/icon-512.png",
+   "./icons/icon-maskable-192.png",
+   "./icons/icon-maskable-512.png",
+-  "./icons/developer.jpg",
+   "./js/core.js",
+   "./js/catalog.js",
+   "./js/docs.js",
+@@ -122,6 +121,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -393,7 +432,7 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
 +const AZ_SHARED_CACHE = "hesabati-hvac-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -418,3 +457,48 @@ Binary files HVAC/icons/icon-maskable-512.png and Trade-Modules/HVAC/icons/icon-
  self.addEventListener("install", event => {
    event.waitUntil((async () => {
      const cache = await caches.open(APP_PREFIX + SW_VERSION);
+@@ -213,7 +240,4 @@
+     return;
+   }
+ 
+-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+-    event.respondWith(serveFont(request));
+-  }
+-});
++});
+--- HVAC/tests/layout-audit.js
++++ Trade-Modules/HVAC/tests/layout-audit.js
+@@ -13,7 +13,7 @@
+ const WIDTHS = process.argv[2] ? [Number(process.argv[2])] : [360, 412];
+ 
+ function serve(port) {
+-  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg' };
++  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css', '.woff2': 'font/woff2' };
+   const server = http.createServer((req, res) => {
+     let p = decodeURIComponent(req.url.split('?')[0]);
+     if (p === '/') p = '/index.html';
+--- HVAC/tests/run-tests.js
++++ Trade-Modules/HVAC/tests/run-tests.js
+@@ -147,7 +147,7 @@
+    ========================================================= */
+ const serveOverride = { version: null };
+ function serve(port) {
+-  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css' };
++  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css', '.woff2': 'font/woff2' };
+   const server = http.createServer((req, res) => {
+     let p = decodeURIComponent(req.url.split('?')[0]).replace(/^\/Hesabaty-HAVC/, '');
+     if (p === '/' || p === '') p = '/index.html';
+--- HVAC/version.json
++++ Trade-Modules/HVAC/version.json
+@@ -1,7 +1,8 @@
+ {
+-  "version": "1.0.2",
+-  "date": "2026-11-15",
++  "version": "1.0.3",
++  "date": "2026-11-24",
+   "notes": [
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
+     "ضبط كل الصفحات على شاشة الموبايل: مفيش أي كلام طالع برا إطاره",
+     "النصوص الطويلة (العقود، بيانات الجهاز، المخزن) بقت بتنزل سطر جديد جوه الإطار",
+     "الأرقام الكبيرة في مربعات الملخص بتظهر كاملة من غير ما تتقطع",
+Deleted (moved to Shared-Assets or removed on purpose): HVAC/icons/developer.jpg

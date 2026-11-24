@@ -1,7 +1,7 @@
 /*
  * أرزقي | Arzoqi — لحسابات المصنعية · الهوية البصرية الموحدة
  * الألوان مأخوذة من اللوجو الرسمي: تيل غامق (كلمة Arzoqi والأيقونة) + برتقالي وأصفر (القوس والنقطة).
- * الخطوط: IBM Plex Sans Arabic للعربي + Inter للاتيني والأرقام (../fonts/arzoqi-fonts.css).
+ * الخطوط: Cairo الخط الرئيسي (IBM Plex Sans Arabic و Inter احتياطي) — ../fonts/arzoqi-fonts.css.
  * الاسم الرسمي بالعربي "أرزقي" وبالإنجليزي "Arzoqi"، ولما يظهروا مع بعض: «أرزقي | Arzoqi».
  * © 2026 أحمد حسن عبدالله
  */
@@ -18,8 +18,8 @@
   --az-orange: #f98a00;
   --az-orange-deep: #ee6300;
   --az-ink: #0a1f1d;
-  --az-font: 'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
-  --az-font-ar: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+  --az-font: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+  --az-font-ar: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
 }
 
 /* ===================== الاسم الرسمي: أرزقي | Arzoqi ===================== */

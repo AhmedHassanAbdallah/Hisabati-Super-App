@@ -2,7 +2,7 @@
 .az-inv {
   --az-b9: #002624; --az-b8: #033935; --az-b7: #0b5450; --az-y: #fbbf00; --az-o: #f17700;
   --az-ink: #011c1b; --az-mut: #476966; --az-line: #d5e6e4;
-  color: var(--az-ink) !important; font-family: 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif; direction: rtl;
+  color: var(--az-ink) !important; font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif; direction: rtl;
   display: flex; flex-direction: column; min-height: calc(297mm - 17mm); font-weight: 700;
 }
 .az-inv svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; vertical-align: -2px; }
@@ -101,7 +101,7 @@
 /* ---------- الفوتر ---------- */
 .az-inv .az-foot { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--az-mut) !important; font-size: 11px; font-weight: 800; border-top: 1px solid var(--az-line); }
 .az-inv .az-foot-brand { display: inline-flex; align-items: center; gap: 6px; direction: rtl; }
-.az-inv .az-foot-brand b { font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 700 !important; font-size: 15px; line-height: 1; color: var(--az-b8) !important; }
+.az-inv .az-foot-brand b { font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif; font-weight: 700 !important; font-size: 15px; line-height: 1; color: var(--az-b8) !important; }
 .az-inv .az-foot-brand i { width: 2px; height: 16px; border-radius: 2px; background: linear-gradient(#fbbf00, #f98a00) !important; }
 .az-inv .az-foot img { height: 22px; width: auto; display: block; }
 

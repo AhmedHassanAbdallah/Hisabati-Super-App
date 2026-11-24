@@ -22,16 +22,20 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -26,7 +26,7 @@
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+@@ -22,11 +22,8 @@
+       if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+     } catch (e) {}
+   </script>
+-  <link rel="preconnect" href="https://fonts.googleapis.com">
+-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
    <!--
 -    حساباتي - حاسبة وفواتير الكهرباء
 +    أرزقي - حاسبة وفواتير الكهرباء
      تصميم وتطوير: أحمد حسن عبدالله
      © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
      يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
-@@ -672,6 +672,8 @@
+@@ -672,6 +669,8 @@
        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
      }
    </style>
@@ -40,7 +44,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
  </head>
  <body>
  
-@@ -682,7 +684,7 @@
+@@ -682,7 +681,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -49,7 +53,16 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -999,7 +1001,7 @@
+@@ -988,7 +987,7 @@
+ 
+       <!-- عن المطور -->
+       <div class="dev-card">
+-        <img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
++        <img class="dev-avatar" src="../../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
+         <div class="dev-name">أحمد حسن عبدالله</div>
+         <div class="dev-role">مطوّر ومصمّم التطبيق</div>
+         <div class="dev-links">
+@@ -999,7 +998,7 @@
        </div>
  
        <div class="copyright">
@@ -58,7 +71,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
          © <span id="copyYear">2026</span> <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br>
          التصميم والفكرة والكود البرمجي ملكية فكرية خاصة بالمطور، ويُمنع نسخها أو تعديلها أو إعادة نشرها دون إذن كتابي.<br>
          <a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a>
-@@ -1331,7 +1333,7 @@
+@@ -1331,18 +1330,18 @@
  
  <script>
    /* =========================================================
@@ -67,7 +80,11 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
       تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
       © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
       ========================================================= */
-@@ -1342,7 +1344,7 @@
+-  const APP_VERSION = '2.4.1';
++  const APP_VERSION = '2.4.2';
+   // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
+   const IS_BETA = /\/beta\//.test(location.pathname);
+   const KEY_PREFIX = IS_BETA ? 'beta_' : '';
    // داخل تطبيق أندرويد (APK): الجسر الأصلي متاح باسم HesabatyApp
    const IN_APP = !!(window.HesabatyApp && typeof window.HesabatyApp.versionName === 'function');
    const RELEASES_API = 'https://api.github.com/repos/AhmedHassanAbdallah/Ezaza/releases/latest';
@@ -76,7 +93,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    if (IN_APP) {
      // روابط واتساب وفيسبوك تفتح في تطبيقاتها، والطباعة عن طريق أندرويد (حفظ PDF أو طابعة)
      window.open = function (u) { try { window.HesabatyApp.openExternal(String(u)); } catch (e) {} return null; };
-@@ -1357,7 +1359,7 @@
+@@ -1357,7 +1356,7 @@
    const DEFAULT_TITLE = 'كشف حساب ومستخلص أعمال كهرباء';
    const DEFAULT_TECH = 'م/ أحمد حسن - للأعمال والتشطيبات الكهربائية';
    const ROOM_PRESETS = ['الريسبشن', 'الصالة', 'غرفة النوم الرئيسية', 'غرفة الأطفال', 'غرفة المعيشة', 'المطبخ', 'الحمام', 'الطرقة والمدخل', 'البلكونة'];
@@ -85,7 +102,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    const EDITOR_VIEWS = ['pricing', 'rooms', 'summary'];
    // نظام البنود المنفصلة
    const WORK_PRESETS = ['تقفيل لوحة', 'تركيب لوحة', 'سحب خط', 'تأسيس نقطة', 'تركيب نجفة', 'تركيب إسبوتات', 'تركيب سخان', 'تركيب شفاط', 'تغيير بريزة / مفتاح', 'صيانة وكشف أعطال'];
-@@ -1659,7 +1661,7 @@
+@@ -1659,7 +1658,7 @@
      const order = EDITOR_VIEWS.indexOf(key);
      EDITOR_VIEWS.forEach((v, i) => { const b = document.getElementById('stepBtn-' + v); b.classList.toggle('on', i === order); b.classList.toggle('done', order > i); });
      document.getElementById('headerTitle').textContent = (key === 'rooms' && isItemsMode(getCurrentInvoice())) ? 'بنود الفاتورة' : VIEW_TITLES[key];
@@ -94,7 +111,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      document.getElementById('addRoomFab').classList.toggle('hidden', key !== 'rooms');
      if (isEd) renderEditorBar();
      if (key === 'home') renderHome();
-@@ -2616,11 +2618,39 @@
+@@ -2616,11 +2615,39 @@
      return `
        <footer class="inv-foot">
          <span ${CE}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -135,7 +152,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    function buildItemsInvoiceHTML(inv) {
      autoFitTypographyForRoomCount(Math.round(inv.items.length * 0.8));
      const t = computeInvoice(inv);
-@@ -2679,6 +2709,7 @@
+@@ -2679,6 +2706,7 @@
          </div>
        </div>
        ${printFooterHTML()}`;
@@ -143,7 +160,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    }
  
    function buildSinglePageHTML() {
-@@ -2850,8 +2881,9 @@
+@@ -2850,8 +2878,9 @@
  
        <footer class="inv-foot">
          <span ${ce}>شكراً لثقتكم — <b>${esc(appData.techName || '')}</b>${appData.techPhone ? ` · <span dir="ltr">${esc(appData.techPhone)}</span>` : ''}</span>
@@ -154,7 +171,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    }
  
    function openSinglePagePreview(autoPrint = false) {
-@@ -3113,6 +3145,8 @@
+@@ -3113,6 +3142,8 @@
        </section>`;
  
      if (c.note) html += `<div class="note" style="margin-bottom:14px"><strong>ملاحظات:</strong> ${esc(c.note)}</div>`;
@@ -163,7 +180,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
  
      // صفحتان منفصلتان: حساب الشغل / حساب الخامات
      html += `
-@@ -3957,6 +3991,8 @@
+@@ -3957,6 +3988,8 @@
      if (!l) return;
      if (!l.items.length) { showAppToast('⚠️ ضيف الخامات الأول قبل الطباعة'); return; }
      buildMatListHTML(l);
@@ -172,7 +189,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      printJobName = 'كشف خامات ' + matListName(l);
      openOverlay('preview');
      const modal = document.getElementById('printPreviewModal');
-@@ -4087,7 +4123,7 @@
+@@ -4087,7 +4120,7 @@
    function exportBackupJSON() {
      syncLinkedInvoices();
      downloadJSON(Object.assign({}, appData, { app: 'hesabaty', backupVersion: 3, exportedAt: new Date().toISOString(), customers, settings, matLists }),
@@ -181,7 +198,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
      showAppToast('✔️ تم تنزيل النسخة الكاملة (الفواتير + النوتة + كشوفات الخامات)');
    }
    // نسخة النوتة فقط
-@@ -4390,7 +4426,7 @@
+@@ -4390,7 +4423,7 @@
      if (state === 'start') txt.textContent = 'بيبدأ التحميل...';
      else if (state === 'progress') txt.textContent = `جاري التحميل ${Math.round(pct)}%`;
      else if (state === 'install') { txt.textContent = 'تم التحميل ✓ — اضغط «تثبيت» في الشاشة اللي ظهرت'; btn.disabled = false; btn.innerHTML = `${icon('download')} تثبيت التحديث`; }
@@ -204,15 +221,17 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    "dir": "rtl",
 --- Electrical/privacy.html
 +++ Trade-Modules/Electrical/privacy.html
-@@ -4,7 +4,7 @@
+@@ -4,8 +4,8 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي</title>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · حاسبة وفواتير الكهرباء</title>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/arzoqi-fonts.css"><!-- Cairo محلي -->
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+     @media (prefers-color-scheme: dark) {
 @@ -28,7 +28,7 @@
  <body>
    <header>
@@ -222,6 +241,15 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
    </header>
    <main>
      <section>
+@@ -45,7 +45,7 @@
+     </section>
+     <section>
+       <h2>الصلاحيات والاتصال بالإنترنت</h2>
+-      <p>يستخدم التطبيق الإنترنت فقط لتنزيل الخطوط وتحديثات التطبيق. عند اختيار صورة لوجو أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
++      <p>يستخدم التطبيق الإنترنت فقط لتحديثات التطبيق (الخطوط موجودة جوه التطبيق). عند اختيار صورة لوجو أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
+     </section>
+     <section>
+       <h2>حذف البيانات</h2>
 --- Electrical/service-worker.js
 +++ Trade-Modules/Electrical/service-worker.js
 @@ -1,5 +1,5 @@
@@ -231,7 +259,26 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
   * نظام الإصدارات:
-@@ -111,6 +111,34 @@
+@@ -13,7 +13,7 @@
+  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
+  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
+  */
+-const SW_VERSION = "2.4.1";
++const SW_VERSION = "2.4.2";
+ 
+ const APP_PREFIX = "hesabaty-app-";
+ const META_CACHE = "hesabaty-meta";
+@@ -31,8 +31,7 @@
+   "./icons/icon-192.png",
+   "./icons/icon-512.png",
+   "./icons/icon-maskable-192.png",
+-  "./icons/icon-maskable-512.png",
+-  "./icons/developer.jpg"
++  "./icons/icon-maskable-512.png"
+ ];
+ 
+ /* ---------- أدوات مساعدة ---------- */
+@@ -111,6 +110,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -241,7 +288,7 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
 +const AZ_SHARED_CACHE = "hesabaty-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -266,3 +313,26 @@ Binary files Electrical/icons/icon-maskable-512.png and Trade-Modules/Electrical
  self.addEventListener("install", event => {
    event.waitUntil((async () => {
      const cache = await caches.open(APP_PREFIX + SW_VERSION);
+@@ -192,7 +219,4 @@
+     return;
+   }
+ 
+-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+-    event.respondWith(serveFont(request));
+-  }
+-});
++});
+--- Electrical/version.json
++++ Trade-Modules/Electrical/version.json
+@@ -1,7 +1,8 @@
+ {
+-  "version": "2.4.1",
+-  "date": "2026-11-15",
++  "version": "2.4.2",
++  "date": "2026-11-24",
+   "notes": [
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
+     "زرار حذف جنب كل فاتورة في قايمة الفواتير وفي الرئيسية",
+     "زرار حذف جنب كل كشف خامات",
+     "بيسألك قبل الحذف عشان مفيش حاجة تتمسح بالغلط",
+Deleted (moved to Shared-Assets or removed on purpose): Electrical/icons/developer.jpg

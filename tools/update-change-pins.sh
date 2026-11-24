@@ -33,11 +33,12 @@ for dp, dirs, files in os.walk(root):
         h = hashlib.sha256(open(p, 'rb').read()).hexdigest()
         if base.get(rel) != h: changed.append((rel, h))
 changed.sort()
-missing = [n for n in base if not os.path.exists(os.path.join(root, n[2:]))]
-if missing: sys.exit(f'{d}: ملفات أصلية ناقصة: {missing[:5]}')
+# ملفات أصلية اتشالت عن قصد من النسخة (مثلاً نسخة مكررة بقت في Shared-Assets) بتتسجل بعلامة «-»
+missing = sorted(n for n in base if not os.path.exists(os.path.join(root, n[2:])))
 os.makedirs('.provenance/changes', exist_ok=True)
 with open(f'.provenance/changes/{d}.sha256', 'w', encoding='utf8') as f:
     for rel, h in changed: f.write(f'{h}  {rel}\n')
+    for rel in missing: f.write(f'-  {rel}\n')
 out = []
 for rel, _ in changed:
     new = open(os.path.join(root, rel[2:]), 'rb').read()
@@ -49,7 +50,8 @@ for rel, _ in changed:
         out.append(f'Binary files {a} and {b} differ\n'); continue
     out.extend(difflib.unified_diff(ot.splitlines(True), nt.splitlines(True), a if rel in base else '/dev/null', b))
     if out and not out[-1].endswith('\n'): out[-1] += '\n\\ No newline at end of file\n'
+for rel in missing: out.append(f'Deleted (moved to Shared-Assets or removed on purpose): {d}/{rel[2:]}\n')
 open(f'.provenance/changes/{d}.patch', 'w', encoding='utf8').write(''.join(out))
-print(f'{d}: {len(changed)} ملف متغير (من أصل {len(base)})')
+print(f'{d}: {len(changed)} ملف متغير و{len(missing)} اتشال عن قصد (من أصل {len(base)})')
 PY
 done

@@ -15,7 +15,7 @@
  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
  */
-const SW_VERSION = "1.0.0";
+const SW_VERSION = "1.0.1";
 
 const APP_PREFIX = "hesabati-plumbing-app-";
 const META_CACHE = "hesabati-plumbing-meta";
@@ -35,7 +35,6 @@ const APP_FILES = [
   "./icons/icon-512.png",
   "./icons/icon-maskable-192.png",
   "./icons/icon-maskable-512.png",
-  "./icons/developer.jpg",
   "./js/core.js",
   "./js/catalog.js",
   "./js/docs.js",
@@ -128,7 +127,7 @@ async function setVersion(version) {
 const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
+  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
   .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -241,7 +240,4 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    event.respondWith(serveFont(request));
-  }
 });

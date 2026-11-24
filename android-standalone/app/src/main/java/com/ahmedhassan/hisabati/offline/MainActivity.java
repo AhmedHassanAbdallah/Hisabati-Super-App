@@ -396,12 +396,6 @@ public class MainActivity extends Activity {
                 if (path.endsWith("/service-worker.js")) return notFound();
                 return asset("www" + path, mimeFor(path), false);
             }
-            // خط Cairo مضمّن جوه التطبيق علشان الشكل يفضل زي ما هو من غير إنترنت
-            if ("fonts.googleapis.com".equals(host)) {
-                String name = uri.getLastPathSegment();
-                if (name != null && name.endsWith(".woff2")) return asset("www/Shared-Assets/fonts/" + name, "font/woff2", true);
-                return asset("www/Shared-Assets/fonts/cairo.css", "text/css", true);
-            }
         } catch (Exception ignored) { }
         return null;
     }

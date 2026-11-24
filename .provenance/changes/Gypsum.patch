@@ -22,8 +22,13 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -26,10 +26,12 @@
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+@@ -21,15 +21,14 @@
+       if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+     } catch (e) {}
+   </script>
+-  <link rel="preconnect" href="https://fonts.googleapis.com">
+-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="./css/app.css">
    <!--
 -    حساباتي للجبس والديكورات — HESABATI GYPSUM
@@ -36,7 +41,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  </head>
  <body>
  <div id="app">
-@@ -37,7 +39,7 @@
+@@ -37,7 +36,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -45,7 +50,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -125,14 +127,14 @@
+@@ -125,14 +124,14 @@
  
        <div class="dev-card">
          <div class="dev-name">أحمد حسن عبدالله</div>
@@ -71,8 +76,9 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   */
  'use strict';
- const APP_VERSION = '1.0.0';
+-const APP_VERSION = '1.0.0';
 -const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
++const APP_VERSION = '1.0.1';
 +const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
  let currentView = 'home';
  
@@ -293,15 +299,17 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    "dir": "rtl",
 --- Gypsum/privacy.html
 +++ Trade-Modules/Gypsum/privacy.html
-@@ -4,7 +4,7 @@
+@@ -4,8 +4,8 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي للجبس والديكورات</title>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · الجبس والديكورات</title>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/arzoqi-fonts.css"><!-- Cairo محلي -->
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+     @media (prefers-color-scheme: dark) {
 @@ -28,7 +28,7 @@
  <body>
    <header>
@@ -311,9 +319,18 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    </header>
    <main>
      <section>
+@@ -45,7 +45,7 @@
+     </section>
+     <section>
+       <h2>الصلاحيات والاتصال بالإنترنت</h2>
+-      <p>يستخدم التطبيق الإنترنت فقط لتنزيل الخطوط وتحديثات التطبيق. عند اختيار صورة لوجو أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
++      <p>يستخدم التطبيق الإنترنت فقط لتحديثات التطبيق (الخطوط موجودة جوه التطبيق). عند اختيار صورة لوجو أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
+     </section>
+     <section>
+       <h2>حذف البيانات</h2>
 --- Gypsum/service-worker.js
 +++ Trade-Modules/Gypsum/service-worker.js
-@@ -1,9 +1,9 @@
+@@ -1,13 +1,13 @@
  /*
 - * حساباتي للجبس والديكورات - Service Worker (العمل بدون إنترنت)
 + * أرزقي للجبس والديكورات - Service Worker (العمل بدون إنترنت)
@@ -325,6 +342,11 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
   * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
   */
+-const SW_VERSION = "1.0.0";
++const SW_VERSION = "1.0.1";
+ const APP_CACHE = "hgyp-app-" + SW_VERSION;
+ const RUNTIME_CACHE = "hgyp-runtime";
+ const APP_FILES = [
 @@ -18,6 +18,34 @@
    "./js/ui/base.js", "./js/ui/calc.js", "./js/ui/projects.js", "./js/ui/manage.js", "./js/ui/docs.js", "./js/app.js",
    "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-192.png", "./icons/icon-maskable-512.png"
@@ -336,7 +358,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
 +const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -360,13 +382,34 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  
  self.addEventListener("install", event => {
    event.waitUntil(caches.open(APP_CACHE).then(c => c.addAll(APP_FILES.map(u => new Request(u, { cache: "reload" })))));
+@@ -37,16 +65,6 @@
+   const req = event.request;
+   if (req.method !== "GET") return;
+   const url = new URL(req.url);
+-  // الخطوط: من الذاكرة أولاً ثم الشبكة
+-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+-    event.respondWith(caches.open(RUNTIME_CACHE).then(async c => {
+-      const hit = await c.match(req);
+-      if (hit) return hit;
+-      try { const res = await fetch(req); if (res.ok || res.type === "opaque") c.put(req, res.clone()); return res; }
+-      catch (e) { return hit || Response.error(); }
+-    }));
+-    return;
+-  }
+   if (url.origin !== self.location.origin) return;
+   if (url.pathname.endsWith("/version.json")) {
+     event.respondWith(fetch(req).catch(() => caches.match(req)));
 --- Gypsum/version.json
 +++ Trade-Modules/Gypsum/version.json
-@@ -2,7 +2,7 @@
-   "version": "1.0.0",
-   "date": "2026-11-17",
+@@ -1,8 +1,9 @@
+ {
+-  "version": "1.0.0",
+-  "date": "2026-11-17",
++  "version": "1.0.1",
++  "date": "2026-11-24",
    "notes": [
 -    "الإصدار الأول من حساباتي للجبس والديكورات",
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "الإصدار الأول من أرزقي للجبس والديكورات",
      "حاسبات الجبسون بورد: أسقف، قواطيع، بيت نور، تكسية حوائط وأعمدة",
      "حاسبات الجبس البلدي والكرانيش والبانوهات والروزتات",

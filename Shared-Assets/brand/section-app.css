@@ -1,5 +1,6 @@
 /*
- * أرزقي | Arzoqi — النجارة: التصميم.
+ * أرزقي | Arzoqi — التصميم المشترك للأقسام الأصلية (البناء، التيار الخفيف، النجارة، الألوميتال، الرخام).
+ * نسخة واحدة بدل 5 نسخ متطابقة — كل قسم بيحمّلها من هنا.
  * نفس نظام التصميم بتاع باقي أقسام أرزقي (الكروت، الأزرار، الحقول، النوافذ، شريط التنقل)،
  * والألوان والخطوط بتيجي من ../../Shared-Assets/brand/section-theme.css زي كل الأقسام.
  * © 2026 أحمد حسن عبدالله
@@ -80,7 +81,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body {
-  font-family: 'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-weight: 600;
   background: var(--bg);
   color: var(--text);

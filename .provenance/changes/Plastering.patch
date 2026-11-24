@@ -20,9 +20,13 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -20,6 +20,8 @@
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+@@ -16,10 +16,9 @@
+     // تطبيق المظهر المحفوظ قبل ظهور الصفحة (مفتاح خاص بتطبيق المحارة فقط)
+     try { var _t = localStorage.getItem('hplaster_theme'); if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}
+   </script>
+-  <link rel="preconnect" href="https://fonts.googleapis.com">
+-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="./css/app.css">
 +  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان الهوية -->
 +  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة -->
@@ -75,6 +79,17 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
          U.confirmBox('تأكيد أخير: كل المشروعات والعملاء والمخزن هيتمسحوا.', () => { S.resetAll(); U.applyTheme(); U.toast('تم المسح'); U.go('home'); }, { yes: 'امسح' });
        }, { yes: 'متابعة' });
      }
+--- Plastering/js/app.js
++++ Trade-Modules/Plastering/js/app.js
+@@ -4,7 +4,7 @@
+ (function () {
+   'use strict';
+   const U = window.UI, S = U.S;
+-  window.APP_VERSION = '1.0.0';
++  window.APP_VERSION = '1.0.1';
+ 
+   S.load();
+   U.applyTheme();
 --- Plastering/js/docs.js
 +++ Trade-Modules/Plastering/js/docs.js
 @@ -12,7 +12,7 @@
@@ -217,16 +232,17 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    "dir": "rtl",
 --- Plastering/privacy.html
 +++ Trade-Modules/Plastering/privacy.html
-@@ -3,7 +3,7 @@
+@@ -3,7 +3,8 @@
  <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 -  <title>سياسة الخصوصية — HESABATI PLASTER</title>
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · المحارة والواجهات</title>
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/arzoqi-fonts.css"><!-- Cairo محلي -->
    <style>
      :root { --bg: #f2f5fa; --text: #0f1b2d; --card: #fff; }
      @media (prefers-color-scheme: dark) { :root { --bg: #071226; --text: #e9eff8; --card: #0f1f38; } }
-@@ -14,15 +14,15 @@
+@@ -14,15 +15,15 @@
  </head>
  <body>
  <main>
@@ -256,18 +272,26 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
   *  - أسماء الكاش تبدأ بـ "hplaster-" فقط.
   *  - التنظيف يمسح كاش "hplaster-" القديم فقط ولا يلمس أي كاش آخر
   *    (مثل hesabaty-app-* الخاص بتطبيق الكهرباء).
-@@ -34,6 +34,34 @@
-   './icons/icon-maskable-192.png',
+@@ -9,7 +9,7 @@
+  *
+  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
+  */
+-const VERSION = '1.0.0';
++const VERSION = '1.0.1';
+ const PREFIX = 'hplaster-';
+ const APP_CACHE = PREFIX + 'app-' + VERSION;
+ const RUNTIME_CACHE = PREFIX + 'runtime';
+@@ -35,6 +35,34 @@
    './icons/icon-maskable-512.png'
  ];
-+
+ 
 +/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
 +   (../../Shared-Assets/brand). بتتخزن هنا علشان القسم يفضل شغال من غير نت.
 +   الـ listener ده متسجّل قبل listener القسم، فبيرد على طلبات Shared-Assets بس. */
 +const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -288,16 +312,38 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
 +    return fresh;
 +  }));
 +});
- 
++
  self.addEventListener('install', event => {
    event.waitUntil(caches.open(APP_CACHE).then(c => c.addAll(APP_FILES.map(u => new Request(u, { cache: 'reload' })))));
+ });
+@@ -54,16 +82,6 @@
+   if (req.method !== 'GET') return;
+   const url = new URL(req.url);
+ 
+-  // خط Cairo: من الكاش أولاً ثم الشبكة
+-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+-    event.respondWith(caches.open(RUNTIME_CACHE).then(async c => {
+-      const hit = await c.match(req);
+-      if (hit) return hit;
+-      try { const res = await fetch(req); if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone()); return res; }
+-      catch (e) { return new Response('', { status: 504 }); }
+-    }));
+-    return;
+-  }
+   if (url.origin !== self.location.origin) return;
+   // داخل نطاق التطبيق فقط
+   const scope = new URL('./', self.location).pathname;
 --- Plastering/version.json
 +++ Trade-Modules/Plastering/version.json
-@@ -2,7 +2,7 @@
-   "version": "1.0.0",
-   "date": "2026-11-18",
+@@ -1,8 +1,9 @@
+ {
+-  "version": "1.0.0",
+-  "date": "2026-11-18",
++  "version": "1.0.1",
++  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للمحارة وتشطيبات الواجهات",
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "أول إصدار من أرزقي للمحارة وتشطيبات الواجهات",
      "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات",
      "المشروعات والعملاء والعمال والمخزن والمستندات والتقارير",

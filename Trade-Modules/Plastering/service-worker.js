@@ -9,7 +9,7 @@
  *
  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 const PREFIX = 'hplaster-';
 const APP_CACHE = PREFIX + 'app-' + VERSION;
 const RUNTIME_CACHE = PREFIX + 'runtime';
@@ -41,7 +41,7 @@ const APP_FILES = [
 const AZ_SHARED_CACHE = RUNTIME_CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
+  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
   .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -82,16 +82,6 @@ self.addEventListener('fetch', event => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // خط Cairo: من الكاش أولاً ثم الشبكة
-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    event.respondWith(caches.open(RUNTIME_CACHE).then(async c => {
-      const hit = await c.match(req);
-      if (hit) return hit;
-      try { const res = await fetch(req); if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone()); return res; }
-      catch (e) { return new Response('', { status: 504 }); }
-    }));
-    return;
-  }
   if (url.origin !== self.location.origin) return;
   // داخل نطاق التطبيق فقط
   const scope = new URL('./', self.location).pathname;

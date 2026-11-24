@@ -24,7 +24,12 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -23,10 +23,12 @@
+@@ -19,14 +19,16 @@
+     // تطبيق المظهر المحفوظ قبل ظهور الصفحة (بدون وميض) — مفتاح خاص بتطبيق الأرضيات فقط
+     try { var _t = localStorage.getItem('hflooring_theme'); if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}
+   </script>
+-  <link rel="stylesheet" href="./fonts/cairo.css">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/cairo.css">
    <link rel="stylesheet" href="./css/app.css">
    <link rel="stylesheet" href="./css/flooring.css">
    <!--
@@ -47,6 +52,15 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
      </div>
      <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
+@@ -79,7 +81,7 @@
+ 
+ <div id="appToast" class="toast" role="status" aria-live="polite"></div>
+ 
+-<script>window.APP_VERSION = '1.0.0';</script>
++<script>window.APP_VERSION = '1.0.1';</script>
+ <script src="./js/calc.js"></script>
+ <script src="./js/finance.js"></script>
+ <script src="./js/store.js"></script>
 --- Flooring/js/app.js
 +++ Trade-Modules/Flooring/js/app.js
 @@ -1,5 +1,5 @@
@@ -198,9 +212,12 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
          });
        }
      });
-@@ -608,7 +608,7 @@
+@@ -606,9 +606,9 @@
+           <div class="ver-box"><span class="dot${root.SWUpdate && root.SWUpdate.waiting ? ' warn' : ''}"></span><div style="flex:1"><div class="s">الإصدار الحالي</div><div class="v">${esc(root.APP_VERSION)}</div></div></div>
+           <div class="note" style="margin-bottom:12px">${root.SWUpdate && root.SWUpdate.waiting ? 'في تحديث جديد جاهز.' : 'التطبيق بيدور على التحديثات لوحده لما يكون في إنترنت، وبياناتك مش بتتأثر بالتحديث.'}</div>
            <div class="stack">${root.SWUpdate && root.SWUpdate.waiting ? `<button type="button" class="btn btn-accent" data-act="apply">${icon('download')} تحديث الآن</button>` : ''}<button type="button" class="btn btn-soft" data-act="check">${icon('refresh')} البحث عن تحديث</button></div></div>
-           <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
+-          <div class="dev-card"><img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
++          <div class="dev-card"><img class="dev-avatar" src="../../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96"><div class="dev-name">أحمد حسن عبدالله</div><div class="dev-role">مطوّر ومصمّم التطبيق</div>
            <div class="dev-links"><a class="btn btn-wa" href="https://wa.me/201015421255" target="_blank" rel="noopener">${icon('chat')} واتساب</a><a class="btn btn-fb" href="https://www.facebook.com/share/1CTcsmiTif/" target="_blank" rel="noopener">${icon('facebook')} فيسبوك</a></div><div class="dev-phone">+20 101 542 1255</div></div>
 -          <div class="copyright"><b>حساباتي للأرضيات والتشطيبات</b> — HESABATI FLOORING · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
 +          <div class="copyright"><b>أرزقي | Arzoqi</b> — الأرضيات والتشطيبات · الإصدار ${esc(root.APP_VERSION)}<br>© ${new Date().getFullYear()} <b>أحمد حسن عبدالله</b>. جميع الحقوق محفوظة.<br><a href="./privacy.html" style="color:var(--primary)">سياسة الخصوصية</a></div>`;
@@ -256,15 +273,17 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    "dir": "rtl",
 --- Flooring/privacy.html
 +++ Trade-Modules/Flooring/privacy.html
-@@ -3,7 +3,7 @@
+@@ -3,8 +3,8 @@
  <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 -  <title>سياسة الخصوصية — حساباتي للأرضيات</title>
+-  <link rel="stylesheet" href="./fonts/cairo.css">
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · الأرضيات والتشطيبات</title>
-   <link rel="stylesheet" href="./fonts/cairo.css">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/cairo.css">
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --primary: #10284a; --border: #e2e8f1; }
+     @media (prefers-color-scheme: dark) { :root { --bg: #071226; --surface: #0f1f38; --text: #e9eff8; --muted: #9db0cb; --primary: #7fa7e6; --border: #223a5e; } }
 @@ -18,7 +18,7 @@
  </head>
  <body>
@@ -276,7 +295,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    <div class="card"><h2>بدون تتبع وبدون إعلانات</h2>
 --- Flooring/service-worker.js
 +++ Trade-Modules/Flooring/service-worker.js
-@@ -1,10 +1,10 @@
+@@ -1,26 +1,53 @@
  /*
 - * حساباتي للأرضيات — Service Worker (العمل بدون إنترنت)
 + * أرزقي للأرضيات — Service Worker (العمل بدون إنترنت)
@@ -289,9 +308,21 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
   *  - الـ Service Worker ده نطاقه مجلد التطبيق بس، وبيتعامل مع الطلبات اللي جوه المجلد ده بس.
   *
   * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
-@@ -21,6 +21,34 @@
+  * (أو شغّل: node tools/bump-version.js 1.0.1 "ملاحظة")
+  */
+-const VERSION = '1.0.0';
++const VERSION = '1.0.1';
+ const PREFIX = 'hflooring-';
+ const CACHE = PREFIX + 'app-' + VERSION;
+ const SCOPE_PATH = new URL('./', self.location).pathname;
+ const FILES = [
+   './', './index.html', './manifest.json', './privacy.html', './version.json',
+-  './css/app.css', './css/flooring.css', './fonts/cairo.css',
+-  './fonts/cairo-arabic.woff2', './fonts/cairo-latin.woff2', './fonts/cairo-latin-ext.woff2',
++  './css/app.css', './css/flooring.css',
    './js/calc.js', './js/finance.js', './js/store.js', './js/ui.js', './js/app.js', './js/modules.js', './js/calculators.js', './js/docs.js',
-   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
+-  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png', './icons/developer.jpg'
++  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-192.png', './icons/icon-maskable-512.png'
  ];
 +
 +/* ── أرزقي: الهوية الموحّدة والفاتورة الموحّدة ملفات مشتركة خارج فولدر القسم
@@ -300,7 +331,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
 +const AZ_SHARED_CACHE = CACHE; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../fonts/cairo.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -326,12 +357,21 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
    event.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' })))));
 --- Flooring/version.json
 +++ Trade-Modules/Flooring/version.json
-@@ -2,7 +2,7 @@
-   "version": "1.0.0",
-   "date": "2026-11-17",
+@@ -1,8 +1,9 @@
+ {
+-  "version": "1.0.0",
+-  "date": "2026-11-17",
++  "version": "1.0.1",
++  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للأرضيات والتشطيبات",
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "أول إصدار من أرزقي للأرضيات والتشطيبات",
      "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة",
      "14 طريقة محاسبة داخل نفس المشروع",
      "المشروعات والعملاء والخامات والمخزون والعمال والمصروفات والأرباح والنوتة",
+Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-arabic.woff2
+Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-latin-ext.woff2
+Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-latin.woff2
+Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo.css
+Deleted (moved to Shared-Assets or removed on purpose): Flooring/icons/developer.jpg

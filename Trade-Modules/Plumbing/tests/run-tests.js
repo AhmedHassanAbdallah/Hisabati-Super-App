@@ -275,7 +275,7 @@ function logicTests() {
    ========================================================= */
 const serveOverride = { version: null };
 function serve(port) {
-  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css' };
+  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css', '.woff2': 'font/woff2' };
   const server = http.createServer((req, res) => {
     let p = decodeURIComponent(req.url.split('?')[0]).replace(/^\/Hesabaty-plumbing/, '');
     if (p === '/' || p === '') p = '/index.html';

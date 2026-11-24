@@ -30,8 +30,8 @@
   }
 }
 
-/* خطوط الهوية: IBM Plex Sans Arabic للعربي + Inter للاتيني والأرقام */
-html, body { font-family: var(--az-font, 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif) !important; }
+/* خط الهوية: Cairo الخط الرئيسي في كل الشاشات (محلي) */
+html, body { font-family: var(--az-font, 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif) !important; }
 body *:not(code):not(pre):not(kbd):not(samp):not(svg):not(svg *) { font-family: inherit !important; }
 
 /* الطباعة و"حفظ PDF": الورقة بيضا بالظبط زي المعاينة — من غير خلفية الوضع الغامق اللي كانت بتظهر إطار أسود حوالين الورقة */
@@ -44,3 +44,6 @@ body *:not(code):not(pre):not(kbd):not(samp):not(svg):not(svg *) { font-family: 
     background: #fff !important; background-image: none !important; box-shadow: none !important; outline: 0 !important;
   }
 }
+
+/* خط Cairo أعرض شوية في الأرقام: الإجمالي الكبير جداً (على شاشة 360px) يلف جوه الكارت بدل ما يطلع بره — الأرقام العادية فاضلة سطر واحد */
+.sum-total strong { white-space: normal !important; overflow-wrap: anywhere; min-width: 0; text-align: end; }

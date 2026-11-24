@@ -4,7 +4,7 @@
  * فكل تطبيق بيفضل متحكم فيه الـ Service Worker الأصلي بتاعه زي ما هو.
  * أسماء الكاش كلها بتبدأ بـ hisabati-super- (مختلفة عن كل التطبيقات).
  */
-const VERSION = '2.8.0';
+const VERSION = '2.8.1';
 const CACHE = 'hisabati-super-' + VERSION;
 const PREFIX = 'hisabati-super-';
 const TRADE_DIRS = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum', 'Plastering', 'Metalwork', 'Carpentry', 'Masonry', 'LowCurrent', 'Aluminium', 'Marble'];
@@ -14,7 +14,7 @@ const FILES = [
   '../Shared-Assets/brand/arzaqi.css', '../Shared-Assets/brand/splash.js',
   '../Shared-Assets/brand/arzoqi-wordmark-light.png', '../Shared-Assets/brand/arzoqi-wordmark-dark.png',
   '../Shared-Assets/brand/splash/light/A.png', '../Shared-Assets/brand/splash/light/r.png', '../Shared-Assets/brand/splash/light/z.png', '../Shared-Assets/brand/splash/light/o.png', '../Shared-Assets/brand/splash/light/q.png', '../Shared-Assets/brand/splash/light/i.png', '../Shared-Assets/brand/splash/light/swoosh.png', '../Shared-Assets/brand/splash/light/arc.png', '../Shared-Assets/brand/splash/light/dot.png', '../Shared-Assets/brand/splash/dark/A.png', '../Shared-Assets/brand/splash/dark/r.png', '../Shared-Assets/brand/splash/dark/z.png', '../Shared-Assets/brand/splash/dark/o.png', '../Shared-Assets/brand/splash/dark/q.png', '../Shared-Assets/brand/splash/dark/i.png', '../Shared-Assets/brand/splash/dark/swoosh.png', '../Shared-Assets/brand/splash/dark/arc.png', '../Shared-Assets/brand/splash/dark/dot.png',
-  '../Shared-Assets/fonts/arzoqi-fonts.css', '../Shared-Assets/fonts/inter-latin-wght-normal.woff2', '../Shared-Assets/fonts/inter-latin-ext-wght-normal.woff2',
+  '../Shared-Assets/fonts/arzoqi-fonts.css', '../Shared-Assets/fonts/cairo-arabic.woff2', '../Shared-Assets/fonts/cairo-latin.woff2', '../Shared-Assets/fonts/cairo-latin-ext.woff2', '../Shared-Assets/fonts/inter-latin-wght-normal.woff2', '../Shared-Assets/fonts/inter-latin-ext-wght-normal.woff2',
   '../Shared-Assets/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2', '../Shared-Assets/fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2',
   '../Shared-Assets/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2', '../Shared-Assets/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2',
   '../Shared-Assets/icons/icon-192.png', '../Shared-Assets/icons/icon-512.png',

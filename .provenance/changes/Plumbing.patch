@@ -4,7 +4,7 @@ Binary files Plumbing/icons/icon-maskable-192.png and Trade-Modules/Plumbing/ico
 Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/icons/icon-maskable-512.png differ
 --- Plumbing/index.html
 +++ Trade-Modules/Plumbing/index.html
-@@ -3,19 +3,19 @@
+@@ -3,31 +3,28 @@
  <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -28,9 +28,12 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      try {
        var _k = (/\/beta\//.test(location.pathname) ? 'beta_' : '') + 'hesabati_plumbing_settings_v1';
        var _t = (JSON.parse(localStorage.getItem(_k) || '{}') || {}).theme;
-@@ -26,8 +26,8 @@
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+       if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+     } catch (e) {}
+   </script>
+-  <link rel="preconnect" href="https://fonts.googleapis.com">
+-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
    <!--
 -    حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي
 -    تطبيق مستقل من عائلة حساباتي (بنفس نظام التصميم)
@@ -39,7 +42,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      تصميم وتطوير: أحمد حسن عبدالله
      © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
      يُمنع نسخ أو تعديل أو إعادة نشر هذا التطبيق أو أي جزء منه دون إذن كتابي من المالك.
-@@ -669,7 +669,7 @@
+@@ -669,7 +666,7 @@
        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
      }
  
@@ -48,7 +51,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      .calc-row { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; margin-bottom: 10px; }
      .calc-row .mini-f input, .calc-row .mini-f select { height: 44px; padding: 0 10px; font-size: .88rem; min-width: 0; width: 100%; }
      .calc-row .row-2 { gap: 6px; align-items: end; }
-@@ -736,6 +736,8 @@
+@@ -736,6 +733,8 @@
      .inv-notes ol { padding-right: 18px; }
      .inv-notes ol li { margin-bottom: 3px; }
    </style>
@@ -57,7 +60,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  </head>
  <body>
  
-@@ -748,7 +750,7 @@
+@@ -748,7 +747,7 @@
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -66,7 +69,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
      </div>
      <button type="button" class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع الليلي والفاتح"><i data-icon="moon"></i></button>
    </header>
-@@ -919,7 +921,7 @@
+@@ -919,7 +918,7 @@
        <h3 class="more-h">التطبيق وبياناتك</h3>
        <div class="card">
          <div class="card-title"><div class="t-ic"><i data-icon="save"></i></div><h2>النسخ الاحتياطي</h2></div>
@@ -75,7 +78,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
          <div class="btn-row">
            <button type="button" class="btn btn-ghost" onclick="exportBackupJSON()"><i data-icon="download"></i> نسخة كاملة</button>
            <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i data-icon="upload"></i> استعادة</button>
-@@ -945,7 +947,7 @@
+@@ -945,13 +944,13 @@
  
        <div class="card hidden" id="apkCard">
          <div class="card-title"><div class="t-ic orange"><i data-icon="download"></i></div><h2>تطبيق أندرويد</h2><span class="tag">APK</span></div>
@@ -84,7 +87,14 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
          <a class="btn btn-accent" id="apkLink" href="#" rel="noopener"><i data-icon="download"></i> تحميل تطبيق أندرويد</a>
        </div>
  
-@@ -962,7 +964,7 @@
+       <!-- عن المطور -->
+       <div class="dev-card">
+-        <img class="dev-avatar" src="./icons/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
++        <img class="dev-avatar" src="../../Shared-Assets/images/developer.jpg" alt="أحمد حسن عبدالله" width="96" height="96">
+         <div class="dev-name">أحمد حسن عبدالله</div>
+         <div class="dev-role">مطوّر ومصمّم التطبيق</div>
+         <div class="dev-links">
+@@ -962,7 +961,7 @@
        </div>
  
        <div class="copyright">
@@ -167,7 +177,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
 --- Plumbing/js/core.js
 +++ Trade-Modules/Plumbing/js/core.js
-@@ -1,6 +1,6 @@
+@@ -1,16 +1,16 @@
  /* =========================================================
 -   حساباتي السباكة - إدارة ومحاسبة أعمال السباكة والصحي وشبكات المياه والصرف
 -   تطبيق مستقل من عائلة حساباتي (HESABATI PLUMBING)
@@ -176,11 +186,12 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
     تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
     © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
     ---------------------------------------------------------
-@@ -8,9 +8,9 @@
+    core.js: الثوابت، التخزين المستقل، العملات، المظهر، الأيقونات،
     النوافذ والصفحات وزر الرجوع، والتنقل بين الأقسام.
     ========================================================= */
- const APP_VERSION = '1.0.0';
+-const APP_VERSION = '1.0.0';
 -const APP_NAME = 'حساباتي السباكة';
++const APP_VERSION = '1.0.1';
 +const APP_NAME = 'أرزقي السباكة';
  const IS_BETA = /\/beta\//.test(location.pathname);
 -// كل مفاتيح التخزين تبدأ بهذا البادئ: لا تختلط أبداً ببيانات حساباتي الكهرباء أو النقاشة أو التكييف
@@ -346,15 +357,17 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    "dir": "rtl",
 --- Plumbing/privacy.html
 +++ Trade-Modules/Plumbing/privacy.html
-@@ -4,7 +4,7 @@
+@@ -4,8 +4,8 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="theme-color" content="#0b1b33">
 -  <title>سياسة الخصوصية - حساباتي السباكة</title>
+-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 +  <title>سياسة الخصوصية — أرزقي | Arzoqi · السباكة</title>
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="../../Shared-Assets/fonts/arzoqi-fonts.css"><!-- Cairo محلي -->
    <style>
      :root { --bg: #f2f5fa; --surface: #fff; --text: #0f1b2d; --muted: #5b6b82; --border: #e2e8f1; --accent: #f97316; --primary: #10284a; }
+     @media (prefers-color-scheme: dark) {
 @@ -28,7 +28,7 @@
  <body>
    <header>
@@ -364,6 +377,15 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    </header>
    <main>
      <section>
+@@ -45,7 +45,7 @@
+     </section>
+     <section>
+       <h2>الصلاحيات والاتصال بالإنترنت</h2>
+-      <p>يعمل التطبيق بالكامل بدون إنترنت، ويستخدم الإنترنت فقط لتنزيل الخطوط وتحديثات التطبيق. تنبيهات المواعيد محلية على الجهاز ولا تحتاج أي خادم. عند اختيار صورة لوجو أو صورة زيارة أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
++      <p>يعمل التطبيق بالكامل بدون إنترنت، ويستخدم الإنترنت فقط لتحديثات التطبيق (الخطوط موجودة جوه التطبيق). تنبيهات المواعيد محلية على الجهاز ولا تحتاج أي خادم. عند اختيار صورة لوجو أو صورة زيارة أو ملف نسخة احتياطية يتم قراءته محلياً على الجهاز فقط. عند الضغط على "إرسال واتساب" يتم فتح تطبيق واتساب بنص الفاتورة لتختار أنت من ترسلها إليه.</p>
+     </section>
+     <section>
+       <h2>حذف البيانات</h2>
 @@ -58,6 +58,6 @@
          فيسبوك: <a href="https://www.facebook.com/share/1CTcsmiTif/">صفحة المطور</a></p>
      </section>
@@ -383,7 +405,24 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
   * (التطبيقات على نفس النطاق github.io بتتشارك نفس مساحة الكاش).
   * © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
   *
-@@ -122,6 +122,34 @@
+@@ -15,7 +15,7 @@
+  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
+  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
+  */
+-const SW_VERSION = "1.0.0";
++const SW_VERSION = "1.0.1";
+ 
+ const APP_PREFIX = "hesabati-plumbing-app-";
+ const META_CACHE = "hesabati-plumbing-meta";
+@@ -35,7 +35,6 @@
+   "./icons/icon-512.png",
+   "./icons/icon-maskable-192.png",
+   "./icons/icon-maskable-512.png",
+-  "./icons/developer.jpg",
+   "./js/core.js",
+   "./js/catalog.js",
+   "./js/docs.js",
+@@ -122,6 +121,34 @@
  }
  
  /* ---------- دورة حياة الـ Service Worker ---------- */
@@ -393,7 +432,7 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
 +const AZ_SHARED_CACHE = "hesabati-plumbing-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 +const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 +const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-+  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
++  "../fonts/arzoqi-fonts.css", "../images/developer.jpg", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
 +  "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
 +  .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -418,8 +457,37 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
  self.addEventListener("install", event => {
    event.waitUntil((async () => {
      const cache = await caches.open(APP_PREFIX + SW_VERSION);
+@@ -213,7 +240,4 @@
+     return;
+   }
+ 
+-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
+-    event.respondWith(serveFont(request));
+-  }
+-});
++});
+--- Plumbing/tests/layout-audit.js
++++ Trade-Modules/Plumbing/tests/layout-audit.js
+@@ -13,7 +13,7 @@
+ const WIDTHS = process.argv[2] ? [Number(process.argv[2])] : [360, 412];
+ 
+ function serve(port) {
+-  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg' };
++  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css', '.woff2': 'font/woff2' };
+   const server = http.createServer((req, res) => {
+     let p = decodeURIComponent(req.url.split('?')[0]);
+     if (p === '/') p = '/index.html';
 --- Plumbing/tests/run-tests.js
 +++ Trade-Modules/Plumbing/tests/run-tests.js
+@@ -275,7 +275,7 @@
+    ========================================================= */
+ const serveOverride = { version: null };
+ function serve(port) {
+-  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css' };
++  const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.css': 'text/css', '.woff2': 'font/woff2' };
+   const server = http.createServer((req, res) => {
+     let p = decodeURIComponent(req.url.split('?')[0]).replace(/^\/Hesabaty-plumbing/, '');
+     if (p === '/' || p === '') p = '/index.html';
 @@ -328,7 +328,7 @@
    check('التطبيق اشتغل بدون أخطاء', errors.length === 0, errors);
    check('عملاء التطبيقات الأخرى لم يتم استيرادهم تلقائياً', (await ev(() => DB.customers.length + DB.docs.length + DB.projects.length)) === 0);
@@ -431,12 +499,17 @@ Binary files Plumbing/icons/icon-maskable-512.png and Trade-Modules/Plumbing/ico
    /* ---------- العملاء والمشروعات ---------- */
 --- Plumbing/version.json
 +++ Trade-Modules/Plumbing/version.json
-@@ -2,7 +2,7 @@
-   "version": "1.0.0",
-   "date": "2026-11-15",
+@@ -1,8 +1,9 @@
+ {
+-  "version": "1.0.0",
+-  "date": "2026-11-15",
++  "version": "1.0.1",
++  "date": "2026-11-24",
    "notes": [
 -    "الإصدار الأول من حساباتي السباكة: مقايسات وفواتير السباكة والصحي",
++    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "الإصدار الأول من أرزقي السباكة: مقايسات وفواتير السباكة والصحي",
      "الحساب بالنقطة والحمام والمطبخ والمتر والقطعة واليومية والمقاولة والزيارة والمتر المكعب والمراحل",
      "حاسبات النقاط والحمامات والمطابخ والمواسير والوصلات والخزانات والحفر",
      "العملاء والمشروعات وسجل الصيانة والخامات والعمال والمصروفات والأرباح"
+Deleted (moved to Shared-Assets or removed on purpose): Plumbing/icons/developer.jpg

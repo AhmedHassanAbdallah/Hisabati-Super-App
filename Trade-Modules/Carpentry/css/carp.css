@@ -125,7 +125,7 @@
 .cut-svg { display: block; width: 100%; height: auto; border-radius: 6px; background: #fff; }
 .cut-svg .cut-board { fill: #efe6d6; stroke: #8a6d3b; stroke-width: 6; }
 .cut-svg .cut-part { stroke: #4a3a1f; stroke-width: 3; opacity: .92; }
-.cut-svg text { fill: #1d1406; font-weight: 800; font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif; direction: ltr; unicode-bidi: plaintext; }
+.cut-svg text { fill: #1d1406; font-weight: 800; font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', sans-serif; direction: ltr; unicode-bidi: plaintext; }
 .az-inv .cut-doc .sum-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; font-size: 11px; }
 .az-inv .cut-doc .sum-row { padding: 3px 0; border-bottom: 1px solid #e6ecf4; display: flex; justify-content: space-between; color: #011c1b !important; }
 .az-inv .cut-doc .sum-row span { color: #476966 !important; }

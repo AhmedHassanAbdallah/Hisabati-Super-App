@@ -1,6 +1,6 @@
 /* أرزقي | Arzoqi — نوتة العمال واليوميات (مشتركة بين كل الأقسام) */
 .azc-card, .azc-ov { --c9: #002624; --c8: #033935; --c7: #0b5450; --c5: #0d8a82; --y: #fbbf00; --o: #f98a00; --ok: #0f8a5f; --bad: #d9363e; }
-.azc-card, .azc-ov, .azc-ov * { box-sizing: border-box; font-family: 'Inter', 'IBM Plex Sans Arabic', system-ui, sans-serif; }
+.azc-card, .azc-ov, .azc-ov * { box-sizing: border-box; font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif; }
 .azc-card svg, .azc-ov svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
 /* ---------- الكارت في صفحة العميل ---------- */

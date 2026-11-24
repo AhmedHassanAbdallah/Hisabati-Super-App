@@ -167,7 +167,7 @@
 .bar-svg .cut-p { fill: #60a5fa; stroke: #1e3a8a; stroke-width: .6; }
 .bar-svg .cut-keep { fill: #86efac; }
 .bar-svg .cut-waste { fill: #fca5a5; }
-.bar-svg text { font-size: 11px; font-weight: 800; fill: #0b1f3a; font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif; }
+.bar-svg text { font-size: 11px; font-weight: 800; fill: #0b1f3a; font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
 .stages { display: flex; flex-wrap: wrap; gap: 6px; }
 .stage { border: 1.5px solid var(--border); background: var(--surface-2); color: var(--muted); border-radius: 99px; padding: 5px 10px; font-size: .74rem; font-weight: 800; }
 .stage.done { background: var(--success-soft); color: var(--success); border-color: transparent; }
@@ -202,7 +202,7 @@
 .slab-svg .cut-p { fill: #93c5fd; stroke: #1e3a8a; stroke-width: 1; }
 .slab-svg .cut-p.lock { fill: #c4b5fd; stroke: #4c1d95; }
 .slab-svg .cut-keep { fill: #bbf7d0; stroke: #15803d; stroke-width: 1; stroke-dasharray: 4 3; }
-.slab-svg text { font-size: 15px; font-weight: 900; fill: #0b1f3a; font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif; }
+.slab-svg text { font-size: 15px; font-weight: 900; fill: #0b1f3a; font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
 .slab-legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: .7rem; color: var(--muted); font-weight: 700; margin-top: 4px; }
 .slab-legend b { color: var(--text); }
 .ph-thumb { border: 0; padding: 0; background: none; width: 42px; height: 42px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }

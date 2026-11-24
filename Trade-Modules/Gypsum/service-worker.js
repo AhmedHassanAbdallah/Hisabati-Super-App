@@ -7,7 +7,7 @@
  * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
  * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const SW_VERSION = "1.0.0";
+const SW_VERSION = "1.0.1";
 const APP_CACHE = "hgyp-app-" + SW_VERSION;
 const RUNTIME_CACHE = "hgyp-runtime";
 const APP_FILES = [
@@ -25,7 +25,7 @@ const APP_FILES = [
 const AZ_SHARED_CACHE = "hgyp-arzaqi-shared"; // باسم القسم، علشان كاش كل قسم يفضل منفصل
 const AZ_SHARED_PATH = new URL("../../Shared-Assets/", self.location).pathname;
 const AZ_SHARED_FILES = ["section-theme.css", "invoice.js", "invoice.css", "crew.js", "crew.css", "arzoqi-wordmark-light.png",
-  "../fonts/arzoqi-fonts.css", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
+  "../fonts/arzoqi-fonts.css", "../fonts/cairo-arabic.woff2", "../fonts/cairo-latin.woff2", "../fonts/cairo-latin-ext.woff2", "../fonts/inter-latin-wght-normal.woff2", "../fonts/inter-latin-ext-wght-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2",
   "../fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2", "../fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2"]
   .map(f => new URL("../../Shared-Assets/brand/" + f, self.location).href);
@@ -65,16 +65,6 @@ self.addEventListener("fetch", event => {
   const req = event.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  // الخطوط: من الذاكرة أولاً ثم الشبكة
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    event.respondWith(caches.open(RUNTIME_CACHE).then(async c => {
-      const hit = await c.match(req);
-      if (hit) return hit;
-      try { const res = await fetch(req); if (res.ok || res.type === "opaque") c.put(req, res.clone()); return res; }
-      catch (e) { return hit || Response.error(); }
-    }));
-    return;
-  }
   if (url.origin !== self.location.origin) return;
   if (url.pathname.endsWith("/version.json")) {
     event.respondWith(fetch(req).catch(() => caches.match(req)));
