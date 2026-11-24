@@ -15,7 +15,7 @@
  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 2.1.0 "ملاحظة 1" "ملاحظة 2").
  */
-const SW_VERSION = "1.0.4";
+const SW_VERSION = "1.0.5";
 
 const APP_PREFIX = "hesabati-hvac-app-";
 const META_CACHE = "hesabati-hvac-meta";

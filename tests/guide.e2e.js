@@ -40,7 +40,7 @@ const dump = page => page.evaluate(pre => { const o = {}; for (let i = 0; i < lo
       if (st.busy) { await sleep(150); continue; }
       if (titles[st.i] === undefined) {
         titles[st.i] = st.title; if (!st.el) noEl.push(st.i + 1 + ' ' + st.title);
-        await sleep(300); // بعد ما الحركة تخلص: الكارت كله جوه الشاشة، والتظليل باين
+        await sleep(450); // بعد ما الحركة تخلص (0.34 ث): الكارت كله جوه الشاشة، والتظليل باين
         const pos = await page.evaluate(() => { const c = document.querySelector('.azg-card').getBoundingClientRect(), sp = document.querySelector('.azg-spot').getBoundingClientRect(), vh = innerHeight;
           return { card: c.top >= 0 && c.bottom <= vh + 1, spot: !ArzoqiGuide.step.el || (sp.bottom > 0 && sp.top < vh && sp.height > 0) }; });
         if (!pos.card || !pos.spot) offScreen.push(st.i + 1 + ' ' + st.title + (pos.card ? '' : ' [الكارت برا الشاشة]') + (pos.spot ? '' : ' [التظليل برا الشاشة]'));

@@ -15,7 +15,7 @@
  * عند إصدار تحديث جديد: غيّر SW_VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 1.1.0 "ملاحظة 1" "ملاحظة 2").
  */
-const SW_VERSION = "1.1.3";
+const SW_VERSION = "1.1.4";
 
 const APP_PREFIX = "hpaint-app-";
 const META_CACHE = "hpaint-meta";

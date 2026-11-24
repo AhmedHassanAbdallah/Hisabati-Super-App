@@ -375,3 +375,18 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
   `tools/update-change-pins.sh` + `tools/verify-integrity.sh` → ALL CHECKS PASSED (originals untouched).
 * Suites: `run-trade-suites` 24/24; launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35,
   biz-precedence 26, guide 143.
+
+## 23. 2.8.4 — smooth usage-guide motion (2026-11-24)
+* **Report:** screen recording from a phone (Electrical, dark mode): lag, stutter and dropped frames while moving between steps.
+* **Cause (engine, so every section):** the dimming was a `box-shadow: 0 0 0 9999px` on the highlight and its `top/left/width/height`
+  were transitioned, so every animation frame re-rasterised a ~20 000 px shadow layer; the card was moved with `top` (layout + paint
+  each frame); a fixed 260 ms pause before each step.
+* **Fix (`guide.js` / `guide.css` only):** dimming = two viewport-sized layers with a rounded cut-out (`clip-path: path(evenodd …)`,
+  polygon fallback) that cross-fade when the highlight moves; ring and card move with `transform`; text cross-fades; first appearance
+  fades in place (nothing flies in from a corner); scroll/resize repositioning throttled to one per frame; the «المزيد» observer
+  throttled to one per frame; shorter waits between actions. Only `opacity` and `transform` animate. `prefers-reduced-motion` disables
+  the motion.
+* **Measured (Chromium trace, 10 steps, mobile viewport @2.75x):** raster time Electrical 792 → 178 ms, Marble 778 → 176 ms.
+  25 fps recording: each step change is now a gradual 6–10 frame glide instead of jumps.
+* `tests/guide.e2e.js` (checks now taken after the 0.34 s glide): 143/143. Versions: app 2.8.4; all 13 sections bumped (they cache
+  `guide.js`/`guide.css`); 504/504 cached files present.

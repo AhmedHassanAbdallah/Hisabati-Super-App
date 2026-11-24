@@ -1,21 +1,32 @@
 /* أرزقي | Arzoqi — «طريقة الاستخدام»: تضليل الشاشة + تظليل العنصر + كارت الخطوة (فاتح وليلي) */
-.azg-root { position: fixed; inset: 0; z-index: 2147483000; display: none; font-family: 'Cairo', 'IBM Plex Sans Arabic', system-ui, sans-serif; direction: rtl; }
-.azg-root.azg-on { display: block; }
+/* الحركة كلها opacity و transform بس (بتتعمل على كارت الشاشة) — مفيش حاجة بتترسم من جديد في كل فريم */
+.azg-root { position: fixed; inset: 0; z-index: 2147483000; visibility: hidden; pointer-events: none; font-family: 'Cairo', 'IBM Plex Sans Arabic', system-ui, sans-serif; direction: rtl; }
+.azg-root.azg-on { visibility: visible; pointer-events: auto; }
 html.azg-lock, html.azg-lock body { overscroll-behavior: none; }
 .azg-block { position: absolute; inset: 0; background: transparent; }
-.azg-spot { position: fixed; border-radius: 14px; box-shadow: 0 0 0 9999px rgba(1, 22, 21, .72), 0 0 0 3px #f98a00, 0 0 22px 4px rgba(249, 138, 0, .55);
-  transition: top .25s ease, left .25s ease, width .25s ease, height .25s ease; pointer-events: none; }
-.azg-center .azg-spot { box-shadow: 0 0 0 9999px rgba(1, 22, 21, .78); }
-.azg-card { position: fixed; left: 12px; right: 12px; max-width: 460px; margin: 0 auto; background: #ffffff; color: #0c2b29; border-radius: 18px;
-  padding: 14px 16px 14px; box-shadow: 0 18px 48px rgba(0, 0, 0, .38); transition: top .25s ease, opacity .15s ease; }
-.azg-center .azg-card { top: 50% !important; transform: translateY(-50%); }
-.azg-card.azg-wait { opacity: .55; pointer-events: none; }
+.azg-dim { position: fixed; inset: 0; background: rgba(1, 22, 21, .74); opacity: 0; pointer-events: none; transition: opacity .3s ease; will-change: opacity; contain: strict; }
+.azg-dim.on { opacity: 1; }
+.azg-spot { position: fixed; left: 0; top: 0; width: 0; height: 0; border-radius: 14px; pointer-events: none; opacity: 0;
+  box-shadow: 0 0 0 3px #f98a00, 0 0 18px 3px rgba(249, 138, 0, .5);
+  transition: transform .34s cubic-bezier(.22, .8, .24, 1), width .34s cubic-bezier(.22, .8, .24, 1), height .34s cubic-bezier(.22, .8, .24, 1), opacity .25s ease;
+  will-change: transform, opacity; }
+.azg-spot.on { opacity: 1; }
+.azg-card { position: fixed; top: 0; left: 12px; right: 12px; max-width: 460px; margin: 0 auto; background: #ffffff; color: #0c2b29; border-radius: 18px;
+  padding: 14px 16px 14px; box-shadow: 0 14px 36px rgba(0, 0, 0, .34); opacity: 0;
+  transition: transform .34s cubic-bezier(.22, .8, .24, 1), opacity .25s ease; will-change: transform, opacity; contain: layout paint; }
+.azg-card.on { opacity: 1; }
+.azg-in { transition: opacity .18s ease; }
+.azg-card.azg-wait .azg-in { opacity: .4; }
+.azg-card.azg-wait { pointer-events: none; }
+/* السكرول وأول ظهور: من غير أنيميشن (الإطار والكارت يمشوا مع الصفحة بالظبط) */
+.azg-snap .azg-spot, .azg-snap .azg-card, .azg-snap .azg-dim { transition: none !important; }
+@media (prefers-reduced-motion: reduce) { .azg-dim, .azg-spot, .azg-card, .azg-in, .azg-bar i { transition: none !important; } }
 .azg-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
 .azg-sec { font-size: 11.5px; font-weight: 800; color: #0b7a72; }
 .azg-skip { border: 0; background: #eef5f4; color: #3c5b58; font: inherit; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 99px; cursor: pointer; }
 .azg-count { font-size: 12px; font-weight: 800; color: #b35c00; }
 .azg-bar { height: 4px; background: #e3eeec; border-radius: 99px; margin: 5px 0 9px; overflow: hidden; }
-.azg-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f98a00, #ffb547); border-radius: 99px; transition: width .25s ease; }
+.azg-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f98a00, #ffb547); border-radius: 99px; transform-origin: right center; transition: transform .34s cubic-bezier(.22, .8, .24, 1); will-change: transform; }
 .azg-t { margin: 0 0 4px; font-size: 17px; font-weight: 900; line-height: 1.45; }
 .azg-d { margin: 0 0 12px; font-size: 14px; font-weight: 600; line-height: 1.8; color: #2f4d4a; }
 .azg-btns { display: flex; justify-content: space-between; align-items: center; gap: 10px; }

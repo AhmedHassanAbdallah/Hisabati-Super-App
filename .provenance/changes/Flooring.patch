@@ -105,7 +105,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
  <div id="appToast" class="toast" role="status" aria-live="polite"></div>
  
 -<script>window.APP_VERSION = '1.0.0';</script>
-+<script>window.APP_VERSION = '1.0.3';</script>
++<script>window.APP_VERSION = '1.0.4';</script>
  <script src="./js/calc.js"></script>
  <script src="./js/finance.js"></script>
  <script src="./js/store.js"></script>
@@ -366,7 +366,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
   * (أو شغّل: node tools/bump-version.js 1.0.1 "ملاحظة")
   */
 -const VERSION = '1.0.0';
-+const VERSION = '1.0.3';
++const VERSION = '1.0.4';
  const PREFIX = 'hflooring-';
  const CACHE = PREFIX + 'app-' + VERSION;
  const SCOPE_PATH = new URL('./', self.location).pathname;
@@ -417,7 +417,7 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-17",
-+  "version": "1.0.3",
++  "version": "1.0.4",
 +  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للأرضيات والتشطيبات",
@@ -426,12 +426,12 @@ Binary files Flooring/icons/icon-maskable-512.png and Trade-Modules/Flooring/ico
 -    "المشروعات والعملاء والخامات والمخزون والعمال والمصروفات والأرباح والنوتة",
 -    "فواتير ومقايسات وعروض أسعار ومستخلصات وإيصالات وكشوف حساب PDF",
 -    "يعمل بدون إنترنت مع نسخ احتياطي واستعادة"
++    "حركة أنعم في «طريقة الاستخدام»: التعتيم والإطار والكارت بيتحركوا بسلاسة من غير تهنيج أو تقطيع",
 +    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
 +    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
-+    "أول إصدار من أرزقي للأرضيات والتشطيبات",
-+    "7 حاسبات: المساحات، البلاط، الباركيه، الإنترلوك، الرخام، السلالم، اللاصق والترويبة"
++    "أول إصدار من أرزقي للأرضيات والتشطيبات"
    ]
  }
 Deleted (moved to Shared-Assets or removed on purpose): Flooring/fonts/cairo-arabic.woff2

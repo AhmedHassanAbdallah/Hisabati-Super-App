@@ -147,7 +147,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
    'use strict';
    const U = window.UI, S = U.S;
 -  window.APP_VERSION = '1.0.0';
-+  window.APP_VERSION = '1.0.3';
++  window.APP_VERSION = '1.0.4';
  
    S.load();
    U.applyTheme();
@@ -338,7 +338,7 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
   * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
   */
 -const VERSION = '1.0.0';
-+const VERSION = '1.0.3';
++const VERSION = '1.0.4';
  const PREFIX = 'hplaster-';
  const APP_CACHE = PREFIX + 'app-' + VERSION;
  const RUNTIME_CACHE = PREFIX + 'runtime';
@@ -408,18 +408,18 @@ Binary files Plastering/icons/icon-maskable-512.png and Trade-Modules/Plastering
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-18",
-+  "version": "1.0.3",
++  "version": "1.0.4",
 +  "date": "2026-11-24",
    "notes": [
 -    "أول إصدار من حساباتي للمحارة وتشطيبات الواجهات",
 -    "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات",
 -    "المشروعات والعملاء والعمال والمخزن والمستندات والتقارير",
 -    "يعمل بالكامل بدون إنترنت"
++    "حركة أنعم في «طريقة الاستخدام»: التعتيم والإطار والكارت بيتحركوا بسلاسة من غير تهنيج أو تقطيع",
 +    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
 +    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
-+    "أول إصدار من أرزقي للمحارة وتشطيبات الواجهات",
-+    "حاسبات المساحات والمحارة والجرافيت والدهارة والمعجون والواجهات"
++    "أول إصدار من أرزقي للمحارة وتشطيبات الواجهات"
    ]
  }

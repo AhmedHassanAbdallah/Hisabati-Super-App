@@ -133,7 +133,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  'use strict';
 -const APP_VERSION = '1.0.0';
 -const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
-+const APP_VERSION = '1.0.3';
++const APP_VERSION = '1.0.4';
 +const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
  let currentView = 'home';
  
@@ -398,7 +398,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
   */
 -const SW_VERSION = "1.0.0";
-+const SW_VERSION = "1.0.3";
++const SW_VERSION = "1.0.4";
  const APP_CACHE = "hgyp-app-" + SW_VERSION;
  const RUNTIME_CACHE = "hgyp-runtime";
  const APP_FILES = [
@@ -464,7 +464,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-17",
-+  "version": "1.0.3",
++  "version": "1.0.4",
 +  "date": "2026-11-24",
    "notes": [
 -    "الإصدار الأول من حساباتي للجبس والديكورات",
@@ -472,11 +472,11 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
 -    "حاسبات الجبس البلدي والكرانيش والبانوهات والروزتات",
 -    "مشروعات وعملاء ومخزون وعمال ومصروفات ونوتة",
 -    "فواتير ومقايسات وعروض أسعار ومستخلصات وتقارير أرباح PDF"
++    "حركة أنعم في «طريقة الاستخدام»: التعتيم والإطار والكارت بيتحركوا بسلاسة من غير تهنيج أو تقطيع",
 +    "«طريقة الاستخدام»: شرح خطوة بخطوة على الشاشة نفسها من أول القسم لحد الفاتورة PDF (بيظهر أول مرة بس، وموجود دايماً في «المزيد») — والمثال مش بيغيّر بياناتك",
 +    "بياناتك في «المزيد» جوه القسم (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتيره، واللي فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية",
 +    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
-+    "الإصدار الأول من أرزقي للجبس والديكورات",
-+    "حاسبات الجبسون بورد: أسقف، قواطيع، بيت نور، تكسية حوائط وأعمدة"
++    "الإصدار الأول من أرزقي للجبس والديكورات"
    ]
  }

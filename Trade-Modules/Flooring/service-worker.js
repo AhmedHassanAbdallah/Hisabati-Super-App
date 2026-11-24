@@ -10,7 +10,7 @@
  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في index.html + version.json
  * (أو شغّل: node tools/bump-version.js 1.0.1 "ملاحظة")
  */
-const VERSION = '1.0.3';
+const VERSION = '1.0.4';
 const PREFIX = 'hflooring-';
 const CACHE = PREFIX + 'app-' + VERSION;
 const SCOPE_PATH = new URL('./', self.location).pathname;

@@ -62,7 +62,7 @@
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function waitFor(sel, ms) {
     var end = Date.now() + (ms || 4000);
-    return new Promise(function (res) { (function tick() { var el = $(sel); if (el && visible(el)) return res(el); if (Date.now() > end) return res(null); setTimeout(tick, 80); })(); });
+    return new Promise(function (res) { (function tick() { var el = $(sel); if (el && visible(el)) return res(el); if (Date.now() > end) return res(null); setTimeout(tick, 90); })(); });
   }
   function setVal(el, v) {
     var proto = el.tagName === 'SELECT' ? HTMLSelectElement.prototype : el.tagName === 'TEXTAREA' ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
@@ -83,7 +83,7 @@
           if (t === 'click') el.click();
           else if (t === 'fill' || t === 'select') setVal(el, a[2]);
           else if (t === 'check') { if (!el.checked) el.click(); }
-          return sleep(t === 'click' ? 420 : 120);
+          return sleep(t === 'click' ? 320 : 90);
         });
       });
     });
@@ -106,45 +106,80 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   // ---------- الواجهة ----------
-  var ui = null;
+  // كل الحركة هنا شغالة على كارت الشاشة (GPU) — opacity و transform بس — علشان تبقى ناعمة حتى على الموبايلات الضعيفة:
+  //  * التعتيم: طبقتين قد الشاشة بالظبط وفيهم «فتحة» حوالين العنصر (clip-path). لما الفتحة تتنقل، الطبقة القديمة بتختفي
+  //    والجديدة بتظهر بالتدريج (crossfade) — من غير ما الشاشة تترسم من جديد في كل فريم.
+  //  * الإطار البرتقالي والكارت بيتحركوا بـ transform، والكلام بيتبدّل بـ fade.
+  var ui = null, raf = 0;
+  var HOLE_PATH = (function () { try { return CSS.supports('clip-path', 'path(evenodd, "M0 0H1V1H0Z")'); } catch (e) { return false; } })();
+  function frame() { return new Promise(function (r) { requestAnimationFrame(function () { r(); }); }); }
   function buildUI() {
     if (ui) return ui;
     var root = document.createElement('div'); root.className = 'azg-root'; root.setAttribute('dir', 'rtl');
-    root.innerHTML = '<div class="azg-block"></div><div class="azg-spot"></div><div class="azg-card" role="dialog" aria-live="polite"></div>';
+    root.innerHTML = '<div class="azg-block"></div><div class="azg-dim"></div><div class="azg-dim"></div><div class="azg-spot"></div>'
+      + '<div class="azg-card" role="dialog" aria-live="polite"><div class="azg-in"></div></div>';
     document.body.appendChild(root);
-    ui = { root: root, spot: root.querySelector('.azg-spot'), card: root.querySelector('.azg-card') };
+    ui = { root: root, dims: root.querySelectorAll('.azg-dim'), cur: 0, hole: null, spot: root.querySelector('.azg-spot'), card: root.querySelector('.azg-card'), body: root.querySelector('.azg-in') };
     root.addEventListener('click', function (e) { var b = e.target.closest('[data-azg]'); if (!b) return; e.preventDefault(); e.stopPropagation(); onBtn(b.getAttribute('data-azg')); }, true);
-    window.addEventListener('resize', place); window.addEventListener('scroll', place, true);
+    // سكرول/تغيير مقاس: مرة واحدة في كل فريم، ومن غير أنيميشن (الإطار يمشي مع الصفحة بالظبط)
+    var onMove = function () { if (raf || !run) return; raf = requestAnimationFrame(function () { raf = 0; place(false); }); };
+    window.addEventListener('resize', onMove); window.addEventListener('scroll', onMove, true);
     return ui;
   }
-  function place() {
+  function clipFor(h) {
+    if (!h) return 'none';
+    var W = innerWidth, H = innerHeight, x = h.x, y = h.y, w = h.w, ht = h.h, r = Math.min(14, w / 2, ht / 2);
+    if (!HOLE_PATH) return 'polygon(evenodd, 0 0, ' + W + 'px 0, ' + W + 'px ' + H + 'px, 0 ' + H + 'px, 0 0, ' + x + 'px ' + y + 'px, ' + x + 'px ' + (y + ht) + 'px, ' + (x + w) + 'px ' + (y + ht) + 'px, ' + (x + w) + 'px ' + y + 'px, ' + x + 'px ' + y + 'px)';
+    return 'path(evenodd, "M0 0H' + W + 'V' + H + 'H0Z M' + (x + r) + ' ' + y + 'H' + (x + w - r) + 'A' + r + ' ' + r + ' 0 0 1 ' + (x + w) + ' ' + (y + r) + 'V' + (y + ht - r)
+      + 'A' + r + ' ' + r + ' 0 0 1 ' + (x + w - r) + ' ' + (y + ht) + 'H' + (x + r) + 'A' + r + ' ' + r + ' 0 0 1 ' + x + ' ' + (y + ht - r) + 'V' + (y + r) + 'A' + r + ' ' + r + ' 0 0 1 ' + (x + r) + ' ' + y + 'Z")';
+  }
+  function setClip(d, c) { d.style.clipPath = c; d.style.webkitClipPath = c; }
+  // أول ظهور (أو بعد ما كان مخفي): يتحط في مكانه على طول وبعدين يظهر بالتدريج — من غير ما «يطير» من ركن الشاشة
+  function moveTo(node, apply) {
+    if (node.classList.contains('on')) { apply(); return; }
+    node.style.transition = 'none'; apply(); void node.offsetWidth; node.style.transition = '';
+  }
+  function setHole(h, fade) {
+    var same = ui.hole && h && Math.abs(ui.hole.x - h.x) < 1 && Math.abs(ui.hole.y - h.y) < 1 && Math.abs(ui.hole.w - h.w) < 1 && Math.abs(ui.hole.h - h.h) < 1;
+    if (same || (!ui.hole && !h)) { if (!ui.dims[ui.cur].classList.contains('on')) ui.dims[ui.cur].classList.add('on'); return; }
+    ui.hole = h;
+    if (!fade) { setClip(ui.dims[ui.cur], clipFor(h)); ui.dims[ui.cur].classList.add('on'); return; }
+    var nx = 1 - ui.cur; setClip(ui.dims[nx], clipFor(h));
+    ui.dims[nx].classList.add('on'); ui.dims[ui.cur].classList.remove('on'); ui.cur = nx;
+  }
+  // fade = الخطوة اتغيرت (حركة ناعمة) · false = سكرول/مقاس (يتنقل على طول مع الصفحة)
+  function place(fade) {
     if (!run || !ui) return;
-    var el = run.el, card = ui.card, vh = window.innerHeight, vw = window.innerWidth;
+    var el = run.el, card = ui.card, vh = innerHeight, vw = innerWidth, ch = card.offsetHeight || 200, y;
+    if (!fade) ui.root.classList.add('azg-snap');
     if (el && visible(el)) {
       var r = el.getBoundingClientRect(), pad = 6;
-      var top = Math.max(r.top - pad, 4), left = Math.max(r.left - pad, 4), w = Math.min(r.width + pad * 2, vw - 8), h = Math.min(r.height + pad * 2, vh - 8);
-      ui.spot.style.cssText = 'top:' + top + 'px;left:' + left + 'px;width:' + w + 'px;height:' + h + 'px';
-      ui.root.classList.remove('azg-center');
-      var ch = card.offsetHeight || 200, below = vh - (r.bottom + pad), above = r.top - pad;
+      var top = Math.round(Math.max(r.top - pad, 4)), left = Math.round(Math.max(r.left - pad, 4));
+      var w = Math.round(Math.min(r.width + pad * 2, vw - 8 - left + 4)), h = Math.round(Math.min(r.height + pad * 2, vh - 8));
+      moveTo(ui.spot, function () { ui.spot.style.width = w + 'px'; ui.spot.style.height = h + 'px'; ui.spot.style.transform = 'translate3d(' + left + 'px,' + top + 'px,0)'; });
+      ui.spot.classList.add('on');
+      setHole({ x: left, y: top, w: w, h: h }, fade);
+      var below = vh - (r.bottom + pad), above = r.top - pad;
       var ct = below >= ch + 16 || below >= above ? r.bottom + pad + 12 : top - ch - 12;
-      card.style.top = Math.max(12, Math.min(ct, vh - ch - 12)) + 'px'; // الكارت دايماً جوه الشاشة
+      y = Math.max(12, Math.min(ct, vh - ch - 12)); // الكارت دايماً جوه الشاشة
     } else {
-      ui.spot.style.cssText = 'top:50%;left:50%;width:0;height:0';
-      ui.root.classList.add('azg-center'); card.style.top = '';
+      ui.spot.classList.remove('on'); setHole(null, fade);
+      y = Math.max(12, Math.round((vh - ch) / 2));
     }
+    moveTo(card, function () { card.style.transform = 'translate3d(0,' + Math.round(y) + 'px,0)'; });
+    if (!fade) requestAnimationFrame(function () { if (ui) ui.root.classList.remove('azg-snap'); });
   }
   function render() {
     var s = run.steps[run.i], n = run.steps.length, isLast = run.i === n - 1, end = run.endPart1 === run.i;
     var back = run.i > 0 && !(run.steps[run.i - 1].act || []).length && !(s.pre || []).length;
     var label = run.whatsNew ? 'الجديد في القسم' : (s.part === 2 ? 'باقي الأجزاء' : 'من البداية لحد الفاتورة PDF');
     var html = '<div class="azg-top"><span class="azg-sec">' + esc(DEF.name) + ' · ' + label + '</span><button type="button" class="azg-skip" data-azg="skip">تخطي ✕</button></div>'
-      + '<div class="azg-count">الخطوة ' + (run.i + 1) + ' من ' + n + '</div><div class="azg-bar"><i style="width:' + Math.round((run.i + 1) / n * 100) + '%"></i></div>'
+      + '<div class="azg-count">الخطوة ' + (run.i + 1) + ' من ' + n + '</div><div class="azg-bar"><i style="transform:scaleX(' + ((run.i + 1) / n).toFixed(3) + ')"></i></div>'
       + '<h3 class="azg-t">' + esc(s.t) + '</h3><p class="azg-d">' + esc(s.d).replace(/\n/g, '<br>') + '</p>';
     if (end && run.hasPart2) html += '<div class="azg-btns azg-two"><button type="button" class="azg-btn ghost" data-azg="finish">ابدأ استخدام التطبيق</button><button type="button" class="azg-btn" data-azg="next">كمّل شرح باقي الأجزاء ←</button></div>';
     else html += '<div class="azg-btns">' + (back ? '<button type="button" class="azg-btn ghost" data-azg="prev">→ السابق</button>' : '<span></span>')
       + '<button type="button" class="azg-btn" data-azg="' + (isLast || end ? 'finish' : 'next') + '">' + (isLast || end ? 'تمام، ابدأ الاستخدام ✓' : 'التالي ←') + '</button></div>';
-    ui.card.innerHTML = html;
-    place();
+    ui.body.innerHTML = html;
   }
   function show(i) {
     run.i = i; run.busy = true;
@@ -160,8 +195,14 @@
         var q = el.getBoundingClientRect();
         if (q.bottom > innerHeight || q.top < 0) { try { window.scrollBy({ top: q.top + Math.min(q.height, innerHeight) / 2 - innerHeight / 2, behavior: 'instant' }); } catch (e) { window.scrollBy(0, q.top - innerHeight / 3); } }
       }
-      return sleep(el ? 260 : 0);
-    }).then(function () { if (!run) return; ui.card.classList.remove('azg-wait'); render(); run.shown.push(i); run.busy = false; });
+      return frame();
+    }).then(function () {
+      if (!run) return;
+      render(); place(true);
+      ui.card.classList.remove('azg-wait');
+      if (!ui.card.classList.contains('on')) requestAnimationFrame(function () { if (ui) ui.card.classList.add('on'); });
+      run.shown.push(i); run.busy = false;
+    });
   }
   function onBtn(a) {
     if (!run || run.busy) return;
@@ -191,7 +232,8 @@
     }
     var p1 = all.filter(function (s) { return (s.part || 1) === 1; }), p2 = all.filter(function (s) { return s.part === 2; });
     run = { steps: p1.concat(p2), i: 0, el: null, busy: true, misses: [], shown: [], endPart1: p2.length && p1.length ? p1.length - 1 : -1, hasPart2: !!p2.length && !!p1.length, whatsNew: !!opts.whatsNew, snap: snap };
-    buildUI(); ui.root.classList.add('azg-on'); document.documentElement.classList.add('azg-lock');
+    // الطبقة بتمنع اللمس من أولها، لكن التعتيم والإطار والكارت بيظهروا مع بعض بالتدريج أول ما أول خطوة تجهز
+    buildUI(); ui.card.classList.remove('on'); ui.root.classList.add('azg-on'); document.documentElement.classList.add('azg-lock');
     doActions(DEF.home).then(function () { show(0); });
     return true;
   }
@@ -199,7 +241,8 @@
     if (!run) return;
     var r = run; run = null;
     markSeen(DEF);
-    ui.root.classList.remove('azg-on'); document.documentElement.classList.remove('azg-lock');
+    ui.root.classList.remove('azg-on'); ui.card.classList.remove('on'); ui.spot.classList.remove('on'); ui.dims[0].classList.remove('on'); ui.dims[1].classList.remove('on'); ui.hole = null;
+    document.documentElement.classList.remove('azg-lock');
     // رجّع بيانات القسم زي ما كانت قبل المثال، وافتح القسم من جديد على الرئيسية
     var changed = false, pre = r.snap.prefixes, i, k, now = {};
     for (i = 0; i < localStorage.length; i++) { k = localStorage.key(i); if (owned(k, pre) && k !== SNAP_KEY) now[k] = localStorage.getItem(k); }
@@ -239,7 +282,8 @@
       DEF = def; DEF.version = DEF.version || 1;
       var go = function () {
         injectMore();
-        new MutationObserver(function () { injectMore(); }).observe(document.body, { childList: true, subtree: true });
+        var pend = 0;
+        new MutationObserver(function () { if (pend) return; pend = requestAnimationFrame(function () { pend = 0; injectMore(); }); }).observe(document.body, { childList: true, subtree: true });
         setTimeout(auto, DEF.delay || 900);
       };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();

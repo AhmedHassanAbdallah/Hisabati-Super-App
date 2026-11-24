@@ -5,7 +5,7 @@
  * عند إصدار تحديث: غيّر SW_VERSION هنا + version.json
  * © 2026 أحمد حسن عبدالله
  */
-const SW_VERSION = "1.0.3";
+const SW_VERSION = "1.0.4";
 const APP_CACHE = "hcarp-app-" + SW_VERSION;
 const APP_FILES = [
   "./", "./index.html", "./guide-steps.js", "./privacy.html", "./manifest.json", "./version.json",
