@@ -7,7 +7,7 @@
  * - الإصدار الجديد بيتنزل في الخلفية، والتطبيق بيسأل المستخدم قبل التحديث.
  * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const SW_VERSION = "1.0.1";
+const SW_VERSION = "1.0.2";
 const APP_CACHE = "hgyp-app-" + SW_VERSION;
 const RUNTIME_CACHE = "hgyp-runtime";
 const APP_FILES = [

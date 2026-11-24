@@ -44,7 +44,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
      input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex-shrink: 0; }
      input[type="color"] { direction: ltr; width: 100%; height: 48px; border: 1.5px solid var(--border); border-radius: 13px; background: var(--surface-2); padding: 4px; }
      .type-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 12px; }
-@@ -738,6 +735,8 @@
+@@ -738,17 +735,19 @@
      }
  
    </style>
@@ -53,7 +53,11 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
  </head>
  <body>
  
-@@ -748,7 +747,7 @@
+ <div id="editorApp">
+   <div class="beta-bar hidden" id="betaBar">نسخة تجريبية — شغالة على نسخة من بياناتك، وتطبيقك الأصلي لن يتأثر</div>
+   <!-- رأس الأقسام الرئيسية -->
+-  <header class="app-header tab-only" id="tabHeader">
++  <header class="app-header tab-only" id="tabHeader" style="--az-sec-tag:'النقاشة'">
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -92,7 +96,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
 +     تطبيق مستقل تماماً عن «أرزقي» للكهرباء: مفاتيح تخزين وذاكرة وتحديثات منفصلة.
       ========================================================= */
 -  const APP_VERSION = '1.1.0';
-+  const APP_VERSION = '1.1.1';
++  const APP_VERSION = '1.1.2';
    // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
    const IS_BETA = /\/beta\//.test(location.pathname);
    const KEY_PREFIX = IS_BETA ? 'beta_' : '';
@@ -376,7 +380,7 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
   * (أو شغّل: node tools/bump-version.js 1.1.0 "ملاحظة 1" "ملاحظة 2").
   */
 -const SW_VERSION = "1.1.0";
-+const SW_VERSION = "1.1.1";
++const SW_VERSION = "1.1.2";
  
  const APP_PREFIX = "hpaint-app-";
  const META_CACHE = "hpaint-meta";
@@ -457,13 +461,14 @@ Binary files Painting/icons/icon-maskable-512.png and Trade-Modules/Painting/ico
    check('عدد الأجزاء 3: 45 م²', near(pol.parts, 45), pol.parts);
 --- Painting/version.json
 +++ Trade-Modules/Painting/version.json
-@@ -1,7 +1,8 @@
+@@ -1,7 +1,9 @@
  {
 -  "version": "1.1.0",
 -  "date": "2026-11-14",
-+  "version": "1.1.1",
++  "version": "1.1.2",
 +  "date": "2026-11-24",
    "notes": [
++    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
      "دهان الأبواب والشبابيك: لاكيه · دوكو · أوستور بالقطعة أو مقطوعية لباب كبير",
      "إضافات بالمقطوعية جوه الغرفة (جنب ديكوري وغيره)",

@@ -47,3 +47,12 @@ body *:not(code):not(pre):not(kbd):not(samp):not(svg):not(svg *) { font-family: 
 
 /* خط Cairo أعرض شوية في الأرقام: الإجمالي الكبير جداً (على شاشة 360px) يلف جوه الكارت بدل ما يطلع بره — الأرقام العادية فاضلة سطر واحد */
 .sum-total strong { white-space: normal !important; overflow-wrap: anywhere; min-width: 0; text-align: end; }
+
+/* اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في رأس الصفحة (زي شارة HVAC) — الاسم من style="--az-sec-tag" على الهيدر.
+   مرسومة بالـ CSS بس، فمش بتتأثر لما القسم يغيّر عنوان التبويب. */
+#tabTitle::after, #appHeader .brand-ic + .titles h1::after {
+  content: var(--az-sec-tag);
+  display: inline-block; font-size: .6rem; font-weight: 900; line-height: 1.6; letter-spacing: 0;
+  background: rgba(255,255,255,.14); color: #bae6fd; padding: 0 7px; border-radius: 99px;
+  margin-inline-start: 6px; vertical-align: middle; white-space: nowrap;
+}

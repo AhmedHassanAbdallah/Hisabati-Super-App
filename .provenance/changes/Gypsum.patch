@@ -22,7 +22,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
    <link rel="manifest" href="./manifest.json">
    <link rel="icon" type="image/png" href="./icons/icon-192.png">
    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-@@ -21,15 +21,14 @@
+@@ -21,23 +21,22 @@
        if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
      } catch (e) {}
    </script>
@@ -41,7 +41,8 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  </head>
  <body>
  <div id="app">
-@@ -37,7 +36,7 @@
+-  <header class="app-header">
++  <header class="app-header" style="--az-sec-tag:'الجبس'">
      <img class="brand-ic" src="./icons/icon-192.png" alt="">
      <div class="titles">
        <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -78,7 +79,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
  'use strict';
 -const APP_VERSION = '1.0.0';
 -const VIEW_TITLES = { home: 'حساباتي للجبس', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
-+const APP_VERSION = '1.0.1';
++const APP_VERSION = '1.0.2';
 +const VIEW_TITLES = { home: 'أرزقي | Arzoqi', projects: 'المشروعات', calc: 'الحاسبات', more: 'المزيد' };
  let currentView = 'home';
  
@@ -343,7 +344,7 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
   * عند إصدار تحديث: غيّر SW_VERSION هنا + APP_VERSION في js/app.js + version.json
   */
 -const SW_VERSION = "1.0.0";
-+const SW_VERSION = "1.0.1";
++const SW_VERSION = "1.0.2";
  const APP_CACHE = "hgyp-app-" + SW_VERSION;
  const RUNTIME_CACHE = "hgyp-runtime";
  const APP_FILES = [
@@ -401,14 +402,15 @@ Binary files Gypsum/icons/icon-maskable-512.png and Trade-Modules/Gypsum/icons/i
      event.respondWith(fetch(req).catch(() => caches.match(req)));
 --- Gypsum/version.json
 +++ Trade-Modules/Gypsum/version.json
-@@ -1,8 +1,9 @@
+@@ -1,8 +1,10 @@
  {
 -  "version": "1.0.0",
 -  "date": "2026-11-17",
-+  "version": "1.0.1",
++  "version": "1.0.2",
 +  "date": "2026-11-24",
    "notes": [
 -    "الإصدار الأول من حساباتي للجبس والديكورات",
++    "اسم القسم في شارة صغيرة جنب «أرزقي | Arzoqi» في أعلى الصفحة",
 +    "خط Cairo محلي جوه التطبيق (من غير إنترنت)، تصغير حجم الملفات، وصفحة سياسة الخصوصية",
 +    "الإصدار الأول من أرزقي للجبس والديكورات",
      "حاسبات الجبسون بورد: أسقف، قواطيع، بيت نور، تكسية حوائط وأعمدة",

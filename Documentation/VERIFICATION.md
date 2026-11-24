@@ -341,3 +341,13 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
   stylesheet in those audits); they now do, so the audits see the page exactly as the app renders it.
 * Suites: `run-trade-suites` 24/24 (plumbing-layout 0 issues, hvac-all 141/141 after the fix); launcher 259, offline 32, native 14,
   cloud 42, crew 25, print-white 13, auto-backup 35. The APK itself is built and emulator-tested by CI (no Android SDK here).
+
+## 21. 2.8.2 — section-name badge in the header (2026-11-24)
+* Every section now shows its name in a small pill next to «أرزقي | Arzoqi» in the top header, the same style as the HVAC badge
+  (HVAC and Plumbing already had theirs and are unchanged). One CSS rule in `section-theme.css` draws it (`#tabTitle::after` /
+  Plastering's `#appHeader .brand-ic + .titles h1::after`) from `style="--az-sec-tag:'…'"` on each header — no JavaScript changed, and
+  the badge stays when a section changes the tab title. Checked at 360 px on every tab of the 11 sections: badge present, no overflow, no
+  JS errors; light and dark screenshots reviewed.
+* Versions: app 2.8.2; the 11 changed sections bumped one patch level (SW + version.json + APP_VERSION). Integrity: ALL CHECKS PASSED;
+  465/465 cached files present.
+* Suites: `run-trade-suites` 24/24; launcher 259, offline 32, native 14, cloud 42, crew 25, print-white 13, auto-backup 35.

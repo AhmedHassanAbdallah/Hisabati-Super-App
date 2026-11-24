@@ -4,7 +4,7 @@
 (function () {
   'use strict';
   const U = window.UI, S = U.S;
-  window.APP_VERSION = '1.0.1';
+  window.APP_VERSION = '1.0.2';
 
   S.load();
   U.applyTheme();

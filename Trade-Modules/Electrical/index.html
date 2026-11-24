@@ -677,7 +677,7 @@
 <div id="editorApp">
   <div class="beta-bar hidden" id="betaBar">نسخة تجريبية 2.4.1 (زرار حذف للفواتير والكشوفات) — شغالة على نسخة من بياناتك، وتطبيقك الأصلي لن يتأثر</div>
   <!-- رأس الأقسام الرئيسية -->
-  <header class="app-header tab-only" id="tabHeader">
+  <header class="app-header tab-only" id="tabHeader" style="--az-sec-tag:'الكهرباء'">
     <img class="brand-ic" src="./icons/icon-192.png" alt="">
     <div class="titles">
       <div class="sub" id="greetLine">أهلاً بيك</div>
@@ -1334,7 +1334,7 @@
      تصميم وتطوير: أحمد حسن عبدالله  |  واتساب: +201015421255
      © 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة.
      ========================================================= */
-  const APP_VERSION = '2.4.2';
+  const APP_VERSION = '2.4.3';
   // النسخة التجريبية (/beta/) تعمل على نسخة مستقلة من البيانات ولا تلمس بيانات التطبيق الأصلي
   const IS_BETA = /\/beta\//.test(location.pathname);
   const KEY_PREFIX = IS_BETA ? 'beta_' : '';

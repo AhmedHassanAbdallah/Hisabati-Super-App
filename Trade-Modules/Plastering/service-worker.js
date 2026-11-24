@@ -9,7 +9,7 @@
  *
  * عند إصدار تحديث: غيّر VERSION هنا + APP_VERSION في js/app.js + version.json
  */
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 const PREFIX = 'hplaster-';
 const APP_CACHE = PREFIX + 'app-' + VERSION;
 const RUNTIME_CACHE = PREFIX + 'runtime';

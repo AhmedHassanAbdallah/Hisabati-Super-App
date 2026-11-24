@@ -2,7 +2,7 @@
 c869e1165cc7828e971299248a2a6941c0993a9ed407489e91d2d8cadc4dc61b  ./icons/icon-512.png
 08021ecc135a3960947e1a36f6048f023688382b507edbf018cb93c09351743d  ./icons/icon-maskable-192.png
 2b401a6627da5ca1bcd452283984e0964eebff92f79ebb6ff0c4dafc935ea6fb  ./icons/icon-maskable-512.png
-db77000be60e071c88f2ffb41dc1feaff45737d3c1d080d99d4d5e4dc4641bdc  ./index.html
+cbb0abba627e29731f0fc52c6831614a44eab7ae85704154627c10308a352cab  ./index.html
 f901944d3abfe2ab02995736f6e825e8be17a96dfb100ce9d6aded6e9f4aaa3c  ./js/app.js
 610aee28c2355bb30f271d830165c2d13a2c1e4cd6fae2fe505fb1f125ae453e  ./js/calc.js
 04501d4867ca5d92a6cf75fdefa337df63669edc36241ccb7ad7957e10cb503c  ./js/calculators.js
@@ -13,8 +13,8 @@ f901944d3abfe2ab02995736f6e825e8be17a96dfb100ce9d6aded6e9f4aaa3c  ./js/app.js
 ec0a5ec9b5f391473aeb78942f4a1ec7b0b593624922b493958a3fda3c5642b2  ./js/ui.js
 5c121a9f536644dda22094b2bac25f041b2a1be6ef1776bd742f21013602a5f8  ./manifest.json
 e73cfba0cea33ed0cd19556e44558fdcb7bc40cd05d984869c8030b191d32830  ./privacy.html
-bc7b55e0a511645581b5fe3d1a0eec6fe1dcdbd92b205d419ccca72029a5d6fd  ./service-worker.js
-4ade62973e5b5c604dfe0aa3f931e8051779aeedd5145b01e0572c8ee2e53fbe  ./version.json
+b819c7304f2fdb84af82a5a14cf47f7ab1f094be68a763a4e9e43f2d7da86329  ./service-worker.js
+496276657624b56976700850e396a88a35477581718d9758fa4d3f19c0e2aa69  ./version.json
 -  ./fonts/cairo-arabic.woff2
 -  ./fonts/cairo-latin-ext.woff2
 -  ./fonts/cairo-latin.woff2
