@@ -6,7 +6,7 @@
  */
 const { chromium } = require('playwright');
 const BASE = (process.argv[2] || 'http://127.0.0.1:8790/').replace(/\/?$/, '/');
-const ALL = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum', 'Plastering', 'Metalwork', 'Carpentry', 'Masonry', 'LowCurrent', 'Aluminium', 'Marble'];
+const ALL = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum', 'Plastering', 'Metalwork', 'Carpentry', 'Masonry', 'LowCurrent', 'Aluminium', 'Marble', 'Automotive'];
 const ONLY = process.argv.slice(3);
 const SECS = ONLY.length ? ALL.filter(s => ONLY.includes(s)) : ALL;
 let passed = 0, failed = 0;

@@ -15,7 +15,7 @@ const OPEN = {
   Flooring: () => { Store.db.customers.push({ id: 'c1', name: 'م. خالد' }); Docs.printStatement(Store.db.customers[Store.db.customers.length - 1]); },
   Gypsum: () => { DB().customers.push({ id: 'c1', name: 'م. خالد' }); makeStatement('c1'); },
   Plastering: () => { UI.S.db().clients.push({ id: 'c1', name: 'م. خالد' }); Docs.openDoc('statement', { cid: 'c1' }); },
-  Metalwork: 'MetalApp', Carpentry: 'CarpApp', Masonry: 'MasonApp', LowCurrent: 'LowApp', Aluminium: 'AluApp', Marble: 'MarbleApp'
+  Metalwork: 'MetalApp', Carpentry: 'CarpApp', Masonry: 'MasonApp', LowCurrent: 'LowApp', Aluminium: 'AluApp', Marble: 'MarbleApp', Automotive: 'AutoApp'
 };
 // كتابة اسم وتليفون الصنايعي من إعدادات القسم نفسه
 const SET = {
@@ -42,8 +42,8 @@ const check = (n, c, x) => { if (c) { passed++; console.log('  ✔ ' + n); } els
       const o = OPEN[sec];
       await p.evaluate(([o, own, set, nat]) => {
         const n = 'ورشة القسم', ph = '01099999999';
-        if (nat) { const A = window[o]; if (own) { A.settings.business.name = n; A.settings.business.phone = ph; } const num = { MetalApp: 'MTL-0001', CarpApp: 'CRP-0001', MasonApp: 'BLD-0001', LowApp: 'LC-0001', AluApp: 'ALU-0001', MarbleApp: 'MRB-0001' }[o];
-          A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: num, customerId: 'c1', title: '', date: '2026-11-24', status: 'active', items: [], costs: [], materials: [], consumables: [], payments: [], discount: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' });
+        if (nat) { const A = window[o]; if (own) { A.settings.business.name = n; A.settings.business.phone = ph; } const num = { MetalApp: 'MTL-0001', CarpApp: 'CRP-0001', MasonApp: 'BLD-0001', LowApp: 'LC-0001', AluApp: 'ALU-0001', MarbleApp: 'MRB-0001', AutoApp: 'WO-0001' }[o];
+          A.db.customers.push({ id: 'c1', name: 'م. خالد', phone: '010' }); A.db.jobs.push({ id: 'j1', number: num, customerId: 'c1', title: '', date: '2026-11-24', status: 'active', items: [], costs: [], materials: [], consumables: [], payments: [], discount: {}, labor: [], parts: [], outside: [], findings: [], recs: [], checkin: {}, next: {} }); A.openPreview({ doc: 'invoice', jobId: 'j1' });
         } else { if (own) (0, eval)('(' + set + ')')(n, ph); (0, eval)('(' + o + ')')(); }
       }, [typeof o === 'string' ? o : o.toString(), own, SET[sec] ? SET[sec].toString() : '', typeof o === 'string']);
       await p.waitForTimeout(900);

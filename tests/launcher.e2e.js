@@ -26,7 +26,7 @@ const LAUNCHER = BASE + 'Main-App/';
 const TRADES = [
   { id: 'electrical', dir: 'Electrical' }, { id: 'plumbing', dir: 'Plumbing' }, { id: 'hvac', dir: 'HVAC' },
   { id: 'painting', dir: 'Painting' }, { id: 'flooring', dir: 'Flooring' }, { id: 'gypsum', dir: 'Gypsum' },
-  { id: 'plastering', dir: 'Plastering' }, { id: 'metalwork', dir: 'Metalwork' }, { id: 'carpentry', dir: 'Carpentry' }, { id: 'masonry', dir: 'Masonry' }, { id: 'lowcurrent', dir: 'LowCurrent' }, { id: 'aluminium', dir: 'Aluminium' }, { id: 'marble', dir: 'Marble' }
+  { id: 'plastering', dir: 'Plastering' }, { id: 'metalwork', dir: 'Metalwork' }, { id: 'carpentry', dir: 'Carpentry' }, { id: 'masonry', dir: 'Masonry' }, { id: 'lowcurrent', dir: 'LowCurrent' }, { id: 'aluminium', dir: 'Aluminium' }, { id: 'marble', dir: 'Marble' }, { id: 'automotive', dir: 'Automotive' }
 ];
 
 let passed = 0, failed = 0;

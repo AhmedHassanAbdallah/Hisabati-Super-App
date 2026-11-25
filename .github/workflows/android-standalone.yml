@@ -83,7 +83,8 @@ jobs:
                    Trade-Modules/Masonry/index.html Trade-Modules/Masonry/js/calc.js Trade-Modules/Masonry/js/catalog.js Trade-Modules/Masonry/js/app.js \
                    Trade-Modules/LowCurrent/index.html Trade-Modules/LowCurrent/js/calc.js Trade-Modules/LowCurrent/js/catalog.js Trade-Modules/LowCurrent/js/app.js \
                    Trade-Modules/Aluminium/index.html Trade-Modules/Aluminium/js/calc.js Trade-Modules/Aluminium/js/catalog.js Trade-Modules/Aluminium/js/app.js \
-                   Trade-Modules/Marble/index.html Trade-Modules/Marble/js/calc.js Trade-Modules/Marble/js/catalog.js Trade-Modules/Marble/js/app.js; do
+                   Trade-Modules/Marble/index.html Trade-Modules/Marble/js/calc.js Trade-Modules/Marble/js/catalog.js Trade-Modules/Marble/js/app.js \
+                   Trade-Modules/Automotive/index.html Trade-Modules/Automotive/js/calc.js Trade-Modules/Automotive/js/catalog.js Trade-Modules/Automotive/js/app.js Trade-Modules/Automotive/guide-steps.js; do
             test -f "$W/$f" || { echo "::error::ناقص $f"; exit 1; }
             cmp -s "$W/$f" "$f" || { echo "::error::$f مختلف عن الأصل"; exit 1; }
           done

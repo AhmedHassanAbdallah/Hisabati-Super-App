@@ -78,7 +78,7 @@ for src in "${!MAP[@]}"; do
 done
 
 # الأقسام الأصلية في أرزقي (اتعملت هنا من الأول، مالهاش مستودع أصلي تتقارن بيه)
-NATIVE=(Metalwork Carpentry Masonry LowCurrent Aluminium Marble)
+NATIVE=(Metalwork Carpentry Masonry LowCurrent Aluminium Marble Automotive)
 for d in "${NATIVE[@]}"; do
   if [ -f "$ROOT/Trade-Modules/$d/index.html" ]; then echo "NEW   Trade-Modules/$d  (original Arzoqi section — no source repository to compare)"
   else echo "FAIL  Trade-Modules/$d missing"; fail=1; fi

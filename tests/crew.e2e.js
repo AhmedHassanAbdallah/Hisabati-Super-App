@@ -20,6 +20,7 @@ const OPEN = {
   LowCurrent: () => { const A = window.LowApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'LC-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
   Aluminium: () => { const A = window.AluApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'ALU-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
   Marble: () => { const A = window.MarbleApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.jobs.push({ id: 'j1', number: 'MRB-0001', customerId: 'c1', title: '', date: '2026-11-22', status: 'active', items: [], costs: [], payments: [], discount: {} }); A.openJob('j1'); },
+  Automotive: () => { const A = window.AutoApp; A.db.customers.push({ id: 'c1', name: 'عميل تجربة', phone: '010' }); A.db.vehicles.push({ id: 'v1', customerId: 'c1', cls: 'car', make: 'تويوتا', model: 'كورولا', plate: 'أ ب ج 123' }); A.db.jobs.push({ id: 'j1', number: 'WO-0001', customerId: 'c1', vehicleId: 'v1', date: '2026-11-25', status: 'repair', labor: [], parts: [], outside: [], costs: [], payments: [], findings: [], recs: [], checkin: {}, next: {}, discount: {} }); A.openJob('j1'); },
 };
 (async () => {
   const b = await chromium.launch();

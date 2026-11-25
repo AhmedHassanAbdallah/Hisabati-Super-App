@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
 
 const BASE = (process.argv[2] || 'http://127.0.0.1:8790/').replace(/\/?$/, '/');
 const LAUNCHER = BASE + 'Main-App/';
-const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum'], ['plastering', 'Plastering'], ['metalwork', 'Metalwork'], ['carpentry', 'Carpentry'], ['masonry', 'Masonry'], ['lowcurrent', 'LowCurrent'], ['aluminium', 'Aluminium'], ['marble', 'Marble']];
+const TRADES = [['electrical', 'Electrical'], ['plumbing', 'Plumbing'], ['hvac', 'HVAC'], ['painting', 'Painting'], ['flooring', 'Flooring'], ['gypsum', 'Gypsum'], ['plastering', 'Plastering'], ['metalwork', 'Metalwork'], ['carpentry', 'Carpentry'], ['masonry', 'Masonry'], ['lowcurrent', 'LowCurrent'], ['aluminium', 'Aluminium'], ['marble', 'Marble'], ['automotive', 'Automotive']];
 let passed = 0, failed = 0;
 const check = (n, c, x) => { if (c) { passed++; console.log('  ✔ ' + n); } else { failed++; console.log('  ✘ ' + n + (x !== undefined ? '  → ' + JSON.stringify(x).slice(0, 400) : '')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -105,7 +105,7 @@ async function frameOf(page) {
 const toastText = page => page.textContent('#toast');
 const waitToast = (page, re, ms = 10000) => page.waitForFunction(r => new RegExp(r).test(document.getElementById('toast').textContent), re.source, { timeout: ms });
 const sectionData = page => page.evaluate(() => {
-  const pre = ['ahmed_elec_', 'hesabaty_', 'hesabati_plumbing_', 'hesabati_hvac_', 'hpaint_', 'hflooring_', 'hgyp_', 'hplaster_', 'hmetal_', 'hcarp_', 'hmas_', 'hlow_', 'halu_', 'hmar_'];
+  const pre = ['ahmed_elec_', 'hesabaty_', 'hesabati_plumbing_', 'hesabati_hvac_', 'hpaint_', 'hflooring_', 'hgyp_', 'hplaster_', 'hmetal_', 'hcarp_', 'hmas_', 'hlow_', 'halu_', 'hmar_', 'hauto_'];
   return Object.fromEntries(Object.keys(localStorage).filter(k => pre.some(p => k.startsWith(p))).sort().map(k => [k, localStorage.getItem(k)]));
 });
 const idbMedia = (page, name) => page.evaluate(n => new Promise(res => {
@@ -151,7 +151,7 @@ const idbMedia = (page, name) => page.evaluate(n => new Promise(res => {
   }));
   const dataA = await sectionData(A.page);
   const mediaA = await idbMedia(A.page, 'hesabati_hvac_media');
-  check('الجهاز الأول فيه بيانات من الأقسام الـ 13', ['ahmed_elec_', 'hesabaty_', 'hesabati_plumbing_', 'hesabati_hvac_', 'hpaint_', 'hflooring_', 'hgyp_', 'hplaster_', 'hmetal_', 'hcarp_', 'hmas_', 'hlow_', 'halu_', 'hmar_'].filter(p => Object.keys(dataA).some(k => k.startsWith(p))).length >= 13, Object.keys(dataA));
+  check('الجهاز الأول فيه بيانات من الأقسام الـ 14', ['ahmed_elec_', 'hesabaty_', 'hesabati_plumbing_', 'hesabati_hvac_', 'hpaint_', 'hflooring_', 'hgyp_', 'hplaster_', 'hmetal_', 'hcarp_', 'hmas_', 'hlow_', 'halu_', 'hmar_', 'hauto_'].filter(p => Object.keys(dataA).some(k => k.startsWith(p))).length >= 14, Object.keys(dataA));
 
   await A.page.click('#cloudCard [data-act="signin"]');
   await waitToast(A.page, /اتسجل دخولك/);

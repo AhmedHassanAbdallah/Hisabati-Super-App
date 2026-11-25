@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#002624">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="author" content="أحمد حسن عبدالله">
+  <meta name="copyright" content="© 2026 أحمد حسن عبدالله - جميع الحقوق محفوظة">
+  <meta name="description" content="أرزقي | Arzoqi — ميكانيكا السيارات والموتوسيكلات والتروسيكلات: استقبال المركبة وكشف الاستلام، التشخيص وأكواد الأعطال، أوامر الشغل والمصنعية وقطع الغيار، المخزن والموردين، الفواتير والدفعات، مواعيد الصيانة والتقارير — من غير إنترنت.">
+  <title>أرزقي | Arzoqi — ميكانيكا السيارات والموتوسيكلات</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script>
+    // المظهر المحفوظ قبل ظهور الصفحة (من غير وميض)
+    try {
+      var _t = (JSON.parse(localStorage.getItem('hauto_settings_v1') || '{}') || {}).theme;
+      if (_t === 'dark' || _t === 'light') document.documentElement.setAttribute('data-theme', _t);
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../Shared-Assets/brand/section-app.css"><!-- التصميم المشترك -->
+  <link rel="stylesheet" href="../../Shared-Assets/brand/section-theme.css"><!-- أرزقي: ألوان وخطوط الهوية -->
+  <link rel="stylesheet" href="./css/auto.css">
+  <script src="../../Shared-Assets/brand/invoice.js"></script><!-- أرزقي: الفاتورة الموحدة + نوتة العمال -->
+  <link rel="stylesheet" href="../../Shared-Assets/brand/guide.css"><script src="../../Shared-Assets/brand/guide.js"></script><!-- أرزقي: طريقة الاستخدام -->
+  <!--
+    أرزقي | Arzoqi — ميكانيكا السيارات والموتوسيكلات والتروسيكلات
+    تصميم وتطوير: أحمد حسن عبدالله
+    © 2026 أحمد حسن عبدالله. جميع الحقوق محفوظة.
+  -->
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M16 4a4 4 0 0 1 0 8"/><path d="M22 21a7 7 0 0 0-4-6.3"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/><path d="M10 11v6M14 11v6"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+<symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+<symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 17V11M11 17V6M16 17v-4M20 17V9"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0 5 5L22 14l-8 8-2.6-2.4a4 4 0 0 0-5-5L3 11l8-8z" transform="scale(.9) translate(1 1)"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 11h8M8 15h8M8 19h5"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h7z"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="M3 13l2-5a2 2 0 0 1 2-1.4h10A2 2 0 0 1 19 8l2 5"/><rect x="2" y="13" width="20" height="5" rx="1.6"/><circle cx="7" cy="18.5" r="1.7"/><circle cx="17" cy="18.5" r="1.7"/></symbol>
+<symbol id="i-moto" viewBox="0 0 24 24"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M5 17l4-7h5l3 7"/><path d="M14 10l-1.5-4H15M9 10h5"/></symbol>
+<symbol id="i-tri" viewBox="0 0 24 24"><circle cx="5" cy="18" r="2.4"/><circle cx="15" cy="18" r="2.4"/><circle cx="20" cy="18" r="2.4"/><path d="M5 18l3-8h4l2 5h8M12 10V6h-3"/><path d="M14 15h8"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24"><path d="M4 9h3l2-2h5l2 2h2v3h2v-2h1v6h-1v-2h-2v3h-3l-2 2H8l-2-2H4z"/><path d="M9 4h5M11.5 4v3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"/><path d="M12 14l4-5"/><circle cx="12" cy="14" r="1.4"/></symbol>
+<symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="12" rx="2"/><path d="M6 7V5h3v2M13 7V5h3v2"/><path d="M6 13h3M14.5 11.5v3M13 13h3"/></symbol>
+<symbol id="i-oil" viewBox="0 0 24 24"><path d="M3 10h4l2-2h6l3 3 3-1-4 7H5z"/><path d="M21 13c0 1.5-1 2.5-1 2.5S19 14.5 19 13"/></symbol>
+<symbol id="i-tire" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></symbol>
+<symbol id="i-brake" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M4 7a9 9 0 0 0 0 10M20 7a9 9 0 0 1 0 10"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V3h6v1"/><path d="M8 10l2 2 4-4M8 16h8"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></symbol>
+<symbol id="i-cooling" viewBox="0 0 24 24"><path d="M12 2v20M4 7l16 10M20 7L4 17"/><path d="M9 4l3 2 3-2M9 20l3-2 3 2"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18M9 20v-6h6v6"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l12-4v4"/><circle cx="17" cy="13.5" r="1.3"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  </defs>
+</svg>
+
+<div id="editorApp">
+  <header class="app-header tab-only" id="tabHeader" style="--az-sec-tag:'الميكانيكا'">
+    <img class="brand-ic" src="./icons/icon-192.png" alt="">
+    <div class="titles">
+      <div class="sub" id="greetLine">أهلاً بيك</div>
+      <h1 id="tabTitle">أرزقي | Arzoqi</h1>
+    </div>
+    <button type="button" class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي والفاتح"><svg class="ic"><use href="#i-moon"/></svg></button>
+  </header>
+
+  <main class="container">
+    <!-- لوحة الورشة -->
+    <section class="view active" id="view-home">
+      <section class="home-sum">
+        <div class="hs-label">تحصيل النهارده</div>
+        <div class="hs-value"><span id="homeToday">0</span> <small class="cur">ج.م</small></div>
+        <div class="hs-stats">
+          <button type="button" data-act="view" data-view="jobs" data-filter="open"><span>في الورشة</span><strong id="homeOpen">0</strong></button>
+          <button type="button" data-act="view" data-view="jobs" data-filter="ready"><span>جاهزة للتسليم</span><strong id="homeReady">0</strong></button>
+          <button type="button" class="mat" data-act="view" data-view="jobs" data-filter="due"><span>مستحقات العملاء</span><strong id="homeDue">0</strong></button>
+        </div>
+      </section>
+
+      <div class="quick">
+        <button type="button" class="q-tile dark" data-act="receive"><span class="q-ic orange"><svg class="ic"><use href="#i-key"/></svg></span><b>استقبال مركبة</b><small>عميل + مركبة + كشف استلام + أمر شغل</small></button>
+        <button type="button" class="q-tile" data-act="tool" data-tool="diag"><span class="q-ic orange-soft"><svg class="ic"><use href="#i-alert"/></svg></span><b>كشف أعطال</b><small>الأعراض وأكواد OBD-II</small></button>
+      </div>
+
+      <h2 class="home-h" style="margin-top:16px">حالة الورشة</h2>
+      <div class="kpi-grid" id="kpis"></div>
+
+      <h2 class="home-h" style="margin-top:16px">اختصارات</h2>
+      <div class="create-row">
+        <button type="button" class="create-opt" data-act="newCustomer"><span class="q-ic"><svg class="ic"><use href="#i-users"/></svg></span><span><b>عميل جديد</b><small>اسم وتليفون</small></span></button>
+        <button type="button" class="create-opt" data-act="newVehicle"><span class="q-ic"><svg class="ic"><use href="#i-car"/></svg></span><span><b>إضافة مركبة</b><small>عربية / موتوسيكل / تروسيكل</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="pickInvoice"><span class="q-ic"><svg class="ic"><use href="#i-receipt"/></svg></span><span><b>إنشاء فاتورة</b><small>اختار أمر الشغل</small></span></button>
+        <button type="button" class="create-opt" data-act="quickPay"><span class="q-ic green"><svg class="ic"><use href="#i-cash"/></svg></span><span><b>تسجيل دفعة</b><small>من عميل</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="tool" data-tool="inventory"><span class="q-ic"><svg class="ic"><use href="#i-box"/></svg></span><span><b>قطع الغيار والمخزن</b><small id="stockBadge">الأصناف والكميات</small></span></button>
+        <button type="button" class="create-opt" data-act="tool" data-tool="suppliers"><span class="q-ic"><svg class="ic"><use href="#i-store"/></svg></span><span><b>الموردين والمشتريات</b><small>فواتير الشراء والأرصدة</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="tool" data-tool="expenses"><span class="q-ic"><svg class="ic"><use href="#i-wallet"/></svg></span><span><b>المصروفات</b><small>إيجار، كهربا، عدة…</small></span></button>
+        <button type="button" class="create-opt" data-act="tool" data-tool="reminders"><span class="q-ic orange-soft"><svg class="ic"><use href="#i-bell"/></svg></span><span><b>مواعيد الصيانة</b><small id="remBadge">الزيت والرخصة والتأمين</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="tool" data-tool="workers"><span class="q-ic"><svg class="ic"><use href="#i-wrench"/></svg></span><span><b>الفنيين</b><small>يومية ونسبة وسلف</small></span></button>
+        <button type="button" class="create-opt" data-act="tool" data-tool="reports"><span class="q-ic green"><svg class="ic"><use href="#i-chart"/></svg></span><span><b>تقارير الورشة</b><small>الإيراد والمصنعية والربح</small></span></button>
+      </div>
+      <div class="create-row" style="margin-top:10px">
+        <button type="button" class="create-opt" data-act="tool" data-tool="calcs"><span class="q-ic"><svg class="ic"><use href="#i-gauge"/></svg></span><span><b>الحاسبات</b><small>كاوتش، بنزين، سعة، 2T…</small></span></button>
+        <button type="button" class="create-opt" data-act="tool" data-tool="settings"><span class="q-ic"><svg class="ic"><use href="#i-tag"/></svg></span><span><b>الأسعار والإعدادات</b><small>سعر الساعة والخدمات والزيت</small></span></button>
+      </div>
+      <p class="hint safety-note">أسباب الأعطال في «كشف أعطال» احتمالات للفحص مش تشخيص نهائي، وفترات الصيانة والأسعار بتكتبها انت حسب كتالوج كل مركبة — مفيش أرقام مفترضة.</p>
+
+      <div class="home-row"><h2 class="home-h" style="margin:0">آخر أوامر الشغل</h2><button type="button" class="link-btn" data-act="view" data-view="jobs">عرض الكل</button></div>
+      <div id="homeRecent"></div>
+    </section>
+
+    <!-- أوامر الشغل -->
+    <section class="view" id="view-jobs">
+      <div class="pick-bar hidden" id="pickBar"><svg class="ic"><use href="#i-receipt"/></svg><span>اختار أمر الشغل اللي عايز فاتورته</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancelPick">إلغاء</button></div>
+      <div class="search-box"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="jobSearch" placeholder="دوّر بالعميل أو رقم اللوحة أو الماركة أو الشكوى" autocomplete="off"></div>
+      <div class="filter-chips" id="jobFilters"></div>
+      <details class="adv" id="jobAdv">
+        <summary><svg class="ic"><use href="#i-calendar"/></svg> فلترة بالعميل أو التاريخ</summary>
+        <div class="field"><label for="jobCust">العميل</label><select id="jobCust"><option value="">كل العملاء</option></select></div>
+        <div class="row-2">
+          <div class="field"><label for="jobFrom">من تاريخ</label><input type="date" id="jobFrom"></div>
+          <div class="field"><label for="jobTo">لحد تاريخ</label><input type="date" id="jobTo"></div>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" data-act="clearJobFilter">مسح الفلترة</button>
+      </details>
+      <div class="list-sum" id="jobSum"></div>
+      <div id="jobList"></div>
+    </section>
+
+    <!-- المركبات والعملاء -->
+    <section class="view" id="view-vehicles">
+      <div class="segmented seg-2" id="vehTabs" style="margin-bottom:10px"><button type="button" class="on" data-act="vehTab" data-v="veh">المركبات</button><button type="button" data-act="vehTab" data-v="cust">العملاء</button></div>
+      <div class="search-box"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="vehSearch" placeholder="دوّر برقم اللوحة أو الماركة أو اسم العميل أو التليفون" autocomplete="off"></div>
+      <div class="filter-chips" id="vehFilters"></div>
+      <button type="button" class="btn btn-soft" id="vehAddBtn" data-act="newVehicle" style="margin-bottom:12px"><svg class="ic"><use href="#i-plus"/></svg> مركبة جديدة</button>
+      <div id="vehList"></div>
+    </section>
+
+    <!-- المزيد -->
+    <section class="view" id="view-more">
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-sun"/></svg></span><h2>المظهر</h2></div>
+        <div class="segmented seg-3" id="themeSeg">
+          <button type="button" data-theme-set="auto">تلقائي</button>
+          <button type="button" data-theme-set="light">فاتح</button>
+          <button type="button" data-theme-set="dark">ليلي</button>
+        </div>
+        <p class="hint">«تلقائي» بيمشي مع وضع الموبايل.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic orange"><svg class="ic"><use href="#i-cash"/></svg></span><h2>العملة</h2></div>
+        <div class="field"><label for="currencySelect">العملة</label><select id="currencySelect"></select></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-receipt"/></svg></span><h2>بيانات الفاتورة</h2></div>
+        <div class="note">البيانات اللي تكتبها هنا (الاسم والتليفون واللوجو) هي اللي بتظهر في فواتير ومستندات القسم ده. اللي تسيبه فاضي بيتاخد من «بياناتي» في الصفحة الرئيسية لأرزقي.</div>
+        <div class="field" style="margin-top:12px"><label for="bizName">اسم الورشة / مركز الصيانة</label><input type="text" id="bizName" placeholder="مثلاً: ورشة النور لميكانيكا السيارات"></div>
+        <div class="row-2">
+          <div class="field"><label for="bizPhone">التليفون</label><input type="text" id="bizPhone" inputmode="tel" dir="ltr"></div>
+          <div class="field"><label for="bizAddress">العنوان</label><input type="text" id="bizAddress"></div>
+        </div>
+        <div class="field"><label>اللوجو (اختياري)</label><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><img id="bizLogoImg" alt="" hidden style="width:56px;height:56px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid var(--border)"><button type="button" class="btn btn-ghost btn-sm" id="bizLogoBtn" style="width:auto">اختار لوجو</button><button type="button" class="btn btn-ghost btn-sm" id="bizLogoDel" hidden style="width:auto">شيل اللوجو</button></div></div>
+        <div class="field"><label for="bizTerms">ملاحظات ثابتة تحت كل فاتورة (اختياري)</label><textarea id="bizTerms" placeholder="مثلاً: الورشة غير مسؤولة عن المتعلقات الشخصية — الضمان على المصنعية بس"></textarea></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic"><svg class="ic"><use href="#i-tag"/></svg></span><h2>الورشة</h2></div>
+        <p class="hint" id="moreSettings"></p>
+        <button type="button" class="btn btn-soft" data-act="tool" data-tool="settings" style="margin-top:8px"><svg class="ic"><use href="#i-tag"/></svg> الأسعار والإعدادات</button>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="t-ic orange"><svg class="ic"><use href="#i-chart"/></svg></span><h2>ملخص الشغل</h2></div>
+        <div class="sum-list" id="moreStats"></div>
+      </div>
+      <p class="copyright"><b>أرزقي | Arzoqi — ميكانيكا السيارات والموتوسيكلات والتروسيكلات</b><br>بيانات القسم محفوظة على موبايلك، وبتدخل في النسخة الاحتياطية على جوجل درايف من الصفحة الرئيسية.<br>© 2026 أحمد حسن عبدالله — جميع الحقوق محفوظة<br><a href="./privacy.html" style="color:var(--primary);font-weight:800">سياسة الخصوصية</a></p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav tab-only" aria-label="أقسام التطبيق">
+    <button type="button" class="nav-item active" id="navBtn-home" data-act="view" data-view="home"><span class="pill"><svg class="ic"><use href="#i-home"/></svg></span>الرئيسية</button>
+    <button type="button" class="nav-item" id="navBtn-jobs" data-act="view" data-view="jobs"><span class="pill"><svg class="ic"><use href="#i-clipboard"/></svg></span>أوامر الشغل</button>
+    <div class="nav-center"><button type="button" class="nav-plus" id="navPlus" data-act="create" aria-label="إنشاء جديد"><svg class="ic"><use href="#i-plus"/></svg></button></div>
+    <button type="button" class="nav-item" id="navBtn-vehicles" data-act="view" data-view="vehicles"><span class="pill"><svg class="ic"><use href="#i-car"/></svg></span>المركبات</button>
+    <button type="button" class="nav-item" id="navBtn-more" data-act="view" data-view="more"><span class="pill"><svg class="ic"><use href="#i-grid"/></svg></span>المزيد</button>
+  </nav>
+</div>
+
+<!-- أمر الشغل -->
+<div class="page-overlay" id="jobPage" role="dialog" aria-label="أمر الشغل"></div>
+<!-- المركبة -->
+<div class="page-overlay" id="vehPage" role="dialog" aria-label="المركبة"></div>
+<!-- العميل -->
+<div class="page-overlay" id="custPage" role="dialog" aria-label="العميل"></div>
+<!-- الأدوات: المخزن، الموردين، المصروفات، الفنيين، التقارير، المواعيد، الحاسبات، الإعدادات -->
+<div class="page-overlay" id="toolPage" role="dialog" aria-label="الأدوات"></div>
+
+<!-- النافذة المنبثقة -->
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+
+<!-- تأكيد -->
+<div class="dialog-wrap" id="dialog"><div class="dialog">
+  <div class="d-ic" id="dlgIc"><svg class="ic"><use href="#i-trash"/></svg></div>
+  <h3 id="dlgTitle"></h3><p id="dlgMsg"></p>
+  <div class="btn-row"><button type="button" class="btn btn-ghost" id="dlgNo">لأ</button><button type="button" class="btn btn-danger" id="dlgYes">أيوه</button></div>
+</div></div>
+
+<!-- معاينة المستندات (ورقة A4) -->
+<div id="printPreviewModal">
+  <div class="preview-toolbar">
+    <div class="toolbar-row">
+      <button type="button" class="tb-btn close" data-act="closeTop" aria-label="قفل"><svg class="ic"><use href="#i-x"/></svg></button>
+      <div class="pv-docs" id="pvDocs"></div>
+      <div class="grow"></div>
+      <button type="button" class="tb-print" id="pvPrint"><svg class="ic"><use href="#i-print"/></svg> طباعة / PDF</button>
+    </div>
+    <div class="edit-hint">تقدر تعدّل أي كلام في الورقة بالضغط عليه قبل الطباعة</div>
+  </div>
+  <div class="page-label">معاينة — ورقة A4</div>
+  <div id="printViewport"><div id="printSheet"></div></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./js/calc.js"></script>
+<script src="./js/catalog.js"></script>
+<script src="./js/app.js"></script>
+<script src="./guide-steps.js"></script>
+</body>
+</html>

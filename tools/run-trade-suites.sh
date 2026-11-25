@@ -21,7 +21,7 @@ for repo in "${!MAP[@]}"; do mkdir -p "$TMP/$repo"; cp -a "$ROOT/Trade-Modules/$
 cp -a "$ROOT/Shared-Assets" "$TMP/Shared-Assets"
 for repo in "${!MAP[@]}"; do ln -s "$TMP/Shared-Assets" "$TMP/$repo/Shared-Assets"; done
 # الحدادة والنجارة: أقسام أصلية في أرزقي (مش نسخ)، بتتجرب بنفس الطريقة
-for d in Metalwork Carpentry Masonry LowCurrent Aluminium Marble; do mkdir -p "$TMP/$d" && cp -a "$ROOT/Trade-Modules/$d/." "$TMP/$d/"; done
+for d in Metalwork Carpentry Masonry LowCurrent Aluminium Marble Automotive; do mkdir -p "$TMP/$d" && cp -a "$ROOT/Trade-Modules/$d/." "$TMP/$d/"; done
 
 ( cd "$TMP" && exec python3 -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 ) & SRV=$!
 trap 'kill $SRV 2>/dev/null; rm -rf "$TMP"' EXIT
@@ -58,5 +58,7 @@ run aluminium-unit   Aluminium         node --test tests/calc.test.js
 run aluminium-e2e    Aluminium         node tests/e2e.js "$B/Aluminium/"
 run marble-unit      Marble            node --test tests/calc.test.js
 run marble-e2e       Marble            node tests/e2e.js "$B/Marble/"
+run automotive-unit  Automotive        node --test tests/calc.test.js
+run automotive-e2e   Automotive        node tests/e2e.js "$B/Automotive/"
 [ -n "${KEEP_LOGS:-}" ] && { cp -r "$LOGS" "$KEEP_LOGS"; echo "logs copied to $KEEP_LOGS"; }
 exit $fail

@@ -31,6 +31,7 @@
     { id: 'lowcurrent', prefixes: ['hlow_'], idb: [] },
     { id: 'aluminium', prefixes: ['halu_'], idb: [] },
     { id: 'marble', prefixes: ['hmar_'], idb: ['hmar_media'] },
+    { id: 'automotive', prefixes: ['hauto_'], idb: [] },
     // بيانات أرزقي المشتركة: بياناتي في الفاتورة + إضافات الفواتير (الضمان)
     { id: 'arzaqi', prefixes: ['arzaqi_'], idb: [] }
   ];
