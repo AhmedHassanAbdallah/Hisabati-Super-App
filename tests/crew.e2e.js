@@ -1,5 +1,5 @@
 /*
- * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام الـ 13.
+ * نوتة العمال واليوميات (Shared-Assets/brand/crew.js) — في الأقسام الـ 14.
  * usage: node tests/crew.e2e.js http://127.0.0.1:8790/
  */
 const { chromium } = require('playwright');

@@ -390,3 +390,30 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
   25 fps recording: each step change is now a gradual 6–10 frame glide instead of jumps.
 * `tests/guide.e2e.js` (checks now taken after the 0.34 s glide): 143/143. Versions: app 2.8.4; all 13 sections bumped (they cache
   `guide.js`/`guide.css`); 504/504 cached files present.
+
+## 24. 2.9.0 — new section: Automotive workshop (cars, motorcycles, tricycles) (2026-11-25)
+* **Built as a native Arzoqi section** (`Trade-Modules/Automotive`, storage prefix `hauto_`) on the same architecture as Marble /
+  Aluminium: shared design system, unified invoice (`ArzaqiInvoice`), workers' log (`ArzoqiCrew`), usage guide, currencies,
+  light/dark, RTL, offline service worker. No other section's files changed.
+* **Linked into existing systems (no duplicates):** launcher card (`trades.js`), one data line in `backup.js` `SECTIONS`
+  (`hauto_`, so its data is in local and Drive backups like every section — backup logic unchanged), launcher SW icon cache,
+  Android section list + smoke test + CI bundled-file check, `verify-integrity.sh` (NATIVE) and `run-trade-suites.sh`.
+* **Engine** `AutoCalc` — `tests/calc.test.js` 14/14 (job order totals with hours/fixed labor, stock/bought/customer parts, outside
+  work, billed/internal costs, discount amount/percent capped, tax, payments, cost & profit incl. worker log and technician %;
+  stock = opening + purchases ± adjustments − issued on non-cancelled jobs; supplier balances; dashboard; next service and
+  reminders; tire / fuel / cc / compression / 2T mix / coolant / speed / Ohm / units / labor & parts pricing / OBD-II decoding).
+  Hand-computed expectations; two wrong hand calculations in the first draft were corrected, not the engine.
+* **UI e2e** `tests/e2e.js` 58/58: full workshop scenario by clicking like a user — settings, purchase invoice (new parts enter
+  stock, supplier balance, supplier payment), car reception with check-in, OBD code auto-description, symptom → inspection item,
+  labor (catalog + remembered price), parts from stock (balance 10 → 9), bought and customer-supplied, outside work, cost, discount,
+  stages, payment, delivery with next service (85,020 + 5,000 = 90,020 km), all six documents + customer statement, dashboard
+  figures, second job on the same vehicle then cancel (stock 7 → 9), motorcycle (2T/4T field, helmet in check-in, chain service),
+  expenses, technician daily log, every tool and all 13 calculators, persistence after reload, dark/light, no horizontal scroll,
+  storage `hauto_`/`arzaqi_` only, no console errors.
+* **Bugs found while testing and fixed:** a job opened from a vehicle file appeared under it (page stacking — now the last opened
+  page is on top, bounded to 150–153 below sheets/preview); preview document tabs overflowed on phones (scrollable, active tab
+  centred); the job status bar now centres the current status.
+* Shared suites (14 sections): `run-trade-suites` 26/26 (hvac-layout / plumbing-layout failed once under parallel load and pass
+  alone with 0 issues — their files are unchanged), launcher 277, offline 34, native 14 (count updated 13 → 14), cloud 43, crew 26,
+  print-white 14, auto-backup 35, biz-precedence 28, guide 154. 538/538 cached files present; every local file each page loads is
+  cached. Integrity: ALL CHECKS PASSED. App 2.9.0.

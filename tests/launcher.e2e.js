@@ -110,7 +110,7 @@ const openPlus = async f => {
     await page.click('#menuBtn'); await sleep(450);
     check('زرار القائمة بيفتحها', await drawerOpen());
     const items = await page.$$eval('#drawerTrades [data-open]', els => els.map(e => e.dataset.open));
-    check('القائمة فيها تعريف الـ 13 قسم بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
+    check('القائمة فيها تعريف الـ 14 قسم بزرار فتح', JSON.stringify(items) === JSON.stringify(TRADES.map(t => t.id)), items);
     const dText = await page.evaluate(() => document.getElementById('drawer').innerText);
     check('القائمة فيها "عن أرزقي" وقسم المحارة', dText.includes('عن أرزقي') && dText.includes('المحارة والواجهات') && !dText.includes('قريباً'));
     check('القائمة ما فيهاش ذكر لـ "تطبيق" ولا إصدارات', !/تطبيق|إصدار/.test(dText), (dText.match(/[^\n]*(تطبيق|إصدار)[^\n]*/g) || []));
