@@ -417,3 +417,17 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
   alone with 0 issues — their files are unchanged), launcher 277, offline 34, native 14 (count updated 13 → 14), cloud 43, crew 26,
   print-white 14, auto-backup 35, biz-precedence 28, guide 154. 538/538 cached files present; every local file each page loads is
   cached. Integrity: ALL CHECKS PASSED. App 2.9.0.
+
+## 25. 2.9.1 — light / dark follows the phone in the Android app (2026-11-25)
+* **Report:** in the Android app the light/dark mode did not follow the phone.
+* **Cause:** the app theme was `Theme.Material.Light` only. With targetSdk ≥ 33 the WebView reports `prefers-color-scheme` from the
+  app theme (`isLightTheme`), not from the phone — so every page always saw «light» and «تلقائي» could never become dark.
+  The web side was fine: the launcher and all 14 sections, with no saved choice, follow `prefers-color-scheme` and switch live
+  (audited in Chromium: background luminance dark 14 → light 245 → dark 14 on every page).
+* **Fix (Android only, no permission/signing/package changes):** `values-night/styles.xml` and `values-night-v31/styles.xml`
+  (same colours and splash, parent `Theme.Material.NoActionBar`), so the theme — and therefore the WebView — follows the phone.
+  The activity keeps handling `uiMode` itself (no reload when the phone switches); on a switch it checks that the page sees the new
+  mode and, only if it does not, rebuilds the screen with the page restored via `saveState`/`restoreState`.
+* **Emulator check added to CI** (`tools/android-standalone-smoke.sh`): app opened with the phone in dark → page dark; phone switched
+  to light while open → page light; back to dark while open → page dark (`HISABATI_THEME` log lines, screenshots theme-dark/light).
+* A section where the user explicitly picked «فاتح» or «ليلي» (header button or المزيد) keeps that choice; «تلقائي» follows the phone.

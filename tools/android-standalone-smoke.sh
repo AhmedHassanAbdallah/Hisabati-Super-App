@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# اختبار تشغيل "أرزقي" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام الـ 13
+# اختبار تشغيل "أرزقي" على المحاكي: يتثبت، يفتح الرئيسية، يفتح كل قسم من الأقسام الـ 14
 # من جوه التطبيق، ويتأكد إن كل صفحة اتحملت وجسرها موجود ومفيش أخطاء JavaScript ولا انهيار.
 set -uo pipefail
 PKG=com.ahmedhassan.arzaqi
@@ -75,6 +75,24 @@ adb logcat -d > logcat-print.txt || true
 adb shell input keyevent KEYCODE_BACK; sleep 2
 adb shell input keyevent KEYCODE_BACK; sleep 2
 adb shell dumpsys activity activities | grep -q "mResumedActivity.*$PKG" || adb shell am start -W -n "$ACT" >/dev/null
+
+# الوضع الليلي والفاتح لازم يمشوا مع وضع الموبايل (2.9.1): الصفحة بتشوف prefers-color-scheme زي الموبايل بالظبط،
+# وكمان لو الموبايل اتغير والتطبيق مفتوح
+theme_check() { # $1 = dark|light ، $2 = وصف
+  if wait_for "HISABATI_THEME system=$1 page=$1"; then echo "✔ $2: $(grep -o "HISABATI_THEME system=$1 page=$1.*" logcat.txt | tail -1)";
+  else echo "::error::$2: الصفحة ما شافتش وضع الموبايل ($1)"; grep "HISABATI_THEME" logcat.txt | tail -5; fail=1; fi
+}
+adb shell cmd uimode night yes; sleep 2
+adb shell am force-stop "$PKG"; sleep 1; adb logcat -c || true
+adb shell am start -W -n "$ACT" >/dev/null
+theme_check dark "التطبيق فتح والموبايل ليلي"
+sleep 2; adb exec-out screencap -p > shots/theme-dark.png || true
+adb logcat -c || true; adb shell cmd uimode night no
+theme_check light "الموبايل اتحول فاتح والتطبيق مفتوح"
+sleep 2; adb exec-out screencap -p > shots/theme-light.png || true
+adb logcat -c || true; adb shell cmd uimode night yes
+theme_check dark "الموبايل رجع ليلي والتطبيق مفتوح"
+adb shell cmd uimode night no; sleep 2
 
 # زرار الرجوع وإعادة الفتح
 adb shell input keyevent KEYCODE_BACK; sleep 2

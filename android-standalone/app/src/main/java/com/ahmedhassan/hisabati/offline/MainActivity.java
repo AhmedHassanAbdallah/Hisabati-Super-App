@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -187,6 +188,34 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState);
         else if (!openFromIntent(getIntent())) webView.loadUrl(HOME_URL);
+        lastNight = nightOf(getResources().getConfiguration());
+    }
+
+    /* ================================================================
+       الوضع الليلي والفاتح = وضع الموبايل
+       الثيم (values / values-night) بيخلي الـ WebView يبلّغ الصفحات بوضع الموبايل (prefers-color-scheme)، وكل الصفحات
+       في «تلقائي» بتمشي معاه. ولو الموبايل اتغير والتطبيق مفتوح: بنتأكد إن الصفحة شافت التغيير، ولو لأ بنعيد بناء الشاشة
+       (الصفحة اللي انت فيها بترجع زي ما هي عن طريق saveState/restoreState، والبيانات محفوظة في التخزين أصلاً).
+       ================================================================ */
+    private int lastNight = -1;
+    private static int nightOf(Configuration c) { return c.uiMode & Configuration.UI_MODE_NIGHT_MASK; }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int night = nightOf(newConfig);
+        if (lastNight != -1 && night != lastNight && webView != null) {
+            final boolean dark = night == Configuration.UI_MODE_NIGHT_YES;
+            handler.postDelayed(() -> {
+                if (webView == null || isFinishing()) return;
+                webView.evaluateJavascript("matchMedia('(prefers-color-scheme: dark)').matches", v -> {
+                    boolean page = "true".equals(v);
+                    Log.i(TAG, "HISABATI_THEME system=" + (dark ? "dark" : "light") + " page=" + (page ? "dark" : "light") + (page == dark ? " live" : " recreate"));
+                    if (page != dark) recreate();
+                });
+            }, 450);
+        }
+        lastNight = night;
     }
 
     private View buildSectionBar() {
@@ -362,8 +391,11 @@ public class MainActivity extends Activity {
             // تشخيص للاختبار الآلي بس (بيقرا، ما بيغيرش أي حاجة في الصفحة)
             view.evaluateJavascript("(function(){var n=['HesabatyApp','HesabatiPlumbingApp','HesabatiHvacApp','HFloorApp','PlasterApp']"
                     + ".filter(function(k){return window[k]&&typeof window[k].versionName==='function'}).length;"
-                    + "return JSON.stringify({title:document.title,bridges:n,body:document.body?document.body.childElementCount:0})})()",
+                    + "return JSON.stringify({title:document.title,bridges:n,body:document.body?document.body.childElementCount:0,dark:matchMedia('(prefers-color-scheme: dark)').matches})})()",
                     v -> Log.i(TAG, "HISABATI_CHECK " + url + " " + v));
+            final boolean sysDark = nightOf(getResources().getConfiguration()) == Configuration.UI_MODE_NIGHT_YES;
+            view.evaluateJavascript("matchMedia('(prefers-color-scheme: dark)').matches",
+                    v -> Log.i(TAG, "HISABATI_THEME system=" + (sysDark ? "dark" : "light") + " page=" + ("true".equals(v) ? "dark" : "light") + " load"));
         }
     }
 
