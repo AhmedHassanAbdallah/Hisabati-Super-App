@@ -4,7 +4,7 @@
  * فكل تطبيق بيفضل متحكم فيه الـ Service Worker الأصلي بتاعه زي ما هو.
  * أسماء الكاش كلها بتبدأ بـ hisabati-super- (مختلفة عن كل التطبيقات).
  */
-const VERSION = '2.9.2';
+const VERSION = '2.9.3';
 const CACHE = 'hisabati-super-' + VERSION;
 const PREFIX = 'hisabati-super-';
 const TRADE_DIRS = ['Electrical', 'Plumbing', 'HVAC', 'Painting', 'Flooring', 'Gypsum', 'Plastering', 'Metalwork', 'Carpentry', 'Masonry', 'LowCurrent', 'Aluminium', 'Marble', 'Automotive'];
@@ -43,8 +43,8 @@ self.addEventListener('fetch', event => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  // ملفات version.json بتاعة التطبيقات: من الشبكة الأول (علشان رقم الإصدار يبقى مظبوط)
-  if (url.pathname.endsWith('/version.json')) {
+  // ملفات version.json وسياسة الخصوصية: من الشبكة الأول (علشان رقم الإصدار والسياسة يبقوا آخر نسخة دايمًا)
+  if (url.pathname.endsWith('/version.json') || url.pathname.endsWith('/privacy.html')) {
     event.respondWith(fetch(req).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
       return res;
