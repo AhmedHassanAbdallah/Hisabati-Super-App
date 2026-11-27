@@ -94,7 +94,8 @@ public class MainActivity extends Activity {
     private static final String APP_HOST = "appassets.androidplatform.net";
     private static final String BASE = "https://" + APP_HOST + "/";
     private static final String HOME_URL = BASE + "Main-App/index.html";
-    private static final String RELEASES_URL = "https://github.com/AhmedHassanAbdallah/Hisabati-Super-App/releases";
+    /** صفحة التطبيق على جوجل بلاي: التحديثات بتيجي من المتجر بس */
+    private static final String STORE_URL = "https://play.google.com/store/apps/details?id=com.ahmedhassan.arzaqi";
     private static final int NAVY = Color.parseColor("#002624");
     private static final int REQ_FILE_CHOOSER = 1001;
     private static final int REQ_STORAGE = 1002;
@@ -396,10 +397,16 @@ public class MainActivity extends Activity {
             final boolean sysDark = nightOf(getResources().getConfiguration()) == Configuration.UI_MODE_NIGHT_YES;
             view.evaluateJavascript("matchMedia('(prefers-color-scheme: dark)').matches",
                     v -> Log.i(TAG, "HISABATI_THEME system=" + (sysDark ? "dark" : "light") + " page=" + ("true".equals(v) ? "dark" : "light") + " load"));
+            // للاختبار الآلي: طلبات جيت هب ما بتطلعش برّه التطبيق (الرد من جوه: مفيش إصدار أحدث)
+            if (url != null && url.contains("/Trade-Modules/Electrical/")) {
+                view.evaluateJavascript("fetch('https://api.github.com/repos/x/y/releases/latest',{cache:'no-store'})"
+                        + ".then(function(r){return r.json()}).then(function(j){console.log('HISABATI_GH tag='+j.tag_name+' assets='+j.assets.length)})"
+                        + ".catch(function(e){console.log('HISABATI_GH error '+e)})", null);
+            }
         }
     }
 
-    /** أي رابط خارج التطبيق (واتساب، فيسبوك، جيت هب) يفتح في التطبيق المناسب */
+    /** أي رابط خارج التطبيق (واتساب، فيسبوك) يفتح في التطبيق المناسب */
     private boolean handleLink(Uri uri) {
         if (uri == null) return false;
         if (APP_HOST.equals(uri.getHost())) return false;
@@ -407,7 +414,26 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    private static boolean isGithub(String host) {
+        if (host == null) return false;
+        host = host.toLowerCase(java.util.Locale.ROOT);
+        return host.equals("github.com") || host.endsWith(".github.com") || host.endsWith(".github.io")
+                || host.endsWith("githubusercontent.com");
+    }
+
+    private void openStore() {
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+        } catch (ActivityNotFoundException e) {
+            openExternalUri(Uri.parse(STORE_URL));
+        }
+    }
+
     private void openExternalUri(Uri uri) {
+        // روابط جيت هب القديمة جوه الأقسام (تحميل APK/الإصدارات) بتفتح صفحة التطبيق على جوجل بلاي
+        if (uri != null && isGithub(uri.getHost())) { openStore(); return; }
         try {
             Intent i = new Intent(Intent.ACTION_VIEW, uri);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -428,6 +454,15 @@ public class MainActivity extends Activity {
                 // الملفات كلها جوه التطبيق: مفيش داعي لـ Service Worker (وكده كمان مفيش نسخ قديمة متخزنة)
                 if (path.endsWith("/service-worker.js")) return notFound();
                 return asset("www" + path, mimeFor(path), false);
+            }
+            // فحص التحديثات القديم في الأقسام: مفيش اتصال بجيت هب، والرد «مفيش إصدار أحدث»
+            // (تحديثات التطبيق بتيجي من جوجل بلاي بس)
+            if (isGithub(host)) {
+                Map<String, String> h = new HashMap<>();
+                h.put("Access-Control-Allow-Origin", "*");
+                h.put("Cache-Control", "no-store");
+                byte[] body = "{\"tag_name\":\"0\",\"assets\":[]}".getBytes(StandardCharsets.UTF_8);
+                return new WebResourceResponse("application/json", "utf-8", 200, "OK", h, new ByteArrayInputStream(body));
             }
         } catch (Exception ignored) { }
         return null;
@@ -568,7 +603,7 @@ public class MainActivity extends Activity {
             handler.post(() -> {
                 toast("التحديثات بتوصل مع تحديث تطبيق أرزقي | Arzoqi");
                 js("window.onAppUpdateProgress && window.onAppUpdateProgress(0,'failed')");
-                openExternalUri(Uri.parse(RELEASES_URL));
+                openStore();
             });
         }
     }

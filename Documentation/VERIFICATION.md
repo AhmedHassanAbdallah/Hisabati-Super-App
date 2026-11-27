@@ -431,3 +431,16 @@ Requested fixes; app behaviour unchanged (backup/Drive/allowBackup/export, packa
 * **Emulator check added to CI** (`tools/android-standalone-smoke.sh`): app opened with the phone in dark → page dark; phone switched
   to light while open → page light; back to dark while open → page dark (`HISABATI_THEME` log lines, screenshots theme-dark/light).
 * A section where the user explicitly picked «فاتح» or «ليلي» (header button or المزيد) keeps that choice; «تلقائي» follows the phone.
+
+## 26. 2.9.3 / 2.9.4 — Google Play readiness: no GitHub inside the app
+
+* **Privacy page always fresh (2.9.3):** `Main-App/service-worker.js` serves `privacy.html` network-first (like `version.json`), so a
+  phone that visited the web app before sees the latest published policy, not a cached copy.
+* **Updates only from Google Play (2.9.4):** the 7 copied sections still contain their original «check for updates» code that asks
+  GitHub for a newer APK. Inside the Android app (`MainActivity`) every request to `github.com` / `*.github.io` /
+  `*githubusercontent.com` is answered locally with `{"tag_name":"0","assets":[]}` (= «you are on the latest version»), so nothing
+  leaves the phone and no GitHub update or download prompt can appear (Play policy: apps update only through Google Play).
+  Any GitHub link a user could still open (old APK links, `downloadUpdate`) opens the app's Google Play page instead.
+  Section web code is unchanged.
+* Emulator check added to CI: on the Electrical page a GitHub fetch must return `tag=0 assets=0` (`HISABATI_GH` log line).
+* Privacy policy text for publishing outside GitHub (Google Sites): `Documentation/play-store/privacy-policy.txt`.

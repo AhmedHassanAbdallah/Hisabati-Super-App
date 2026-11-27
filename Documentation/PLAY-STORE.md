@@ -4,7 +4,7 @@
 | | |
 |---|---|
 | اسم الحزمة (Package) | `com.ahmedhassan.arzaqi` — **ما يتغيّرش أبداً بعد أول رفع** |
-| الملف اللي بيترفع | `arzoqi.aab` من آخر إصدار في صفحة **Releases** (`arzoqi-v2.9.3` أو أحدث) |
+| الملف اللي بيترفع | `arzoqi.aab` من آخر إصدار في صفحة **Releases** (`arzoqi-v2.9.4` أو أحدث) |
 | موقّع بمفتاح الرفع | SHA-1 `F3:67:70:A9:02:F5:A1:CF:2D:A7:86:49:0A:AA:76:38:A6:34:81:1D` |
 | targetSdk / الأذونات | 36 · الإنترنت + الكتابة على التخزين (أندرويد 9 وأقدم بس) |
 
@@ -18,7 +18,7 @@
 | أيقونة 512×512 | `Documentation/play-store/icon-512.png` |
 | Feature graphic 1024×500 | `Documentation/play-store/feature-graphic-1024x500.png` |
 | لقطات الموبايل 1080×1920 (8) | `Documentation/play-store/screenshots/01…08.png` |
-| سياسة الخصوصية | `https://ahmedhassanabdallah.github.io/Hisabati-Super-App/Main-App/privacy.html` |
+| سياسة الخصوصية | صفحة على **Google Sites** (من غير جيت هب في الرابط) — النص جاهز في `Documentation/play-store/privacy-policy.txt` |
 
 ## نصوص صفحة المتجر (Main store listing)
 **App name** (30/30):

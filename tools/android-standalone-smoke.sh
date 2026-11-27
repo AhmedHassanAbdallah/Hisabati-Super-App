@@ -61,6 +61,10 @@ for d in Electrical Plumbing HVAC Painting Flooring Gypsum Plastering Metalwork 
   fi
 done
 
+# تحديثات أندرويد من جوجل بلاي بس (2.9.4): فحص التحديثات القديم في الأقسام ما بيوصلش لجيت هب
+if grep -q "HISABATI_GH tag=0 assets=0" logcat-Electrical.txt; then echo "✔ مفيش اتصال بجيت هب: $(grep -o 'HISABATI_GH.*' logcat-Electrical.txt | tail -1)";
+else echo "::error::طلبات جيت هب لسه بتطلع برّه التطبيق"; grep "HISABATI_GH" logcat-Electrical.txt | tail -3; fail=1; fi
+
 # الطباعة / حفظ PDF: معاينة الطباعة لازم تبقى ورقة بيضا من غير إطار بلون خلفية التطبيق (حصلت في 2.2.1)
 adb logcat -c || true
 adb shell am start -W -n "$ACT" -e path "Shared-Assets/brand/print-check.html" >/dev/null
